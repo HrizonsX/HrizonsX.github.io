@@ -4,3 +4,8 @@
 .idea/
 tmp/
 node_modules/
+
+# Agent 规则与配置（禁止提交至 demo 仓库）
+AGENT.md
+CLAUDE.md
+AGENTS.md
