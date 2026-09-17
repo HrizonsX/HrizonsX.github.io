@@ -1,0 +1,3 @@
+#!/bin/sh
+# UNIJMU commit message 校验。启用：git config core.hooksPath .githooks
+exec python3 "$(git rev-parse --show-toplevel)/scripts/check-commit-msg.py" --file "$1"

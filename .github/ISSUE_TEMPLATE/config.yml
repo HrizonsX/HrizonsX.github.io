@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 产品目标与迭代计划
+    url: https://github.com/UniJMU/unijmu-docs/blob/main/document/PRODUCT_TARGET.md
+    about: 提需求前先看当前范围与边界
+  - name: 工程协作规范
+    url: https://github.com/UniJMU/unijmu-docs/blob/main/document/ENGINEERING_GUIDE.md
+    about: 分支、commit、PR 规范

@@ -1,4 +1,30 @@
-# Welcome to your organization's demo respository
-This code repository (or "repo") is designed to demonstrate the best GitHub has to offer with the least amount of noise.
+# UNIJMU 原型演示站点 (demo-repository)
 
-The repo includes an `index.html` file (so it can render a web page), two GitHub Actions workflows, and a CSS stylesheet dependency.
+集美大学校园聚合服务平台（微信小程序）高保真交互原型与静态演示站点。
+
+## 简介
+
+本仓库承载 UNIJMU 小程序原型的线上部署、社区交流与敏捷迭代。原型采用单文件自包含架构（HTML5 + Tailwind CSS + 原生 ES6），具备零构建门槛、原生级交互响应与多端适配特性。
+
+## 当前原型版本
+
+- **当前版本**：`v1.7.0`（闲鱼二手、标准化发帖与工具精细化重构版）
+- **主要文件**：`index.html`（双击即可本地浏览器预览，亦可直接通过 GitHub Pages / Vercel / Nginx 静态托管）
+
+## 核心交互特性
+
+1. **4 Tab + 校园功能二级子菜单**：底栏【校园】支持点击滑出二级 Action Sheet 快捷调度，无界面重复 Tab。
+2. **标准化发帖链路（FAB 3 步走）**：选板块/话题 ➔ 图文与校内地点编辑 ➔ 安全合规机审即时置顶上屏。
+3. **课表日历式备忘**：单门课程随堂作业与考点便签编辑保存，高亮 `📌 备忘` 标签。
+4. **门牌级空教室**：精确呈现尚大楼、诚毅3号楼、美贤楼等具体教室门牌（如 1402、3-401）的节次占用与剩余座席。
+5. **闲鱼化二手集市**：顶部实时搜索栏、每日签到领擦亮卡、6 大金刚分类、双列推荐流、挂载商品卡片一键私聊与校内公共场所安全面交。
+6. **校区统一与地点标签**：顶栏统一定义为“集美大学”，发帖与面交下沉为具体地点标签（诚毅二食堂、尚大楼等）。
+7. **生活互助 4 宫格**：社区推荐流顶部常驻快捷互助入口，支持日常动态与互助卡片混排。
+8. **成绩看板与体测计算器**：支持 GPA 查分与男女体测指标综合评分换算（P1 扩展工具）。
+9. **内置 Review Console**：宽屏桌面模式下提供手机仿真壳与快捷测试控制台，方便快速演示各个功能。
+
+## 协作与提交规范
+
+本仓库遵循 UNIJMU 团队统一工程规范：
+- 提交格式：Gitmoji + Conventional Commits（`<emoji> <type>(<scope>): <subject>`）
+- 钩子校验：本地 `.githooks/commit-msg` + CI `commit-lint.yml`

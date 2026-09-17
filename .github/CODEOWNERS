@@ -1,0 +1,3 @@
+# 默认所有改动请求 GnaixEuy 评审。
+# Free 计划下 CODEOWNERS 只会自动添加评审人，不能阻塞合并。
+* @GnaixEuy
