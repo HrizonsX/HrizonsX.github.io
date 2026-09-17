@@ -308,6 +308,10 @@
               <span class="font-medium text-slate-700 group-hover:text-[#8B1E29]">✍️ 体验“＋快速发帖”分步抽屉</span>
               <span class="text-slate-400 group-hover:translate-x-0.5 transition">›</span>
             </button>
+            <button onclick="handleCampusTabClick()" class="w-full flex items-center justify-between p-2 hover:bg-slate-50 rounded-lg text-left transition group">
+              <span class="font-medium text-slate-700 group-hover:text-[#8B1E29]">🗂️ 呼出底栏【校园二级子菜单】</span>
+              <span class="text-slate-400 group-hover:translate-x-0.5 transition">›</span>
+            </button>
             <button onclick="switchTab('campus'); selectCampusModule('used')" class="w-full flex items-center justify-between p-2 hover:bg-slate-50 rounded-lg text-left transition group">
               <span class="font-medium text-slate-700 group-hover:text-[#8B1E29]">🛍️ 闲鱼式二手集市 (搜索/分类/签到)</span>
               <span class="text-slate-400 group-hover:translate-x-0.5 transition">›</span>
@@ -419,40 +423,6 @@
             </div>
           </div>
 
-          <!-- 生活互助在社区侧的快捷入口 (金刚区 4 宫格) -->
-          <div id="feedShortcutGrid" class="grid grid-cols-4 gap-2 px-3 py-3 bg-white border-b border-[var(--border-divider)] text-center">
-            <div onclick="switchTab('campus'); selectCampusModule('used')" class="flex flex-col items-center cursor-pointer hover:opacity-80 transition group">
-              <div class="w-10 h-10 rounded-xl bg-[#FAF0F1] text-[#8B1E29] flex items-center justify-center text-base shadow-2xs group-hover:scale-105 transition">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
-              </div>
-              <span class="text-[11px] font-bold text-slate-800 mt-1">二手闲置</span>
-              <span class="text-[9px] text-slate-400">校内面交</span>
-            </div>
-
-            <div onclick="switchTab('campus'); selectCampusModule('lost')" class="flex flex-col items-center cursor-pointer hover:opacity-80 transition group">
-              <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center text-base shadow-2xs group-hover:scale-105 transition">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
-              </div>
-              <span class="text-[11px] font-bold text-slate-800 mt-1">失物招领</span>
-              <span class="text-[9px] text-slate-400">联动保卫处</span>
-            </div>
-
-            <div onclick="switchTab('campus'); selectCampusModule('errand')" class="flex flex-col items-center cursor-pointer hover:opacity-80 transition group">
-              <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center text-base shadow-2xs group-hover:scale-105 transition">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.25V4.875A1.125 1.125 0 0013.125 3.75h-7.5A1.125 1.125 0 004.5 4.875v9.375m9.75-6.75H16.5"/></svg>
-              </div>
-              <span class="text-[11px] font-bold text-slate-800 mt-1">校园跑腿</span>
-              <span class="text-[9px] text-slate-400">顺手代取</span>
-            </div>
-
-            <div onclick="openPublishWithBoard('问答互助')" class="flex flex-col items-center cursor-pointer hover:opacity-80 transition group">
-              <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-base shadow-2xs group-hover:scale-105 transition">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"/></svg>
-              </div>
-              <span class="text-[11px] font-bold text-slate-800 mt-1">问答互助</span>
-              <span class="text-[9px] text-slate-400">集大求助</span>
-            </div>
-          </div>
 
           <!-- 高频热门话题横滑 -->
           <div id="feedTopicScroll" class="flex gap-2 px-3 py-2.5 overflow-x-auto no-scrollbar bg-white border-b border-[var(--border-divider)]">
@@ -688,16 +658,20 @@
         <!-- ==================== Tab 2: 校园功能 (Campus) ==================== -->
         <div id="page-campus" class="tab-page hidden">
           
-          <!-- 校园功能顶部专属二级分段导航条 (Sub-Navbar) + 快捷服务抽屉入口 -->
-          <div class="sticky top-0 z-20 bg-white/95 backdrop-blur border-b border-[var(--border-divider)] px-3 py-2 flex items-center gap-2">
-            <div class="flex-1 flex bg-slate-100 p-1 rounded-xl text-xs">
-              <button onclick="selectCampusModule('schedule')" id="subnav-schedule" class="flex-1 py-1.5 rounded-lg font-bold text-[#8B1E29] bg-white shadow-2xs transition">课表日程</button>
-              <button onclick="selectCampusModule('used')" id="subnav-used" class="flex-1 py-1.5 rounded-lg font-medium text-slate-600 transition">二手集市</button>
-              <button onclick="selectCampusModule('lost')" id="subnav-lost" class="flex-1 py-1.5 rounded-lg font-medium text-slate-600 transition">失物招领</button>
-              <button onclick="selectCampusModule('errand')" id="subnav-errand" class="flex-1 py-1.5 rounded-lg font-medium text-slate-600 transition">校园跑腿</button>
+          <!-- 校园服务当前业务指示栏 (点击展开完整二级子菜单，彻底解决与二级菜单功能重复问题) -->
+          <div class="sticky top-0 z-20 bg-white/95 backdrop-blur border-b border-[var(--border-divider)] px-3.5 py-2.5 flex items-center justify-between">
+            <div onclick="openCampusActionSheet()" class="flex items-center gap-2 cursor-pointer group">
+              <span class="w-2.5 h-2.5 rounded-full bg-[#8B1E29] group-hover:scale-125 transition"></span>
+              <div class="flex items-center gap-1.5">
+                <span id="campusCurrentServiceTitle" class="text-xs font-bold text-slate-900 group-hover:text-[#8B1E29] transition">课表日程</span>
+                <span class="text-[10px] text-[#8B1E29] bg-[#FAF0F1] px-1.5 py-0.5 rounded font-medium border border-[#F0D5D8] flex items-center gap-0.5">
+                  切换服务 ▾
+                </span>
+              </div>
             </div>
-            <button onclick="openCampusActionSheet()" title="展开校园快捷服务" class="p-1.5 bg-slate-100 hover:bg-slate-200 rounded-lg text-slate-700 transition shrink-0">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+            <button onclick="openCampusActionSheet()" class="text-xs text-slate-600 hover:text-slate-900 flex items-center gap-1 bg-slate-50 hover:bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200/80 transition">
+              <svg class="w-3.5 h-3.5 text-[#8B1E29]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+              <span class="text-[11px] font-medium">服务中心</span>
             </button>
           </div>
 
@@ -1216,7 +1190,7 @@
         </button>
 
         <!-- 校园功能 Tab (点击直达大厅，不再弹窗死循环) -->
-        <button onclick="switchTab('campus')" id="tab-campus" class="flex flex-col items-center justify-center text-slate-400 hover:text-slate-700 transition group relative">
+        <button onclick="handleCampusTabClick()" id="tab-campus" class="flex flex-col items-center justify-center text-slate-400 hover:text-slate-700 transition group relative">
           <div class="relative">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-5.25 6.557c.725-.262 1.464-.498 2.217-.706"/></svg>
             <span class="absolute -top-1 -right-2 text-[9px] text-slate-400 group-hover:text-[#8B1E29] font-bold">▾</span>
@@ -1241,60 +1215,73 @@
 
       <!-- ==================== 弹窗与抽屉系统 (状态完全解耦，彻底杜绝常开与无响应) ==================== -->
 
-      <!-- 1. 校园功能二级 Action Sheet 展开菜单 -->
+      <!-- 1. 校园功能二级 Action Sheet 展开菜单 (全校服务中枢) -->
       <div id="campusActionSheet" onclick="if(event.target===this) closeCampusActionSheet()" class="sheet-modal">
-        <div class="bg-white rounded-t-3xl p-4 shadow-2xl modal-dialog space-y-3">
-        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-          <div class="flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-[#8B1E29]"></span>
-            <span class="font-bold text-sm text-slate-900">集大校园服务中心 · 快捷调度</span>
+        <div class="bg-white rounded-t-3xl p-4 shadow-2xl modal-dialog space-y-3.5 max-h-[580px] overflow-y-auto no-scrollbar">
+          <div class="flex items-center justify-between pb-2.5 border-b border-slate-100">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#8B1E29]"></span>
+              <span class="font-bold text-sm text-slate-900">集大校园服务中心 · 功能矩阵</span>
+            </div>
+            <button onclick="closeCampusActionSheet()" class="text-slate-400 hover:text-slate-600 text-xs p-1">✕ 关闭</button>
           </div>
-          <button onclick="closeCampusActionSheet()" class="text-slate-400 hover:text-slate-600 text-xs p-1">✕ 关闭</button>
-        </div>
 
-        <div class="py-1 space-y-4">
-          <!-- 学业教务组 -->
-          <div>
-            <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">学业事务</div>
-            <div class="grid grid-cols-4 gap-2 text-center text-xs">
-              <div onclick="closeCampusActionSheet(); selectCampusModule('schedule')" class="flex flex-col items-center p-2 rounded-xl hover:bg-slate-50 cursor-pointer">
-                <div class="w-10 h-10 rounded-xl bg-[#FAF0F1] text-[#8B1E29] flex items-center justify-center text-base">📅</div>
-                <span class="text-[11px] font-semibold text-slate-800 mt-1">课表日程</span>
+          <div class="space-y-3.5 text-xs">
+            <!-- 组 1: 生活互助服务 (二手/失物/跑腿) -->
+            <div>
+              <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center justify-between">
+                <span>生活互助服务</span>
+                <span class="text-[9px] text-slate-400 font-normal">校内面交 · 互助履约</span>
               </div>
-              <div onclick="closeCampusActionSheet(); openClassroomModal()" class="flex flex-col items-center p-2 rounded-xl hover:bg-slate-50 cursor-pointer">
-                <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-base">🏫</div>
-                <span class="text-[11px] font-semibold text-slate-800 mt-1">空教室</span>
+              <div class="grid grid-cols-3 gap-2 text-center">
+                <div onclick="selectCampusModule('used')" class="flex flex-col items-center p-2.5 rounded-xl bg-amber-50/50 hover:bg-amber-50 border border-amber-100/60 cursor-pointer transition group">
+                  <div class="w-10 h-10 rounded-xl bg-amber-100/70 text-amber-800 flex items-center justify-center text-lg shadow-2xs group-hover:scale-105 transition">🛍️</div>
+                  <span class="text-[11px] font-bold text-slate-800 mt-1.5">二手闲置集市</span>
+                  <span class="text-[9px] text-slate-400 mt-0.5">校内安全面交</span>
+                </div>
+                <div onclick="selectCampusModule('lost')" class="flex flex-col items-center p-2.5 rounded-xl bg-blue-50/50 hover:bg-blue-50 border border-blue-100/60 cursor-pointer transition group">
+                  <div class="w-10 h-10 rounded-xl bg-blue-100/70 text-blue-700 flex items-center justify-center text-lg shadow-2xs group-hover:scale-105 transition">🔍</div>
+                  <span class="text-[11px] font-bold text-slate-800 mt-1.5">失物招领告示</span>
+                  <span class="text-[9px] text-slate-400 mt-0.5">联动保卫处</span>
+                </div>
+                <div onclick="selectCampusModule('errand')" class="flex flex-col items-center p-2.5 rounded-xl bg-emerald-50/50 hover:bg-emerald-50 border border-emerald-100/60 cursor-pointer transition group">
+                  <div class="w-10 h-10 rounded-xl bg-emerald-100/70 text-emerald-700 flex items-center justify-center text-lg shadow-2xs group-hover:scale-105 transition">🏃</div>
+                  <span class="text-[11px] font-bold text-slate-800 mt-1.5">校园跑腿代取</span>
+                  <span class="text-[9px] text-slate-400 mt-0.5">同学顺手互助</span>
+                </div>
               </div>
-              <div onclick="closeCampusActionSheet(); openGradesModal()" class="flex flex-col items-center p-2 rounded-xl hover:bg-slate-50 cursor-pointer">
-                <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-base">📊</div>
-                <span class="text-[11px] font-semibold text-slate-800 mt-1">查成绩GPA</span>
+            </div>
+
+            <!-- 组 2: 学业教务工具 (课表/空教室/成绩/日历/体测) -->
+            <div>
+              <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center justify-between">
+                <span>学业教务工具</span>
+                <span class="text-[9px] text-slate-400 font-normal">教务直联 · 便捷查询</span>
               </div>
-              <div onclick="closeCampusActionSheet(); openCalendarModal()" class="flex flex-col items-center p-2 rounded-xl hover:bg-slate-50 cursor-pointer">
-                <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-base">🗓️</div>
-                <span class="text-[11px] font-semibold text-slate-800 mt-1">导出日历</span>
+              <div class="grid grid-cols-4 gap-2 text-center">
+                <div onclick="selectCampusModule('schedule')" class="flex flex-col items-center p-2 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-100 cursor-pointer transition group">
+                  <div class="w-9 h-9 rounded-xl bg-[#FAF0F1] text-[#8B1E29] flex items-center justify-center text-base shadow-2xs group-hover:scale-105 transition">📅</div>
+                  <span class="text-[10px] font-bold text-slate-800 mt-1">课表日程</span>
+                  <span class="text-[8px] text-slate-400">日历便签</span>
+                </div>
+                <div onclick="closeCampusActionSheet(); openClassroomModal()" class="flex flex-col items-center p-2 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-100 cursor-pointer transition group">
+                  <div class="w-9 h-9 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center text-base shadow-2xs group-hover:scale-105 transition">🏫</div>
+                  <span class="text-[10px] font-bold text-slate-800 mt-1">空教室</span>
+                  <span class="text-[8px] text-slate-400">门牌空座</span>
+                </div>
+                <div onclick="closeCampusActionSheet(); openGradesModal()" class="flex flex-col items-center p-2 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-100 cursor-pointer transition group">
+                  <div class="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-base shadow-2xs group-hover:scale-105 transition">📊</div>
+                  <span class="text-[10px] font-bold text-slate-800 mt-1">查成绩</span>
+                  <span class="text-[8px] text-slate-400">GPA走势</span>
+                </div>
+                <div onclick="closeCampusActionSheet(); openFitnessModal()" class="flex flex-col items-center p-2 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-100 cursor-pointer transition group">
+                  <div class="w-9 h-9 rounded-xl bg-purple-50 text-purple-700 flex items-center justify-center text-base shadow-2xs group-hover:scale-105 transition">🏃‍♂️</div>
+                  <span class="text-[10px] font-bold text-slate-800 mt-1">体测计算</span>
+                  <span class="text-[8px] text-slate-400">国标打分</span>
+                </div>
               </div>
             </div>
           </div>
-
-          <!-- 生活互助组 -->
-          <div>
-            <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">生活互助</div>
-            <div class="grid grid-cols-3 gap-2 text-center text-xs">
-              <div onclick="closeCampusActionSheet(); selectCampusModule('used')" class="flex flex-col items-center p-2 rounded-xl hover:bg-slate-50 cursor-pointer">
-                <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center text-base">🛍️</div>
-                <span class="text-[11px] font-semibold text-slate-800 mt-1">二手闲置集市</span>
-              </div>
-              <div onclick="closeCampusActionSheet(); selectCampusModule('lost')" class="flex flex-col items-center p-2 rounded-xl hover:bg-slate-50 cursor-pointer">
-                <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center text-base">🔍</div>
-                <span class="text-[11px] font-semibold text-slate-800 mt-1">失物招领告示</span>
-              </div>
-              <div onclick="closeCampusActionSheet(); selectCampusModule('errand')" class="flex flex-col items-center p-2 rounded-xl hover:bg-slate-50 cursor-pointer">
-                <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-base">🏃</div>
-                <span class="text-[11px] font-semibold text-slate-800 mt-1">校园跑腿代取</span>
-              </div>
-            </div>
-          </div>
-        </div>
         </div>
       </div>
 
@@ -2148,28 +2135,38 @@
       }
     }
 
+    // 校园功能 Tab 点击与二级菜单联动
+    function handleCampusTabClick() {
+      if (currentTab !== 'campus') {
+        switchTab('campus');
+        openCampusActionSheet();
+      } else {
+        const sheet = document.getElementById('campusActionSheet');
+        if (sheet && sheet.classList.contains('is-active')) {
+          closeCampusActionSheet();
+        } else {
+          openCampusActionSheet();
+        }
+      }
+    }
+
     // 校园功能子模块调度
     function selectCampusModule(mod) {
       currentModule = mod;
       const vp = document.getElementById('viewport');
       if (vp) vp.scrollTop = 0;
-      
+      closeCampusActionSheet();
+      if (currentTab !== 'campus') {
+        switchTab('campus');
+      }
+
       ['schedule', 'used', 'lost', 'errand'].forEach(m => {
         const el = document.getElementById('campus-view-' + m);
         if (el) el.classList.add('hidden');
-        const btn = document.getElementById('subnav-' + m);
-        if (btn) {
-          btn.className = 'flex-1 py-1.5 rounded-lg font-medium text-slate-600 transition';
-        }
       });
 
       const target = document.getElementById('campus-view-' + mod);
       if (target) target.classList.remove('hidden');
-
-      const activeBtn = document.getElementById('subnav-' + mod);
-      if (activeBtn) {
-        activeBtn.className = 'flex-1 py-1.5 rounded-lg font-bold text-[#8B1E29] bg-white shadow-2xs transition';
-      }
 
       const modTitles = {
         schedule: '课表日程',
@@ -2177,8 +2174,11 @@
         lost: '失物招领告示',
         errand: '校园互助跑腿'
       };
+      const title = modTitles[mod] || '校园功能';
+      const curTitleEl = document.getElementById('campusCurrentServiceTitle');
+      if (curTitleEl) curTitleEl.innerText = title;
       if (currentTab === 'campus') {
-        document.getElementById('navTitle').innerText = modTitles[mod] || '校园功能';
+        document.getElementById('navTitle').innerText = title;
       }
     }
 
@@ -2218,14 +2218,10 @@
         }
       });
 
-      const shortcut = document.getElementById('feedShortcutGrid');
       const topicScroll = document.getElementById('feedTopicScroll');
-      if (c === 'topic') {
-        shortcut.classList.add('hidden');
-        topicScroll.classList.add('hidden');
-      } else {
-        shortcut.classList.remove('hidden');
-        topicScroll.classList.remove('hidden');
+      if (topicScroll) {
+        if (c === 'topic') topicScroll.classList.add('hidden');
+        else topicScroll.classList.remove('hidden');
       }
       showToast('已切换至' + (c === 'rec' ? '推荐流' : (c === 'focus' ? '关注流' : '话题广场')));
     }
