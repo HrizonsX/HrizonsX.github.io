@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>UNIJMU · 集美大学校园服务平台交互原型 (v1.9.0)</title>
+  <title>UNIJMU · 集美大学校园服务平台交互原型 (v1.9.1)</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
   
   <!-- 双通道 Tailwind CSS (极速 CDN + 完备自包含内联兜底) -->
@@ -273,7 +273,7 @@
             <div>
               <h2 class="text-base font-bold text-slate-900 leading-tight">UNIJMU 校园服务平台</h2>
               <div class="flex items-center gap-1.5 mt-0.5">
-                <span class="text-[11px] text-slate-500 font-mono">v1.9.0 · 双二级菜单与生活互助并入社区版</span>
+                <span class="text-[11px] text-slate-500 font-mono">v1.9.1 · 标题去重与课表内嵌周次版</span>
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
               </div>
             </div>
@@ -288,11 +288,11 @@
             <span>本次深度重构与体验演进</span>
           </div>
           <p class="text-[11px] text-slate-600 leading-relaxed">
-            1. <strong>生活互助服务全面并入社区</strong>：二手闲置集市、失物招领告示、校园互助跑腿移入社区空间，主屏与二级菜单双通道触达。<br>
-            2. <strong>底栏双二级子菜单架构</strong>：【社区 ▾】与【校园 ▾】底栏 Tab 均支持点击呼出独立专属 Action Sheet，支持顶栏板块实时切换。<br>
-            3. <strong>校园侧聚焦学业教务矩阵</strong>：课表日程（日/周网格）、周次选择、空教室门牌、GPA走势、体测算分、ICS日历导出。<br>
-            4. <strong>居中偏上悬浮发帖 FAB 键</strong>：保持在【校园】与【消息】Tab 之间偏上位置，高保真微投影，多板块分类直发。<br>
-            5. <strong>状态完全隔离与优雅回退</strong>：彻底根除弹窗无响应与常开问题，全流程闭环流畅体验。
+            1. <strong>彻底消除重复标题栏</strong>：剥离多余的吸顶次级标题栏，微信胶囊导航条集成为全端唯一标题与板块下拉中枢，释放近 80px 垂直浏览视野。<br>
+            2. <strong>周次选择严格内置于课表内部</strong>：课表卡片就地提供 ‹ 第 3 周 (本周) ▾ › 步进器与 1-20 周网格折叠面板，绝不外溢至二级菜单。<br>
+            3. <strong>二级菜单全面重新梳理</strong>：【社区二级菜单】专注生活互助大厅与热门话题；【校园二级菜单】精炼为 4 大教务工具与 ICS 日历导出。<br>
+            4. <strong>社区主页集约化单行胶囊栏</strong>：二手、失物、跑腿、表白墙与拼车学伴整合为单行横滑磁贴，告别粗笨大卡片堆叠。<br>
+            5. <strong>双端平滑联动</strong>：顶栏与底栏双通道无缝调起专属二级抽屉，居中悬浮发帖 FAB 键黄金分割优雅平衡。
           </p>
         </div>
 
@@ -308,16 +308,20 @@
               <span class="font-medium text-slate-700 group-hover:text-[#8B1E29]">✍️ 体验“＋快速发帖”分步抽屉</span>
               <span class="text-slate-400 group-hover:translate-x-0.5 transition">›</span>
             </button>
-            <button onclick="handleFeedTabClick()" class="w-full flex items-center justify-between p-2 hover:bg-slate-50 rounded-lg text-left transition group">
-              <span class="font-medium text-slate-700 group-hover:text-[#8B1E29]">💬 呼出底栏【社区二级子菜单】</span>
+            <button onclick="openFeedActionSheet()" class="w-full flex items-center justify-between p-2 hover:bg-slate-50 rounded-lg text-left transition group">
+              <span class="font-medium text-slate-700 group-hover:text-[#8B1E29]">💬 呼出【社区二级板块大厅】</span>
               <span class="text-slate-400 group-hover:translate-x-0.5 transition">›</span>
             </button>
-            <button onclick="handleCampusTabClick()" class="w-full flex items-center justify-between p-2 hover:bg-slate-50 rounded-lg text-left transition group">
-              <span class="font-medium text-slate-700 group-hover:text-[#8B1E29]">🎓 呼出底栏【校园二级子菜单】</span>
+            <button onclick="openCampusActionSheet()" class="w-full flex items-center justify-between p-2 hover:bg-slate-50 rounded-lg text-left transition group">
+              <span class="font-medium text-slate-700 group-hover:text-[#8B1E29]">🎓 呼出【校园教务二级菜单】</span>
               <span class="text-slate-400 group-hover:translate-x-0.5 transition">›</span>
             </button>
             <button onclick="switchTab('feed'); selectFeedModule('used')" class="w-full flex items-center justify-between p-2 hover:bg-slate-50 rounded-lg text-left transition group">
-              <span class="font-medium text-slate-700 group-hover:text-[#8B1E29]">🛍️ 闲鱼式二手集市 (现已并入社区)</span>
+              <span class="font-medium text-slate-700 group-hover:text-[#8B1E29]">🛍️ 体验二手闲置集市 (社区专区)</span>
+              <span class="text-slate-400 group-hover:translate-x-0.5 transition">›</span>
+            </button>
+            <button onclick="switchTab('campus'); toggleInPageWeekPicker(true)" class="w-full flex items-center justify-between p-2 hover:bg-slate-50 rounded-lg text-left transition group">
+              <span class="font-medium text-slate-700 group-hover:text-[#8B1E29]">📅 体验课表内嵌 1-20 周次选择</span>
               <span class="text-slate-400 group-hover:translate-x-0.5 transition">›</span>
             </button>
             <button onclick="switchTab('campus'); selectCampusModule('schedule'); openCourseDetailModal('数据结构与算法设计 (C++)', '诚毅教学楼 3-402', '张教授 · 计算机工程学院', '08:00 - 09:35', '1-16周 每周上课', 'course-card-1')" class="w-full flex items-center justify-between p-2 hover:bg-slate-50 rounded-lg text-left transition group">
@@ -384,20 +388,22 @@
         </div>
       </div>
 
-      <!-- 微信小程序 Navigation Bar -->
-      <div class="h-11 bg-white border-b border-[var(--border-divider)] flex items-center justify-between px-4 shrink-0 z-30">
-        <div class="flex items-center gap-2">
-          <span id="navTitle" class="font-bold text-[15px] text-slate-900 tracking-tight">社区广场</span>
-          <span class="text-[10px] font-medium text-[#8B1E29] bg-[#FAF0F1] px-1.5 py-[1px] rounded border border-[#F0D5D8]">集美大学</span>
+      <!-- 微信小程序 Navigation Bar (全端唯一顶栏，集成板块指示器，彻底消除重复标题栏) -->
+      <div class="h-11 bg-white border-b border-[var(--border-divider)] flex items-center justify-between px-4 shrink-0 z-30 select-none">
+        <div id="headerTitleTrigger" onclick="handleHeaderTitleClick()" class="flex items-center gap-1.5 cursor-pointer group">
+          <span id="navTitle" class="font-bold text-[15px] text-slate-900 tracking-tight group-hover:text-[#8B1E29] transition">社区广场</span>
+          <span id="navSubBadge" class="text-[10px] font-medium text-[#8B1E29] bg-[#FAF0F1] px-1.5 py-[1px] rounded border border-[#F0D5D8] flex items-center gap-0.5 group-hover:bg-[#F5E2E4] transition">
+            <span id="navSubBadgeText">动态 ▾</span>
+          </span>
         </div>
         
         <!-- 微信原生胶囊控制器 (Mini-app Capsule) -->
         <div class="w-[84px] h-[30px] rounded-full border border-slate-200 bg-white flex items-center justify-evenly px-1 shadow-2xs">
-          <button onclick="openWechatActionSheet()" class="p-1 text-slate-700 hover:text-black transition">
+          <button onclick="handleHeaderTitleClick()" title="展开当前业务二级菜单" class="p-1 text-slate-700 hover:text-black transition">
             <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
           </button>
           <div class="w-[1px] h-3 bg-slate-200"></div>
-          <button onclick="showToast('已将 UNIJMU 小程序添加至浮窗')" class="p-1 text-slate-700 hover:text-black transition">
+          <button onclick="showToast('集美大学 UNIJMU 校园服务平台 (v1.9.1)')" class="p-1 text-slate-700 hover:text-black transition">
             <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"/></svg>
           </button>
         </div>
@@ -408,110 +414,67 @@
         
         <!-- ==================== Tab 1: 社区广场 (Feed) ==================== -->
         <div id="page-feed" class="tab-page block">
-          
-          <!-- 社区服务当前业务指示栏 (点击展开完整社区二级子菜单，双二级子菜单架构) -->
-          <div class="sticky top-0 z-20 bg-white/95 backdrop-blur border-b border-[var(--border-divider)] px-3.5 py-2.5 flex items-center justify-between">
-            <div onclick="openFeedActionSheet()" class="flex items-center gap-2 cursor-pointer group">
-              <span class="w-2.5 h-2.5 rounded-full bg-[#8B1E29] group-hover:scale-125 transition"></span>
-              <div class="flex items-center gap-1.5">
-                <span id="feedCurrentServiceTitle" class="text-xs font-bold text-slate-900 group-hover:text-[#8B1E29] transition">社区动态广场</span>
-                <span class="text-[10px] text-[#8B1E29] bg-[#FAF0F1] px-1.5 py-0.5 rounded font-medium border border-[#F0D5D8] flex items-center gap-0.5">
-                  切换板块 ▾
-                </span>
-              </div>
-            </div>
-            <button onclick="openFeedActionSheet()" class="text-xs text-slate-600 hover:text-slate-900 flex items-center gap-1 bg-slate-50 hover:bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200/80 transition">
-              <svg class="w-3.5 h-3.5 text-[#8B1E29]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
-              <span class="text-[11px] font-medium">社区板块</span>
-            </button>
-          </div>
 
           <!-- 子视图 1: 社区动态广场主流 -->
           <div id="feed-view-stream" class="block">
           
-            <!-- 频道切换栏 -->
-          <div class="sticky top-0 z-20 glass-nav border-b border-[var(--border-divider)] px-4 py-2 flex items-center justify-between">
-            <div class="flex items-center gap-6 text-xs">
-              <button onclick="setFeedChannel('rec')" id="feed-btn-rec" class="text-sm font-bold text-[#8B1E29] relative transition">
-                推荐
-                <span id="feed-line-rec" class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-[2px] bg-[#8B1E29] rounded-full"></span>
-              </button>
-              <button onclick="setFeedChannel('focus')" id="feed-btn-focus" class="text-sm font-medium text-slate-400 relative transition hover:text-slate-700">
-                关注
-                <span id="feed-line-focus" class="hidden absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-[2px] bg-[#8B1E29] rounded-full"></span>
-              </button>
-              <button onclick="setFeedChannel('topic')" id="feed-btn-topic" class="text-sm font-medium text-slate-400 relative transition hover:text-slate-700">
-                话题广场
-                <span id="feed-line-topic" class="hidden absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-[2px] bg-[#8B1E29] rounded-full"></span>
-              </button>
-            </div>
-          </div>
-
-
-          <!-- 生活互助服务快捷矩阵 (二手/失物/跑腿) -->
-            <div class="px-3 pt-2.5 pb-1 bg-white border-b border-[var(--border-divider)]">
-              <div class="p-2.5 bg-gradient-to-r from-amber-500/10 via-red-500/5 to-blue-500/10 rounded-2xl border border-amber-200/60 flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                  <span class="text-base">🤝</span>
-                  <div>
-                    <div class="text-xs font-bold text-slate-900 flex items-center gap-1.5">
-                      <span>生活互助大厅</span>
-                      <span class="text-[9px] bg-[#8B1E29] text-white px-1.5 py-0.2 rounded-full font-bold">校内专区</span>
-                    </div>
-                    <div class="text-[10px] text-slate-500">二手闲置 · 失物寻物 · 校园代取</div>
-                  </div>
-                </div>
-                <button onclick="openFeedActionSheet()" class="px-2.5 py-1 bg-[#8B1E29] hover:bg-[#751722] text-white text-[10px] font-bold rounded-full transition shadow-xs">
-                  板块清单 ›
+            <!-- 频道切换栏 (推荐 / 关注 / 话题广场) -->
+            <div class="sticky top-0 z-20 glass-nav border-b border-[var(--border-divider)] px-4 py-2 flex items-center justify-between">
+              <div class="flex items-center gap-6 text-xs">
+                <button onclick="setFeedChannel('rec')" id="feed-btn-rec" class="text-sm font-bold text-[#8B1E29] relative transition">
+                  推荐
+                  <span id="feed-line-rec" class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-[2px] bg-[#8B1E29] rounded-full"></span>
+                </button>
+                <button onclick="setFeedChannel('focus')" id="feed-btn-focus" class="text-sm font-medium text-slate-400 relative transition hover:text-slate-700">
+                  关注
+                  <span id="feed-line-focus" class="hidden absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-[2px] bg-[#8B1E29] rounded-full"></span>
+                </button>
+                <button onclick="setFeedChannel('topic')" id="feed-btn-topic" class="text-sm font-medium text-slate-400 relative transition hover:text-slate-700">
+                  话题广场
+                  <span id="feed-line-topic" class="hidden absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-[2px] bg-[#8B1E29] rounded-full"></span>
                 </button>
               </div>
-              <div class="grid grid-cols-3 gap-2 mt-2 pb-1.5">
-                <div onclick="selectFeedModule('used')" class="flex items-center gap-2 p-2 bg-slate-50 hover:bg-amber-50 rounded-xl border border-slate-200/80 hover:border-amber-300 cursor-pointer transition group">
-                  <div class="w-7 h-7 rounded-lg bg-amber-100/80 text-amber-800 flex items-center justify-center text-xs group-hover:scale-105 transition">🛍️</div>
-                  <div>
-                    <div class="text-[11px] font-bold text-slate-800">二手集市</div>
-                    <div class="text-[9px] text-slate-400">安全面交</div>
-                  </div>
-                </div>
-                <div onclick="selectFeedModule('lost')" class="flex items-center gap-2 p-2 bg-slate-50 hover:bg-blue-50 rounded-xl border border-slate-200/80 hover:border-blue-300 cursor-pointer transition group">
-                  <div class="w-7 h-7 rounded-lg bg-blue-100/80 text-blue-700 flex items-center justify-center text-xs group-hover:scale-105 transition">🔍</div>
-                  <div>
-                    <div class="text-[11px] font-bold text-slate-800">失物招领</div>
-                    <div class="text-[9px] text-slate-400">保卫处联动</div>
-                  </div>
-                </div>
-                <div onclick="selectFeedModule('errand')" class="flex items-center gap-2 p-2 bg-slate-50 hover:bg-emerald-50 rounded-xl border border-slate-200/80 hover:border-emerald-300 cursor-pointer transition group">
-                  <div class="w-7 h-7 rounded-lg bg-emerald-100/80 text-emerald-700 flex items-center justify-center text-xs group-hover:scale-105 transition">🏃</div>
-                  <div>
-                    <div class="text-[11px] font-bold text-slate-800">校园跑腿</div>
-                    <div class="text-[9px] text-slate-400">同学顺带</div>
-                  </div>
-                </div>
+              <button onclick="openFeedActionSheet()" class="text-xs text-[#8B1E29] bg-[#FAF0F1] hover:bg-[#F5E2E4] px-2 py-0.5 rounded font-medium border border-[#F0D5D8] flex items-center gap-1 transition">
+                <span>板块大厅</span>
+                <span class="text-[9px]">▾</span>
+              </button>
+            </div>
+
+            <!-- 社区高频服务与热门话题横滑快捷入口 (单行集约化，杜绝多层标题栏堆叠) -->
+            <div class="flex gap-2 px-3 py-2 overflow-x-auto no-scrollbar bg-white border-b border-[var(--border-divider)] text-xs">
+              <div onclick="selectFeedModule('used')" class="shrink-0 flex items-center gap-1 px-2.5 py-1 bg-amber-50 hover:bg-amber-100 rounded-lg font-medium text-amber-800 cursor-pointer border border-amber-200/80 transition">
+                <span>🛍️</span>
+                <span>二手集市</span>
+                <span class="text-[9px] bg-amber-500 text-white px-1 rounded-full font-bold">闲置</span>
+              </div>
+              <div onclick="selectFeedModule('lost')" class="shrink-0 flex items-center gap-1 px-2.5 py-1 bg-blue-50 hover:bg-blue-100 rounded-lg font-medium text-blue-700 cursor-pointer border border-blue-200/80 transition">
+                <span>🔍</span>
+                <span>失物寻物</span>
+              </div>
+              <div onclick="selectFeedModule('errand')" class="shrink-0 flex items-center gap-1 px-2.5 py-1 bg-emerald-50 hover:bg-emerald-100 rounded-lg font-medium text-emerald-700 cursor-pointer border border-emerald-200/80 transition">
+                <span>🏃</span>
+                <span>校园代取</span>
+              </div>
+              <div onclick="filterTopic('集大表白墙')" class="shrink-0 flex items-center gap-1 px-2.5 py-1 bg-red-50 hover:bg-red-100 rounded-lg font-medium text-[#8B1E29] cursor-pointer border border-red-100 transition">
+                <span>💌</span>
+                <span>表白墙</span>
+                <span class="text-[9px] text-red-500 bg-white px-1 rounded font-bold">HOT</span>
+              </div>
+              <div onclick="filterTopic('拼单拼车厦门北站')" class="shrink-0 flex items-center gap-1 px-2.5 py-1 bg-slate-50 hover:bg-slate-100 rounded-lg font-medium text-slate-700 cursor-pointer border border-slate-200 transition">
+                <span>🚗</span>
+                <span>拼车北站</span>
+              </div>
+              <div onclick="filterTopic('考研自习搭子')" class="shrink-0 flex items-center gap-1 px-2.5 py-1 bg-slate-50 hover:bg-slate-100 rounded-lg font-medium text-slate-700 cursor-pointer border border-slate-200 transition">
+                <span>📖</span>
+                <span>学伴搭子</span>
+              </div>
+              <div onclick="filterTopic('集大选课避雷')" class="shrink-0 flex items-center gap-1 px-2.5 py-1 bg-slate-50 hover:bg-slate-100 rounded-lg font-medium text-slate-700 cursor-pointer border border-slate-200 transition">
+                <span>💬</span>
+                <span>选课避雷</span>
               </div>
             </div>
 
-            <!-- 高频热门话题横滑 -->
-          <div id="feedTopicScroll" class="flex gap-2 px-3 py-2.5 overflow-x-auto no-scrollbar bg-white border-b border-[var(--border-divider)]">
-            <div onclick="filterTopic('集大表白墙')" class="shrink-0 flex items-center gap-1 px-2.5 py-1 bg-red-50 hover:bg-red-100 rounded-lg text-xs font-medium text-[#8B1E29] cursor-pointer border border-red-100 transition">
-              <span>💌</span>
-              <span>集大表白墙</span>
-              <span class="text-[9px] text-red-500 bg-white px-1 rounded font-bold">HOT</span>
-            </div>
-            <div onclick="filterTopic('拼单拼车厦门北站')" class="shrink-0 flex items-center gap-1 px-2.5 py-1 bg-slate-50 hover:bg-slate-100 rounded-lg text-xs font-medium text-slate-700 cursor-pointer border border-slate-200 transition">
-              <span>🚗</span>
-              <span>拼车厦门北站</span>
-            </div>
-            <div onclick="filterTopic('考研自习搭子')" class="shrink-0 flex items-center gap-1 px-2.5 py-1 bg-slate-50 hover:bg-slate-100 rounded-lg text-xs font-medium text-slate-700 cursor-pointer border border-slate-200 transition">
-              <span>📖</span>
-              <span>找学伴搭子</span>
-            </div>
-            <div onclick="filterTopic('集大选课避雷')" class="shrink-0 flex items-center gap-1 px-2.5 py-1 bg-slate-50 hover:bg-slate-100 rounded-lg text-xs font-medium text-slate-700 cursor-pointer border border-slate-200 transition">
-              <span>💬</span>
-              <span>选课避雷吐槽</span>
-            </div>
-          </div>
-
-          <!-- 动态卡片流容器 (推荐流) -->
+            <!-- 动态卡片流容器 (推荐流) -->
           <div id="feedChannelRec" class="p-3 space-y-3 block">
             
             <!-- 动态卡片 1 -->
@@ -981,34 +944,22 @@
         <!-- ==================== Tab 2: 校园功能 (Campus) ==================== -->
         <div id="page-campus" class="tab-page hidden">
           
-          <!-- 校园服务当前业务指示栏 (点击展开完整二级子菜单，彻底解决与二级菜单功能重复问题) -->
-          <div class="sticky top-0 z-20 bg-white/95 backdrop-blur border-b border-[var(--border-divider)] px-3.5 py-2.5 flex items-center justify-between">
-            <div onclick="openCampusActionSheet()" class="flex items-center gap-2 cursor-pointer group">
-              <span class="w-2.5 h-2.5 rounded-full bg-[#8B1E29] group-hover:scale-125 transition"></span>
-              <div class="flex items-center gap-1.5">
-                <span id="campusCurrentServiceTitle" class="text-xs font-bold text-slate-900 group-hover:text-[#8B1E29] transition">课表日程</span>
-                <span class="text-[10px] text-[#8B1E29] bg-[#FAF0F1] px-1.5 py-0.5 rounded font-medium border border-[#F0D5D8] flex items-center gap-0.5">
-                  切换服务 ▾
-                </span>
-              </div>
-            </div>
-            <button onclick="openCampusActionSheet()" class="text-xs text-slate-600 hover:text-slate-900 flex items-center gap-1 bg-slate-50 hover:bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200/80 transition">
-              <svg class="w-3.5 h-3.5 text-[#8B1E29]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
-              <span class="text-[11px] font-medium">服务中心</span>
-            </button>
-          </div>
-
           <!-- 1. 课表日程视图 -->
           <div id="campus-view-schedule" class="block p-3 space-y-3">
             
-            <!-- 课表顶部控制区：学期周次选择 + 日/周视图切换 -->
-            <div class="app-card p-4 space-y-3">
+            <!-- 课表顶部控制区：学期与内嵌周次切换 + 日/周视图切换 (周次选择严格就地内嵌，绝不外溢至二级菜单) -->
+            <div class="app-card p-3.5 space-y-2.5">
               <div class="flex items-center justify-between">
                 <div>
-                  <span class="text-[11px] font-medium text-slate-400">2026-2027学年 秋季学期</span>
-                  <div class="flex items-center gap-1.5 cursor-pointer mt-0.5 group" onclick="openWeekPickerModal()">
-                    <h3 id="scheduleWeekTitle" class="text-sm font-bold text-slate-900 group-hover:text-[#8B1E29] transition">第 3 周 (本周)</h3>
-                    <span class="text-[10px] text-[#8B1E29] bg-[#FAF0F1] px-1.5 py-[0.5px] rounded font-medium border border-[#F0D5D8]">切换周次 ▾</span>
+                  <span class="text-[10px] font-medium text-slate-400">2026-2027学年 秋季学期</span>
+                  <!-- 课表内嵌周次选择器：上一周、当前周下拉、下一周 -->
+                  <div class="flex items-center gap-1.5 mt-0.5">
+                    <button onclick="changeScheduleWeek(-1)" title="上一周" class="w-6 h-6 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold transition">‹</button>
+                    <button onclick="toggleInPageWeekPicker()" class="flex items-center gap-1 px-2 py-0.5 rounded-lg bg-[#FAF0F1] hover:bg-[#F5E2E4] border border-[#F0D5D8] transition group">
+                      <h3 id="scheduleWeekTitle" class="text-xs font-bold text-[#8B1E29]">第 3 周 (本周)</h3>
+                      <span id="inPageWeekArrow" class="text-[9px] text-[#8B1E29] transition-transform">▾</span>
+                    </button>
+                    <button onclick="changeScheduleWeek(1)" title="下一周" class="w-6 h-6 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold transition">›</button>
                   </div>
                 </div>
                 
@@ -1016,6 +967,17 @@
                 <div class="bg-slate-100 p-0.5 rounded-lg flex text-xs">
                   <button onclick="setScheduleView('day')" id="btn-view-day" class="px-2.5 py-1 rounded-md font-semibold text-white bg-[#8B1E29] shadow-xs transition text-[11px]">日日程</button>
                   <button onclick="setScheduleView('week')" id="btn-view-week" class="px-2.5 py-1 rounded-md font-medium text-slate-600 hover:text-slate-900 transition text-[11px]">周网格</button>
+                </div>
+              </div>
+
+              <!-- 课表内嵌 1-20 周网格面板 (点击当前周即可平滑就地展开/收起) -->
+              <div id="inPageWeekPicker" class="hidden pt-2.5 border-t border-slate-100 space-y-2">
+                <div class="flex items-center justify-between text-[11px]">
+                  <span class="font-bold text-slate-700">切换教学周次</span>
+                  <button onclick="selectScheduleWeek(3)" class="text-[10px] text-[#8B1E29] font-bold hover:underline">回到本周 (第3周)</button>
+                </div>
+                <div class="grid grid-cols-5 gap-1.5 text-center text-xs" id="weekButtonsGrid">
+                  <!-- JS 动态渲染 1 到 20 周小块 -->
                 </div>
               </div>
 
@@ -1278,7 +1240,7 @@
               <span class="text-slate-800 font-medium">💬 小程序开发与设计评审反馈</span>
               <span class="text-[#8B1E29] text-[11px] font-medium">填写建议 ›</span>
             </div>
-            <div onclick="showToast('已清理临时缓存，当前版本 v1.9.0 (双二级菜单与生活互助并入社区版)')" class="p-3 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition">
+            <div onclick="showToast('已清理临时缓存，当前版本 v1.9.1 (标题去重与课表内嵌周次版)')" class="p-3 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition">
               <span class="text-slate-800 font-medium">⚙️ 缓存清理与系统设置</span>
               <span class="text-slate-400 text-[11px]">0.3 MB ›</span>
             </div>
@@ -1332,79 +1294,76 @@
 
       <!-- ==================== 弹窗与抽屉系统 (状态完全解耦，彻底杜绝常开与无响应) ==================== -->
 
-      <!-- 1. 社区功能二级 Action Sheet 展开菜单 (全校社区与互助板块中枢) -->
+      <!-- 1. 社区功能二级 Action Sheet 展开菜单 (全校社区与生活互助板块中枢) -->
       <div id="feedActionSheet" onclick="if(event.target===this) closeFeedActionSheet()" class="sheet-modal">
-        <div class="bg-white rounded-t-3xl p-4 shadow-2xl modal-dialog space-y-3.5 max-h-[580px] overflow-y-auto no-scrollbar">
+        <div class="bg-white rounded-t-3xl p-4 shadow-2xl modal-dialog space-y-3.5 max-h-[540px] overflow-y-auto no-scrollbar">
           <div class="flex items-center justify-between pb-2.5 border-b border-slate-100">
             <div class="flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-[#8B1E29]"></span>
-              <span class="font-bold text-sm text-slate-900">集大社区空间 · 板块与生活互助</span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#8B1E29]"></span>
+              <span class="font-bold text-sm text-slate-900">集大社区空间 · 综合板块导航</span>
             </div>
             <button onclick="closeFeedActionSheet()" class="text-slate-400 hover:text-slate-600 text-xs p-1">✕ 关闭</button>
           </div>
 
-          <div class="space-y-3.5 text-xs">
-            <!-- 组 1: 生活互助服务 (校内面交 · 互助履约) -->
+          <div class="space-y-3 text-xs">
+            <!-- 组 1: 生活互助大厅 -->
             <div>
               <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center justify-between">
-                <span>生活互助大厅</span>
-                <span class="text-[9px] text-[#8B1E29] font-semibold bg-[#FAF0F1] px-1.5 py-0.5 rounded border border-[#F0D5D8]">校内专区</span>
+                <span>校内生活互助专区</span>
+                <span class="text-[9px] text-[#8B1E29] font-semibold bg-[#FAF0F1] px-1.5 py-0.5 rounded border border-[#F0D5D8]">核心互助</span>
               </div>
               <div class="grid grid-cols-3 gap-2 text-center">
-                <div onclick="selectFeedModule('used')" class="flex flex-col items-center p-2.5 rounded-xl bg-amber-50/60 hover:bg-amber-100/60 border border-amber-200/70 cursor-pointer transition group">
-                  <div class="w-10 h-10 rounded-xl bg-amber-100/80 text-amber-800 flex items-center justify-center text-lg shadow-2xs group-hover:scale-105 transition">🛍️</div>
+                <div onclick="selectFeedModule('used')" class="flex flex-col items-center p-2.5 rounded-xl bg-amber-50/70 hover:bg-amber-100/70 border border-amber-200/80 cursor-pointer transition group">
+                  <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center text-lg shadow-2xs group-hover:scale-105 transition">🛍️</div>
                   <span class="text-[11px] font-bold text-slate-800 mt-1.5">二手闲置集市</span>
                   <span class="text-[9px] text-slate-400 mt-0.5">校内安全面交</span>
                 </div>
-                <div onclick="selectFeedModule('lost')" class="flex flex-col items-center p-2.5 rounded-xl bg-blue-50/60 hover:bg-blue-100/60 border border-blue-200/70 cursor-pointer transition group">
-                  <div class="w-10 h-10 rounded-xl bg-blue-100/80 text-blue-700 flex items-center justify-center text-lg shadow-2xs group-hover:scale-105 transition">🔍</div>
-                  <span class="text-[11px] font-bold text-slate-800 mt-1.5">失物招领告示</span>
+                <div onclick="selectFeedModule('lost')" class="flex flex-col items-center p-2.5 rounded-xl bg-blue-50/70 hover:bg-blue-100/70 border border-blue-200/80 cursor-pointer transition group">
+                  <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center text-lg shadow-2xs group-hover:scale-105 transition">🔍</div>
+                  <span class="text-[11px] font-bold text-slate-800 mt-1.5">失物寻物告示</span>
                   <span class="text-[9px] text-slate-400 mt-0.5">联动保卫处</span>
                 </div>
-                <div onclick="selectFeedModule('errand')" class="flex flex-col items-center p-2.5 rounded-xl bg-emerald-50/60 hover:bg-emerald-100/60 border border-emerald-200/70 cursor-pointer transition group">
-                  <div class="w-10 h-10 rounded-xl bg-emerald-100/80 text-emerald-700 flex items-center justify-center text-lg shadow-2xs group-hover:scale-105 transition">🏃</div>
+                <div onclick="selectFeedModule('errand')" class="flex flex-col items-center p-2.5 rounded-xl bg-emerald-50/70 hover:bg-emerald-100/70 border border-emerald-200/80 cursor-pointer transition group">
+                  <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-lg shadow-2xs group-hover:scale-105 transition">🏃</div>
                   <span class="text-[11px] font-bold text-slate-800 mt-1.5">校园跑腿代取</span>
-                  <span class="text-[9px] text-slate-400 mt-0.5">同学顺手互助</span>
+                  <span class="text-[9px] text-slate-400 mt-0.5">同学顺路代领</span>
                 </div>
               </div>
             </div>
 
-            <!-- 组 2: 社区热门板块与话题圈子 -->
-            <div>
-              <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center justify-between">
-                <span>社区热门板块</span>
-                <span class="text-[9px] text-slate-400 font-normal">动态广场 · 话题讨论</span>
+            <!-- 组 2: 动态广场主入口 -->
+            <div onclick="selectFeedModule('stream'); setFeedChannel('rec')" class="p-2.5 bg-[#FAF0F1] hover:bg-[#F5E2E4] rounded-xl border border-[#F0D5D8] flex items-center justify-between cursor-pointer transition">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-[#8B1E29] text-white flex items-center justify-center text-sm font-bold">📰</div>
+                <div>
+                  <div class="text-xs font-bold text-[#8B1E29]">社区动态广场</div>
+                  <div class="text-[10px] text-slate-500">师生动态、推荐流与关注流</div>
+                </div>
               </div>
-              <div class="grid grid-cols-3 gap-2 text-center">
-                <div onclick="selectFeedModule('stream'); setFeedChannel('rec')" class="flex flex-col items-center p-2 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-100 cursor-pointer transition group">
-                  <div class="w-9 h-9 rounded-xl bg-[#FAF0F1] text-[#8B1E29] flex items-center justify-center text-base shadow-2xs group-hover:scale-105 transition">📰</div>
-                  <span class="text-[10px] font-bold text-slate-800 mt-1">动态广场</span>
-                  <span class="text-[8px] text-slate-400">推荐与关注</span>
+              <span class="text-xs text-[#8B1E29] font-bold">进入广场 ›</span>
+            </div>
+
+            <!-- 组 3: 热门话题讨论圈 -->
+            <div>
+              <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">
+                <span>热门话题讨论</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 text-xs">
+                <div onclick="selectFeedModule('stream'); filterTopic('集大表白墙')" class="p-2 bg-slate-50 hover:bg-slate-100 rounded-lg border border-slate-200/80 flex items-center gap-2 cursor-pointer transition">
+                  <span>💌</span>
+                  <span class="font-medium text-slate-700">集大表白墙</span>
                 </div>
-                <div onclick="selectFeedModule('stream'); filterTopic('集大表白墙')" class="flex flex-col items-center p-2 rounded-xl bg-rose-50/50 hover:bg-rose-50 border border-rose-100 cursor-pointer transition group">
-                  <div class="w-9 h-9 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center text-base shadow-2xs group-hover:scale-105 transition">💌</div>
-                  <span class="text-[10px] font-bold text-slate-800 mt-1">集大表白墙</span>
-                  <span class="text-[8px] text-slate-400">心动树洞</span>
+                <div onclick="selectFeedModule('stream'); filterTopic('拼单拼车厦门北站')" class="p-2 bg-slate-50 hover:bg-slate-100 rounded-lg border border-slate-200/80 flex items-center gap-2 cursor-pointer transition">
+                  <span>🚗</span>
+                  <span class="font-medium text-slate-700">拼车厦门北站</span>
                 </div>
-                <div onclick="selectFeedModule('stream'); filterTopic('考研自习搭子')" class="flex flex-col items-center p-2 rounded-xl bg-emerald-50/50 hover:bg-emerald-50 border border-emerald-100 cursor-pointer transition group">
-                  <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-base shadow-2xs group-hover:scale-105 transition">📖</div>
-                  <span class="text-[10px] font-bold text-slate-800 mt-1">找学伴搭子</span>
-                  <span class="text-[8px] text-slate-400">尚大楼自习</span>
+                <div onclick="selectFeedModule('stream'); filterTopic('考研自习搭子')" class="p-2 bg-slate-50 hover:bg-slate-100 rounded-lg border border-slate-200/80 flex items-center gap-2 cursor-pointer transition">
+                  <span>📖</span>
+                  <span class="font-medium text-slate-700">找学伴搭子</span>
                 </div>
-                <div onclick="selectFeedModule('stream'); filterTopic('拼单拼车厦门北站')" class="flex flex-col items-center p-2 rounded-xl bg-blue-50/50 hover:bg-blue-50 border border-blue-100 cursor-pointer transition group">
-                  <div class="w-9 h-9 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center text-base shadow-2xs group-hover:scale-105 transition">🚗</div>
-                  <span class="text-[10px] font-bold text-slate-800 mt-1">拼单拼车</span>
-                  <span class="text-[8px] text-slate-400">厦门北站</span>
-                </div>
-                <div onclick="selectFeedModule('stream'); filterTopic('集大选课避雷')" class="flex flex-col items-center p-2 rounded-xl bg-amber-50/50 hover:bg-amber-50 border border-amber-100 cursor-pointer transition group">
-                  <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-base shadow-2xs group-hover:scale-105 transition">💬</div>
-                  <span class="text-[10px] font-bold text-slate-800 mt-1">选课吐槽</span>
-                  <span class="text-[8px] text-slate-400">课程避雷</span>
-                </div>
-                <div onclick="selectFeedModule('stream'); setFeedChannel('topic')" class="flex flex-col items-center p-2 rounded-xl bg-purple-50/50 hover:bg-purple-50 border border-purple-100 cursor-pointer transition group">
-                  <div class="w-9 h-9 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center text-base shadow-2xs group-hover:scale-105 transition">🏷️</div>
-                  <span class="text-[10px] font-bold text-slate-800 mt-1">话题广场</span>
-                  <span class="text-[8px] text-slate-400">全校话题榜</span>
+                <div onclick="selectFeedModule('stream'); filterTopic('集大选课避雷')" class="p-2 bg-slate-50 hover:bg-slate-100 rounded-lg border border-slate-200/80 flex items-center gap-2 cursor-pointer transition">
+                  <span>💬</span>
+                  <span class="font-medium text-slate-700">选课避雷吐槽</span>
                 </div>
               </div>
             </div>
@@ -1412,47 +1371,34 @@
         </div>
       </div>
 
-      <!-- 2. 校园功能二级 Action Sheet 展开菜单 (教务中心) -->
+      <!-- 2. 校园功能二级 Action Sheet 展开菜单 (教务服务中枢，无周次干扰) -->
       <div id="campusActionSheet" onclick="if(event.target===this) closeCampusActionSheet()" class="sheet-modal">
-        <div class="bg-white rounded-t-3xl p-4 shadow-2xl modal-dialog space-y-3.5 max-h-[580px] overflow-y-auto no-scrollbar">
+        <div class="bg-white rounded-t-3xl p-4 shadow-2xl modal-dialog space-y-3.5 max-h-[540px] overflow-y-auto no-scrollbar">
           <div class="flex items-center justify-between pb-2.5 border-b border-slate-100">
             <div class="flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-[#8B1E29]"></span>
-              <span class="font-bold text-sm text-slate-900">集大校园服务中心 · 教务功能矩阵</span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#8B1E29]"></span>
+              <span class="font-bold text-sm text-slate-900">集大校园服务 · 教务功能矩阵</span>
             </div>
             <button onclick="closeCampusActionSheet()" class="text-slate-400 hover:text-slate-600 text-xs p-1">✕ 关闭</button>
           </div>
 
-          <div class="space-y-3.5 text-xs">
-            <!-- 组 1: 核心学业日程 -->
-            <div>
-              <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center justify-between">
-                <span>学业日程管理</span>
-                <span class="text-[9px] text-slate-400 font-normal">周次 · 课程便签</span>
-              </div>
-              <div class="grid grid-cols-2 gap-2 text-center">
-                <div onclick="selectCampusModule('schedule')" class="flex items-center gap-3 p-3 rounded-xl bg-[#FAF0F1] hover:bg-[#F5E2E4] border border-[#F0D5D8] cursor-pointer transition group text-left">
-                  <div class="w-10 h-10 rounded-xl bg-white text-[#8B1E29] flex items-center justify-center text-lg shadow-2xs group-hover:scale-105 transition shrink-0">📅</div>
-                  <div>
-                    <div class="text-xs font-bold text-[#8B1E29]">课表日程中心</div>
-                    <div class="text-[10px] text-slate-500 mt-0.5">日日程流 / 5天周网格</div>
-                  </div>
-                </div>
-                <div onclick="closeCampusActionSheet(); openWeekPickerModal()" class="flex items-center gap-3 p-3 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 cursor-pointer transition group text-left">
-                  <div class="w-10 h-10 rounded-xl bg-white text-slate-700 flex items-center justify-center text-lg shadow-2xs group-hover:scale-105 transition shrink-0">🗓️</div>
-                  <div>
-                    <div class="text-xs font-bold text-slate-800">学期周次选择</div>
-                    <div class="text-[10px] text-slate-500 mt-0.5">第 1 - 20 周随时切换</div>
-                  </div>
+          <div class="space-y-3 text-xs">
+            <!-- 课表日程直达 -->
+            <div onclick="selectCampusModule('schedule')" class="p-2.5 bg-[#FAF0F1] hover:bg-[#F5E2E4] rounded-xl border border-[#F0D5D8] flex items-center justify-between cursor-pointer transition">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-[#8B1E29] text-white flex items-center justify-center text-sm font-bold">📅</div>
+                <div>
+                  <div class="text-xs font-bold text-[#8B1E29]">课表日程中心</div>
+                  <div class="text-[10px] text-slate-500">日日程清单 / 5天全景周网格</div>
                 </div>
               </div>
+              <span class="text-xs text-[#8B1E29] font-bold">查看课表 ›</span>
             </div>
 
-            <!-- 组 2: 教务查询与高频工具 -->
+            <!-- 4 大教务查询与体测工具 (无周次选择，周次严格内置于课表内部) -->
             <div>
-              <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center justify-between">
-                <span>教务直联工具</span>
-                <span class="text-[9px] text-slate-400 font-normal">自习 · 成绩 · 日历 · 体测</span>
+              <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">
+                <span>教务高频直联工具</span>
               </div>
               <div class="grid grid-cols-4 gap-2 text-center">
                 <div onclick="closeCampusActionSheet(); openClassroomModal()" class="flex flex-col items-center p-2 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-100 cursor-pointer transition group">
@@ -1477,16 +1423,13 @@
               </div>
             </div>
 
-            <!-- 组 3: 生活互助跳转导流 -->
-            <div onclick="closeCampusActionSheet(); switchTab('feed'); openFeedActionSheet()" class="p-2.5 bg-slate-50 hover:bg-slate-100 rounded-xl border border-slate-200 cursor-pointer transition flex items-center justify-between">
+            <!-- 底部生活互助导流条 -->
+            <div onclick="closeCampusActionSheet(); switchTab('feed'); selectFeedModule('used')" class="p-2.5 bg-slate-50 hover:bg-slate-100 rounded-xl border border-slate-200/80 flex items-center justify-between cursor-pointer transition">
               <div class="flex items-center gap-2">
-                <span class="text-base">🛍️</span>
-                <div>
-                  <div class="text-xs font-bold text-slate-800">二手闲置 · 失物招领 · 校园跑腿</div>
-                  <div class="text-[9px] text-slate-400">生活互助服务已全部移入【社区 ▾】板块</div>
-                </div>
+                <span>🛍️</span>
+                <span class="text-slate-600 text-xs">二手闲置 · 失物招领 · 跑腿代取已并入社区</span>
               </div>
-              <span class="text-[11px] font-bold text-[#8B1E29]">前往社区 ›</span>
+              <span class="text-[#8B1E29] font-bold text-xs">前往社区 ›</span>
             </div>
           </div>
         </div>
@@ -2313,8 +2256,11 @@
       currentTab = tabId;
       const vp = document.getElementById('viewport');
       if (vp) vp.scrollTop = 0;
-      
-      document.querySelectorAll('.tab-page').forEach(el => el.classList.add('hidden'));
+
+      document.querySelectorAll('.device-shell .tab-page').forEach(el => {
+        el.classList.add('hidden');
+      });
+
       document.querySelectorAll('.device-shell [id^="tab-"]').forEach(el => {
         el.className = 'flex flex-col items-center justify-center text-slate-400 hover:text-slate-700 transition group relative';
       });
@@ -2327,20 +2273,37 @@
         activeBtn.className = 'flex flex-col items-center justify-center text-[#8B1E29] transition group relative';
       }
 
-      const feedTitleMap = {
-        stream: '社区广场',
-        used: '二手闲置集市',
-        lost: '失物招领告示',
-        errand: '校园互助跑腿'
+      const feedBadgeMap = {
+        stream: '动态 ▾',
+        used: '二手 ▾',
+        lost: '寻物 ▾',
+        errand: '跑腿 ▾'
       };
 
-      const titles = {
-        feed: feedTitleMap[currentFeedModule] || '社区广场',
-        campus: '课表日程',
-        messages: '消息中心',
-        profile: '个人主页'
+      const titleConfigs = {
+        feed: {
+          title: currentFeedModule === 'stream' ? '社区广场' : (currentFeedModule === 'used' ? '二手闲置' : (currentFeedModule === 'lost' ? '失物寻物' : '校园跑腿')),
+          badge: feedBadgeMap[currentFeedModule] || '板块 ▾'
+        },
+        campus: {
+          title: '校园功能',
+          badge: '课表 ▾'
+        },
+        messages: {
+          title: '消息中心',
+          badge: '未读 3'
+        },
+        profile: {
+          title: '个人主页',
+          badge: '集大认证'
+        }
       };
-      document.getElementById('navTitle').innerText = titles[tabId] || 'UNIJMU';
+
+      const cfg = titleConfigs[tabId] || { title: 'UNIJMU', badge: '集美大学' };
+      const navTitleEl = document.getElementById('navTitle');
+      const navSubBadgeTextEl = document.getElementById('navSubBadgeText');
+      if (navTitleEl) navTitleEl.innerText = cfg.title;
+      if (navSubBadgeTextEl) navSubBadgeTextEl.innerText = cfg.badge;
 
       const fab = document.getElementById('fabPublishBtn');
       if (fab) {
@@ -2348,18 +2311,43 @@
       }
     }
 
-    // 社区 Tab 点击与二级子菜单联动
+    // ==================== 顶栏与二级菜单综合联动 ====================
+    function handleHeaderTitleClick() {
+      if (currentTab === 'feed') {
+        toggleFeedActionSheet();
+      } else if (currentTab === 'campus') {
+        toggleCampusActionSheet();
+      } else {
+        showToast('当前处于' + (currentTab === 'messages' ? '消息中心' : '个人主页'));
+      }
+    }
+
+    function toggleFeedActionSheet() {
+      const sheet = document.getElementById('feedActionSheet');
+      if (!sheet) return;
+      if (sheet.classList.contains('is-active')) {
+        closeFeedActionSheet();
+      } else {
+        openFeedActionSheet();
+      }
+    }
+
+    function toggleCampusActionSheet() {
+      const sheet = document.getElementById('campusActionSheet');
+      if (!sheet) return;
+      if (sheet.classList.contains('is-active')) {
+        closeCampusActionSheet();
+      } else {
+        openCampusActionSheet();
+      }
+    }
+
+    // 社区 Tab 点击 (首次点击切入Tab，在当前Tab轻点展开二级板块)
     function handleFeedTabClick() {
       if (currentTab !== 'feed') {
         switchTab('feed');
-        openFeedActionSheet();
       } else {
-        const sheet = document.getElementById('feedActionSheet');
-        if (sheet && sheet.classList.contains('is-active')) {
-          closeFeedActionSheet();
-        } else {
-          openFeedActionSheet();
-        }
+        toggleFeedActionSheet();
       }
     }
 
@@ -2373,7 +2361,26 @@
       if (sheet) sheet.classList.remove('is-active');
     }
 
-    // 社区板块/子模块调度 (动态广场、二手闲置、失物招领、校园跑腿)
+    // 校园功能 Tab 点击 (首次点击切入Tab，在当前Tab轻点展开二级教务菜单)
+    function handleCampusTabClick() {
+      if (currentTab !== 'campus') {
+        switchTab('campus');
+      } else {
+        toggleCampusActionSheet();
+      }
+    }
+
+    function openCampusActionSheet() {
+      const sheet = document.getElementById('campusActionSheet');
+      if (sheet) sheet.classList.add('is-active');
+    }
+
+    function closeCampusActionSheet() {
+      const sheet = document.getElementById('campusActionSheet');
+      if (sheet) sheet.classList.remove('is-active');
+    }
+
+    // 社区子模块调度 (流/二手/失物/跑腿)
     function selectFeedModule(mod) {
       currentFeedModule = mod;
       const vp = document.getElementById('viewport');
@@ -2392,35 +2399,20 @@
       if (target) target.classList.remove('hidden');
 
       const titles = {
-        stream: '社区动态广场',
-        used: '二手闲置集市',
-        lost: '失物招领告示',
-        errand: '校园互助跑腿'
+        stream: { title: '社区广场', badge: '动态 ▾' },
+        used: { title: '二手闲置', badge: '集市 ▾' },
+        lost: { title: '失物寻物', badge: '告示 ▾' },
+        errand: { title: '校园跑腿', badge: '代取 ▾' }
       };
-      const title = titles[mod] || '社区广场';
-      const curTitleEl = document.getElementById('feedCurrentServiceTitle');
-      if (curTitleEl) curTitleEl.innerText = title;
-      if (currentTab === 'feed') {
-        document.getElementById('navTitle').innerText = title;
-      }
+
+      const info = titles[mod] || { title: '社区广场', badge: '板块 ▾' };
+      const navTitleEl = document.getElementById('navTitle');
+      const navSubBadgeTextEl = document.getElementById('navSubBadgeText');
+      if (navTitleEl) navTitleEl.innerText = info.title;
+      if (navSubBadgeTextEl) navSubBadgeTextEl.innerText = info.badge;
     }
 
-    // 校园功能 Tab 点击与二级菜单联动
-    function handleCampusTabClick() {
-      if (currentTab !== 'campus') {
-        switchTab('campus');
-        openCampusActionSheet();
-      } else {
-        const sheet = document.getElementById('campusActionSheet');
-        if (sheet && sheet.classList.contains('is-active')) {
-          closeCampusActionSheet();
-        } else {
-          openCampusActionSheet();
-        }
-      }
-    }
-
-    // 校园功能子模块调度
+    // 校园功能调度 (课表日程)
     function selectCampusModule(mod) {
       if (mod === 'used' || mod === 'lost' || mod === 'errand') {
         selectFeedModule(mod);
@@ -2437,11 +2429,69 @@
       const scheduleEl = document.getElementById('campus-view-schedule');
       if (scheduleEl) scheduleEl.classList.remove('hidden');
 
-      const curTitleEl = document.getElementById('campusCurrentServiceTitle');
-      if (curTitleEl) curTitleEl.innerText = '课表日程';
-      if (currentTab === 'campus') {
-        document.getElementById('navTitle').innerText = '课表日程';
+      const navTitleEl = document.getElementById('navTitle');
+      const navSubBadgeTextEl = document.getElementById('navSubBadgeText');
+      if (navTitleEl) navTitleEl.innerText = '校园功能';
+      if (navSubBadgeTextEl) navSubBadgeTextEl.innerText = '课表 ▾';
+    }
+
+    // ==================== 课表内嵌周次选择器逻辑 (严格就地选择，不外溢) ====================
+    let currentScheduleWeek = 3;
+
+    function changeScheduleWeek(delta) {
+      currentScheduleWeek = Math.max(1, Math.min(20, currentScheduleWeek + delta));
+      applyScheduleWeek(currentScheduleWeek);
+    }
+
+    function selectScheduleWeek(week) {
+      currentScheduleWeek = week;
+      applyScheduleWeek(week);
+      toggleInPageWeekPicker(false);
+    }
+
+    function applyScheduleWeek(week) {
+      const isCurrent = (week === 3);
+      const titleEl = document.getElementById('scheduleWeekTitle');
+      if (titleEl) {
+        titleEl.innerText = '第 ' + week + ' 周' + (isCurrent ? ' (本周)' : '');
       }
+      renderInPageWeekGrid();
+      showToast('已切换至第 ' + week + ' 周课表' + (isCurrent ? ' (当前教学周)' : ''));
+    }
+
+    function toggleInPageWeekPicker(forceState) {
+      const el = document.getElementById('inPageWeekPicker');
+      const arrow = document.getElementById('inPageWeekArrow');
+      if (!el) return;
+      const willShow = (forceState !== undefined) ? forceState : el.classList.contains('hidden');
+      if (willShow) {
+        renderInPageWeekGrid();
+        el.classList.remove('hidden');
+        if (arrow) arrow.style.transform = 'rotate(180deg)';
+      } else {
+        el.classList.add('hidden');
+        if (arrow) arrow.style.transform = 'rotate(0deg)';
+      }
+    }
+
+    function renderInPageWeekGrid() {
+      const grid = document.getElementById('weekButtonsGrid');
+      if (!grid) return;
+      let gridHtml = '';
+      for (let i = 1; i <= 20; i++) {
+        const isSelected = (i === currentScheduleWeek);
+        const isThisWeek = (i === 3);
+        let cls = 'py-1.5 rounded-lg font-medium transition cursor-pointer text-[11px] ';
+        if (isSelected) {
+          cls += 'bg-[#8B1E29] text-white font-bold shadow-xs';
+        } else if (isThisWeek) {
+          cls += 'bg-[#FAF0F1] text-[#8B1E29] border border-[#F0D5D8] font-bold';
+        } else {
+          cls += 'bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-100';
+        }
+        gridHtml += '<div onclick="selectScheduleWeek(' + i + ')" class="' + cls + '">' + i + '周' + (isThisWeek && !isSelected ? '*' : '') + '</div>';
+      }
+      grid.innerHTML = gridHtml;
     }
 
     function setScheduleView(v) {
@@ -2988,6 +3038,7 @@
         closeUserProfilePage();
       }
     });
+    renderInPageWeekGrid();
   </script>
 </body>
 </html>
