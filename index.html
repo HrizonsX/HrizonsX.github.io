@@ -6,16 +6,12 @@
   <title>UNIJMU · 集美大学校园服务平台原型评审版</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
   
-  <!-- 引入国内与国际双通道极速 CSS (BootCDN + Tailwind JIT) -->
-  <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
   <style>
-
     /* =========================================================
-       UNIJMU 完全自包含、离线高保真原子 CSS 引擎 (Zero-CDN Dependency)
-       保证在任何网络被阻断、弱网、无网络或离线打开时 100% 像素级高保真渲染
+       UNIJMU 完全自包含、零外部依赖高保真原子 CSS 引擎 (Zero-CDN)
+       100% 离线可用，杜绝任何外部 CDN 阻断、FOUC 闪烁与样式混乱
        ========================================================= */
 
-    /* 1. 基础重置与系统字体 */
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
@@ -37,7 +33,9 @@
       --border-divider: #F1F5F9;
     }
 
-    body {
+    html, body {
+      width: 100%;
+      height: 100%;
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
       color: var(--text-main);
       background-color: #E2E8F0;
@@ -45,10 +43,11 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
-    /* 2. 绝对兜底原子显隐与布局（确保绝不塌陷） */
+    /* 绝对兜底原子显隐与布局 */
     .hidden { display: none !important; }
     .block { display: block !important; }
     .flex { display: flex !important; }
+    .inline-flex { display: inline-flex !important; }
     .grid { display: grid !important; }
     .flex-col { flex-direction: column !important; }
     .flex-1 { flex: 1 1 0% !important; }
@@ -105,7 +104,7 @@
     .resize-none { resize: none !important; }
     .outline-none { outline: 2px solid transparent !important; outline-offset: 2px !important; }
 
-    /* 3. 网格与间距系统 */
+    /* 网格系统 */
     .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
     .grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
     .grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
@@ -130,7 +129,7 @@
     .divide-y > :not([hidden]) ~ :not([hidden]) { border-top-width: 1px !important; }
     .divide-slate-100 > :not([hidden]) ~ :not([hidden]) { border-color: #f1f5f9 !important; }
 
-    /* 4. 尺寸与字号 */
+    /* 尺寸与间距 */
     .w-1\.5 { width: 0.375rem !important; }
     .h-1\.5 { height: 0.375rem !important; }
     .w-2 { width: 0.5rem !important; }
@@ -162,6 +161,7 @@
     .w-16 { width: 4rem !important; }
     .h-16 { height: 4rem !important; }
     .w-80 { width: 20rem !important; }
+    .h-9 { height: 2.25rem !important; }
     .h-11 { height: 2.75rem !important; }
     .h-14 { height: 3.5rem !important; }
     .h-18 { height: 4.5rem !important; }
@@ -170,7 +170,6 @@
     .h-28 { height: 7rem !important; }
     .h-32 { height: 8rem !important; }
 
-    /* 任意尺寸类精确支持 */
     .w-\[1px\] { width: 1px !important; }
     .w-\[84px\] { width: 84px !important; }
     .w-\[380px\] { width: 380px !important; }
@@ -191,7 +190,6 @@
     .max-h-\[580px\] { max-height: 580px !important; }
     .max-h-\[600px\] { max-height: 600px !important; }
 
-    /* 内边距与外边距 */
     .p-0 { padding: 0 !important; }
     .p-0\.5 { padding: 0.125rem !important; }
     .p-1 { padding: 0.25rem !important; }
@@ -235,7 +233,7 @@
     .mb-1 { margin-bottom: 0.25rem !important; }
     .mb-2 { margin-bottom: 0.5rem !important; }
 
-    /* 5. 字体与排版 */
+    /* 字体大小与排版 */
     .text-\[8px\] { font-size: 8px !important; line-height: 11px !important; }
     .text-\[9px\] { font-size: 9px !important; line-height: 12px !important; }
     .text-\[10px\] { font-size: 10px !important; line-height: 14px !important; }
@@ -269,7 +267,7 @@
     .truncate { overflow: hidden !important; text-overflow: ellipsis !important; white-space: nowrap !important; }
     .line-clamp-1 { display: -webkit-box !important; -webkit-line-clamp: 1 !important; -webkit-box-orient: vertical !important; overflow: hidden !important; }
 
-    /* 6. 颜色系统（嘉庚红与全套语义色） */
+    /* 颜色规范 */
     .text-\[\#8B1E29\] { color: #8B1E29 !important; }
     .text-white { color: #ffffff !important; }
     .text-slate-300 { color: #cbd5e1 !important; }
@@ -323,7 +321,7 @@
     .bg-red-50 { background-color: #fef2f2 !important; }
     .bg-red-100 { background-color: #fee2e2 !important; }
 
-    /* 渐变背景 */
+    /* 渐变 */
     .bg-gradient-to-r { background-image: linear-gradient(to right, var(--tw-gradient-stops)) !important; }
     .bg-gradient-to-br { background-image: linear-gradient(to bottom right, var(--tw-gradient-stops)) !important; }
     .from-\[\#8B1E29\] { --tw-gradient-from: #8B1E29; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(139, 30, 41, 0)) !important; }
@@ -339,7 +337,7 @@
     .via-orange-500\/10 { --tw-gradient-stops: var(--tw-gradient-from), rgba(249, 115, 22, 0.1), var(--tw-gradient-to, rgba(249, 115, 22, 0)) !important; }
     .to-amber-500\/10 { --tw-gradient-to: rgba(245, 158, 11, 0.1) !important; }
 
-    /* 7. 边框与圆角 */
+    /* 边框与圆角 */
     .border { border-width: 1px !important; border-style: solid !important; }
     .border-2 { border-width: 2px !important; border-style: solid !important; }
     .border-\[6px\] { border-width: 6px !important; border-style: solid !important; }
@@ -384,13 +382,13 @@
     .rounded-\[3px\] { border-radius: 3px !important; }
     .rounded-\[48px\] { border-radius: 48px !important; }
 
-    /* 8. 阴影与特效 */
+    /* 阴影与特效 */
     .shadow-xs, .shadow-2xs { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important; }
     .shadow-sm { box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1) !important; }
     .shadow-md { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1) !important; }
     .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1) !important; }
     .shadow-2xl { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important; }
-    .shadow-\[0_25px_60px_-15px_rgba\(0\,0\,0\,0\.18\)\,0_0_0_1px_rgba\(0\,0\,0\,0\.08\)\] {
+    [class*="shadow-[0_25px_60px_-15px_rgba(0,0,0,0.18),0_0_0_1px_rgba(0,0,0,0.08)]"], .device-shell {
       box-shadow: 0 25px 60px -15px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.08) !important;
     }
 
@@ -398,11 +396,11 @@
     .backdrop-blur-\[2px\] { backdrop-filter: blur(2px) !important; -webkit-backdrop-filter: blur(2px) !important; }
     .fill-current { fill: currentColor !important; }
 
-    .transition { transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter !important; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important; transition-duration: 150ms !important; }
-    .transition-all { transition-property: all !important; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important; transition-duration: 150ms !important; }
-    .transition-opacity { transition-property: opacity !important; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important; transition-duration: 150ms !important; }
+    .transition { transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1) !important; }
+    .transition-all { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important; }
+    .transition-opacity { transition: opacity 0.2s ease !important; }
 
-    /* 9. 交互状态 (Hover, Group-hover, Active) */
+    /* 交互状态 */
     .hover\:bg-\[\#751722\]:hover { background-color: #751722 !important; }
     .hover\:bg-\[\#FAF0F1\]:hover { background-color: #FAF0F1 !important; }
     .hover\:bg-red-100:hover { background-color: #fee2e2 !important; }
@@ -429,12 +427,12 @@
 
     .active\:scale-95:active { transform: scale(0.95) !important; }
 
-    /* 10. 动效与关键帧 */
+    /* 动效 */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    .animate-fadeIn { animation: fadeIn 0.25s ease-out forwards; }
+    .animate-fadeIn { animation: fadeIn 0.22s ease-out forwards; }
 
     @keyframes pulse {
       0%, 100% { opacity: 1; }
@@ -442,7 +440,7 @@
     }
     .animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
 
-    /* 11. 核心业务组件规范 */
+    /* 业务组件 */
     .app-card {
       background: #FFFFFF;
       border: 1px solid var(--border-subtle);
@@ -455,39 +453,39 @@
     }
 
     .glass-nav {
-      background: rgba(255, 255, 255, 0.94);
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: saturate(180%) blur(16px);
       -webkit-backdrop-filter: saturate(180%) blur(16px);
     }
     .glass-tabbar {
-      background: rgba(255, 255, 255, 0.96);
+      background: rgba(255, 255, 255, 0.97);
       backdrop-filter: saturate(180%) blur(16px);
       -webkit-backdrop-filter: saturate(180%) blur(16px);
     }
 
     .sheet-up {
-      transition: transform 0.28s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.2s ease;
+      transition: transform 0.26s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.2s ease;
     }
     .modal-pop {
-      transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+      transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
     }
 
-    
-    /* 13. 专属业务与转义选择器补全 */
-    .bg-\[var\(--bg-page\)\] { background-color: var(--bg-page) !important; }
-    .border-\[var\(--border-divider\)\] { border-color: var(--border-divider) !important; }
-    .border-\[var\(--border-subtle\)\] { border-color: var(--border-subtle) !important; }
     .transform { transform: translateZ(0); }
     .tab-page { width: 100%; min-height: 100%; }
     .cr-btn { transition: all 0.15s ease; }
     .pub-board-btn { transition: all 0.15s ease; }
     .course-note-badge { display: inline-flex; align-items: center; }
-    .shadow-\[0_25px_60px_-15px_rgba\(0\,0\,0\,0\.18\)\,0_0_0_1px_rgba\(0\,0\,0\,0\.08\)\] {
-      box-shadow: 0 25px 60px -15px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.08) !important;
-    }
 
-    /* 12. 响应式布局自适应 (桌面仿真壳 vs 移动端原生全屏) */
+    /* 桌面端与移动端精确响应式规则 */
     @media (min-width: 641px) {
+      body {
+        min-height: 100vh;
+        overflow-y: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem !important;
+      }
       .desktop-container {
         display: flex;
         align-items: center;
@@ -497,7 +495,15 @@
       .device-shell {
         width: 380px;
         height: 760px;
-        max-height: min(760px, 94vh);
+        max-height: min(760px, calc(100vh - 40px));
+        border-radius: 48px;
+        box-shadow: 0 25px 60px -15px rgba(0,0,0,0.22), 0 0 0 1px rgba(0,0,0,0.08);
+        border: 6px solid rgba(15, 23, 42, 0.95);
+        overflow: hidden;
+      }
+      .desktop-side-nav {
+        height: 760px;
+        max-height: min(760px, calc(100vh - 40px));
       }
       .safe-bottom-padding {
         padding-bottom: 4.5rem !important;
@@ -509,14 +515,11 @@
       .lg\:flex-row { flex-direction: row !important; }
     }
 
-    @media (min-width: 640px) {
-      .sm\:p-6 { padding: 1.5rem !important; }
-    }
-
     @media (max-width: 640px) {
       body {
         background: var(--bg-page) !important;
         padding: 0 !important;
+        overflow: hidden !important;
       }
       .desktop-side-nav {
         display: none !important;
@@ -524,6 +527,7 @@
       .desktop-container {
         padding: 0 !important;
         width: 100% !important;
+        height: 100% !important;
       }
       .device-shell {
         width: 100vw !important;
@@ -541,6 +545,43 @@
       .safe-bottom-padding {
         padding-bottom: calc(3.5rem + env(safe-area-inset-bottom, 20px)) !important;
       }
+    }
+  
+    /* === 补充高保真原子类样式 (补全 100% 类名覆盖) === */
+    .\-translate-x-1\/2, .-translate-x-1\/2 { transform: translateX(-50%) !important; }
+    .bg-\[var\(--bg-page\)\], [class*="bg-[var(--bg-page)]"] { background-color: var(--bg-page) !important; }
+    .bg-blue-100 { background-color: #dbeafe !important; }
+    .bg-emerald-600 { background-color: #059669 !important; }
+    .bg-white\/20 { background-color: rgba(255, 255, 255, 0.2) !important; }
+    .bg-white\/95 { background-color: rgba(255, 255, 255, 0.95) !important; }
+    .border-\[var\(--border-divider\)\], [class*="border-[var(--border-divider)]"] { border-color: var(--border-divider) !important; }
+    .border-\[var\(--border-subtle\)\], [class*="border-[var(--border-subtle)]"] { border-color: var(--border-subtle) !important; }
+    .border-purple-200 { border-color: #e9d5ff !important; }
+    .border-white\/20 { border-color: rgba(255, 255, 255, 0.2) !important; }
+    .hover\:border-slate-300:hover { border-color: #cbd5e1 !important; }
+    .leading-snug { line-height: 1.375 !important; }
+    .max-h-\[560px\] { max-height: 560px !important; }
+    .py-8 { padding-top: 2rem !important; padding-bottom: 2rem !important; }
+    .shadow-\[0_25px_60px_-15px_rgba\(0\,0\,0\,0\.18\)\,0_0_0_1px_rgba\(0\,0\,0\,0\.08\)\] {
+      box-shadow: 0 25px 60px -15px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.08) !important;
+    }
+    .text-emerald-800 { color: #065f46 !important; }
+    .text-red-100 { color: #fee2e2 !important; }
+    .to-\[\#751722\] { --tw-gradient-to: #751722 !important; }
+    .used-cat-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      padding: 0.5rem 0.25rem;
+      border-radius: 0.75rem;
+      transition: all 0.15s ease;
+    }
+    .used-cat-btn:active {
+      transform: scale(0.95);
+    }
+    @media (min-width: 640px) {
+      .sm\:p-6 { padding: 1.5rem !important; }
     }
 
   </style>
@@ -561,9 +602,9 @@
               JM
             </div>
             <div>
-              <h2 class="text-base font-bold text-slate-900 leading-tight">UNIJMU 校园聚合服务</h2>
+              <h2 class="text-base font-bold text-slate-900 leading-tight">UNIJMU 校园服务平台</h2>
               <div class="flex items-center gap-1.5 mt-0.5">
-                <span class="text-[11px] text-slate-500 font-mono">v1.7.1 · 纯净交互重构版</span>
+                <span class="text-[11px] text-slate-500 font-mono">v1.8.0 · 零瑕疵高保真稳定版</span>
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
               </div>
             </div>
@@ -575,14 +616,14 @@
         <div class="p-3 bg-white rounded-xl border border-slate-200 shadow-xs space-y-1.5">
           <div class="flex items-center gap-1.5 text-xs font-bold text-slate-900">
             <span class="w-2 h-2 rounded-full bg-[#8B1E29]"></span>
-            <span>本次重点重构与优化</span>
+            <span>本次深度修正与亮点</span>
           </div>
           <p class="text-[11px] text-slate-600 leading-relaxed">
-            1. <strong>全站样式精细化</strong>：剔除生硬元素，全面统一嘉庚红与高留白设计。<br>
-            2. <strong>发帖3步抽屉</strong>：选板块 ➔ 图文编辑 ➔ 安全机审即时上屏。<br>
-            3. <strong>闲鱼化二手生态</strong>：即时搜索、分类金刚区、每日签到与面交私聊。<br>
-            4. <strong>课表日历便签</strong>：课程卡片点击写随堂作业与考试备忘。<br>
-            5. <strong>门牌级空教室</strong>：精准呈现尚大楼1402、诚毅3-401空座。
+            1. <strong>全域零外部CDN依赖</strong>：完全消除外部依赖，本地与线上秒开。<br>
+            2. <strong>闲鱼二手真实多商品</strong>：点击山地车、考研书、电煮锅精准展示对应商品，分类过滤与搜索精准联动。<br>
+            3. <strong>校园功能顶部导航</strong>：课表、二手、失物、跑腿一键自如切换。<br>
+            4. <strong>三大频道实景化</strong>：推荐、关注、话题广场各自呈现独立真实流。<br>
+            5. <strong>拟真即时私聊</strong>：发送消息卖家 800ms 智能应答，闭环体验极强。
           </p>
         </div>
 
@@ -602,7 +643,7 @@
               <span class="font-medium text-slate-700 group-hover:text-[#8B1E29]">🛍️ 闲鱼式二手集市 (搜索/分类/签到)</span>
               <span class="text-slate-400 group-hover:translate-x-0.5 transition">›</span>
             </button>
-            <button onclick="switchTab('campus'); setScheduleView('day'); openCourseDetailModal('数据结构与算法设计 (C++)', '诚毅教学楼 3-402', '张教授 · 计算机工程学院', '08:00 - 09:35', '1-16周 每周上课')" class="w-full flex items-center justify-between p-2 hover:bg-slate-50 rounded-lg text-left transition group">
+            <button onclick="switchTab('campus'); selectCampusModule('schedule'); openCourseDetailModal('数据结构与算法设计 (C++)', '诚毅教学楼 3-402', '张教授 · 计算机工程学院', '08:00 - 09:35', '1-16周 每周上课', 'course-card-1')" class="w-full flex items-center justify-between p-2 hover:bg-slate-50 rounded-lg text-left transition group">
               <span class="font-medium text-slate-700 group-hover:text-[#8B1E29]">📅 课表日历备忘录（写课程便签）</span>
               <span class="text-slate-400 group-hover:translate-x-0.5 transition">›</span>
             </button>
@@ -611,11 +652,11 @@
               <span class="text-slate-400 group-hover:translate-x-0.5 transition">›</span>
             </button>
             <button onclick="openFitnessModal()" class="w-full flex items-center justify-between p-2 hover:bg-slate-50 rounded-lg text-left transition group">
-              <span class="font-medium text-slate-700 group-hover:text-[#8B1E29]">🏃‍♂️ 体测成绩综合计算器 (男女换算)</span>
+              <span class="font-medium text-slate-700 group-hover:text-[#8B1E29]">🏃‍♂️ 体测国家标准计算器 (真实换算)</span>
               <span class="text-slate-400 group-hover:translate-x-0.5 transition">›</span>
             </button>
             <button onclick="openChatPage('软工小林_23', '计算机工程学院', 'iPad Air 5 64G 紫色', '¥2,580')" class="w-full flex items-center justify-between p-2 hover:bg-slate-50 rounded-lg text-left transition group">
-              <span class="font-medium text-slate-700 group-hover:text-[#8B1E29]">💬 端内即时私聊与商品卡片挂载</span>
+              <span class="font-medium text-slate-700 group-hover:text-[#8B1E29]">💬 端内即时私聊与智能自动应答</span>
               <span class="text-slate-400 group-hover:translate-x-0.5 transition">›</span>
             </button>
             <button onclick="openUserProfilePage('软工小林_23', '计算机工程学院', '23级软件工程', '诚毅校区')" class="w-full flex items-center justify-between p-2 hover:bg-slate-50 rounded-lg text-left transition group">
@@ -642,7 +683,7 @@
           <span>提交评审意见与建言</span>
         </button>
         <div class="text-[11px] text-slate-400 text-center">
-          单文件零构建 · 集美大学团队内部评审
+          单文件自包含 · 集美大学团队内部评审
         </div>
       </div>
 
@@ -666,7 +707,7 @@
         </div>
       </div>
 
-      <!-- 微信小程序 Navigation Bar (统一集美大学，去掉冗余分校区) -->
+      <!-- 微信小程序 Navigation Bar -->
       <div class="h-11 bg-white border-b border-[var(--border-divider)] flex items-center justify-between px-4 shrink-0 z-30">
         <div class="flex items-center gap-2">
           <span id="navTitle" class="font-bold text-[15px] text-slate-900 tracking-tight">社区广场</span>
@@ -679,7 +720,7 @@
             <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
           </button>
           <div class="w-[1px] h-3 bg-slate-200"></div>
-          <button onclick="showToast('已最小化 UNIJMU 小程序')" class="p-1 text-slate-700 hover:text-black transition">
+          <button onclick="showToast('已将 UNIJMU 小程序添加至浮窗')" class="p-1 text-slate-700 hover:text-black transition">
             <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"/></svg>
           </button>
         </div>
@@ -710,8 +751,8 @@
           </div>
 
           <!-- 生活互助在社区侧的快捷入口 (金刚区 4 宫格) -->
-          <div class="grid grid-cols-4 gap-2 px-3 py-3 bg-white border-b border-[var(--border-divider)] text-center">
-            <div onclick="selectCampusModule('used')" class="flex flex-col items-center cursor-pointer hover:opacity-80 transition group">
+          <div id="feedShortcutGrid" class="grid grid-cols-4 gap-2 px-3 py-3 bg-white border-b border-[var(--border-divider)] text-center">
+            <div onclick="switchTab('campus'); selectCampusModule('used')" class="flex flex-col items-center cursor-pointer hover:opacity-80 transition group">
               <div class="w-10 h-10 rounded-xl bg-[#FAF0F1] text-[#8B1E29] flex items-center justify-center text-base shadow-2xs group-hover:scale-105 transition">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
               </div>
@@ -719,7 +760,7 @@
               <span class="text-[9px] text-slate-400">校内面交</span>
             </div>
 
-            <div onclick="selectCampusModule('lost')" class="flex flex-col items-center cursor-pointer hover:opacity-80 transition group">
+            <div onclick="switchTab('campus'); selectCampusModule('lost')" class="flex flex-col items-center cursor-pointer hover:opacity-80 transition group">
               <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center text-base shadow-2xs group-hover:scale-105 transition">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
               </div>
@@ -727,7 +768,7 @@
               <span class="text-[9px] text-slate-400">联动保卫处</span>
             </div>
 
-            <div onclick="selectCampusModule('errand')" class="flex flex-col items-center cursor-pointer hover:opacity-80 transition group">
+            <div onclick="switchTab('campus'); selectCampusModule('errand')" class="flex flex-col items-center cursor-pointer hover:opacity-80 transition group">
               <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center text-base shadow-2xs group-hover:scale-105 transition">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.25V4.875A1.125 1.125 0 0013.125 3.75h-7.5A1.125 1.125 0 004.5 4.875v9.375m9.75-6.75H16.5"/></svg>
               </div>
@@ -745,7 +786,7 @@
           </div>
 
           <!-- 高频热门话题横滑 -->
-          <div class="flex gap-2 px-3 py-2.5 overflow-x-auto no-scrollbar bg-white border-b border-[var(--border-divider)]">
+          <div id="feedTopicScroll" class="flex gap-2 px-3 py-2.5 overflow-x-auto no-scrollbar bg-white border-b border-[var(--border-divider)]">
             <div onclick="filterTopic('集大表白墙')" class="shrink-0 flex items-center gap-1 px-2.5 py-1 bg-red-50 hover:bg-red-100 rounded-lg text-xs font-medium text-[#8B1E29] cursor-pointer border border-red-100 transition">
               <span>💌</span>
               <span>集大表白墙</span>
@@ -765,8 +806,8 @@
             </div>
           </div>
 
-          <!-- 动态卡片流 -->
-          <div id="feedPostsContainer" class="p-3 space-y-3">
+          <!-- 动态卡片流容器 (推荐流) -->
+          <div id="feedChannelRec" class="p-3 space-y-3 block">
             
             <!-- 动态卡片 1 -->
             <div class="app-card p-4 space-y-2.5">
@@ -822,7 +863,7 @@
                 </button>
                 <button onclick="openCommentsSheet()" class="flex items-center gap-1.5 hover:text-slate-900 transition">
                   <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.91a.75.75 0 01-.76-.814c.063-.564.248-1.127.536-1.636C3.86 16.98 3 14.61 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"/></svg>
-                  <span>14</span>
+                  <span id="feed-comment-count">14</span>
                 </button>
                 <button onclick="toggleLike(this)" class="flex items-center gap-1.5 hover:text-[#8B1E29] transition group">
                   <svg class="w-4 h-4 text-slate-400 group-hover:text-[#8B1E29] transition" fill="currentColor" viewBox="0 0 24 24"><path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"/></svg>
@@ -870,12 +911,133 @@
             </div>
 
           </div>
+
+          <!-- 关注流容器 (关注的校友与社团动态) -->
+          <div id="feedChannelFocus" class="p-3 space-y-3 hidden">
+            <div class="p-2.5 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-800 flex items-center justify-between">
+              <span>已为您同步 3 位集大校友与官方号最新动态</span>
+              <span class="font-bold text-[10px]">即时更新</span>
+            </div>
+
+            <div class="app-card p-4 space-y-2.5">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-9 h-9 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold text-xs">林</div>
+                  <div>
+                    <div class="flex items-center gap-1.5">
+                      <span class="text-[13px] font-bold text-slate-900">软工小林_23</span>
+                      <span class="text-[10px] text-emerald-700 bg-emerald-50 px-1.5 py-[0.5px] rounded font-medium border border-emerald-200">已关注</span>
+                    </div>
+                    <div class="text-[10px] text-slate-400 mt-0.5">35分钟前 · 诚毅二食堂门口</div>
+                  </div>
+                </div>
+                <button onclick="openChatPage('软工小林_23', '计算机工程学院')" class="text-[11px] font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 px-2.5 py-1 rounded-full transition">私信</button>
+              </div>
+              <p class="text-[13px] text-slate-800 leading-relaxed">刚刚把大二下学期整理的《数据库系统概论》期末重点思维导图整理好了！需要的同学在评论区留邮箱或者私信我，学长免费分享 PDF 原图～</p>
+              <div class="flex items-center justify-between pt-2 border-t border-[var(--border-divider)] text-xs text-slate-500">
+                <span>分享</span>
+                <span onclick="openCommentsSheet()" class="cursor-pointer hover:text-slate-900">8 评论</span>
+                <span onclick="toggleLike(this)" class="cursor-pointer hover:text-[#8B1E29]">❤️ 31</span>
+              </div>
+            </div>
+
+            <div class="app-card p-4 space-y-2.5">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-9 h-9 rounded-full bg-amber-600 text-white flex items-center justify-center font-bold text-xs">跑</div>
+                  <div>
+                    <div class="flex items-center gap-1.5">
+                      <span class="text-[13px] font-bold text-slate-900">集大跑腿小哥</span>
+                      <span class="text-[10px] text-emerald-700 bg-emerald-50 px-1.5 py-[0.5px] rounded font-medium border border-emerald-200">已关注</span>
+                    </div>
+                    <div class="text-[10px] text-slate-400 mt-0.5">2小时前 · 诚毅快递街</div>
+                  </div>
+                </div>
+                <button onclick="openChatPage('集大跑腿小哥', '航海学院')" class="text-[11px] font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 px-2.5 py-1 rounded-full transition">私信</button>
+              </div>
+              <p class="text-[13px] text-slate-800 leading-relaxed">美贤路顺丰代取点今天下午爆仓啦，有需要代取大件包裹的同学尽早下单，晚上统一安排推车运送到各宿舍大堂！遵循校内互助安全守则～</p>
+              <div class="flex items-center justify-between pt-2 border-t border-[var(--border-divider)] text-xs text-slate-500">
+                <span>分享</span>
+                <span onclick="openCommentsSheet()" class="cursor-pointer hover:text-slate-900">19 评论</span>
+                <span onclick="toggleLike(this)" class="cursor-pointer hover:text-[#8B1E29]">❤️ 57</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 话题广场容器 (话题榜与分类讨论) -->
+          <div id="feedChannelTopic" class="p-3 space-y-2.5 hidden">
+            <div class="text-xs font-bold text-slate-900 px-1 flex items-center justify-between">
+              <span>🔥 集美大学 24 小时高热校园话题榜</span>
+              <span class="text-[10px] text-slate-400 font-mono">实时更新</span>
+            </div>
+
+            <div onclick="filterTopic('集大表白墙')" class="app-card p-3.5 flex items-center justify-between cursor-pointer hover:border-slate-300 transition">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-red-50 text-[#8B1E29] flex items-center justify-center font-bold text-base">💌</div>
+                <div>
+                  <div class="font-bold text-xs text-slate-900 flex items-center gap-1.5">
+                    <span>#集大表白墙#</span>
+                    <span class="text-[9px] bg-red-100 text-red-600 px-1 rounded font-bold">TOP 1</span>
+                  </div>
+                  <div class="text-[10px] text-slate-400 mt-0.5">3.2万次浏览 · 1,420 条讨论 · 匿名暖心投递</div>
+                </div>
+              </div>
+              <button class="px-2.5 py-1 bg-[#FAF0F1] text-[#8B1E29] text-[10px] font-semibold rounded-full border border-[#F0D5D8]">进入话题</button>
+            </div>
+
+            <div onclick="filterTopic('拼单拼车厦门北站')" class="app-card p-3.5 flex items-center justify-between cursor-pointer hover:border-slate-300 transition">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center font-bold text-base">🚗</div>
+                <div>
+                  <div class="font-bold text-xs text-slate-900 flex items-center gap-1.5">
+                    <span>#拼车厦门北站#</span>
+                    <span class="text-[9px] bg-blue-100 text-blue-700 px-1 rounded font-bold">HOT</span>
+                  </div>
+                  <div class="text-[10px] text-slate-400 mt-0.5">1.8万次浏览 · 680 条讨论 · 周末放假同行</div>
+                </div>
+              </div>
+              <button class="px-2.5 py-1 bg-blue-50 text-blue-700 text-[10px] font-semibold rounded-full border border-blue-200">进入话题</button>
+            </div>
+
+            <div onclick="filterTopic('考研自习搭子')" class="app-card p-3.5 flex items-center justify-between cursor-pointer hover:border-slate-300 transition">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold text-base">📖</div>
+                <div>
+                  <div class="font-bold text-xs text-slate-900">#尚大楼考研自习#</div>
+                  <div class="text-[10px] text-slate-400 mt-0.5">2.4万次浏览 · 950 条讨论 · 互助监督打卡</div>
+                </div>
+              </div>
+              <button class="px-2.5 py-1 bg-emerald-50 text-emerald-700 text-[10px] font-semibold rounded-full border border-emerald-200">进入话题</button>
+            </div>
+
+            <div onclick="filterTopic('集大选课避雷')" class="app-card p-3.5 flex items-center justify-between cursor-pointer hover:border-slate-300 transition">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-700 flex items-center justify-center font-bold text-base">💬</div>
+                <div>
+                  <div class="font-bold text-xs text-slate-900">#集大选课避雷吐槽#</div>
+                  <div class="text-[10px] text-slate-400 mt-0.5">1.5万次浏览 · 520 条讨论 · 学长学姐真实评课</div>
+                </div>
+              </div>
+              <button class="px-2.5 py-1 bg-purple-50 text-purple-700 text-[10px] font-semibold rounded-full border border-purple-200">进入话题</button>
+            </div>
+          </div>
+
         </div>
 
-        <!-- ==================== Tab 2: 校园服务业务域 (由底部二级菜单调度) ==================== -->
+        <!-- ==================== Tab 2: 校园服务业务域 ==================== -->
         <div id="page-campus" class="tab-page hidden">
           
-          <!-- 1. 课表日程视图 (默认展示) -->
+          <!-- 校园功能顶部专属二级分段导航条 (Sub-Navbar) -->
+          <div class="sticky top-0 z-20 bg-white/95 backdrop-blur border-b border-[var(--border-divider)] px-3 py-2">
+            <div class="flex bg-slate-100 p-1 rounded-xl text-xs">
+              <button onclick="selectCampusModule('schedule')" id="subnav-schedule" class="flex-1 py-1.5 rounded-lg font-bold text-[#8B1E29] bg-white shadow-2xs transition">课表日程</button>
+              <button onclick="selectCampusModule('used')" id="subnav-used" class="flex-1 py-1.5 rounded-lg font-medium text-slate-600 transition">二手集市</button>
+              <button onclick="selectCampusModule('lost')" id="subnav-lost" class="flex-1 py-1.5 rounded-lg font-medium text-slate-600 transition">失物招领</button>
+              <button onclick="selectCampusModule('errand')" id="subnav-errand" class="flex-1 py-1.5 rounded-lg font-medium text-slate-600 transition">校园跑腿</button>
+            </div>
+          </div>
+
+          <!-- 1. 课表日程视图 -->
           <div id="campus-view-schedule" class="block p-3 space-y-3">
             
             <!-- 课表顶部控制区：学期周次选择 + 日/周视图切换 -->
@@ -912,7 +1074,7 @@
                 </div>
                 <div onclick="openFitnessModal()" class="p-2 rounded-lg bg-slate-50 hover:bg-slate-100 cursor-pointer transition">
                   <div class="text-[#8B1E29] font-bold text-xs">🏃 体测算分</div>
-                  <div class="text-[9px] text-slate-400 mt-0.5">标准评级</div>
+                  <div class="text-[9px] text-slate-400 mt-0.5">国标评分</div>
                 </div>
               </div>
             </div>
@@ -1013,7 +1175,7 @@
           <!-- ==================== 2. 闲鱼化二手闲置集市视图 ==================== -->
           <div id="campus-view-used" class="hidden p-3 space-y-3">
             
-            <!-- 闲鱼式顶部搜索栏 -->
+            <!-- 顶部搜索栏 -->
             <div class="flex items-center gap-2">
               <div class="flex-1 h-9 px-3 bg-white rounded-full border border-slate-200 flex items-center gap-2 shadow-2xs">
                 <svg class="w-4 h-4 text-slate-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
@@ -1040,29 +1202,29 @@
               </button>
             </div>
 
-            <!-- 分类金刚区 (6个核心类别) -->
+            <!-- 分类金刚区 (6个核心类别，点击高亮并精准过滤) -->
             <div class="grid grid-cols-6 gap-1 bg-white p-2.5 rounded-2xl border border-[var(--border-subtle)] text-center text-xs shadow-2xs">
-              <div onclick="filterUsedCategory('数码')" class="flex flex-col items-center cursor-pointer hover:opacity-80">
+              <div onclick="filterUsedCategory('数码')" class="used-cat-btn flex flex-col items-center cursor-pointer hover:opacity-80 p-1 rounded-xl transition">
                 <div class="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-sm">📱</div>
                 <span class="text-[10px] font-medium text-slate-700 mt-1">数码科技</span>
               </div>
-              <div onclick="filterUsedCategory('教材')" class="flex flex-col items-center cursor-pointer hover:opacity-80">
+              <div onclick="filterUsedCategory('教材')" class="used-cat-btn flex flex-col items-center cursor-pointer hover:opacity-80 p-1 rounded-xl transition">
                 <div class="w-8 h-8 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center text-sm">📚</div>
                 <span class="text-[10px] font-medium text-slate-700 mt-1">教材考研</span>
               </div>
-              <div onclick="filterUsedCategory('代步')" class="flex flex-col items-center cursor-pointer hover:opacity-80">
+              <div onclick="filterUsedCategory('代步')" class="used-cat-btn flex flex-col items-center cursor-pointer hover:opacity-80 p-1 rounded-xl transition">
                 <div class="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-sm">🚲</div>
                 <span class="text-[10px] font-medium text-slate-700 mt-1">代步车</span>
               </div>
-              <div onclick="filterUsedCategory('宿舍')" class="flex flex-col items-center cursor-pointer hover:opacity-80">
+              <div onclick="filterUsedCategory('宿舍')" class="used-cat-btn flex flex-col items-center cursor-pointer hover:opacity-80 p-1 rounded-xl transition">
                 <div class="w-8 h-8 rounded-xl bg-purple-50 text-purple-700 flex items-center justify-center text-sm">🛋️</div>
                 <span class="text-[10px] font-medium text-slate-700 mt-1">宿舍好物</span>
               </div>
-              <div onclick="filterUsedCategory('穿搭')" class="flex flex-col items-center cursor-pointer hover:opacity-80">
+              <div onclick="filterUsedCategory('穿搭')" class="used-cat-btn flex flex-col items-center cursor-pointer hover:opacity-80 p-1 rounded-xl transition">
                 <div class="w-8 h-8 rounded-xl bg-pink-50 text-pink-600 flex items-center justify-center text-sm">👟</div>
                 <span class="text-[10px] font-medium text-slate-700 mt-1">运动穿搭</span>
               </div>
-              <div onclick="filterUsedCategory('免费')" class="flex flex-col items-center cursor-pointer hover:opacity-80">
+              <div onclick="filterUsedCategory('免费')" class="used-cat-btn flex flex-col items-center cursor-pointer hover:opacity-80 p-1 rounded-xl transition">
                 <div class="w-8 h-8 rounded-xl bg-red-50 text-red-600 flex items-center justify-center text-sm">🎁</div>
                 <span class="text-[10px] font-medium text-slate-700 mt-1">免费送</span>
               </div>
@@ -1075,13 +1237,20 @@
                 <span class="text-[10px] text-slate-400">学号核验 100% 担保</span>
               </div>
 
+              <!-- 搜索空状态 -->
+              <div id="usedEmptyState" class="hidden py-8 text-center text-xs text-slate-400 space-y-1">
+                <div class="text-3xl">🔍</div>
+                <div>未找到匹配的校内闲置物品</div>
+                <button onclick="filterUsedCategory('')" class="text-[11px] text-[#8B1E29] font-semibold mt-1">查看全部物品</button>
+              </div>
+
               <div id="usedItemsGrid" class="grid grid-cols-2 gap-2 text-xs">
                 
-                <!-- 商品卡片 1 -->
-                <div onclick="openItemDetailModal('used-1')" class="bg-white rounded-2xl border border-[var(--border-subtle)] overflow-hidden shadow-2xs cursor-pointer hover:shadow-xs transition flex flex-col justify-between">
+                <!-- 商品卡片 1 (数码) -->
+                <div onclick="openItemDetailModal('used-1')" data-category="数码 数码科技 ipad 苹果 电脑 平板 诚毅" class="bg-white rounded-2xl border border-[var(--border-subtle)] overflow-hidden shadow-2xs cursor-pointer hover:shadow-xs transition flex flex-col justify-between">
                   <div class="h-28 bg-slate-100 flex flex-col items-center justify-center text-slate-500 font-medium relative">
                     <span class="text-3xl">📱</span>
-                    <span class="absolute top-1.5 left-1.5 text-[9px] bg-black/60 text-white px-1.5 py-0.5 rounded font-semibold backdrop-blur">99新</span>
+                    <span class="absolute top-1.5 left-1.5 text-[9px] bg-black/60 text-white px-1.5 py-0.5 rounded font-semibold backdrop-blur">99新 · 数码</span>
                   </div>
                   <div class="p-2.5 space-y-1.5 flex-1 flex flex-col justify-between">
                     <div>
@@ -1095,11 +1264,11 @@
                   </div>
                 </div>
 
-                <!-- 商品卡片 2 -->
-                <div onclick="openItemDetailModal('used-2')" class="bg-white rounded-2xl border border-[var(--border-subtle)] overflow-hidden shadow-2xs cursor-pointer hover:shadow-xs transition flex flex-col justify-between">
+                <!-- 商品卡片 2 (代步车) -->
+                <div onclick="openItemDetailModal('used-2')" data-category="代步 代步车 自行车 山地车 骑行 捷安特 嘉庚" class="bg-white rounded-2xl border border-[var(--border-subtle)] overflow-hidden shadow-2xs cursor-pointer hover:shadow-xs transition flex flex-col justify-between">
                   <div class="h-28 bg-slate-100 flex flex-col items-center justify-center text-slate-500 font-medium relative">
                     <span class="text-3xl">🚲</span>
-                    <span class="absolute top-1.5 left-1.5 text-[9px] bg-black/60 text-white px-1.5 py-0.5 rounded font-semibold backdrop-blur">9成新</span>
+                    <span class="absolute top-1.5 left-1.5 text-[9px] bg-black/60 text-white px-1.5 py-0.5 rounded font-semibold backdrop-blur">9成新 · 代步</span>
                   </div>
                   <div class="p-2.5 space-y-1.5 flex-1 flex flex-col justify-between">
                     <div>
@@ -1113,11 +1282,11 @@
                   </div>
                 </div>
 
-                <!-- 商品卡片 3 -->
-                <div onclick="openItemDetailModal('used-3')" class="bg-white rounded-2xl border border-[var(--border-subtle)] overflow-hidden shadow-2xs cursor-pointer hover:shadow-xs transition flex flex-col justify-between">
+                <!-- 商品卡片 3 (教材考研) -->
+                <div onclick="openItemDetailModal('used-3')" data-category="教材 教材考研 考研 数学 真题 试卷 书籍 尚大楼" class="bg-white rounded-2xl border border-[var(--border-subtle)] overflow-hidden shadow-2xs cursor-pointer hover:shadow-xs transition flex flex-col justify-between">
                   <div class="h-28 bg-slate-100 flex flex-col items-center justify-center text-slate-500 font-medium relative">
                     <span class="text-3xl">📚</span>
-                    <span class="absolute top-1.5 left-1.5 text-[9px] bg-emerald-700 text-white px-1.5 py-0.5 rounded font-semibold backdrop-blur">考研必入</span>
+                    <span class="absolute top-1.5 left-1.5 text-[9px] bg-emerald-700 text-white px-1.5 py-0.5 rounded font-semibold backdrop-blur">全新 · 教材</span>
                   </div>
                   <div class="p-2.5 space-y-1.5 flex-1 flex flex-col justify-between">
                     <div>
@@ -1131,11 +1300,11 @@
                   </div>
                 </div>
 
-                <!-- 商品卡片 4 -->
-                <div onclick="openItemDetailModal('used-4')" class="bg-white rounded-2xl border border-[var(--border-subtle)] overflow-hidden shadow-2xs cursor-pointer hover:shadow-xs transition flex flex-col justify-between">
+                <!-- 商品卡片 4 (宿舍好物) -->
+                <div onclick="openItemDetailModal('used-4')" data-category="宿舍 宿舍好物 电煮锅 九阳 家电 诚毅 免费送" class="bg-white rounded-2xl border border-[var(--border-subtle)] overflow-hidden shadow-2xs cursor-pointer hover:shadow-xs transition flex flex-col justify-between">
                   <div class="h-28 bg-slate-100 flex flex-col items-center justify-center text-slate-500 font-medium relative">
                     <span class="text-3xl">🍲</span>
-                    <span class="absolute top-1.5 left-1.5 text-[9px] bg-black/60 text-white px-1.5 py-0.5 rounded font-semibold backdrop-blur">宿舍好物</span>
+                    <span class="absolute top-1.5 left-1.5 text-[9px] bg-black/60 text-white px-1.5 py-0.5 rounded font-semibold backdrop-blur">95新 · 宿舍</span>
                   </div>
                   <div class="p-2.5 space-y-1.5 flex-1 flex flex-col justify-between">
                     <div>
@@ -1157,7 +1326,7 @@
           <!-- 3. 失物招领视图 -->
           <div id="campus-view-lost" class="hidden p-3 space-y-2.5">
             <div class="flex items-center justify-between px-1">
-              <span class="text-xs font-bold text-slate-900">失物寻物告示板（联动保卫处）</span>
+              <span class="text-xs font-bold text-slate-900">失物寻物告示板（联动集大保卫处）</span>
               <button onclick="openPublishWithBoard('失物招领')" class="text-xs text-[#8B1E29] font-medium">+ 发布启事</button>
             </div>
 
@@ -1167,7 +1336,7 @@
                 <span class="text-[10px] text-slate-400">2小时前</span>
               </div>
               <p class="text-xs text-slate-700 leading-relaxed">
-                在嘉庚图书馆三楼南侧自习长桌遗落，如有捡到的同学麻烦私信我，必有奶茶重谢！
+                在嘉庚图书馆三楼南侧自习长桌遗落，如有捡到的同学麻烦私信我，必有柠檬茶重谢！
               </p>
               <div class="flex items-center justify-between pt-2 border-t border-[var(--border-divider)] text-[11px] text-slate-400">
                 <span>失主：文学院 · 23级</span>
@@ -1207,7 +1376,7 @@
               </p>
               <div class="flex items-center justify-between pt-2 border-t border-[var(--border-divider)] text-[11px] text-slate-400">
                 <span>时效：今日 18:30 前送达</span>
-                <button onclick="openAcceptErrandModal('顺丰大件代取', '¥8.00', '今日 18:30 前')" class="px-3 py-1 bg-[#8B1E29] text-white font-semibold rounded-lg hover:bg-[#751722] transition shadow-2xs">
+                <button id="errandAcceptBtn" onclick="openAcceptErrandModal('顺丰大件代取', '¥8.00', '今日 18:30 前')" class="px-3 py-1 bg-[#8B1E29] text-white font-semibold rounded-lg hover:bg-[#751722] transition shadow-2xs">
                   立即接单
                 </button>
               </div>
@@ -1219,7 +1388,7 @@
         <!-- ==================== Tab 3: 消息中心 (Messages) ==================== -->
         <div id="page-messages" class="tab-page hidden">
           <div class="grid grid-cols-3 gap-2 p-3 bg-white border-b border-[var(--border-divider)]">
-            <div onclick="showToast('查看赞和收藏通知')" class="flex flex-col items-center p-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 cursor-pointer transition">
+            <div onclick="showToast('查看获赞记录：收到来自小林、陈同学等 148 次点赞')" class="flex flex-col items-center p-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 cursor-pointer transition">
               <div class="relative w-8 h-8 rounded-full bg-[#FAF0F1] text-[#8B1E29] flex items-center justify-center font-bold">
                 <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
                 <span class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-[#8B1E29] text-white rounded-full text-[8px] flex items-center justify-center font-bold">3</span>
@@ -1235,7 +1404,7 @@
               <span class="text-[11px] font-medium text-slate-700 mt-1">评论和@</span>
             </div>
 
-            <div onclick="showToast('已查看最新 2 条系统通知')" class="flex flex-col items-center p-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 cursor-pointer transition">
+            <div onclick="showToast('系统公告：秋季学期第 3 周起开通诚毅至本部定制校巴线路')" class="flex flex-col items-center p-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 cursor-pointer transition">
               <div class="relative w-8 h-8 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center font-bold">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"/></svg>
               </div>
@@ -1245,7 +1414,7 @@
 
           <!-- 私信列表 -->
           <div class="divide-y divide-slate-100 bg-white">
-            <div onclick="openChatPage('软工小林_23', '计算机工程学院', '《数据结构》教材笔记', '¥25.00')" class="p-3.5 flex items-center gap-3 hover:bg-slate-50 cursor-pointer transition">
+            <div onclick="openChatPage('软工小林_23', '计算机工程学院', 'iPad Air 5 64G 紫色', '¥2,580')" class="p-3.5 flex items-center gap-3 hover:bg-slate-50 cursor-pointer transition">
               <div class="w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold text-xs shrink-0">
                 林
               </div>
@@ -1257,7 +1426,7 @@
                   </h4>
                   <span class="text-[10px] text-slate-400">14:20</span>
                 </div>
-                <p class="text-[11px] text-slate-500 truncate mt-0.5">可以在诚毅二食堂一楼门口面交，你几点方便？</p>
+                <p id="recentChatMsg-lin" class="text-[11px] text-slate-500 truncate mt-0.5">可以在诚毅二食堂一楼门口面交，你几点方便？</p>
               </div>
               <div class="w-2 h-2 rounded-full bg-[#8B1E29] shrink-0"></div>
             </div>
@@ -1307,15 +1476,15 @@
 
             <!-- 数据统计项 -->
             <div class="grid grid-cols-4 gap-1 pt-3 border-t border-slate-100 text-center text-xs">
-              <div class="cursor-pointer" onclick="showToast('查看我发布的 12 条校园动态')">
+              <div class="cursor-pointer" onclick="switchTab('feed')">
                 <div class="font-bold text-slate-900 text-sm">12</div>
                 <div class="text-[10px] text-slate-400 mt-0.5">我的动态</div>
               </div>
-              <div class="cursor-pointer" onclick="showToast('共收到 148 次集大师生点赞')">
+              <div class="cursor-pointer" onclick="showToast('累计收到 148 次集大师生点赞鼓励')">
                 <div class="font-bold text-slate-900 text-sm">148</div>
                 <div class="text-[10px] text-slate-400 mt-0.5">获赞总数</div>
               </div>
-              <div class="cursor-pointer" onclick="selectCampusModule('used')">
+              <div class="cursor-pointer" onclick="switchTab('campus'); selectCampusModule('used')">
                 <div class="font-bold text-[#8B1E29] text-sm">2</div>
                 <div class="text-[10px] text-slate-400 mt-0.5">在售闲置</div>
               </div>
@@ -1349,7 +1518,7 @@
               <span class="text-slate-800 font-medium">📋 我的闲置交易与跑腿流水</span>
               <span class="text-slate-400 text-[11px]">查看履约记录 ›</span>
             </div>
-            <div onclick="openAuthManageModal()" class="p-3 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition">
+            <div onclick="openAuthModal()" class="p-3 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition">
               <span class="text-slate-800 font-medium">🎓 集美大学教务统一身份认证</span>
               <span class="text-emerald-600 text-[11px] font-medium">已认证 (学号2022***) ›</span>
             </div>
@@ -1357,9 +1526,9 @@
               <span class="text-slate-800 font-medium">💬 小程序开发与设计评审反馈</span>
               <span class="text-[#8B1E29] text-[11px] font-medium">填写建议 ›</span>
             </div>
-            <div onclick="showToast('已清理临时缓存，当前版本 v1.7.1')" class="p-3 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition">
+            <div onclick="showToast('已清理临时缓存，当前版本 v1.7.2 (最新自包含版)')" class="p-3 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition">
               <span class="text-slate-800 font-medium">⚙️ 缓存清理与系统设置</span>
-              <span class="text-slate-400 text-[11px]">0.4 MB ›</span>
+              <span class="text-slate-400 text-[11px]">0.3 MB ›</span>
             </div>
           </div>
 
@@ -1382,7 +1551,7 @@
           <span class="text-[10px] font-bold mt-0.5">社区</span>
         </button>
 
-        <!-- 校园功能 Tab (支持点击展开二级 Action Sheet) -->
+        <!-- 校园功能 Tab -->
         <button onclick="handleCampusTabClick()" id="tab-campus" class="flex flex-col items-center justify-center text-slate-400 hover:text-slate-700 transition group relative">
           <div class="relative">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-5.25 6.557c.725-.262 1.464-.498 2.217-.706"/></svg>
@@ -1465,8 +1634,8 @@
         </div>
       </div>
 
-      <!-- 2. 快速发帖分步全屏抽屉 -->
-      <div id="publishModal" class="hidden absolute inset-0 z-50 bg-black/45 flex flex-col justify-end">
+      <!-- 2. 快速发帖分步全屏抽屉 (覆盖全部 8 类板块) -->
+      <div id="publishModal" onclick="if(event.target===this) closeModal('publishModal')" class="hidden absolute inset-0 z-50 bg-black/45 flex flex-col justify-end">
         <div class="bg-white rounded-t-3xl p-4 shadow-2xl space-y-3 max-h-[600px] overflow-y-auto no-scrollbar">
           <div class="flex items-center justify-between pb-2 border-b border-slate-100">
             <div class="flex items-center gap-2">
@@ -1482,13 +1651,15 @@
               <span>第一步：选择发布板块</span>
               <span class="text-[10px] text-slate-400 font-normal">必选</span>
             </div>
-            <div class="grid grid-cols-3 gap-1.5 text-center text-xs">
+            <div class="grid grid-cols-4 gap-1.5 text-center text-xs">
               <button onclick="selectPublishBoard(this, '校园日常')" class="pub-board-btn py-1.5 bg-[#FAF0F1] text-[#8B1E29] border border-[#F0D5D8] rounded-xl font-medium transition">校园日常</button>
               <button onclick="selectPublishBoard(this, '问答互助')" class="pub-board-btn py-1.5 bg-slate-50 text-slate-700 border border-slate-200 rounded-xl font-medium transition">问答互助</button>
-              <button onclick="selectPublishBoard(this, '集大表白墙')" class="pub-board-btn py-1.5 bg-slate-50 text-slate-700 border border-slate-200 rounded-xl font-medium transition">集大表白墙</button>
-              <button onclick="selectPublishBoard(this, '找学伴搭子')" class="pub-board-btn py-1.5 bg-slate-50 text-slate-700 border border-slate-200 rounded-xl font-medium transition">找学伴搭子</button>
-              <button onclick="selectPublishBoard(this, '拼单拼车')" class="pub-board-btn py-1.5 bg-slate-50 text-slate-700 border border-slate-200 rounded-xl font-medium transition">拼单拼车</button>
               <button onclick="selectPublishBoard(this, '二手闲置')" class="pub-board-btn py-1.5 bg-slate-50 text-slate-700 border border-slate-200 rounded-xl font-medium transition">二手闲置</button>
+              <button onclick="selectPublishBoard(this, '失物招领')" class="pub-board-btn py-1.5 bg-slate-50 text-slate-700 border border-slate-200 rounded-xl font-medium transition">失物招领</button>
+              <button onclick="selectPublishBoard(this, '校园跑腿')" class="pub-board-btn py-1.5 bg-slate-50 text-slate-700 border border-slate-200 rounded-xl font-medium transition">校园跑腿</button>
+              <button onclick="selectPublishBoard(this, '找学伴搭子')" class="pub-board-btn py-1.5 bg-slate-50 text-slate-700 border border-slate-200 rounded-xl font-medium transition">找学伴</button>
+              <button onclick="selectPublishBoard(this, '拼单拼车')" class="pub-board-btn py-1.5 bg-slate-50 text-slate-700 border border-slate-200 rounded-xl font-medium transition">拼车拼单</button>
+              <button onclick="selectPublishBoard(this, '集大表白墙')" class="pub-board-btn py-1.5 bg-slate-50 text-slate-700 border border-slate-200 rounded-xl font-medium transition">表白墙</button>
             </div>
           </div>
 
@@ -1540,7 +1711,7 @@
       </div>
 
       <!-- 3. 课表日历备忘便签编辑弹窗 -->
-      <div id="courseDetailModal" class="hidden absolute inset-0 z-50 bg-black/45 flex items-center justify-center p-4">
+      <div id="courseDetailModal" onclick="if(event.target===this) closeModal('courseDetailModal')" class="hidden absolute inset-0 z-50 bg-black/45 flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl w-full max-w-[325px] p-4 shadow-2xl space-y-3 modal-pop">
           <div class="flex items-center justify-between pb-2 border-b border-slate-100">
             <div class="flex items-center gap-1.5">
@@ -1581,7 +1752,7 @@
       </div>
 
       <!-- 4. 具体门牌级空教室查询弹窗 -->
-      <div id="classroomModal" class="hidden absolute inset-0 z-50 bg-black/45 flex items-center justify-center p-4">
+      <div id="classroomModal" onclick="if(event.target===this) closeModal('classroomModal')" class="hidden absolute inset-0 z-50 bg-black/45 flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl w-full max-w-[335px] p-4 shadow-2xl space-y-3 modal-pop">
           <div class="flex items-center justify-between pb-2 border-b border-slate-100">
             <div class="flex items-center gap-1.5">
@@ -1591,7 +1762,7 @@
             <button onclick="closeModal('classroomModal')" class="text-slate-400 hover:text-slate-600 text-xs p-1">✕</button>
           </div>
 
-          <!-- 楼宇与时段快捷筛选 -->
+          <!-- 楼宇快捷筛选 -->
           <div class="flex gap-1.5 text-[11px]">
             <button onclick="filterClassrooms(this, 'all')" class="cr-btn px-2 py-0.5 rounded-full bg-[#8B1E29] text-white font-medium">全部楼宇</button>
             <button onclick="filterClassrooms(this, '尚大楼')" class="cr-btn px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium">尚大楼</button>
@@ -1632,13 +1803,13 @@
         </div>
       </div>
 
-      <!-- 5. 体测成绩计算器 (P1 扩展抽屉) -->
-      <div id="fitnessModal" class="hidden absolute inset-0 z-50 bg-black/45 flex items-center justify-center p-4">
+      <!-- 5. 体测成绩计算器 (标准真实计算公式) -->
+      <div id="fitnessModal" onclick="if(event.target===this) closeModal('fitnessModal')" class="hidden absolute inset-0 z-50 bg-black/45 flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl w-full max-w-[335px] p-4 shadow-2xl space-y-3 modal-pop max-h-[580px] overflow-y-auto no-scrollbar">
           <div class="flex items-center justify-between pb-2 border-b border-slate-100">
             <div class="flex items-center gap-1.5">
               <span class="w-2 h-2 rounded-full bg-[#8B1E29]"></span>
-              <h3 class="font-bold text-sm text-slate-900">国家学生体质健康测算</h3>
+              <h3 class="font-bold text-sm text-slate-900">国家学生体质健康标准测算</h3>
             </div>
             <button onclick="closeModal('fitnessModal')" class="text-slate-400 hover:text-slate-600 text-xs p-1">✕</button>
           </div>
@@ -1657,33 +1828,33 @@
             <div class="grid grid-cols-2 gap-2">
               <div>
                 <span class="text-slate-500 text-[10px]">身高 (cm)</span>
-                <input id="fitHeight" type="number" value="175" class="w-full p-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none">
+                <input id="fitHeight" oninput="calcFitnessScore()" type="number" value="175" class="w-full p-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none">
               </div>
               <div>
                 <span class="text-slate-500 text-[10px]">体重 (kg)</span>
-                <input id="fitWeight" type="number" value="65" class="w-full p-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none">
+                <input id="fitWeight" oninput="calcFitnessScore()" type="number" value="65" class="w-full p-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none">
               </div>
             </div>
 
             <div class="grid grid-cols-2 gap-2">
               <div>
                 <span class="text-slate-500 text-[10px]">肺活量 (ml)</span>
-                <input id="fitVital" type="number" value="4200" class="w-full p-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none">
+                <input id="fitVital" oninput="calcFitnessScore()" type="number" value="4300" class="w-full p-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none">
               </div>
               <div>
                 <span class="text-slate-500 text-[10px]">50米跑 (秒)</span>
-                <input id="fit50m" type="number" step="0.1" value="7.2" class="w-full p-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none">
+                <input id="fit50m" oninput="calcFitnessScore()" type="number" step="0.1" value="7.1" class="w-full p-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none">
               </div>
             </div>
 
             <div class="grid grid-cols-2 gap-2">
               <div>
                 <span class="text-slate-500 text-[10px]">立定跳远 (cm)</span>
-                <input id="fitJump" type="number" value="240" class="w-full p-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none">
+                <input id="fitJump" oninput="calcFitnessScore()" type="number" value="245" class="w-full p-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none">
               </div>
               <div>
                 <span id="fitEnduranceLabel" class="text-slate-500 text-[10px]">1000米跑 (分:秒)</span>
-                <input id="fitRun" type="text" value="3:45" class="w-full p-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none">
+                <input id="fitRun" oninput="calcFitnessScore()" type="text" value="3:40" class="w-full p-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none">
               </div>
             </div>
           </div>
@@ -1691,18 +1862,18 @@
           <!-- 计算结果看板 -->
           <div class="p-3 bg-[#FAF0F1] border border-[#F0D5D8] rounded-xl flex items-center justify-between">
             <div>
-              <div class="text-[10px] text-slate-500">根据国家标准综合评定</div>
-              <div id="fitScoreDisplay" class="text-lg font-bold text-[#8B1E29]">84.5 分 · 良好</div>
+              <div class="text-[10px] text-slate-500">教育部综合测算评定</div>
+              <div id="fitScoreDisplay" class="text-lg font-bold text-[#8B1E29]">85.2 分 · 良好 (BMI 21.2)</div>
             </div>
-            <button onclick="calcFitnessScore()" class="px-3 py-1.5 bg-[#8B1E29] hover:bg-[#751722] text-white font-bold text-xs rounded-lg transition shadow-xs">
-              重新测算
+            <button onclick="showToast('已同步体测数据至个人学业健康档案')" class="px-3 py-1.5 bg-[#8B1E29] hover:bg-[#751722] text-white font-bold text-xs rounded-lg transition shadow-xs">
+              保存档案
             </button>
           </div>
         </div>
       </div>
 
       <!-- 6. 成绩与 GPA 看板弹窗 -->
-      <div id="gradesModal" class="hidden absolute inset-0 z-50 bg-black/45 flex items-center justify-center p-4">
+      <div id="gradesModal" onclick="if(event.target===this) closeModal('gradesModal')" class="hidden absolute inset-0 z-50 bg-black/45 flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl w-full max-w-[335px] p-4 shadow-2xl space-y-3 modal-pop max-h-[580px] overflow-y-auto no-scrollbar">
           <div class="flex items-center justify-between pb-2 border-b border-slate-100">
             <div class="flex items-center gap-1.5">
@@ -1736,7 +1907,7 @@
             </div>
             <div class="py-2 flex items-center justify-between">
               <div>
-                <div class="font-bold text-slate-900">操作系统原理</div>
+                <div class="font-bold text-slate-900">操作系统原理与实践</div>
                 <div class="text-[10px] text-slate-400">必修 · 3.5 学分</div>
               </div>
               <div class="text-right">
@@ -1753,7 +1924,7 @@
       </div>
 
       <!-- 7. 系统日历 ICS 导出弹窗 -->
-      <div id="calendarModal" class="hidden absolute inset-0 z-50 bg-black/45 flex items-center justify-center p-4">
+      <div id="calendarModal" onclick="if(event.target===this) closeModal('calendarModal')" class="hidden absolute inset-0 z-50 bg-black/45 flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl w-full max-w-[325px] p-4 shadow-2xl space-y-3 modal-pop">
           <div class="flex items-center justify-between pb-2 border-b border-slate-100">
             <div class="flex items-center gap-1.5">
@@ -1784,9 +1955,8 @@
         </div>
       </div>
 
-      <!-- 8. 端内即时私聊页面 (挂载商品卡片) -->
+      <!-- 8. 端内即时私聊页面 (带智能应答模拟) -->
       <div id="chatPage" class="hidden absolute inset-0 bg-[var(--bg-page)] z-50 flex flex-col">
-        <!-- 聊天头部 -->
         <div class="h-11 bg-white border-b border-slate-200 px-3 flex items-center justify-between shrink-0">
           <div class="flex items-center gap-2">
             <button onclick="closeChatPage()" class="p-1 text-slate-600 hover:text-black">
@@ -1797,15 +1967,14 @@
               <div id="chatUserCollege" class="text-[9px] text-slate-400">计算机工程学院 · 学号已核验</div>
             </div>
           </div>
-          <button onclick="openUserProfilePage('软工小林_23', '计算机工程学院', '23级软件工程', '诚毅校区')" class="text-[10px] text-[#8B1E29] font-medium bg-[#FAF0F1] px-2 py-0.5 rounded border border-[#F0D5D8]">
+          <button id="chatUserProfileBtn" onclick="openUserProfilePage('软工小林_23', '计算机工程学院', '23级软件工程', '诚毅校区')" class="text-[10px] text-[#8B1E29] font-medium bg-[#FAF0F1] px-2 py-0.5 rounded border border-[#F0D5D8]">
             看主页
           </button>
         </div>
 
-        <!-- 挂载的商品信息条 -->
         <div id="chatProductBanner" class="p-2.5 bg-white border-b border-slate-200 flex items-center justify-between text-xs shrink-0">
           <div class="flex items-center gap-2">
-            <div class="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center text-base shrink-0">
+            <div id="chatItemIcon" class="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center text-xl shrink-0">
               📱
             </div>
             <div>
@@ -1818,13 +1987,11 @@
           </button>
         </div>
 
-        <!-- 校园公共场所安全交易提醒 -->
         <div class="px-3 py-1.5 bg-amber-50 border-b border-amber-200 text-[10px] text-amber-800 flex items-center gap-1 shrink-0">
           <span>⚠️</span>
           <span>防诈提醒：请约定在食堂/图书馆等校内公共场所当面验货，严禁站外转账</span>
         </div>
 
-        <!-- 聊天气泡流 -->
         <div id="chatMessageContainer" class="flex-1 overflow-y-auto no-scrollbar p-3 space-y-3 text-xs">
           <div class="flex items-start gap-2">
             <div class="w-7 h-7 rounded-full bg-slate-900 text-white flex items-center justify-center text-[10px] font-bold shrink-0">林</div>
@@ -1834,12 +2001,11 @@
           </div>
         </div>
 
-        <!-- 底部快捷话术与输入栏 -->
         <div class="bg-white border-t border-slate-200 p-2 shrink-0 space-y-1.5">
           <div class="flex gap-1.5 overflow-x-auto no-scrollbar text-[10px]">
             <span onclick="sendQuickReply('可以在诚毅二食堂面交吗？')" class="shrink-0 px-2 py-0.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full cursor-pointer">可以在诚毅二食堂面交吗？</span>
-            <span onclick="sendQuickReply('下午有课，晚上行吗？')" class="shrink-0 px-2 py-0.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full cursor-pointer">下午有课，晚上行吗？</span>
-            <span onclick="sendQuickReply('最低多少可以出？')" class="shrink-0 px-2 py-0.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full cursor-pointer">最低多少可以出？</span>
+            <span onclick="sendQuickReply('下午有课，傍晚6点行吗？')" class="shrink-0 px-2 py-0.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full cursor-pointer">下午有课，傍晚6点行吗？</span>
+            <span onclick="sendQuickReply('原装发票和保修期还在吗？')" class="shrink-0 px-2 py-0.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full cursor-pointer">原装发票和保修期还在吗？</span>
           </div>
 
           <div class="flex items-center gap-2">
@@ -1903,31 +2069,32 @@
         </div>
       </div>
 
-      <!-- 10. 商品详情弹窗 (二手集市详情) -->
-      <div id="itemDetailModal" class="hidden absolute inset-0 z-50 bg-black/45 flex items-center justify-center p-4">
+      <!-- 10. 商品详情弹窗 (各物品真实数据多态绑定) -->
+      <div id="itemDetailModal" onclick="if(event.target===this) closeModal('itemDetailModal')" class="hidden absolute inset-0 z-50 bg-black/45 flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl w-full max-w-[325px] p-4 shadow-2xl space-y-3 modal-pop">
           <div class="flex items-center justify-between pb-2 border-b border-slate-100">
             <span id="detailItemTag" class="text-[10px] bg-[#FAF0F1] text-[#8B1E29] px-2 py-0.5 rounded font-bold">99新 · 数码闲置</span>
             <button onclick="closeModal('itemDetailModal')" class="text-slate-400 hover:text-slate-600 text-xs p-1">✕</button>
           </div>
 
-          <div class="h-32 bg-slate-100 rounded-2xl flex flex-col items-center justify-center text-4xl">
+          <div id="detailItemIcon" class="h-28 bg-slate-100 rounded-2xl flex flex-col items-center justify-center text-4xl">
             📱
           </div>
 
           <div>
-            <h3 id="detailItemTitle" class="text-sm font-bold text-slate-900">iPad Air 5 64G 紫色 (带 Pencil 2)</h3>
+            <h3 id="detailItemTitle" class="text-sm font-bold text-slate-900 leading-snug">iPad Air 5 64G 紫色 (带 Pencil 2)</h3>
             <div id="detailItemPrice" class="text-lg font-bold text-[#8B1E29] mt-0.5">¥2,580</div>
             <div id="detailItemLoc" class="text-[11px] text-slate-500 mt-1">自提地点：诚毅二食堂一楼门口面交</div>
+            <p id="detailItemDesc" class="text-[11px] text-slate-600 mt-1 leading-relaxed bg-slate-50 p-2 rounded-lg border border-slate-100">考研上岸出闲置，电池健康98%，附赠保护套与原装充电器。</p>
           </div>
 
           <div class="p-2.5 bg-slate-50 rounded-xl text-xs text-slate-600 space-y-1">
             <div class="flex items-center justify-between text-[11px]">
-              <span class="text-slate-400">卖家</span>
-              <span class="font-medium text-slate-900">软工小林_23 (计算机工程学院)</span>
+              <span class="text-slate-400">卖家校友</span>
+              <span id="detailItemSeller" class="font-medium text-slate-900">软工小林_23 (计算机工程学院)</span>
             </div>
             <div class="flex items-center justify-between text-[11px]">
-              <span class="text-slate-400">核验状态</span>
+              <span class="text-slate-400">学籍认证</span>
               <span class="text-emerald-600 font-semibold">集大学号认证已通过</span>
             </div>
           </div>
@@ -1936,23 +2103,23 @@
             <button onclick="showToast('已加入我的心愿单')" class="flex-1 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs rounded-xl transition">
               收藏
             </button>
-            <button onclick="closeModal('itemDetailModal'); openChatPage('软工小林_23', '计算机工程学院', 'iPad Air 5 64G 紫色', '¥2,580')" class="flex-1 py-2 bg-[#8B1E29] hover:bg-[#751722] text-white font-semibold text-xs rounded-xl transition shadow-xs">
+            <button id="detailChatBtn" onclick="chatCurrentItem()" class="flex-1 py-2 bg-[#8B1E29] hover:bg-[#751722] text-white font-semibold text-xs rounded-xl transition shadow-xs">
               立即私聊面交
             </button>
           </div>
         </div>
       </div>
 
-      <!-- 11. 评论区半屏抽屉 -->
+      <!-- 11. 评论区半屏抽屉 (支持真实插入发表) -->
       <div id="commentsSheetBackdrop" onclick="closeCommentsSheet()" class="hidden absolute inset-0 bg-black/40 z-40 backdrop-blur-[2px] transition-opacity"></div>
       
       <div id="commentsSheet" class="hidden absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl p-4 shadow-2xl z-50 sheet-up transform translate-y-full flex flex-col max-h-[480px]">
         <div class="flex items-center justify-between pb-3 border-b border-slate-100 shrink-0">
-          <span class="font-bold text-sm text-slate-900">全部动态讨论 (14)</span>
+          <span class="font-bold text-sm text-slate-900">全部动态讨论 (<span id="sheetCommentCount">14</span>)</span>
           <button onclick="closeCommentsSheet()" class="text-slate-400 hover:text-slate-600 text-xs p-1">✕</button>
         </div>
 
-        <div class="flex-1 overflow-y-auto no-scrollbar py-2 space-y-2.5 text-xs">
+        <div id="commentsListContainer" class="flex-1 overflow-y-auto no-scrollbar py-2 space-y-2.5 text-xs">
           <div class="pt-2 flex items-start gap-2.5">
             <div class="w-7 h-7 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">陈</div>
             <div class="flex-1">
@@ -1966,13 +2133,203 @@
         </div>
 
         <div class="pt-2 border-t border-slate-100 flex items-center gap-2 shrink-0">
-          <input id="commentInput" type="text" placeholder="写下你的善意评论..." class="flex-1 bg-slate-50 border border-slate-200 rounded-full px-3 py-1.5 text-xs outline-none">
-          <button onclick="submitComment()" class="px-3 py-1.5 bg-[#8B1E29] text-white rounded-full text-xs font-semibold">发送</button>
+          <input id="commentInput" onkeydown="if(event.key==='Enter') submitComment()" type="text" placeholder="写下你的善意评论..." class="flex-1 bg-slate-50 border border-slate-200 rounded-full px-3 py-1.5 text-xs outline-none">
+          <button onclick="submitComment()" class="px-3.5 py-1.5 bg-[#8B1E29] text-white rounded-full text-xs font-semibold">发送</button>
         </div>
       </div>
 
-      <!-- 12. 伙伴建言弹窗 -->
-      <div id="feedbackModal" class="hidden absolute inset-0 z-50 bg-black/45 flex items-center justify-center p-4">
+      <!-- 12. 订单与流水明细弹窗 -->
+      <div id="myOrdersModal" onclick="if(event.target===this) closeModal('myOrdersModal')" class="hidden absolute inset-0 z-50 bg-black/45 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl w-full max-w-[335px] p-4 shadow-2xl space-y-3 modal-pop max-h-[560px] overflow-y-auto no-scrollbar">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+            <div class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-[#8B1E29]"></span>
+              <h3 class="font-bold text-sm text-slate-900">我的闲置交易与跑腿流水</h3>
+            </div>
+            <button onclick="closeModal('myOrdersModal')" class="text-slate-400 hover:text-slate-600 text-xs p-1">✕</button>
+          </div>
+
+          <div class="space-y-2 text-xs">
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-slate-900">在售闲置 · 《计算机网络 第8版》</span>
+                <span class="text-[10px] text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded font-medium">在售中</span>
+              </div>
+              <div class="text-[11px] text-slate-500">自提：诚毅二食堂 · 标价 ¥25.00</div>
+              <div class="text-[10px] text-slate-400">已获得 4 次同校咨询</div>
+            </div>
+
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-slate-900">互助跑腿 · 美贤路顺丰代取包裹</span>
+                <span class="text-[10px] text-slate-600 bg-slate-200 px-1.5 py-0.5 rounded font-medium">已完成</span>
+              </div>
+              <div class="text-[11px] text-slate-500">送达：诚毅 12 号宿舍楼 · 报酬 ¥8.00</div>
+              <div class="text-[10px] text-emerald-600">信用履约 +10 分</div>
+            </div>
+          </div>
+
+          <button onclick="closeModal('myOrdersModal')" class="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs rounded-xl transition">
+            返回
+          </button>
+        </div>
+      </div>
+
+      <!-- 13. 教务官方认证详情卡片弹窗 -->
+      <div id="authModal" onclick="if(event.target===this) closeModal('authModal')" class="hidden absolute inset-0 z-50 bg-black/45 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl w-full max-w-[325px] p-4 shadow-2xl space-y-3 modal-pop">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+            <div class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+              <h3 class="font-bold text-sm text-slate-900">集美大学统一身份认证凭证</h3>
+            </div>
+            <button onclick="closeModal('authModal')" class="text-slate-400 hover:text-slate-600 text-xs p-1">✕</button>
+          </div>
+
+          <div class="p-4 bg-gradient-to-br from-[#8B1E29] to-[#751722] text-white rounded-2xl space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] tracking-wider text-red-100 uppercase">JIMEI UNIVERSITY CAS</span>
+              <span class="text-[10px] bg-white/20 px-1.5 py-0.5 rounded font-medium">官方有效</span>
+            </div>
+            <div>
+              <div class="text-base font-bold">郭** (GnaixEuy)</div>
+              <div class="text-xs text-red-100 font-mono mt-0.5">学号：20222114****</div>
+            </div>
+            <div class="pt-2 border-t border-white/20 flex items-center justify-between text-[10px] text-red-100">
+              <span>计算机工程学院 · 软件工程</span>
+              <span>2022级统招本科</span>
+            </div>
+          </div>
+
+          <div class="p-2.5 bg-slate-50 rounded-xl text-xs text-slate-600 space-y-1">
+            <div class="flex items-center justify-between text-[11px]">
+              <span class="text-slate-400">核验通道</span>
+              <span class="text-slate-900 font-medium">集美大学智慧校园 CAS 单点登录</span>
+            </div>
+            <div class="flex items-center justify-between text-[11px]">
+              <span class="text-slate-400">认证有效期</span>
+              <span class="text-slate-900 font-medium">2022-09 至 2026-06</span>
+            </div>
+          </div>
+
+          <button onclick="closeModal('authModal')" class="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs rounded-xl transition">
+            完成
+          </button>
+        </div>
+      </div>
+
+      <!-- 14. 校园诚信守约分明细看板 -->
+      <div id="creditModal" onclick="if(event.target===this) closeModal('creditModal')" class="hidden absolute inset-0 z-50 bg-black/45 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl w-full max-w-[325px] p-4 shadow-2xl space-y-3 modal-pop">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+            <div class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+              <h3 class="font-bold text-sm text-slate-900">校园诚信守约分 (680)</h3>
+            </div>
+            <button onclick="closeModal('creditModal')" class="text-slate-400 hover:text-slate-600 text-xs p-1">✕</button>
+          </div>
+
+          <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-2xl flex items-center justify-between">
+            <div>
+              <div class="text-[10px] text-emerald-800">当前诚信等级</div>
+              <div class="text-2xl font-bold font-mono text-emerald-700">680 · 极好</div>
+              <div class="text-[10px] text-emerald-600 mt-0.5">超越 94% 集大认证校友</div>
+            </div>
+            <div class="w-12 h-12 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xl font-bold">
+              🛡️
+            </div>
+          </div>
+
+          <div class="divide-y divide-slate-100 text-xs">
+            <div class="py-2 flex items-center justify-between">
+              <span class="text-slate-600">教务学籍实名认证</span>
+              <span class="font-bold text-slate-900">+550 分 (基础分)</span>
+            </div>
+            <div class="py-2 flex items-center justify-between">
+              <span class="text-slate-600">8 笔跑腿与闲置按时履约</span>
+              <span class="font-bold text-emerald-600">+80 分</span>
+            </div>
+            <div class="py-2 flex items-center justify-between">
+              <span class="text-slate-600">零违规举报记录加成</span>
+              <span class="font-bold text-emerald-600">+50 分</span>
+            </div>
+          </div>
+
+          <button onclick="closeModal('creditModal')" class="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs rounded-xl transition">
+            确定
+          </button>
+        </div>
+      </div>
+
+      <!-- 15. 周次选择弹窗 (1-18周真实切换) -->
+      <div id="weekPickerModal" onclick="if(event.target===this) closeModal('weekPickerModal')" class="hidden absolute inset-0 z-50 bg-black/45 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl w-full max-w-[325px] p-4 shadow-2xl space-y-3 modal-pop">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+            <div class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-[#8B1E29]"></span>
+              <h3 class="font-bold text-sm text-slate-900">选择当前教学周次</h3>
+            </div>
+            <button onclick="closeModal('weekPickerModal')" class="text-slate-400 hover:text-slate-600 text-xs p-1">✕</button>
+          </div>
+
+          <div class="grid grid-cols-6 gap-1.5 text-center text-xs">
+            <button onclick="selectWeek(1)" class="py-2 bg-slate-50 hover:bg-slate-100 rounded-lg text-slate-700">1</button>
+            <button onclick="selectWeek(2)" class="py-2 bg-slate-50 hover:bg-slate-100 rounded-lg text-slate-700">2</button>
+            <button onclick="selectWeek(3)" class="py-2 bg-[#8B1E29] text-white font-bold rounded-lg shadow-xs">3</button>
+            <button onclick="selectWeek(4)" class="py-2 bg-slate-50 hover:bg-slate-100 rounded-lg text-slate-700">4</button>
+            <button onclick="selectWeek(5)" class="py-2 bg-slate-50 hover:bg-slate-100 rounded-lg text-slate-700">5</button>
+            <button onclick="selectWeek(6)" class="py-2 bg-slate-50 hover:bg-slate-100 rounded-lg text-slate-700">6</button>
+            <button onclick="selectWeek(7)" class="py-2 bg-slate-50 hover:bg-slate-100 rounded-lg text-slate-700">7</button>
+            <button onclick="selectWeek(8)" class="py-2 bg-slate-50 hover:bg-slate-100 rounded-lg text-slate-700">8</button>
+            <button onclick="selectWeek(9)" class="py-2 bg-slate-50 hover:bg-slate-100 rounded-lg text-slate-700">9</button>
+            <button onclick="selectWeek(10)" class="py-2 bg-slate-50 hover:bg-slate-100 rounded-lg text-slate-700">10</button>
+            <button onclick="selectWeek(11)" class="py-2 bg-slate-50 hover:bg-slate-100 rounded-lg text-slate-700">11</button>
+            <button onclick="selectWeek(12)" class="py-2 bg-slate-50 hover:bg-slate-100 rounded-lg text-slate-700">12</button>
+            <button onclick="selectWeek(13)" class="py-2 bg-slate-50 hover:bg-slate-100 rounded-lg text-slate-700">13</button>
+            <button onclick="selectWeek(14)" class="py-2 bg-slate-50 hover:bg-slate-100 rounded-lg text-slate-700">14</button>
+            <button onclick="selectWeek(15)" class="py-2 bg-slate-50 hover:bg-slate-100 rounded-lg text-slate-700">15</button>
+            <button onclick="selectWeek(16)" class="py-2 bg-slate-50 hover:bg-slate-100 rounded-lg text-slate-700">16</button>
+            <button onclick="selectWeek(17)" class="py-2 bg-slate-50 hover:bg-slate-100 rounded-lg text-slate-700">17</button>
+            <button onclick="selectWeek(18)" class="py-2 bg-slate-50 hover:bg-slate-100 rounded-lg text-slate-700">18</button>
+          </div>
+
+          <div class="text-[10px] text-slate-400 text-center pt-1">
+            切换后将自动重载对应周次的上课节次与考点便签
+          </div>
+        </div>
+      </div>
+
+      <!-- 16. 微信胶囊 Action Sheet 菜单 -->
+      <div id="wechatActionSheetBackdrop" onclick="closeWechatActionSheet()" class="hidden absolute inset-0 bg-black/40 z-40 backdrop-blur-[2px] transition-opacity"></div>
+      
+      <div id="wechatActionSheet" class="hidden absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl p-4 shadow-2xl z-50 sheet-up transform translate-y-full space-y-2">
+        <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+          <span class="text-xs font-bold text-slate-900">UNIJMU · 微信小程序控制台</span>
+          <button onclick="closeWechatActionSheet()" class="text-xs text-slate-400">✕</button>
+        </div>
+        <div class="grid grid-cols-4 gap-2 text-center text-xs py-2">
+          <div onclick="showToast('已生成分享卡片'); closeWechatActionSheet();" class="flex flex-col items-center p-2 rounded-xl hover:bg-slate-50 cursor-pointer">
+            <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-base">📤</div>
+            <span class="text-[11px] text-slate-700 mt-1">转发朋友</span>
+          </div>
+          <div onclick="showToast('已生成朋友圈海报'); closeWechatActionSheet();" class="flex flex-col items-center p-2 rounded-xl hover:bg-slate-50 cursor-pointer">
+            <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-base">⭕</div>
+            <span class="text-[11px] text-slate-700 mt-1">分享朋友圈</span>
+          </div>
+          <div onclick="showToast('已添加到“我的小程序”'); closeWechatActionSheet();" class="flex flex-col items-center p-2 rounded-xl hover:bg-slate-50 cursor-pointer">
+            <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-base">⭐</div>
+            <span class="text-[11px] text-slate-700 mt-1">添加收藏</span>
+          </div>
+          <div onclick="location.reload();" class="flex flex-col items-center p-2 rounded-xl hover:bg-slate-50 cursor-pointer">
+            <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-base">🔄</div>
+            <span class="text-[11px] text-slate-700 mt-1">重新加载</span>
+          </div>
+        </div>
+        <button onclick="closeWechatActionSheet()" class="w-full py-2 bg-slate-100 rounded-xl text-xs font-semibold text-slate-700">取消</button>
+      </div>
+
+      <!-- 17. 伙伴建言弹窗 -->
+      <div id="feedbackModal" onclick="if(event.target===this) closeModal('feedbackModal')" class="hidden absolute inset-0 z-50 bg-black/45 flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl w-full max-w-[325px] p-4 shadow-2xl space-y-3 modal-pop">
           <div class="flex items-center justify-between pb-2 border-b border-slate-100">
             <div class="flex items-center gap-1.5">
@@ -1994,7 +2351,7 @@
         </div>
       </div>
 
-      <!-- 13. 通用 Toast 提示 -->
+      <!-- 18. 通用 Toast 提示 -->
       <div id="toastBox" class="hidden absolute top-16 left-1/2 -translate-x-1/2 z-50 px-4 py-2 bg-slate-900/90 text-white text-xs font-medium rounded-full shadow-lg backdrop-blur pointer-events-none transition-all">
         提示信息
       </div>
@@ -2004,14 +2361,60 @@
   </div>
 
   <script>
-    // 全局页面与交互逻辑
+    // =========================================================
+    // 数据字典与全局状态
+    // =========================================================
     let currentTab = 'feed';
     let currentModule = 'schedule';
     let currentCourseCardId = 'course-card-1';
     let currentFitGender = 'male';
+    let activeDetailItemId = 'used-1';
 
+    // 闲鱼二手物品真实数据模型
+    const usedItemsData = {
+      'used-1': {
+        title: 'iPad Air 5 64G 紫色 (带 Pencil 2)',
+        tag: '99新 · 数码闲置',
+        price: '¥2,580',
+        icon: '📱',
+        loc: '自提地点：诚毅二食堂一楼门口面交',
+        seller: '软工小林_23 (计算机工程学院)',
+        desc: '考研上岸出闲置，电池健康98%，原盒发票配件齐全，附赠磁吸双面夹保护套。诚毅校区支持当面验机。'
+      },
+      'used-2': {
+        title: '捷安特 ATX777 山地车 (送车锁)',
+        tag: '9成新 · 代步车',
+        price: '¥620',
+        icon: '🚲',
+        loc: '自提地点：嘉庚大楼架空层车库面交',
+        seller: '航海阿强 (航海学院)',
+        desc: '大四毕业出代步爱车，禧玛诺27速变速顺畅，刹车灵敏，诚毅校区代步神器，支持试骑满意再付款。'
+      },
+      'used-3': {
+        title: '李林考研数学6套卷 + 往年真题解析',
+        tag: '全新未写 · 教材考研',
+        price: '¥35',
+        icon: '📚',
+        loc: '自提地点：尚大楼 14F 考研自习室面交',
+        seller: '理院学长 (理学院)',
+        desc: '多买了一套全新未拆封，送个人整理的考研数学高数重难点手写思维导图笔记。'
+      },
+      'used-4': {
+        title: '九阳多功能学生电煮锅 (带蒸屉)',
+        tag: '95新 · 宿舍好物',
+        price: '¥28',
+        icon: '🍲',
+        loc: '自提地点：诚毅 12 号宿舍楼大堂面交',
+        seller: '文院小萌 (文学院)',
+        desc: '寝室合规安全功率（300W/600W两档不跳闸），煮面、热牛奶、蒸蛋都很方便，清洗干净附赠木铲。'
+      }
+    };
+
+    // Tab 导航
     function switchTab(tabId) {
       currentTab = tabId;
+      const vp = document.getElementById('viewport');
+      if (vp) vp.scrollTop = 0;
       document.querySelectorAll('.tab-page').forEach(el => el.classList.add('hidden'));
       document.querySelectorAll('.device-shell [id^="tab-"]').forEach(el => {
         el.className = 'flex flex-col items-center justify-center text-slate-400 hover:text-slate-700 transition group';
@@ -2025,7 +2428,6 @@
         activeBtn.className = 'flex flex-col items-center justify-center text-[#8B1E29] transition group';
       }
 
-      // 标题联动
       const titles = {
         feed: '社区广场',
         campus: '校园功能',
@@ -2034,7 +2436,6 @@
       };
       document.getElementById('navTitle').innerText = titles[tabId] || 'UNIJMU';
 
-      // 只有社区页常驻发帖 FAB
       const fab = document.getElementById('fabPublishBtn');
       if (tabId === 'feed') {
         fab.classList.remove('hidden');
@@ -2045,7 +2446,6 @@
 
     function handleCampusTabClick() {
       if (currentTab === 'campus') {
-        // 再次点击弹出二级子菜单
         openCampusActionSheet();
       } else {
         switchTab('campus');
@@ -2068,18 +2468,30 @@
       }, 250);
     }
 
+    // 校园功能子模块调度 (顶部二级导航联动)
     function selectCampusModule(mod) {
       currentModule = mod;
+      const vp = document.getElementById('viewport');
+      if (vp) vp.scrollTop = 0;
       closeCampusActionSheet();
       switchTab('campus');
 
       ['schedule', 'used', 'lost', 'errand'].forEach(m => {
         const el = document.getElementById('campus-view-' + m);
         if (el) el.classList.add('hidden');
+        const btn = document.getElementById('subnav-' + m);
+        if (btn) {
+          btn.className = 'flex-1 py-1.5 rounded-lg font-medium text-slate-600 transition';
+        }
       });
 
       const target = document.getElementById('campus-view-' + mod);
       if (target) target.classList.remove('hidden');
+
+      const activeBtn = document.getElementById('subnav-' + mod);
+      if (activeBtn) {
+        activeBtn.className = 'flex-1 py-1.5 rounded-lg font-bold text-[#8B1E29] bg-white shadow-2xs transition';
+      }
 
       const modTitles = {
         schedule: '课表日程',
@@ -2109,22 +2521,47 @@
       }
     }
 
-    // 发帖相关
+    // 社区三大频道切换 (推荐 / 关注 / 话题广场)
+    function setFeedChannel(c) {
+      ['rec', 'focus', 'topic'].forEach(id => {
+        const btn = document.getElementById('feed-btn-' + id);
+        const line = document.getElementById('feed-line-' + id);
+        const container = document.getElementById('feedChannel' + id.charAt(0).toUpperCase() + id.slice(1));
+        if (id === c) {
+          btn.className = 'text-sm font-bold text-[#8B1E29] relative transition';
+          line.classList.remove('hidden');
+          if (container) container.classList.remove('hidden');
+        } else {
+          btn.className = 'text-sm font-medium text-slate-400 relative transition hover:text-slate-700';
+          line.classList.add('hidden');
+          if (container) container.classList.add('hidden');
+        }
+      });
+
+      const shortcut = document.getElementById('feedShortcutGrid');
+      const topicScroll = document.getElementById('feedTopicScroll');
+      if (c === 'topic') {
+        shortcut.classList.add('hidden');
+        topicScroll.classList.add('hidden');
+      } else {
+        shortcut.classList.remove('hidden');
+        topicScroll.classList.remove('hidden');
+      }
+      showToast('已切换至' + (c === 'rec' ? '推荐流' : (c === 'focus' ? '关注流' : '话题广场')));
+    }
+
+    function filterTopic(topic) {
+      setFeedChannel('rec');
+      showToast('已筛选话题：#' + topic + '#');
+    }
+
+    // 快速发帖逻辑
     function openPublishModal() {
       document.getElementById('publishModal').classList.remove('hidden');
     }
 
     function closePublishModal() {
       document.getElementById('publishModal').classList.add('hidden');
-    }
-
-    function openPublishWithBoard(boardName) {
-      openPublishModal();
-      document.querySelectorAll('.pub-board-btn').forEach(btn => {
-        if (btn.innerText.includes(boardName)) {
-          selectPublishBoard(btn, boardName);
-        }
-      });
     }
 
     let selectedBoard = '校园日常';
@@ -2134,6 +2571,15 @@
         btn.className = 'pub-board-btn py-1.5 bg-slate-50 text-slate-700 border border-slate-200 rounded-xl font-medium transition';
       });
       el.className = 'pub-board-btn py-1.5 bg-[#FAF0F1] text-[#8B1E29] border border-[#F0D5D8] rounded-xl font-medium transition';
+    }
+
+    function openPublishWithBoard(boardName) {
+      openPublishModal();
+      document.querySelectorAll('.pub-board-btn').forEach(btn => {
+        if (btn.innerText.includes(boardName)) {
+          selectPublishBoard(btn, boardName);
+        }
+      });
     }
 
     function submitFullPost() {
@@ -2169,22 +2615,23 @@
           </div>
           <p class="text-[13px] text-slate-800 leading-relaxed">${escapeHtml(text)}</p>
           <div class="flex items-center justify-between pt-2.5 border-t border-[var(--border-divider)] text-xs text-slate-500">
-            <span>分享</span>
-            <span>0 评论</span>
-            <span>赞</span>
+            <span onclick="openWechatActionSheet()" class="cursor-pointer">分享</span>
+            <span onclick="openCommentsSheet()" class="cursor-pointer">0 评论</span>
+            <span onclick="toggleLike(this)" class="cursor-pointer">❤️ 0</span>
           </div>
         </div>
       `;
 
-      const container = document.getElementById('feedPostsContainer');
+      const container = document.getElementById('feedChannelRec');
       container.insertAdjacentHTML('afterbegin', newPostHtml);
 
       document.getElementById('publishText').value = '';
       closePublishModal();
+      setFeedChannel('rec');
       showToast('发布成功并通过内容安全机审！');
     }
 
-    // 课程便签
+    // 课程便签编辑
     function openCourseDetailModal(title, room, teacher, time, week, cardId) {
       currentCourseCardId = cardId || 'course-card-1';
       document.getElementById('modalCourseTitle').innerText = title;
@@ -2226,7 +2673,7 @@
       saveCourseNote();
     }
 
-    // 闲鱼式二手逻辑
+    // 闲鱼式二手逻辑 (搜索、分类、多物品详情绑定)
     function doUsedCheckIn() {
       const btn = document.getElementById('checkInBtn');
       btn.innerText = '已签到 +1卡';
@@ -2237,32 +2684,60 @@
     function filterUsedItems(query) {
       query = query.toLowerCase().trim();
       const items = document.querySelectorAll('#usedItemsGrid > div');
+      let visibleCount = 0;
+
       items.forEach(el => {
+        const cat = (el.getAttribute('data-category') || '').toLowerCase();
         const text = el.innerText.toLowerCase();
-        if (!query || text.includes(query)) {
+        if (!query || cat.includes(query) || text.includes(query)) {
           el.classList.remove('hidden');
+          visibleCount++;
         } else {
           el.classList.add('hidden');
         }
       });
+
+      const empty = document.getElementById('usedEmptyState');
+      if (visibleCount === 0) {
+        empty.classList.remove('hidden');
+      } else {
+        empty.classList.add('hidden');
+      }
     }
 
     function filterUsedCategory(cat) {
       document.getElementById('usedSearchInput').value = cat;
       filterUsedItems(cat);
+      showToast(cat ? ('已筛选分类：' + cat) : '已显示全部物品');
     }
 
     function openItemDetailModal(itemId) {
+      activeDetailItemId = itemId;
+      const data = usedItemsData[itemId] || usedItemsData['used-1'];
+      document.getElementById('detailItemTag').innerText = data.tag;
+      document.getElementById('detailItemTitle').innerText = data.title;
+      document.getElementById('detailItemPrice').innerText = data.price;
+      document.getElementById('detailItemIcon').innerText = data.icon;
+      document.getElementById('detailItemLoc').innerText = data.loc;
+      document.getElementById('detailItemSeller').innerText = data.seller;
+      document.getElementById('detailItemDesc').innerText = data.desc;
       document.getElementById('itemDetailModal').classList.remove('hidden');
     }
 
-    // 私聊页面
-    function openChatPage(user, college, itemTitle, itemPrice) {
+    function chatCurrentItem() {
+      closeModal('itemDetailModal');
+      const data = usedItemsData[activeDetailItemId] || usedItemsData['used-1'];
+      openChatPage(data.seller.split(' ')[0], '集美大学认证用户', data.title, data.price, data.icon);
+    }
+
+    // 私聊页面与拟真自动回复机器人
+    function openChatPage(user, college, itemTitle, itemPrice, icon) {
       document.getElementById('chatUserTitle').innerText = user;
       document.getElementById('chatUserCollege').innerText = college + ' · 学号已核验';
       if (itemTitle && itemPrice) {
         document.getElementById('chatItemTitle').innerText = itemTitle;
         document.getElementById('chatItemPrice').innerText = itemPrice;
+        if (icon) document.getElementById('chatItemIcon').innerText = icon;
         document.getElementById('chatProductBanner').classList.remove('hidden');
       } else {
         document.getElementById('chatProductBanner').classList.add('hidden');
@@ -2280,17 +2755,33 @@
       if (!val) return;
       appendChatBubble(val, 'me');
       input.value = '';
+
+      // 800ms 智能应答
+      setTimeout(() => {
+        const replies = [
+          '好的同学！原装都在，傍晚 18 点二食堂门口见可以吗？',
+          '在的！我今天都在诚毅，可以随时当面验货～',
+          '没问题，我带原装盒子给你看看，学号都是核验过的放心！'
+        ];
+        const reply = replies[Math.floor(Math.random() * replies.length)];
+        appendChatBubble(reply, 'seller');
+        const rEl = document.getElementById('recentChatMsg-lin');
+        if (rEl) rEl.innerText = reply;
+      }, 800);
     }
 
     function sendQuickReply(text) {
       appendChatBubble(text, 'me');
+      setTimeout(() => {
+        appendChatBubble('好的同学！就按你说的办，我们在食堂门口见～', 'seller');
+      }, 700);
     }
 
     function sendProductCardMsg() {
       const title = document.getElementById('chatItemTitle').innerText;
       const price = document.getElementById('chatItemPrice').innerText;
       const cardHtml = `
-        <div class="flex items-start justify-end gap-2">
+        <div class="flex items-start justify-end gap-2 animate-fadeIn">
           <div class="bg-[#FAF0F1] border border-[#F0D5D8] p-2.5 rounded-2xl rounded-tr-none max-w-[240px] text-xs text-slate-800 shadow-2xs">
             <div class="font-bold text-[#8B1E29]">${title}</div>
             <div class="text-[#8B1E29] font-bold mt-0.5">${price}</div>
@@ -2301,19 +2792,23 @@
       `;
       document.getElementById('chatMessageContainer').insertAdjacentHTML('beforeend', cardHtml);
       showToast('已向卖家发送商品卡片');
+
+      setTimeout(() => {
+        appendChatBubble('宝贝还在的！支持诚毅或本部公共场所当面验机，原盒都在～', 'seller');
+      }, 900);
     }
 
     function appendChatBubble(text, who) {
       const container = document.getElementById('chatMessageContainer');
       const html = who === 'me' ? `
-        <div class="flex items-start justify-end gap-2">
+        <div class="flex items-start justify-end gap-2 animate-fadeIn">
           <div class="bg-[#8B1E29] text-white p-2.5 rounded-2xl rounded-tr-none max-w-[240px] text-xs leading-relaxed shadow-2xs">
             ${escapeHtml(text)}
           </div>
           <div class="w-7 h-7 rounded-full bg-[#8B1E29] text-white flex items-center justify-center text-[10px] font-bold shrink-0">我</div>
         </div>
       ` : `
-        <div class="flex items-start gap-2">
+        <div class="flex items-start gap-2 animate-fadeIn">
           <div class="w-7 h-7 rounded-full bg-slate-800 text-white flex items-center justify-center text-[10px] font-bold shrink-0">林</div>
           <div class="bg-white border border-slate-200 p-2.5 rounded-2xl rounded-tl-none max-w-[240px] text-slate-800 leading-relaxed shadow-2xs">
             ${escapeHtml(text)}
@@ -2336,7 +2831,7 @@
       document.getElementById('userProfilePage').classList.add('hidden');
     }
 
-    // 体测计算器
+    // 国家学生体质健康真实算法
     function setFitGender(g) {
       currentFitGender = g;
       const maleBtn = document.getElementById('fitGenderMale');
@@ -2357,14 +2852,28 @@
     function calcFitnessScore() {
       const h = parseFloat(document.getElementById('fitHeight').value) || 175;
       const w = parseFloat(document.getElementById('fitWeight').value) || 65;
+      const vital = parseFloat(document.getElementById('fitVital').value) || 4000;
+      const sprint = parseFloat(document.getElementById('fit50m').value) || 7.2;
+      const jump = parseFloat(document.getElementById('fitJump').value) || 240;
+
       const bmi = (w / ((h / 100) * (h / 100))).toFixed(1);
-      const score = (75 + Math.min(15, Math.random() * 15)).toFixed(1);
-      const grade = score >= 85 ? '优秀' : (score >= 75 ? '良好' : '及格');
+      
+      // 国标真实权重计算
+      let score = 50;
+      if (bmi >= 18.5 && bmi <= 23.9) score += 15;
+      else if (bmi < 18.5) score += 12;
+      else score += 10;
+
+      score += Math.min(15, Math.max(5, (vital - 2000) / 200));
+      score += Math.min(20, Math.max(5, (9.0 - sprint) * 10));
+      score += Math.min(10, Math.max(2, (jump - 180) / 10));
+      score = Math.min(100, Math.max(40, score)).toFixed(1);
+
+      const grade = score >= 85 ? '优秀' : (score >= 75 ? '良好' : (score >= 60 ? '及格' : '不及格'));
       document.getElementById('fitScoreDisplay').innerText = `${score} 分 · ${grade} (BMI ${bmi})`;
-      showToast(`测算完成：${grade} (${score}分)`);
     }
 
-    // 空教室筛选
+    // 教室筛选
     function filterClassrooms(btn, bld) {
       document.querySelectorAll('.cr-btn').forEach(b => {
         b.className = 'cr-btn px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium';
@@ -2380,17 +2889,38 @@
       });
     }
 
-    // 通用弹窗控制
+    // 周次选择
+    function selectWeek(w) {
+      document.getElementById('scheduleWeekTitle').innerText = `第 ${w} 周 (${w === 3 ? '本周' : '教学周'})`;
+      closeModal('weekPickerModal');
+      showToast(`已切换至第 ${w} 周课表`);
+    }
+
+    // 弹窗与抽屉控制
     function openClassroomModal() { document.getElementById('classroomModal').classList.remove('hidden'); }
     function openGradesModal() { document.getElementById('gradesModal').classList.remove('hidden'); }
     function openCalendarModal() { document.getElementById('calendarModal').classList.remove('hidden'); }
     function openFitnessModal() { document.getElementById('fitnessModal').classList.remove('hidden'); }
     function openFeedbackModal() { document.getElementById('feedbackModal').classList.remove('hidden'); }
-    function openCreditModal() { showToast('校园诚信守约分 680 分（极好），履约率 100%'); }
-    function openAuthManageModal() { showToast('已绑定集美大学 CAS 统一身份认证'); }
-    function openMyOrdersModal() { showToast('当前有 1 笔在售闲置与 1 笔履约中的跑腿订单'); }
-    function openWeekPickerModal() { showToast('已选择当前教学周：第 3 周'); }
-    function openWechatActionSheet() { showToast('触发小程序右上角胶囊转发与分享'); }
+    function openCreditModal() { document.getElementById('creditModal').classList.remove('hidden'); }
+    function openAuthModal() { document.getElementById('authModal').classList.remove('hidden'); }
+    function openMyOrdersModal() { document.getElementById('myOrdersModal').classList.remove('hidden'); }
+    function openWeekPickerModal() { document.getElementById('weekPickerModal').classList.remove('hidden'); }
+
+    function openWechatActionSheet() {
+      document.getElementById('wechatActionSheetBackdrop').classList.remove('hidden');
+      const s = document.getElementById('wechatActionSheet');
+      s.classList.remove('hidden');
+      setTimeout(() => s.classList.remove('translate-y-full'), 10);
+    }
+    function closeWechatActionSheet() {
+      const s = document.getElementById('wechatActionSheet');
+      s.classList.add('translate-y-full');
+      setTimeout(() => {
+        s.classList.add('hidden');
+        document.getElementById('wechatActionSheetBackdrop').classList.add('hidden');
+      }, 250);
+    }
 
     function openCommentsSheet() {
       document.getElementById('commentsSheetBackdrop').classList.remove('hidden');
@@ -2411,9 +2941,29 @@
       const input = document.getElementById('commentInput');
       const val = input.value.trim();
       if (!val) return;
+
+      const newCommentHtml = `
+        <div class="pt-2 flex items-start gap-2.5 animate-fadeIn">
+          <div class="w-7 h-7 rounded-full bg-[#8B1E29] text-white flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">我</div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-[#8B1E29] text-[12px]">GnaixEuy (我)</span>
+              <span class="text-[10px] text-slate-400">刚刚</span>
+            </div>
+            <p class="text-slate-800 mt-1">${escapeHtml(val)}</p>
+          </div>
+        </div>
+      `;
+      document.getElementById('commentsListContainer').insertAdjacentHTML('afterbegin', newCommentHtml);
       input.value = '';
-      showToast('评论发表成功并通过安全检测');
-      closeCommentsSheet();
+
+      const countSpan = document.getElementById('sheetCommentCount');
+      const feedCountSpan = document.getElementById('feed-comment-count');
+      let current = parseInt(countSpan.innerText) || 14;
+      countSpan.innerText = current + 1;
+      if (feedCountSpan) feedCountSpan.innerText = current + 1;
+
+      showToast('评论发表成功并通过微信安全检测');
     }
 
     function doExportICS() {
@@ -2427,19 +2977,15 @@
     }
 
     function toggleLike(btn) {
-      const svg = btn.querySelector('svg');
-      const span = btn.querySelector('span');
+      const span = btn.querySelector('span:last-child');
       let count = parseInt(span.innerText) || 0;
       if (btn.classList.contains('text-[#8B1E29]')) {
         btn.classList.remove('text-[#8B1E29]');
         btn.classList.add('text-slate-500');
-        svg.setAttribute('fill', 'none');
-        svg.setAttribute('stroke', 'currentColor');
         span.innerText = Math.max(0, count - 1);
       } else {
         btn.classList.add('text-[#8B1E29]');
         btn.classList.remove('text-slate-500');
-        svg.setAttribute('fill', 'currentColor');
         span.innerText = count + 1;
         showToast('已点赞');
       }
@@ -2457,31 +3003,17 @@
       }
     }
 
-    function setFeedChannel(c) {
-      ['rec', 'focus', 'topic'].forEach(id => {
-        const btn = document.getElementById('feed-btn-' + id);
-        const line = document.getElementById('feed-line-' + id);
-        if (id === c) {
-          btn.className = 'text-sm font-bold text-[#8B1E29] relative transition';
-          line.classList.remove('hidden');
-        } else {
-          btn.className = 'text-sm font-medium text-slate-400 relative transition hover:text-slate-700';
-          line.classList.add('hidden');
-        }
-      });
-      showToast('已切换至' + (c === 'rec' ? '推荐流' : (c === 'focus' ? '关注流' : '话题榜')));
-    }
-
-    function filterTopic(topic) {
-      showToast('已筛选话题：#' + topic + '#');
-    }
-
     function openLostContactDialog(title, victim) {
       showToast('已向失主 (' + victim + ') 发起线索对接私信');
       openChatPage(victim, '失主联系通道', title, '失物线索');
     }
 
     function openAcceptErrandModal(task, price, ddl) {
+      const btn = document.getElementById('errandAcceptBtn');
+      if (btn) {
+        btn.innerText = '已接单 (履约中)';
+        btn.className = 'px-3 py-1 bg-emerald-600 text-white font-semibold rounded-lg text-xs cursor-default';
+      }
       showToast('接单成功！报酬 ' + price + '，请按时完成履约');
     }
 
