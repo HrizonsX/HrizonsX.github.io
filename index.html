@@ -1174,9 +1174,9 @@
 
       </div>
 
-      <!-- 社区悬浮发帖 FAB 按钮 -->
-      <div id="fabPublishBtn" onclick="openPublishModal()" class="absolute bottom-20 right-4 z-30 cursor-pointer shadow-lg hover:scale-105 active:scale-95 transition-all">
-        <div class="w-12 h-12 rounded-full bg-gradient-to-r from-[#8B1E29] to-[#9C2330] text-white flex items-center justify-center shadow-md border-2 border-white">
+      <!-- 底部居中悬浮发帖 FAB 按钮 (浮动在“校园功能”与“消息”两个Tab中间偏上位置) -->
+      <div id="fabPublishBtn" onclick="openPublishModal()" title="发布校园动态与闲置互助" class="absolute bottom-[30px] left-1/2 -translate-x-1/2 z-[45] cursor-pointer hover:scale-105 active:scale-95 transition-all">
+        <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-[#8B1E29] to-[#A32835] text-white flex items-center justify-center shadow-[0_6px_18px_rgba(139,30,41,0.38)] border-[3px] border-white">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
         </div>
       </div>
@@ -2128,10 +2128,8 @@
       document.getElementById('navTitle').innerText = titles[tabId] || 'UNIJMU';
 
       const fab = document.getElementById('fabPublishBtn');
-      if (tabId === 'feed') {
+      if (fab) {
         fab.classList.remove('hidden');
-      } else {
-        fab.classList.add('hidden');
       }
     }
 
