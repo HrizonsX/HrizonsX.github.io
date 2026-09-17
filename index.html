@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>UNIJMU · 集美大学校园服务平台交互原型 (v1.8.1)</title>
+  <title>UNIJMU · 集美大学校园服务平台交互原型 (v1.9.0)</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
   
   <!-- 双通道 Tailwind CSS (极速 CDN + 完备自包含内联兜底) -->
@@ -273,7 +273,7 @@
             <div>
               <h2 class="text-base font-bold text-slate-900 leading-tight">UNIJMU 校园服务平台</h2>
               <div class="flex items-center gap-1.5 mt-0.5">
-                <span class="text-[11px] text-slate-500 font-mono">v1.8.1 · 高保真稳定闭环版</span>
+                <span class="text-[11px] text-slate-500 font-mono">v1.9.0 · 双二级菜单与生活互助并入社区版</span>
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
               </div>
             </div>
@@ -288,11 +288,11 @@
             <span>本次深度重构与体验演进</span>
           </div>
           <p class="text-[11px] text-slate-600 leading-relaxed">
-            1. <strong>彻底解决弹窗常开与无响应缺陷</strong>：建立专属状态层叠隔离，消除 CSS 冲突，Esc 与遮罩点击双向退出。<br>
-            2. <strong>导航去重与逻辑解耦</strong>：底栏校园直达功能大厅，顶部平滑分段调度，二级快捷菜单按需唤起。<br>
-            3. <strong>闲鱼二手真实多商品</strong>：搜索、6大分类打标与4款真实商品双列推荐，直通即时私聊。<br>
-            4. <strong>课表备忘录实时绑定</strong>：为课程编辑便签并即时外显 📌 备忘标签。<br>
-            5. <strong>门牌级空教室与体测计算</strong>：真实门牌剩余座席，国家标准综合测算。
+            1. <strong>生活互助服务全面并入社区</strong>：二手闲置集市、失物招领告示、校园互助跑腿移入社区空间，主屏与二级菜单双通道触达。<br>
+            2. <strong>底栏双二级子菜单架构</strong>：【社区 ▾】与【校园 ▾】底栏 Tab 均支持点击呼出独立专属 Action Sheet，支持顶栏板块实时切换。<br>
+            3. <strong>校园侧聚焦学业教务矩阵</strong>：课表日程（日/周网格）、周次选择、空教室门牌、GPA走势、体测算分、ICS日历导出。<br>
+            4. <strong>居中偏上悬浮发帖 FAB 键</strong>：保持在【校园】与【消息】Tab 之间偏上位置，高保真微投影，多板块分类直发。<br>
+            5. <strong>状态完全隔离与优雅回退</strong>：彻底根除弹窗无响应与常开问题，全流程闭环流畅体验。
           </p>
         </div>
 
@@ -308,12 +308,16 @@
               <span class="font-medium text-slate-700 group-hover:text-[#8B1E29]">✍️ 体验“＋快速发帖”分步抽屉</span>
               <span class="text-slate-400 group-hover:translate-x-0.5 transition">›</span>
             </button>
-            <button onclick="handleCampusTabClick()" class="w-full flex items-center justify-between p-2 hover:bg-slate-50 rounded-lg text-left transition group">
-              <span class="font-medium text-slate-700 group-hover:text-[#8B1E29]">🗂️ 呼出底栏【校园二级子菜单】</span>
+            <button onclick="handleFeedTabClick()" class="w-full flex items-center justify-between p-2 hover:bg-slate-50 rounded-lg text-left transition group">
+              <span class="font-medium text-slate-700 group-hover:text-[#8B1E29]">💬 呼出底栏【社区二级子菜单】</span>
               <span class="text-slate-400 group-hover:translate-x-0.5 transition">›</span>
             </button>
-            <button onclick="switchTab('campus'); selectCampusModule('used')" class="w-full flex items-center justify-between p-2 hover:bg-slate-50 rounded-lg text-left transition group">
-              <span class="font-medium text-slate-700 group-hover:text-[#8B1E29]">🛍️ 闲鱼式二手集市 (搜索/分类/签到)</span>
+            <button onclick="handleCampusTabClick()" class="w-full flex items-center justify-between p-2 hover:bg-slate-50 rounded-lg text-left transition group">
+              <span class="font-medium text-slate-700 group-hover:text-[#8B1E29]">🎓 呼出底栏【校园二级子菜单】</span>
+              <span class="text-slate-400 group-hover:translate-x-0.5 transition">›</span>
+            </button>
+            <button onclick="switchTab('feed'); selectFeedModule('used')" class="w-full flex items-center justify-between p-2 hover:bg-slate-50 rounded-lg text-left transition group">
+              <span class="font-medium text-slate-700 group-hover:text-[#8B1E29]">🛍️ 闲鱼式二手集市 (现已并入社区)</span>
               <span class="text-slate-400 group-hover:translate-x-0.5 transition">›</span>
             </button>
             <button onclick="switchTab('campus'); selectCampusModule('schedule'); openCourseDetailModal('数据结构与算法设计 (C++)', '诚毅教学楼 3-402', '张教授 · 计算机工程学院', '08:00 - 09:35', '1-16周 每周上课', 'course-card-1')" class="w-full flex items-center justify-between p-2 hover:bg-slate-50 rounded-lg text-left transition group">
@@ -405,7 +409,27 @@
         <!-- ==================== Tab 1: 社区广场 (Feed) ==================== -->
         <div id="page-feed" class="tab-page block">
           
-          <!-- 频道切换栏 -->
+          <!-- 社区服务当前业务指示栏 (点击展开完整社区二级子菜单，双二级子菜单架构) -->
+          <div class="sticky top-0 z-20 bg-white/95 backdrop-blur border-b border-[var(--border-divider)] px-3.5 py-2.5 flex items-center justify-between">
+            <div onclick="openFeedActionSheet()" class="flex items-center gap-2 cursor-pointer group">
+              <span class="w-2.5 h-2.5 rounded-full bg-[#8B1E29] group-hover:scale-125 transition"></span>
+              <div class="flex items-center gap-1.5">
+                <span id="feedCurrentServiceTitle" class="text-xs font-bold text-slate-900 group-hover:text-[#8B1E29] transition">社区动态广场</span>
+                <span class="text-[10px] text-[#8B1E29] bg-[#FAF0F1] px-1.5 py-0.5 rounded font-medium border border-[#F0D5D8] flex items-center gap-0.5">
+                  切换板块 ▾
+                </span>
+              </div>
+            </div>
+            <button onclick="openFeedActionSheet()" class="text-xs text-slate-600 hover:text-slate-900 flex items-center gap-1 bg-slate-50 hover:bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200/80 transition">
+              <svg class="w-3.5 h-3.5 text-[#8B1E29]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+              <span class="text-[11px] font-medium">社区板块</span>
+            </button>
+          </div>
+
+          <!-- 子视图 1: 社区动态广场主流 -->
+          <div id="feed-view-stream" class="block">
+          
+            <!-- 频道切换栏 -->
           <div class="sticky top-0 z-20 glass-nav border-b border-[var(--border-divider)] px-4 py-2 flex items-center justify-between">
             <div class="flex items-center gap-6 text-xs">
               <button onclick="setFeedChannel('rec')" id="feed-btn-rec" class="text-sm font-bold text-[#8B1E29] relative transition">
@@ -424,7 +448,49 @@
           </div>
 
 
-          <!-- 高频热门话题横滑 -->
+          <!-- 生活互助服务快捷矩阵 (二手/失物/跑腿) -->
+            <div class="px-3 pt-2.5 pb-1 bg-white border-b border-[var(--border-divider)]">
+              <div class="p-2.5 bg-gradient-to-r from-amber-500/10 via-red-500/5 to-blue-500/10 rounded-2xl border border-amber-200/60 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="text-base">🤝</span>
+                  <div>
+                    <div class="text-xs font-bold text-slate-900 flex items-center gap-1.5">
+                      <span>生活互助大厅</span>
+                      <span class="text-[9px] bg-[#8B1E29] text-white px-1.5 py-0.2 rounded-full font-bold">校内专区</span>
+                    </div>
+                    <div class="text-[10px] text-slate-500">二手闲置 · 失物寻物 · 校园代取</div>
+                  </div>
+                </div>
+                <button onclick="openFeedActionSheet()" class="px-2.5 py-1 bg-[#8B1E29] hover:bg-[#751722] text-white text-[10px] font-bold rounded-full transition shadow-xs">
+                  板块清单 ›
+                </button>
+              </div>
+              <div class="grid grid-cols-3 gap-2 mt-2 pb-1.5">
+                <div onclick="selectFeedModule('used')" class="flex items-center gap-2 p-2 bg-slate-50 hover:bg-amber-50 rounded-xl border border-slate-200/80 hover:border-amber-300 cursor-pointer transition group">
+                  <div class="w-7 h-7 rounded-lg bg-amber-100/80 text-amber-800 flex items-center justify-center text-xs group-hover:scale-105 transition">🛍️</div>
+                  <div>
+                    <div class="text-[11px] font-bold text-slate-800">二手集市</div>
+                    <div class="text-[9px] text-slate-400">安全面交</div>
+                  </div>
+                </div>
+                <div onclick="selectFeedModule('lost')" class="flex items-center gap-2 p-2 bg-slate-50 hover:bg-blue-50 rounded-xl border border-slate-200/80 hover:border-blue-300 cursor-pointer transition group">
+                  <div class="w-7 h-7 rounded-lg bg-blue-100/80 text-blue-700 flex items-center justify-center text-xs group-hover:scale-105 transition">🔍</div>
+                  <div>
+                    <div class="text-[11px] font-bold text-slate-800">失物招领</div>
+                    <div class="text-[9px] text-slate-400">保卫处联动</div>
+                  </div>
+                </div>
+                <div onclick="selectFeedModule('errand')" class="flex items-center gap-2 p-2 bg-slate-50 hover:bg-emerald-50 rounded-xl border border-slate-200/80 hover:border-emerald-300 cursor-pointer transition group">
+                  <div class="w-7 h-7 rounded-lg bg-emerald-100/80 text-emerald-700 flex items-center justify-center text-xs group-hover:scale-105 transition">🏃</div>
+                  <div>
+                    <div class="text-[11px] font-bold text-slate-800">校园跑腿</div>
+                    <div class="text-[9px] text-slate-400">同学顺带</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 高频热门话题横滑 -->
           <div id="feedTopicScroll" class="flex gap-2 px-3 py-2.5 overflow-x-auto no-scrollbar bg-white border-b border-[var(--border-divider)]">
             <div onclick="filterTopic('集大表白墙')" class="shrink-0 flex items-center gap-1 px-2.5 py-1 bg-red-50 hover:bg-red-100 rounded-lg text-xs font-medium text-[#8B1E29] cursor-pointer border border-red-100 transition">
               <span>💌</span>
@@ -549,6 +615,21 @@
               </div>
             </div>
 
+            <!-- 生活互助服务迁移引导卡片 -->
+            <div onclick="switchTab('feed'); openFeedActionSheet()" class="p-3 bg-gradient-to-r from-amber-500/10 via-red-500/5 to-blue-500/10 rounded-2xl border border-amber-200/70 flex items-center justify-between cursor-pointer hover:border-amber-300 transition">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-xl bg-white border border-amber-200 flex items-center justify-center text-sm shadow-2xs">🤝</div>
+                <div>
+                  <div class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+                    <span>校内生活互助专区</span>
+                    <span class="text-[9px] bg-[#8B1E29] text-white px-1.5 py-0.2 rounded font-medium">已移至社区</span>
+                  </div>
+                  <div class="text-[10px] text-slate-500 mt-0.5">二手闲置集市、失物寻物告示、校园互助跑腿</div>
+                </div>
+              </div>
+              <span class="text-xs text-[#8B1E29] font-bold flex items-center gap-0.5">前往社区 ›</span>
+            </div>
+
           </div>
 
           <!-- 关注流容器 (关注的校友与社团动态) -->
@@ -652,6 +733,248 @@
               <button class="px-2.5 py-1 bg-emerald-50 text-emerald-700 text-[10px] font-semibold rounded-full border border-emerald-200">进入话题</button>
             </div>
           </div>
+
+                  </div>
+
+          <!-- ==================== 2. 闲鱼化二手闲置集市视图 ==================== -->
+          <div id="feed-view-used" class="hidden p-3 space-y-3">
+            <!-- 返回动态广场导航条 -->
+            <div class="flex items-center justify-between pb-1">
+              <button onclick="selectFeedModule('stream')" class="text-xs text-slate-600 hover:text-[#8B1E29] flex items-center gap-1 font-semibold transition">
+                <span>‹ 返回社区广场</span>
+              </button>
+              <button onclick="openFeedActionSheet()" class="text-[11px] text-[#8B1E29] bg-[#FAF0F1] px-2 py-0.5 rounded font-medium border border-[#F0D5D8] flex items-center gap-0.5">
+                切换板块 ▾
+              </button>
+            </div>
+
+            
+            <!-- 顶部搜索栏 -->
+            <div class="flex items-center gap-2">
+              <div class="flex-1 h-9 px-3 bg-white rounded-full border border-slate-200 flex items-center gap-2 shadow-2xs">
+                <svg class="w-4 h-4 text-slate-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+                <input id="usedSearchInput" oninput="filterUsedItems(this.value)" type="text" placeholder="搜索集大闲置：考研真题、iPad、电驴..." class="w-full text-xs bg-transparent outline-none">
+              </div>
+              <button onclick="openPublishWithBoard('二手闲置')" class="h-9 px-3.5 bg-[#8B1E29] hover:bg-[#751722] text-white rounded-full text-xs font-semibold shrink-0 shadow-xs transition flex items-center gap-1">
+                <span>+ 卖闲置</span>
+              </button>
+            </div>
+
+            <!-- 签到打卡领擦亮卡 -->
+            <div class="p-2.5 bg-gradient-to-r from-amber-500/10 via-orange-500/10 to-amber-500/10 rounded-2xl border border-amber-200/70 flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-xl bg-amber-500 text-white flex items-center justify-center font-bold text-sm shadow-2xs">
+                  ✨
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-slate-900">集大闲置打卡 · 擦亮集市</div>
+                  <div class="text-[10px] text-amber-800">每日签到领 1 张商品置顶擦亮卡</div>
+                </div>
+              </div>
+              <button id="checkInBtn" onclick="doUsedCheckIn()" class="px-3 py-1 bg-amber-600 hover:bg-amber-700 text-white font-semibold text-[11px] rounded-full transition shadow-xs">
+                立即签到
+              </button>
+            </div>
+
+            <!-- 分类金刚区 (6个核心类别，点击高亮并精准过滤) -->
+            <div class="grid grid-cols-6 gap-1 bg-white p-2.5 rounded-2xl border border-[var(--border-subtle)] text-center text-xs shadow-2xs">
+              <div onclick="filterUsedCategory('数码')" class="flex flex-col items-center cursor-pointer hover:opacity-80 p-1 rounded-xl transition">
+                <div class="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-sm">📱</div>
+                <span class="text-[10px] font-medium text-slate-700 mt-1">数码科技</span>
+              </div>
+              <div onclick="filterUsedCategory('教材')" class="flex flex-col items-center cursor-pointer hover:opacity-80 p-1 rounded-xl transition">
+                <div class="w-8 h-8 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center text-sm">📚</div>
+                <span class="text-[10px] font-medium text-slate-700 mt-1">教材考研</span>
+              </div>
+              <div onclick="filterUsedCategory('代步')" class="flex flex-col items-center cursor-pointer hover:opacity-80 p-1 rounded-xl transition">
+                <div class="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-sm">🚲</div>
+                <span class="text-[10px] font-medium text-slate-700 mt-1">代步车</span>
+              </div>
+              <div onclick="filterUsedCategory('宿舍')" class="flex flex-col items-center cursor-pointer hover:opacity-80 p-1 rounded-xl transition">
+                <div class="w-8 h-8 rounded-xl bg-purple-50 text-purple-700 flex items-center justify-center text-sm">🛋️</div>
+                <span class="text-[10px] font-medium text-slate-700 mt-1">宿舍好物</span>
+              </div>
+              <div onclick="filterUsedCategory('穿搭')" class="flex flex-col items-center cursor-pointer hover:opacity-80 p-1 rounded-xl transition">
+                <div class="w-8 h-8 rounded-xl bg-pink-50 text-pink-600 flex items-center justify-center text-sm">👟</div>
+                <span class="text-[10px] font-medium text-slate-700 mt-1">运动穿搭</span>
+              </div>
+              <div onclick="filterUsedCategory('免费')" class="flex flex-col items-center cursor-pointer hover:opacity-80 p-1 rounded-xl transition">
+                <div class="w-8 h-8 rounded-xl bg-red-50 text-red-600 flex items-center justify-center text-sm">🎁</div>
+                <span class="text-[10px] font-medium text-slate-700 mt-1">免费送</span>
+              </div>
+            </div>
+
+            <!-- 闲鱼式双列推荐流 -->
+            <div>
+              <div class="flex items-center justify-between px-1 mb-2">
+                <span class="text-xs font-bold text-slate-900">集大校友推荐 · 严选面交</span>
+                <span class="text-[10px] text-slate-400">学号核验 100% 担保</span>
+              </div>
+
+              <!-- 搜索空状态 -->
+              <div id="usedEmptyState" class="hidden py-8 text-center text-xs text-slate-400 space-y-1">
+                <div class="text-3xl">🔍</div>
+                <div>未找到匹配的校内闲置物品</div>
+                <button onclick="filterUsedCategory('')" class="text-[11px] text-[#8B1E29] font-semibold mt-1">查看全部物品</button>
+              </div>
+
+              <div id="usedItemsGrid" class="grid grid-cols-2 gap-2 text-xs">
+                
+                <!-- 商品卡片 1 (数码) -->
+                <div onclick="openItemDetailModal('used-1')" data-category="数码 数码科技 ipad 苹果 电脑 平板 诚毅" class="bg-white rounded-2xl border border-[var(--border-subtle)] overflow-hidden shadow-2xs cursor-pointer hover:shadow-xs transition flex flex-col justify-between">
+                  <div class="h-28 bg-slate-100 flex flex-col items-center justify-center text-slate-500 font-medium relative">
+                    <span class="text-3xl">📱</span>
+                    <span class="absolute top-1.5 left-1.5 text-[9px] bg-black/60 text-white px-1.5 py-0.5 rounded font-semibold backdrop-blur">99新 · 数码</span>
+                  </div>
+                  <div class="p-2.5 space-y-1.5 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h4 class="text-xs font-bold text-slate-900 line-clamp-1">iPad Air 5 64G 紫色 (带 Pencil 2)</h4>
+                      <p class="text-[10px] text-slate-400 mt-0.5">诚毅二食堂面交 · 原盒发票齐全</p>
+                    </div>
+                    <div class="pt-1 flex items-center justify-between border-t border-slate-100">
+                      <span class="text-sm font-bold text-[#8B1E29]">¥2,580</span>
+                      <span class="text-[9px] bg-[#FAF0F1] text-[#8B1E29] px-1 rounded font-medium">学号已核验</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 商品卡片 2 (代步车) -->
+                <div onclick="openItemDetailModal('used-2')" data-category="代步 代步车 自行车 山地车 骑行 捷安特 嘉庚" class="bg-white rounded-2xl border border-[var(--border-subtle)] overflow-hidden shadow-2xs cursor-pointer hover:shadow-xs transition flex flex-col justify-between">
+                  <div class="h-28 bg-slate-100 flex flex-col items-center justify-center text-slate-500 font-medium relative">
+                    <span class="text-3xl">🚲</span>
+                    <span class="absolute top-1.5 left-1.5 text-[9px] bg-black/60 text-white px-1.5 py-0.5 rounded font-semibold backdrop-blur">9成新 · 代步</span>
+                  </div>
+                  <div class="p-2.5 space-y-1.5 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h4 class="text-xs font-bold text-slate-900 line-clamp-1">捷安特 ATX777 山地车 (送车锁)</h4>
+                      <p class="text-[10px] text-slate-400 mt-0.5">嘉庚大楼面交 · 顺滑免维护</p>
+                    </div>
+                    <div class="pt-1 flex items-center justify-between border-t border-slate-100">
+                      <span class="text-sm font-bold text-[#8B1E29]">¥620</span>
+                      <span class="text-[9px] bg-slate-100 text-slate-600 px-1 rounded font-medium">大四出清</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 商品卡片 3 (教材考研) -->
+                <div onclick="openItemDetailModal('used-3')" data-category="教材 教材考研 考研 数学 真题 试卷 书籍 尚大楼" class="bg-white rounded-2xl border border-[var(--border-subtle)] overflow-hidden shadow-2xs cursor-pointer hover:shadow-xs transition flex flex-col justify-between">
+                  <div class="h-28 bg-slate-100 flex flex-col items-center justify-center text-slate-500 font-medium relative">
+                    <span class="text-3xl">📚</span>
+                    <span class="absolute top-1.5 left-1.5 text-[9px] bg-emerald-700 text-white px-1.5 py-0.5 rounded font-semibold backdrop-blur">全新 · 教材</span>
+                  </div>
+                  <div class="p-2.5 space-y-1.5 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h4 class="text-xs font-bold text-slate-900 line-clamp-1">李林考研数学6套卷 + 往年真题解析</h4>
+                      <p class="text-[10px] text-slate-400 mt-0.5">尚大楼自习室面交 · 全新未写</p>
+                    </div>
+                    <div class="pt-1 flex items-center justify-between border-t border-slate-100">
+                      <span class="text-sm font-bold text-[#8B1E29]">¥35</span>
+                      <span class="text-[9px] bg-[#FAF0F1] text-[#8B1E29] px-1 rounded font-medium">学号已核验</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 商品卡片 4 (宿舍好物) -->
+                <div onclick="openItemDetailModal('used-4')" data-category="宿舍 宿舍好物 电煮锅 九阳 家电 诚毅 免费送" class="bg-white rounded-2xl border border-[var(--border-subtle)] overflow-hidden shadow-2xs cursor-pointer hover:shadow-xs transition flex flex-col justify-between">
+                  <div class="h-28 bg-slate-100 flex flex-col items-center justify-center text-slate-500 font-medium relative">
+                    <span class="text-3xl">🍲</span>
+                    <span class="absolute top-1.5 left-1.5 text-[9px] bg-black/60 text-white px-1.5 py-0.5 rounded font-semibold backdrop-blur">95新 · 宿舍</span>
+                  </div>
+                  <div class="p-2.5 space-y-1.5 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h4 class="text-xs font-bold text-slate-900 line-clamp-1">九阳多功能学生电煮锅 (带蒸屉)</h4>
+                      <p class="text-[10px] text-slate-400 mt-0.5">诚毅12号楼面交 · 功率合规</p>
+                    </div>
+                    <div class="pt-1 flex items-center justify-between border-t border-slate-100">
+                      <span class="text-sm font-bold text-[#8B1E29]">¥28</span>
+                      <span class="text-[9px] bg-slate-100 text-slate-600 px-1 rounded font-medium">诚毅宿舍</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 3. 失物招领视图 -->
+          <div id="feed-view-lost" class="hidden p-3 space-y-2.5">
+            <!-- 返回动态广场导航条 -->
+            <div class="flex items-center justify-between pb-1">
+              <button onclick="selectFeedModule('stream')" class="text-xs text-slate-600 hover:text-[#8B1E29] flex items-center gap-1 font-semibold transition">
+                <span>‹ 返回社区广场</span>
+              </button>
+              <button onclick="openFeedActionSheet()" class="text-[11px] text-[#8B1E29] bg-[#FAF0F1] px-2 py-0.5 rounded font-medium border border-[#F0D5D8] flex items-center gap-0.5">
+                切换板块 ▾
+              </button>
+            </div>
+
+            <div class="flex items-center justify-between px-1">
+              <span class="text-xs font-bold text-slate-900">失物寻物告示板（联动集大保卫处）</span>
+              <button onclick="openPublishWithBoard('失物招领')" class="text-xs text-[#8B1E29] font-medium">+ 发布启事</button>
+            </div>
+
+            <div class="app-card p-4 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded">【寻物】黑色韶音骨传导耳机</span>
+                <span class="text-[10px] text-slate-400">2小时前</span>
+              </div>
+              <p class="text-xs text-slate-700 leading-relaxed">
+                在嘉庚图书馆三楼南侧自习长桌遗落，如有捡到的同学麻烦私信我，必有柠檬茶重谢！
+              </p>
+              <div class="flex items-center justify-between pt-2 border-t border-[var(--border-divider)] text-[11px] text-slate-400">
+                <span>失主：文学院 · 23级</span>
+                <button onclick="openLostContactDialog('黑色韶音骨传导耳机', '文学院 · 23级')" class="text-[#8B1E29] font-semibold hover:underline">提供线索 ›</button>
+              </div>
+            </div>
+
+            <div class="app-card p-4 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">【招领】校园一卡通 (学号 2024****08)</span>
+                <span class="text-[10px] text-slate-400">今天上午</span>
+              </div>
+              <p class="text-xs text-slate-700 leading-relaxed">
+                在尚大楼 4 楼饮水机旁拾获，已移交至尚大楼一楼保卫室，失主可凭身份证件核对领取。
+              </p>
+              <div class="flex items-center justify-between pt-2 border-t border-[var(--border-divider)] text-[11px] text-slate-400">
+                <span>存放：尚大楼保卫室</span>
+                <button onclick="showToast('已复制尚大楼值班室电话: 0592-618****')" class="text-[#8B1E29] font-semibold hover:underline">联系保卫室 ›</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. 校园跑腿互助视图 -->
+          <div id="feed-view-errand" class="hidden p-3 space-y-2.5">
+            <!-- 返回动态广场导航条 -->
+            <div class="flex items-center justify-between pb-1">
+              <button onclick="selectFeedModule('stream')" class="text-xs text-slate-600 hover:text-[#8B1E29] flex items-center gap-1 font-semibold transition">
+                <span>‹ 返回社区广场</span>
+              </button>
+              <button onclick="openFeedActionSheet()" class="text-[11px] text-[#8B1E29] bg-[#FAF0F1] px-2 py-0.5 rounded font-medium border border-[#F0D5D8] flex items-center gap-0.5">
+                切换板块 ▾
+              </button>
+            </div>
+
+            <div class="flex items-center justify-between px-1">
+              <span class="text-xs font-bold text-slate-900">校园互助跑腿 · 严格遵循学生守则</span>
+              <button onclick="openPublishWithBoard('校园跑腿')" class="text-xs text-[#8B1E29] font-medium">+ 发布需求</button>
+            </div>
+
+            <div class="app-card p-4 space-y-2.5">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded">待接单 · 顺丰大件代取</span>
+                <span class="text-xs font-bold text-[#8B1E29]">报酬 ¥8.00</span>
+              </div>
+              <p class="text-xs text-slate-800 leading-relaxed font-medium">
+                帮忙去美贤路顺丰服务点代取一个大箱子（约3kg），送达诚毅 12 号宿舍楼大堂。
+              </p>
+              <div class="flex items-center justify-between pt-2 border-t border-[var(--border-divider)] text-[11px] text-slate-400">
+                <span>时效：今日 18:30 前送达</span>
+                <button id="errandAcceptBtn" onclick="openAcceptErrandModal('顺丰大件代取', '¥8.00', '今日 18:30 前')" class="px-3 py-1 bg-[#8B1E29] text-white font-semibold rounded-lg hover:bg-[#751722] transition shadow-2xs">
+                  立即接单
+                </button>
+              </div>
+            </div>
 
         </div>
 
@@ -810,215 +1133,6 @@
 
           </div>
 
-          <!-- ==================== 2. 闲鱼化二手闲置集市视图 ==================== -->
-          <div id="campus-view-used" class="hidden p-3 space-y-3">
-            
-            <!-- 顶部搜索栏 -->
-            <div class="flex items-center gap-2">
-              <div class="flex-1 h-9 px-3 bg-white rounded-full border border-slate-200 flex items-center gap-2 shadow-2xs">
-                <svg class="w-4 h-4 text-slate-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
-                <input id="usedSearchInput" oninput="filterUsedItems(this.value)" type="text" placeholder="搜索集大闲置：考研真题、iPad、电驴..." class="w-full text-xs bg-transparent outline-none">
-              </div>
-              <button onclick="openPublishWithBoard('二手闲置')" class="h-9 px-3.5 bg-[#8B1E29] hover:bg-[#751722] text-white rounded-full text-xs font-semibold shrink-0 shadow-xs transition flex items-center gap-1">
-                <span>+ 卖闲置</span>
-              </button>
-            </div>
-
-            <!-- 签到打卡领擦亮卡 -->
-            <div class="p-2.5 bg-gradient-to-r from-amber-500/10 via-orange-500/10 to-amber-500/10 rounded-2xl border border-amber-200/70 flex items-center justify-between">
-              <div class="flex items-center gap-2.5">
-                <div class="w-8 h-8 rounded-xl bg-amber-500 text-white flex items-center justify-center font-bold text-sm shadow-2xs">
-                  ✨
-                </div>
-                <div>
-                  <div class="text-xs font-bold text-slate-900">集大闲置打卡 · 擦亮集市</div>
-                  <div class="text-[10px] text-amber-800">每日签到领 1 张商品置顶擦亮卡</div>
-                </div>
-              </div>
-              <button id="checkInBtn" onclick="doUsedCheckIn()" class="px-3 py-1 bg-amber-600 hover:bg-amber-700 text-white font-semibold text-[11px] rounded-full transition shadow-xs">
-                立即签到
-              </button>
-            </div>
-
-            <!-- 分类金刚区 (6个核心类别，点击高亮并精准过滤) -->
-            <div class="grid grid-cols-6 gap-1 bg-white p-2.5 rounded-2xl border border-[var(--border-subtle)] text-center text-xs shadow-2xs">
-              <div onclick="filterUsedCategory('数码')" class="flex flex-col items-center cursor-pointer hover:opacity-80 p-1 rounded-xl transition">
-                <div class="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-sm">📱</div>
-                <span class="text-[10px] font-medium text-slate-700 mt-1">数码科技</span>
-              </div>
-              <div onclick="filterUsedCategory('教材')" class="flex flex-col items-center cursor-pointer hover:opacity-80 p-1 rounded-xl transition">
-                <div class="w-8 h-8 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center text-sm">📚</div>
-                <span class="text-[10px] font-medium text-slate-700 mt-1">教材考研</span>
-              </div>
-              <div onclick="filterUsedCategory('代步')" class="flex flex-col items-center cursor-pointer hover:opacity-80 p-1 rounded-xl transition">
-                <div class="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-sm">🚲</div>
-                <span class="text-[10px] font-medium text-slate-700 mt-1">代步车</span>
-              </div>
-              <div onclick="filterUsedCategory('宿舍')" class="flex flex-col items-center cursor-pointer hover:opacity-80 p-1 rounded-xl transition">
-                <div class="w-8 h-8 rounded-xl bg-purple-50 text-purple-700 flex items-center justify-center text-sm">🛋️</div>
-                <span class="text-[10px] font-medium text-slate-700 mt-1">宿舍好物</span>
-              </div>
-              <div onclick="filterUsedCategory('穿搭')" class="flex flex-col items-center cursor-pointer hover:opacity-80 p-1 rounded-xl transition">
-                <div class="w-8 h-8 rounded-xl bg-pink-50 text-pink-600 flex items-center justify-center text-sm">👟</div>
-                <span class="text-[10px] font-medium text-slate-700 mt-1">运动穿搭</span>
-              </div>
-              <div onclick="filterUsedCategory('免费')" class="flex flex-col items-center cursor-pointer hover:opacity-80 p-1 rounded-xl transition">
-                <div class="w-8 h-8 rounded-xl bg-red-50 text-red-600 flex items-center justify-center text-sm">🎁</div>
-                <span class="text-[10px] font-medium text-slate-700 mt-1">免费送</span>
-              </div>
-            </div>
-
-            <!-- 闲鱼式双列推荐流 -->
-            <div>
-              <div class="flex items-center justify-between px-1 mb-2">
-                <span class="text-xs font-bold text-slate-900">集大校友推荐 · 严选面交</span>
-                <span class="text-[10px] text-slate-400">学号核验 100% 担保</span>
-              </div>
-
-              <!-- 搜索空状态 -->
-              <div id="usedEmptyState" class="hidden py-8 text-center text-xs text-slate-400 space-y-1">
-                <div class="text-3xl">🔍</div>
-                <div>未找到匹配的校内闲置物品</div>
-                <button onclick="filterUsedCategory('')" class="text-[11px] text-[#8B1E29] font-semibold mt-1">查看全部物品</button>
-              </div>
-
-              <div id="usedItemsGrid" class="grid grid-cols-2 gap-2 text-xs">
-                
-                <!-- 商品卡片 1 (数码) -->
-                <div onclick="openItemDetailModal('used-1')" data-category="数码 数码科技 ipad 苹果 电脑 平板 诚毅" class="bg-white rounded-2xl border border-[var(--border-subtle)] overflow-hidden shadow-2xs cursor-pointer hover:shadow-xs transition flex flex-col justify-between">
-                  <div class="h-28 bg-slate-100 flex flex-col items-center justify-center text-slate-500 font-medium relative">
-                    <span class="text-3xl">📱</span>
-                    <span class="absolute top-1.5 left-1.5 text-[9px] bg-black/60 text-white px-1.5 py-0.5 rounded font-semibold backdrop-blur">99新 · 数码</span>
-                  </div>
-                  <div class="p-2.5 space-y-1.5 flex-1 flex flex-col justify-between">
-                    <div>
-                      <h4 class="text-xs font-bold text-slate-900 line-clamp-1">iPad Air 5 64G 紫色 (带 Pencil 2)</h4>
-                      <p class="text-[10px] text-slate-400 mt-0.5">诚毅二食堂面交 · 原盒发票齐全</p>
-                    </div>
-                    <div class="pt-1 flex items-center justify-between border-t border-slate-100">
-                      <span class="text-sm font-bold text-[#8B1E29]">¥2,580</span>
-                      <span class="text-[9px] bg-[#FAF0F1] text-[#8B1E29] px-1 rounded font-medium">学号已核验</span>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- 商品卡片 2 (代步车) -->
-                <div onclick="openItemDetailModal('used-2')" data-category="代步 代步车 自行车 山地车 骑行 捷安特 嘉庚" class="bg-white rounded-2xl border border-[var(--border-subtle)] overflow-hidden shadow-2xs cursor-pointer hover:shadow-xs transition flex flex-col justify-between">
-                  <div class="h-28 bg-slate-100 flex flex-col items-center justify-center text-slate-500 font-medium relative">
-                    <span class="text-3xl">🚲</span>
-                    <span class="absolute top-1.5 left-1.5 text-[9px] bg-black/60 text-white px-1.5 py-0.5 rounded font-semibold backdrop-blur">9成新 · 代步</span>
-                  </div>
-                  <div class="p-2.5 space-y-1.5 flex-1 flex flex-col justify-between">
-                    <div>
-                      <h4 class="text-xs font-bold text-slate-900 line-clamp-1">捷安特 ATX777 山地车 (送车锁)</h4>
-                      <p class="text-[10px] text-slate-400 mt-0.5">嘉庚大楼面交 · 顺滑免维护</p>
-                    </div>
-                    <div class="pt-1 flex items-center justify-between border-t border-slate-100">
-                      <span class="text-sm font-bold text-[#8B1E29]">¥620</span>
-                      <span class="text-[9px] bg-slate-100 text-slate-600 px-1 rounded font-medium">大四出清</span>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- 商品卡片 3 (教材考研) -->
-                <div onclick="openItemDetailModal('used-3')" data-category="教材 教材考研 考研 数学 真题 试卷 书籍 尚大楼" class="bg-white rounded-2xl border border-[var(--border-subtle)] overflow-hidden shadow-2xs cursor-pointer hover:shadow-xs transition flex flex-col justify-between">
-                  <div class="h-28 bg-slate-100 flex flex-col items-center justify-center text-slate-500 font-medium relative">
-                    <span class="text-3xl">📚</span>
-                    <span class="absolute top-1.5 left-1.5 text-[9px] bg-emerald-700 text-white px-1.5 py-0.5 rounded font-semibold backdrop-blur">全新 · 教材</span>
-                  </div>
-                  <div class="p-2.5 space-y-1.5 flex-1 flex flex-col justify-between">
-                    <div>
-                      <h4 class="text-xs font-bold text-slate-900 line-clamp-1">李林考研数学6套卷 + 往年真题解析</h4>
-                      <p class="text-[10px] text-slate-400 mt-0.5">尚大楼自习室面交 · 全新未写</p>
-                    </div>
-                    <div class="pt-1 flex items-center justify-between border-t border-slate-100">
-                      <span class="text-sm font-bold text-[#8B1E29]">¥35</span>
-                      <span class="text-[9px] bg-[#FAF0F1] text-[#8B1E29] px-1 rounded font-medium">学号已核验</span>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- 商品卡片 4 (宿舍好物) -->
-                <div onclick="openItemDetailModal('used-4')" data-category="宿舍 宿舍好物 电煮锅 九阳 家电 诚毅 免费送" class="bg-white rounded-2xl border border-[var(--border-subtle)] overflow-hidden shadow-2xs cursor-pointer hover:shadow-xs transition flex flex-col justify-between">
-                  <div class="h-28 bg-slate-100 flex flex-col items-center justify-center text-slate-500 font-medium relative">
-                    <span class="text-3xl">🍲</span>
-                    <span class="absolute top-1.5 left-1.5 text-[9px] bg-black/60 text-white px-1.5 py-0.5 rounded font-semibold backdrop-blur">95新 · 宿舍</span>
-                  </div>
-                  <div class="p-2.5 space-y-1.5 flex-1 flex flex-col justify-between">
-                    <div>
-                      <h4 class="text-xs font-bold text-slate-900 line-clamp-1">九阳多功能学生电煮锅 (带蒸屉)</h4>
-                      <p class="text-[10px] text-slate-400 mt-0.5">诚毅12号楼面交 · 功率合规</p>
-                    </div>
-                    <div class="pt-1 flex items-center justify-between border-t border-slate-100">
-                      <span class="text-sm font-bold text-[#8B1E29]">¥28</span>
-                      <span class="text-[9px] bg-slate-100 text-slate-600 px-1 rounded font-medium">诚毅宿舍</span>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
-          </div>
-
-          <!-- 3. 失物招领视图 -->
-          <div id="campus-view-lost" class="hidden p-3 space-y-2.5">
-            <div class="flex items-center justify-between px-1">
-              <span class="text-xs font-bold text-slate-900">失物寻物告示板（联动集大保卫处）</span>
-              <button onclick="openPublishWithBoard('失物招领')" class="text-xs text-[#8B1E29] font-medium">+ 发布启事</button>
-            </div>
-
-            <div class="app-card p-4 space-y-2">
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded">【寻物】黑色韶音骨传导耳机</span>
-                <span class="text-[10px] text-slate-400">2小时前</span>
-              </div>
-              <p class="text-xs text-slate-700 leading-relaxed">
-                在嘉庚图书馆三楼南侧自习长桌遗落，如有捡到的同学麻烦私信我，必有柠檬茶重谢！
-              </p>
-              <div class="flex items-center justify-between pt-2 border-t border-[var(--border-divider)] text-[11px] text-slate-400">
-                <span>失主：文学院 · 23级</span>
-                <button onclick="openLostContactDialog('黑色韶音骨传导耳机', '文学院 · 23级')" class="text-[#8B1E29] font-semibold hover:underline">提供线索 ›</button>
-              </div>
-            </div>
-
-            <div class="app-card p-4 space-y-2">
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">【招领】校园一卡通 (学号 2024****08)</span>
-                <span class="text-[10px] text-slate-400">今天上午</span>
-              </div>
-              <p class="text-xs text-slate-700 leading-relaxed">
-                在尚大楼 4 楼饮水机旁拾获，已移交至尚大楼一楼保卫室，失主可凭身份证件核对领取。
-              </p>
-              <div class="flex items-center justify-between pt-2 border-t border-[var(--border-divider)] text-[11px] text-slate-400">
-                <span>存放：尚大楼保卫室</span>
-                <button onclick="showToast('已复制尚大楼值班室电话: 0592-618****')" class="text-[#8B1E29] font-semibold hover:underline">联系保卫室 ›</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- 4. 校园跑腿互助视图 -->
-          <div id="campus-view-errand" class="hidden p-3 space-y-2.5">
-            <div class="flex items-center justify-between px-1">
-              <span class="text-xs font-bold text-slate-900">校园互助跑腿 · 严格遵循学生守则</span>
-              <button onclick="openPublishWithBoard('校园跑腿')" class="text-xs text-[#8B1E29] font-medium">+ 发布需求</button>
-            </div>
-
-            <div class="app-card p-4 space-y-2.5">
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded">待接单 · 顺丰大件代取</span>
-                <span class="text-xs font-bold text-[#8B1E29]">报酬 ¥8.00</span>
-              </div>
-              <p class="text-xs text-slate-800 leading-relaxed font-medium">
-                帮忙去美贤路顺丰服务点代取一个大箱子（约3kg），送达诚毅 12 号宿舍楼大堂。
-              </p>
-              <div class="flex items-center justify-between pt-2 border-t border-[var(--border-divider)] text-[11px] text-slate-400">
-                <span>时效：今日 18:30 前送达</span>
-                <button id="errandAcceptBtn" onclick="openAcceptErrandModal('顺丰大件代取', '¥8.00', '今日 18:30 前')" class="px-3 py-1 bg-[#8B1E29] text-white font-semibold rounded-lg hover:bg-[#751722] transition shadow-2xs">
-                  立即接单
-                </button>
-              </div>
-            </div>
           </div>
 
         </div>
@@ -1122,7 +1236,7 @@
                 <div class="font-bold text-slate-900 text-sm">148</div>
                 <div class="text-[10px] text-slate-400 mt-0.5">获赞总数</div>
               </div>
-              <div class="cursor-pointer" onclick="switchTab('campus'); selectCampusModule('used')">
+              <div class="cursor-pointer" onclick="switchTab('feed'); selectFeedModule('used')">
                 <div class="font-bold text-[#8B1E29] text-sm">2</div>
                 <div class="text-[10px] text-slate-400 mt-0.5">在售闲置</div>
               </div>
@@ -1164,7 +1278,7 @@
               <span class="text-slate-800 font-medium">💬 小程序开发与设计评审反馈</span>
               <span class="text-[#8B1E29] text-[11px] font-medium">填写建议 ›</span>
             </div>
-            <div onclick="showToast('已清理临时缓存，当前版本 v1.8.1 (高保真稳定闭环版)')" class="p-3 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition">
+            <div onclick="showToast('已清理临时缓存，当前版本 v1.9.0 (双二级菜单与生活互助并入社区版)')" class="p-3 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition">
               <span class="text-slate-800 font-medium">⚙️ 缓存清理与系统设置</span>
               <span class="text-slate-400 text-[11px]">0.3 MB ›</span>
             </div>
@@ -1184,8 +1298,11 @@
       <!-- 底部 4 Tab 导航栏 -->
       <div class="absolute bottom-0 left-0 right-0 h-14 glass-tabbar border-t border-[var(--border-divider)] grid grid-cols-4 z-40 select-none">
         
-        <button onclick="switchTab('feed')" id="tab-feed" class="flex flex-col items-center justify-center text-[#8B1E29] transition group">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.25a.75.75 0 01.75.75v.759a8.966 8.966 0 015.657 2.343l.53-.53a.75.75 0 111.06 1.06l-.53.53a8.966 8.966 0 012.343 5.657h.76a.75.75 0 010 1.5h-.76a8.966 8.966 0 01-2.343 5.657l.53.53a.75.75 0 11-1.06 1.06l-.53-.53a8.966 8.966 0 01-5.657 2.343v.76a.75.75 0 01-1.5 0v-.76a8.966 8.966 0 01-5.657-2.343l-.53.53a.75.75 0 11-1.06-1.06l.53-.53A8.966 8.966 0 012.82 13.5h-.76a.75.75 0 010-1.5h.76a8.966 8.966 0 012.343-5.657l-.53-.53a.75.75 0 111.06-1.06l.53.53A8.966 8.966 0 0111.25 3.76V3a.75.75 0 01.75-.75zM12 6a6 6 0 100 12 6 6 0 000-12z"/></svg>
+        <button onclick="handleFeedTabClick()" id="tab-feed" class="flex flex-col items-center justify-center text-[#8B1E29] transition group">
+          <div class="relative">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.25a.75.75 0 01.75.75v.759a8.966 8.966 0 015.657 2.343l.53-.53a.75.75 0 111.06 1.06l-.53.53a8.966 8.966 0 012.343 5.657h.76a.75.75 0 010 1.5h-.76a8.966 8.966 0 01-2.343 5.657l.53.53a.75.75 0 11-1.06 1.06l-.53-.53a8.966 8.966 0 01-5.657 2.343v.76a.75.75 0 01-1.5 0v-.76a8.966 8.966 0 01-5.657-2.343l-.53.53a.75.75 0 11-1.06-1.06l.53-.53A8.966 8.966 0 012.82 13.5h-.76a.75.75 0 010-1.5h.76a8.966 8.966 0 012.343-5.657l-.53-.53a.75.75 0 111.06-1.06l.53.53A8.966 8.966 0 0111.25 3.76V3a.75.75 0 01.75-.75zM12 6a6 6 0 100 12 6 6 0 000-12z"/></svg>
+            <span class="absolute -top-1 -right-2 text-[9px] text-[#8B1E29] group-hover:text-[#8B1E29] font-bold">▾</span>
+          </div>
           <span class="text-[10px] font-bold mt-0.5">社区</span>
         </button>
 
@@ -1215,71 +1332,161 @@
 
       <!-- ==================== 弹窗与抽屉系统 (状态完全解耦，彻底杜绝常开与无响应) ==================== -->
 
-      <!-- 1. 校园功能二级 Action Sheet 展开菜单 (全校服务中枢) -->
-      <div id="campusActionSheet" onclick="if(event.target===this) closeCampusActionSheet()" class="sheet-modal">
+      <!-- 1. 社区功能二级 Action Sheet 展开菜单 (全校社区与互助板块中枢) -->
+      <div id="feedActionSheet" onclick="if(event.target===this) closeFeedActionSheet()" class="sheet-modal">
         <div class="bg-white rounded-t-3xl p-4 shadow-2xl modal-dialog space-y-3.5 max-h-[580px] overflow-y-auto no-scrollbar">
           <div class="flex items-center justify-between pb-2.5 border-b border-slate-100">
             <div class="flex items-center gap-2">
               <span class="w-2 h-2 rounded-full bg-[#8B1E29]"></span>
-              <span class="font-bold text-sm text-slate-900">集大校园服务中心 · 功能矩阵</span>
+              <span class="font-bold text-sm text-slate-900">集大社区空间 · 板块与生活互助</span>
             </div>
-            <button onclick="closeCampusActionSheet()" class="text-slate-400 hover:text-slate-600 text-xs p-1">✕ 关闭</button>
+            <button onclick="closeFeedActionSheet()" class="text-slate-400 hover:text-slate-600 text-xs p-1">✕ 关闭</button>
           </div>
 
           <div class="space-y-3.5 text-xs">
-            <!-- 组 1: 生活互助服务 (二手/失物/跑腿) -->
+            <!-- 组 1: 生活互助服务 (校内面交 · 互助履约) -->
             <div>
               <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center justify-between">
-                <span>生活互助服务</span>
-                <span class="text-[9px] text-slate-400 font-normal">校内面交 · 互助履约</span>
+                <span>生活互助大厅</span>
+                <span class="text-[9px] text-[#8B1E29] font-semibold bg-[#FAF0F1] px-1.5 py-0.5 rounded border border-[#F0D5D8]">校内专区</span>
               </div>
               <div class="grid grid-cols-3 gap-2 text-center">
-                <div onclick="selectCampusModule('used')" class="flex flex-col items-center p-2.5 rounded-xl bg-amber-50/50 hover:bg-amber-50 border border-amber-100/60 cursor-pointer transition group">
-                  <div class="w-10 h-10 rounded-xl bg-amber-100/70 text-amber-800 flex items-center justify-center text-lg shadow-2xs group-hover:scale-105 transition">🛍️</div>
+                <div onclick="selectFeedModule('used')" class="flex flex-col items-center p-2.5 rounded-xl bg-amber-50/60 hover:bg-amber-100/60 border border-amber-200/70 cursor-pointer transition group">
+                  <div class="w-10 h-10 rounded-xl bg-amber-100/80 text-amber-800 flex items-center justify-center text-lg shadow-2xs group-hover:scale-105 transition">🛍️</div>
                   <span class="text-[11px] font-bold text-slate-800 mt-1.5">二手闲置集市</span>
                   <span class="text-[9px] text-slate-400 mt-0.5">校内安全面交</span>
                 </div>
-                <div onclick="selectCampusModule('lost')" class="flex flex-col items-center p-2.5 rounded-xl bg-blue-50/50 hover:bg-blue-50 border border-blue-100/60 cursor-pointer transition group">
-                  <div class="w-10 h-10 rounded-xl bg-blue-100/70 text-blue-700 flex items-center justify-center text-lg shadow-2xs group-hover:scale-105 transition">🔍</div>
+                <div onclick="selectFeedModule('lost')" class="flex flex-col items-center p-2.5 rounded-xl bg-blue-50/60 hover:bg-blue-100/60 border border-blue-200/70 cursor-pointer transition group">
+                  <div class="w-10 h-10 rounded-xl bg-blue-100/80 text-blue-700 flex items-center justify-center text-lg shadow-2xs group-hover:scale-105 transition">🔍</div>
                   <span class="text-[11px] font-bold text-slate-800 mt-1.5">失物招领告示</span>
                   <span class="text-[9px] text-slate-400 mt-0.5">联动保卫处</span>
                 </div>
-                <div onclick="selectCampusModule('errand')" class="flex flex-col items-center p-2.5 rounded-xl bg-emerald-50/50 hover:bg-emerald-50 border border-emerald-100/60 cursor-pointer transition group">
-                  <div class="w-10 h-10 rounded-xl bg-emerald-100/70 text-emerald-700 flex items-center justify-center text-lg shadow-2xs group-hover:scale-105 transition">🏃</div>
+                <div onclick="selectFeedModule('errand')" class="flex flex-col items-center p-2.5 rounded-xl bg-emerald-50/60 hover:bg-emerald-100/60 border border-emerald-200/70 cursor-pointer transition group">
+                  <div class="w-10 h-10 rounded-xl bg-emerald-100/80 text-emerald-700 flex items-center justify-center text-lg shadow-2xs group-hover:scale-105 transition">🏃</div>
                   <span class="text-[11px] font-bold text-slate-800 mt-1.5">校园跑腿代取</span>
                   <span class="text-[9px] text-slate-400 mt-0.5">同学顺手互助</span>
                 </div>
               </div>
             </div>
 
-            <!-- 组 2: 学业教务工具 (课表/空教室/成绩/日历/体测) -->
+            <!-- 组 2: 社区热门板块与话题圈子 -->
             <div>
               <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center justify-between">
-                <span>学业教务工具</span>
-                <span class="text-[9px] text-slate-400 font-normal">教务直联 · 便捷查询</span>
+                <span>社区热门板块</span>
+                <span class="text-[9px] text-slate-400 font-normal">动态广场 · 话题讨论</span>
+              </div>
+              <div class="grid grid-cols-3 gap-2 text-center">
+                <div onclick="selectFeedModule('stream'); setFeedChannel('rec')" class="flex flex-col items-center p-2 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-100 cursor-pointer transition group">
+                  <div class="w-9 h-9 rounded-xl bg-[#FAF0F1] text-[#8B1E29] flex items-center justify-center text-base shadow-2xs group-hover:scale-105 transition">📰</div>
+                  <span class="text-[10px] font-bold text-slate-800 mt-1">动态广场</span>
+                  <span class="text-[8px] text-slate-400">推荐与关注</span>
+                </div>
+                <div onclick="selectFeedModule('stream'); filterTopic('集大表白墙')" class="flex flex-col items-center p-2 rounded-xl bg-rose-50/50 hover:bg-rose-50 border border-rose-100 cursor-pointer transition group">
+                  <div class="w-9 h-9 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center text-base shadow-2xs group-hover:scale-105 transition">💌</div>
+                  <span class="text-[10px] font-bold text-slate-800 mt-1">集大表白墙</span>
+                  <span class="text-[8px] text-slate-400">心动树洞</span>
+                </div>
+                <div onclick="selectFeedModule('stream'); filterTopic('考研自习搭子')" class="flex flex-col items-center p-2 rounded-xl bg-emerald-50/50 hover:bg-emerald-50 border border-emerald-100 cursor-pointer transition group">
+                  <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-base shadow-2xs group-hover:scale-105 transition">📖</div>
+                  <span class="text-[10px] font-bold text-slate-800 mt-1">找学伴搭子</span>
+                  <span class="text-[8px] text-slate-400">尚大楼自习</span>
+                </div>
+                <div onclick="selectFeedModule('stream'); filterTopic('拼单拼车厦门北站')" class="flex flex-col items-center p-2 rounded-xl bg-blue-50/50 hover:bg-blue-50 border border-blue-100 cursor-pointer transition group">
+                  <div class="w-9 h-9 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center text-base shadow-2xs group-hover:scale-105 transition">🚗</div>
+                  <span class="text-[10px] font-bold text-slate-800 mt-1">拼单拼车</span>
+                  <span class="text-[8px] text-slate-400">厦门北站</span>
+                </div>
+                <div onclick="selectFeedModule('stream'); filterTopic('集大选课避雷')" class="flex flex-col items-center p-2 rounded-xl bg-amber-50/50 hover:bg-amber-50 border border-amber-100 cursor-pointer transition group">
+                  <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-base shadow-2xs group-hover:scale-105 transition">💬</div>
+                  <span class="text-[10px] font-bold text-slate-800 mt-1">选课吐槽</span>
+                  <span class="text-[8px] text-slate-400">课程避雷</span>
+                </div>
+                <div onclick="selectFeedModule('stream'); setFeedChannel('topic')" class="flex flex-col items-center p-2 rounded-xl bg-purple-50/50 hover:bg-purple-50 border border-purple-100 cursor-pointer transition group">
+                  <div class="w-9 h-9 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center text-base shadow-2xs group-hover:scale-105 transition">🏷️</div>
+                  <span class="text-[10px] font-bold text-slate-800 mt-1">话题广场</span>
+                  <span class="text-[8px] text-slate-400">全校话题榜</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. 校园功能二级 Action Sheet 展开菜单 (教务中心) -->
+      <div id="campusActionSheet" onclick="if(event.target===this) closeCampusActionSheet()" class="sheet-modal">
+        <div class="bg-white rounded-t-3xl p-4 shadow-2xl modal-dialog space-y-3.5 max-h-[580px] overflow-y-auto no-scrollbar">
+          <div class="flex items-center justify-between pb-2.5 border-b border-slate-100">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#8B1E29]"></span>
+              <span class="font-bold text-sm text-slate-900">集大校园服务中心 · 教务功能矩阵</span>
+            </div>
+            <button onclick="closeCampusActionSheet()" class="text-slate-400 hover:text-slate-600 text-xs p-1">✕ 关闭</button>
+          </div>
+
+          <div class="space-y-3.5 text-xs">
+            <!-- 组 1: 核心学业日程 -->
+            <div>
+              <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center justify-between">
+                <span>学业日程管理</span>
+                <span class="text-[9px] text-slate-400 font-normal">周次 · 课程便签</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 text-center">
+                <div onclick="selectCampusModule('schedule')" class="flex items-center gap-3 p-3 rounded-xl bg-[#FAF0F1] hover:bg-[#F5E2E4] border border-[#F0D5D8] cursor-pointer transition group text-left">
+                  <div class="w-10 h-10 rounded-xl bg-white text-[#8B1E29] flex items-center justify-center text-lg shadow-2xs group-hover:scale-105 transition shrink-0">📅</div>
+                  <div>
+                    <div class="text-xs font-bold text-[#8B1E29]">课表日程中心</div>
+                    <div class="text-[10px] text-slate-500 mt-0.5">日日程流 / 5天周网格</div>
+                  </div>
+                </div>
+                <div onclick="closeCampusActionSheet(); openWeekPickerModal()" class="flex items-center gap-3 p-3 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 cursor-pointer transition group text-left">
+                  <div class="w-10 h-10 rounded-xl bg-white text-slate-700 flex items-center justify-center text-lg shadow-2xs group-hover:scale-105 transition shrink-0">🗓️</div>
+                  <div>
+                    <div class="text-xs font-bold text-slate-800">学期周次选择</div>
+                    <div class="text-[10px] text-slate-500 mt-0.5">第 1 - 20 周随时切换</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 组 2: 教务查询与高频工具 -->
+            <div>
+              <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center justify-between">
+                <span>教务直联工具</span>
+                <span class="text-[9px] text-slate-400 font-normal">自习 · 成绩 · 日历 · 体测</span>
               </div>
               <div class="grid grid-cols-4 gap-2 text-center">
-                <div onclick="selectCampusModule('schedule')" class="flex flex-col items-center p-2 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-100 cursor-pointer transition group">
-                  <div class="w-9 h-9 rounded-xl bg-[#FAF0F1] text-[#8B1E29] flex items-center justify-center text-base shadow-2xs group-hover:scale-105 transition">📅</div>
-                  <span class="text-[10px] font-bold text-slate-800 mt-1">课表日程</span>
-                  <span class="text-[8px] text-slate-400">日历便签</span>
-                </div>
                 <div onclick="closeCampusActionSheet(); openClassroomModal()" class="flex flex-col items-center p-2 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-100 cursor-pointer transition group">
                   <div class="w-9 h-9 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center text-base shadow-2xs group-hover:scale-105 transition">🏫</div>
                   <span class="text-[10px] font-bold text-slate-800 mt-1">空教室</span>
                   <span class="text-[8px] text-slate-400">门牌空座</span>
                 </div>
-                <div onclick="closeCampusActionSheet(); openGradesModal()" class="flex flex-col items-center p-2 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-100 cursor-pointer transition group">
-                  <div class="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-base shadow-2xs group-hover:scale-105 transition">📊</div>
-                  <span class="text-[10px] font-bold text-slate-800 mt-1">查成绩</span>
-                  <span class="text-[8px] text-slate-400">GPA走势</span>
+                <div onclick="closeCampusActionSheet(); openGradesModal()" class="flex flex-col items-center p-2 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-base shadow-2xs group-hover:scale-105 transition">📊</div>
+                <span class="text-[10px] font-bold text-slate-800 mt-1">查成绩</span>
+                <span class="text-[8px] text-slate-400">GPA走势</span>
                 </div>
-                <div onclick="closeCampusActionSheet(); openFitnessModal()" class="flex flex-col items-center p-2 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-100 cursor-pointer transition group">
+                <div onclick="closeCampusActionSheet(); openCalendarModal()" class="flex flex-col items-center p-2 rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-100 cursor-pointer transition group">
+                  <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center text-base shadow-2xs group-hover:scale-105 transition">🗓️</div>
+                  <span class="text-[10px] font-bold text-slate-800 mt-1">导日历</span>
+                  <span class="text-[8px] text-slate-400">18周ICS</span>
+                </div>
+                <div onclick="closeCampusActionSheet(); openFitnessModal()" class="flex flex-col items-center p-2 rounded-xl bg-purple-50 hover:bg-purple-100 border border-purple-100 cursor-pointer transition group">
                   <div class="w-9 h-9 rounded-xl bg-purple-50 text-purple-700 flex items-center justify-center text-base shadow-2xs group-hover:scale-105 transition">🏃‍♂️</div>
                   <span class="text-[10px] font-bold text-slate-800 mt-1">体测计算</span>
                   <span class="text-[8px] text-slate-400">国标打分</span>
                 </div>
               </div>
+            </div>
+
+            <!-- 组 3: 生活互助跳转导流 -->
+            <div onclick="closeCampusActionSheet(); switchTab('feed'); openFeedActionSheet()" class="p-2.5 bg-slate-50 hover:bg-slate-100 rounded-xl border border-slate-200 cursor-pointer transition flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="text-base">🛍️</span>
+                <div>
+                  <div class="text-xs font-bold text-slate-800">二手闲置 · 失物招领 · 校园跑腿</div>
+                  <div class="text-[9px] text-slate-400">生活互助服务已全部移入【社区 ▾】板块</div>
+                </div>
+              </div>
+              <span class="text-[11px] font-bold text-[#8B1E29]">前往社区 ›</span>
             </div>
           </div>
         </div>
@@ -2052,6 +2259,7 @@
     // UNIJMU 全局状态与核心数据模型
     // =========================================================
     let currentTab = 'feed';
+    let currentFeedModule = 'stream'; // 'stream', 'used', 'lost', 'errand'
     let currentModule = 'schedule';
     let currentCourseCardId = 'course-card-1';
     let currentFitGender = 'male';
@@ -2119,9 +2327,16 @@
         activeBtn.className = 'flex flex-col items-center justify-center text-[#8B1E29] transition group relative';
       }
 
+      const feedTitleMap = {
+        stream: '社区广场',
+        used: '二手闲置集市',
+        lost: '失物招领告示',
+        errand: '校园互助跑腿'
+      };
+
       const titles = {
-        feed: '社区广场',
-        campus: currentModule === 'schedule' ? '课表日程' : (currentModule === 'used' ? '二手闲置' : (currentModule === 'lost' ? '失物招领' : '校园跑腿')),
+        feed: feedTitleMap[currentFeedModule] || '社区广场',
+        campus: '课表日程',
         messages: '消息中心',
         profile: '个人主页'
       };
@@ -2130,6 +2345,63 @@
       const fab = document.getElementById('fabPublishBtn');
       if (fab) {
         fab.classList.remove('hidden');
+      }
+    }
+
+    // 社区 Tab 点击与二级子菜单联动
+    function handleFeedTabClick() {
+      if (currentTab !== 'feed') {
+        switchTab('feed');
+        openFeedActionSheet();
+      } else {
+        const sheet = document.getElementById('feedActionSheet');
+        if (sheet && sheet.classList.contains('is-active')) {
+          closeFeedActionSheet();
+        } else {
+          openFeedActionSheet();
+        }
+      }
+    }
+
+    function openFeedActionSheet() {
+      const sheet = document.getElementById('feedActionSheet');
+      if (sheet) sheet.classList.add('is-active');
+    }
+
+    function closeFeedActionSheet() {
+      const sheet = document.getElementById('feedActionSheet');
+      if (sheet) sheet.classList.remove('is-active');
+    }
+
+    // 社区板块/子模块调度 (动态广场、二手闲置、失物招领、校园跑腿)
+    function selectFeedModule(mod) {
+      currentFeedModule = mod;
+      const vp = document.getElementById('viewport');
+      if (vp) vp.scrollTop = 0;
+      closeFeedActionSheet();
+      if (currentTab !== 'feed') {
+        switchTab('feed');
+      }
+
+      ['stream', 'used', 'lost', 'errand'].forEach(m => {
+        const el = document.getElementById('feed-view-' + m);
+        if (el) el.classList.add('hidden');
+      });
+
+      const target = document.getElementById('feed-view-' + mod);
+      if (target) target.classList.remove('hidden');
+
+      const titles = {
+        stream: '社区动态广场',
+        used: '二手闲置集市',
+        lost: '失物招领告示',
+        errand: '校园互助跑腿'
+      };
+      const title = titles[mod] || '社区广场';
+      const curTitleEl = document.getElementById('feedCurrentServiceTitle');
+      if (curTitleEl) curTitleEl.innerText = title;
+      if (currentTab === 'feed') {
+        document.getElementById('navTitle').innerText = title;
       }
     }
 
@@ -2150,6 +2422,10 @@
 
     // 校园功能子模块调度
     function selectCampusModule(mod) {
+      if (mod === 'used' || mod === 'lost' || mod === 'errand') {
+        selectFeedModule(mod);
+        return;
+      }
       currentModule = mod;
       const vp = document.getElementById('viewport');
       if (vp) vp.scrollTop = 0;
@@ -2158,25 +2434,13 @@
         switchTab('campus');
       }
 
-      ['schedule', 'used', 'lost', 'errand'].forEach(m => {
-        const el = document.getElementById('campus-view-' + m);
-        if (el) el.classList.add('hidden');
-      });
+      const scheduleEl = document.getElementById('campus-view-schedule');
+      if (scheduleEl) scheduleEl.classList.remove('hidden');
 
-      const target = document.getElementById('campus-view-' + mod);
-      if (target) target.classList.remove('hidden');
-
-      const modTitles = {
-        schedule: '课表日程',
-        used: '二手闲置集市',
-        lost: '失物招领告示',
-        errand: '校园互助跑腿'
-      };
-      const title = modTitles[mod] || '校园功能';
       const curTitleEl = document.getElementById('campusCurrentServiceTitle');
-      if (curTitleEl) curTitleEl.innerText = title;
+      if (curTitleEl) curTitleEl.innerText = '课表日程';
       if (currentTab === 'campus') {
-        document.getElementById('navTitle').innerText = title;
+        document.getElementById('navTitle').innerText = '课表日程';
       }
     }
 
