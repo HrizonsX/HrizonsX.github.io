@@ -11,7 +11,7 @@ npm run dev -- --host 127.0.0.1 --port 4173
 
 打开 `http://127.0.0.1:4173/#campus` 进入新版校园首页；无 hash 时保留原社区首页。也可直接打开 `index.html`，运行不依赖外部 CDN。
 
-线上原型通过 GitHub Actions 发布到 GitHub Pages：`https://unijmu.github.io/demo-repository/`。
+线上原型已发布到 GitHub 个人主页：`https://hrizonsx.github.io/`；组织仓库的演示地址仍为 `https://unijmu.github.io/demo-repository/`。
 
 修改 Tailwind 类名后运行 `npm run build:css`。手机尺寸直接展示页面；宽屏展示手机预览壳与快捷评审入口。
 
