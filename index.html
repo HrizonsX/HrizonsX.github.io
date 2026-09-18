@@ -2,12 +2,12 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>UNIJMU · 集美大学校园服务平台交互原型 (v1.9.1)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>UNIJMU · 集大日常</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
   
-  <!-- 双通道 Tailwind CSS (极速 CDN + 完备自包含内联兜底) -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- 本地构建样式，无外部 CDN 运行依赖 -->
+  <link rel="stylesheet" href="assets/utilities.css">
   <script>
     if (window.tailwind) {
       tailwind.config = {
@@ -254,6 +254,7 @@
       display: none !important;
     }
   </style>
+  <link rel="stylesheet" href="campus.css">
 </head>
 <body class="min-h-screen flex items-center justify-center p-0 sm:p-6 select-none">
 
@@ -273,7 +274,7 @@
             <div>
               <h2 class="text-base font-bold text-slate-900 leading-tight">UNIJMU 校园服务平台</h2>
               <div class="flex items-center gap-1.5 mt-0.5">
-                <span class="text-[11px] text-slate-500 font-mono">v1.9.1 · 标题去重与课表内嵌周次版</span>
+                <span class="text-[11px] text-slate-500 font-mono">v2.0 · 校园日常与公告融合版</span>
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
               </div>
             </div>
@@ -285,14 +286,14 @@
         <div class="p-3 bg-white rounded-xl border border-slate-200 shadow-xs space-y-1.5">
           <div class="flex items-center gap-1.5 text-xs font-bold text-slate-900">
             <span class="w-2 h-2 rounded-full bg-[#8B1E29]"></span>
-            <span>本次深度重构与体验演进</span>
+            <span>这一版，先体验校园日常</span>
           </div>
           <p class="text-[11px] text-slate-600 leading-relaxed">
-            1. <strong>彻底消除重复标题栏</strong>：剥离多余的吸顶次级标题栏，微信胶囊导航条集成为全端唯一标题与板块下拉中枢，释放近 80px 垂直浏览视野。<br>
-            2. <strong>周次选择严格内置于课表内部</strong>：课表卡片就地提供 ‹ 第 3 周 (本周) ▾ › 步进器与 1-20 周网格折叠面板，绝不外溢至二级菜单。<br>
-            3. <strong>二级菜单全面重新梳理</strong>：【社区二级菜单】专注生活互助大厅与热门话题；【校园二级菜单】精炼为 4 大教务工具与 ICS 日历导出。<br>
-            4. <strong>社区主页集约化单行胶囊栏</strong>：二手、失物、跑腿、表白墙与拼车学伴整合为单行横滑磁贴，告别粗笨大卡片堆叠。<br>
-            5. <strong>双端平滑联动</strong>：顶栏与底栏双通道无缝调起专属二级抽屉，居中悬浮发帖 FAB 键黄金分割优雅平衡。
+            1. <strong>校园首页</strong>：建筑插图、今日课程和常用工具，配色更轻松。<br>
+            2. <strong>完整课表</strong>：日 / 周视图、1–20 周切换、课程备忘与日历文件导出。<br>
+            3. <strong>学校与学院公告</strong>：分类、搜索、未读、收藏及提醒状态演示。<br>
+            4. <strong>原有社区功能</strong>：保留二手、失物、跑腿、发帖、私聊和个人主页。<br>
+            当前全部为本地演示数据；刷新后交互状态重置。尚未接入教务、真实消息或通知推送。
           </p>
         </div>
 
@@ -320,7 +321,7 @@
               <span class="font-medium text-slate-700 group-hover:text-[#8B1E29]">🛍️ 体验二手闲置集市 (社区专区)</span>
               <span class="text-slate-400 group-hover:translate-x-0.5 transition">›</span>
             </button>
-            <button onclick="switchTab('campus'); toggleInPageWeekPicker(true)" class="w-full flex items-center justify-between p-2 hover:bg-slate-50 rounded-lg text-left transition group">
+            <button onclick="selectCampusModule('schedule'); toggleInPageWeekPicker(true)" class="w-full flex items-center justify-between p-2 hover:bg-slate-50 rounded-lg text-left transition group">
               <span class="font-medium text-slate-700 group-hover:text-[#8B1E29]">📅 体验课表内嵌 1-20 周次选择</span>
               <span class="text-slate-400 group-hover:translate-x-0.5 transition">›</span>
             </button>
@@ -333,14 +334,14 @@
               <span class="text-slate-400 group-hover:translate-x-0.5 transition">›</span>
             </button>
             <button onclick="openFitnessModal()" class="w-full flex items-center justify-between p-2 hover:bg-slate-50 rounded-lg text-left transition group">
-              <span class="font-medium text-slate-700 group-hover:text-[#8B1E29]">🏃‍♂️ 体测国家标准计算器 (真实评分)</span>
+              <span class="font-medium text-slate-700 group-hover:text-[#8B1E29]">🏃‍♂️ 体测测算交互演示 (非正式成绩)</span>
               <span class="text-slate-400 group-hover:translate-x-0.5 transition">›</span>
             </button>
             <button onclick="openChatPage('软工小林_23', '计算机工程学院', 'iPad Air 5 64G 紫色', '¥2,580', '📱')" class="w-full flex items-center justify-between p-2 hover:bg-slate-50 rounded-lg text-left transition group">
               <span class="font-medium text-slate-700 group-hover:text-[#8B1E29]">💬 端内即时私聊与智能自动应答</span>
               <span class="text-slate-400 group-hover:translate-x-0.5 transition">›</span>
             </button>
-            <button onclick="openUserProfilePage('软工小林_23', '计算机工程学院', '23级软件工程', '诚毅校区')" class="w-full flex items-center justify-between p-2 hover:bg-slate-50 rounded-lg text-left transition group">
+            <button onclick="openUserProfilePage('软工小林_23', '计算机工程学院', '23级软件工程', '集美大学')" class="w-full flex items-center justify-between p-2 hover:bg-slate-50 rounded-lg text-left transition group">
               <span class="font-medium text-slate-700 group-hover:text-[#8B1E29]">👤 他人公开个人主页 (信用与在售)</span>
               <span class="text-slate-400 group-hover:translate-x-0.5 transition">›</span>
             </button>
@@ -389,13 +390,7 @@
       </div>
 
       <!-- 微信小程序 Navigation Bar (全端唯一顶栏，集成板块指示器，彻底消除重复标题栏) -->
-      <div class="h-11 bg-white border-b border-[var(--border-divider)] flex items-center justify-between px-4 shrink-0 z-30 select-none">
-        <div id="headerTitleTrigger" onclick="handleHeaderTitleClick()" class="flex items-center gap-1.5 cursor-pointer group">
-          <span id="navTitle" class="font-bold text-[15px] text-slate-900 tracking-tight group-hover:text-[#8B1E29] transition">社区广场</span>
-          <span id="navSubBadge" class="text-[10px] font-medium text-[#8B1E29] bg-[#FAF0F1] px-1.5 py-[1px] rounded border border-[#F0D5D8] flex items-center gap-0.5 group-hover:bg-[#F5E2E4] transition">
-            <span id="navSubBadgeText">动态 ▾</span>
-          </span>
-        </div>
+      <div class="h-11 bg-white border-b border-[var(--border-divider)] flex items-center justify-end px-4 shrink-0 z-30 select-none">
         
         <!-- 微信原生胶囊控制器 (Mini-app Capsule) -->
         <div class="w-[84px] h-[30px] rounded-full border border-slate-200 bg-white flex items-center justify-evenly px-1 shadow-2xs">
@@ -476,11 +471,21 @@
 
             <!-- 动态卡片流容器 (推荐流) -->
           <div id="feedChannelRec" class="p-3 space-y-3 block">
+
+            <!-- 生活互助置顶公告 -->
+            <button onclick="openFeedActionSheet()" class="community-notice w-full text-left" aria-label="打开校内生活互助专区">
+              <span class="community-notice-icon" aria-hidden="true">互助</span>
+              <span class="min-w-0 flex-1">
+                <span class="community-notice-title">校内生活互助专区</span>
+                <span class="community-notice-copy">二手、寻物、校园代取，都在这里</span>
+              </span>
+              <span class="community-notice-link">查看 <i class="ui-icon" data-icon="caret-right"></i></span>
+            </button>
             
             <!-- 动态卡片 1 -->
             <div class="app-card p-4 space-y-2.5">
               <div class="flex items-center justify-between">
-                <div class="flex items-center gap-2.5 cursor-pointer" onclick="openUserProfilePage('软工小林_23', '计算机工程学院', '23级软件工程', '诚毅校区')">
+                <div class="flex items-center gap-2.5 cursor-pointer" onclick="openUserProfilePage('软工小林_23', '计算机工程学院', '23级软件工程', '集美大学')">
                   <div class="w-9 h-9 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold text-xs">
                     林
                   </div>
@@ -508,16 +513,16 @@
               </div>
 
               <p class="text-[13px] text-slate-800 leading-relaxed">
-                尚大楼考研自习室靠窗的一排插座修好了！寻一个大三准备考本校计算机专硕的学伴，每天晚上 18:30-22:00 互相监督刷数学真题打卡，诚毅或者本部的同学均可～
+                尚大楼考研自习室靠窗的一排插座修好了！寻一个大三准备考本校计算机专硕的学伴，每天晚上 18:30-22:00 互相监督刷数学真题打卡，有兴趣的同学一起呀～
               </p>
 
               <!-- 图片栅格 -->
               <div class="grid grid-cols-2 gap-2 pt-0.5">
-                <div class="h-28 bg-slate-100 rounded-xl flex flex-col items-center justify-center text-slate-500 text-xs border border-slate-200/60 cursor-pointer hover:opacity-90 transition" onclick="showToast('查看高清自习室照片')">
+                <div class="feed-media-card h-28 bg-slate-100 rounded-xl flex flex-col items-center justify-center text-slate-500 text-xs border border-slate-200/60 cursor-pointer hover:opacity-90 transition" onclick="showToast('查看高清自习室照片')"><img src="assets/campus-life-v2.png" alt="集美大学校园与自习生活实拍">
                   <svg class="w-6 h-6 text-slate-400 mb-1" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
                   <span>尚大楼自习室实拍</span>
                 </div>
-                <div class="h-28 bg-slate-100 rounded-xl flex flex-col items-center justify-center text-slate-500 text-xs border border-slate-200/60 cursor-pointer hover:opacity-90 transition" onclick="showToast('查看打卡计划表')">
+                <div class="feed-media-card h-28 bg-slate-100 rounded-xl flex flex-col items-center justify-center text-slate-500 text-xs border border-slate-200/60 cursor-pointer hover:opacity-90 transition" onclick="showToast('查看打卡计划表')"><img src="assets/campus-study-v2.png" alt="考研复习计划插图">
                   <svg class="w-6 h-6 text-slate-400 mb-1" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>
                   <span>考研复习进度打卡</span>
                 </div>
@@ -576,21 +581,6 @@
                   <span>68</span>
                 </button>
               </div>
-            </div>
-
-            <!-- 生活互助服务迁移引导卡片 -->
-            <div onclick="switchTab('feed'); openFeedActionSheet()" class="p-3 bg-gradient-to-r from-amber-500/10 via-red-500/5 to-blue-500/10 rounded-2xl border border-amber-200/70 flex items-center justify-between cursor-pointer hover:border-amber-300 transition">
-              <div class="flex items-center gap-2.5">
-                <div class="w-8 h-8 rounded-xl bg-white border border-amber-200 flex items-center justify-center text-sm shadow-2xs">🤝</div>
-                <div>
-                  <div class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
-                    <span>校内生活互助专区</span>
-                    <span class="text-[9px] bg-[#8B1E29] text-white px-1.5 py-0.2 rounded font-medium">已移至社区</span>
-                  </div>
-                  <div class="text-[10px] text-slate-500 mt-0.5">二手闲置集市、失物寻物告示、校园互助跑腿</div>
-                </div>
-              </div>
-              <span class="text-xs text-[#8B1E29] font-bold flex items-center gap-0.5">前往社区 ›</span>
             </div>
 
           </div>
@@ -771,7 +761,7 @@
             <div>
               <div class="flex items-center justify-between px-1 mb-2">
                 <span class="text-xs font-bold text-slate-900">集大校友推荐 · 严选面交</span>
-                <span class="text-[10px] text-slate-400">学号核验 100% 担保</span>
+                <span class="text-[10px] text-slate-400">演示商品 · 请当面核验</span>
               </div>
 
               <!-- 搜索空状态 -->
@@ -945,9 +935,44 @@
 
         <!-- ==================== Tab 2: 校园功能 (Campus) ==================== -->
         <div id="page-campus" class="tab-page hidden">
+          <div id="campus-view-home">
+            <header class="campus-hero">
+              <span class="campus-eyebrow">UNIJMU · 集大日常</span>
+              <h1>校园</h1>
+              <p>诚以待人 <span>毅以处事</span></p>
+            </header>
+            <div class="campus-content">
+              <section class="campus-panel next-class-panel" aria-labelledby="nextClassHeading">
+                <div class="section-heading"><h2 id="nextClassHeading">下一节课</h2></div>
+                <div id="homeWeekStrip" class="week-strip" aria-label="本周日期"></div>
+                <button id="nextClassCard" class="next-class-card" onclick="openNextCourse()"></button>
+                <button class="panel-link" onclick="selectCampusModule('schedule')">查看完整课表 <i class="ui-icon" data-icon="caret-right"></i></button>
+              </section>
+              <section class="campus-panel service-grid" aria-label="常用教务工具">
+                <button onclick="openClassroomModal()"><span class="service-icon rose"><i class="ui-icon" data-icon="door-open"></i></span><strong>空教室</strong><small>找个自习位</small></button>
+                <button onclick="openGradesModal()"><span class="service-icon apricot"><i class="ui-icon" data-icon="chart-bar"></i></span><strong>成绩</strong><small>查看学业成绩</small></button>
+                <button onclick="openCalendarModal()"><span class="service-icon rose"><i class="ui-icon" data-icon="calendar-plus"></i></span><strong>导日历</strong><small>课程随身提醒</small></button>
+                <button onclick="openFitnessModal()"><span class="service-icon mint"><i class="ui-icon" data-icon="person-simple-run"></i></span><strong>体测</strong><small>算算我的成绩</small></button>
+              </section>
+              <section class="campus-panel announcement-panel" aria-label="校园公告">
+                <div class="section-heading"><div class="notice-tabs" aria-label="公告来源"><button data-home-source="school" onclick="setHomeNoticeSource('school')" aria-pressed="true">学校公告</button><button data-home-source="college" onclick="setHomeNoticeSource('college')" aria-pressed="false">学院公告</button></div><button class="text-action" onclick="openNoticeList()">查看全部 <i class="ui-icon" data-icon="caret-right"></i></button></div>
+                <div id="homeNotices"></div>
+              </section>
+              <p class="campus-footnote">把重要的事放在心上，也给校园生活留点空闲。</p>
+            </div>
+          </div>
+          <section id="campus-view-notices" class="hidden campus-content notice-library">
+            <div class="section-heading"><button class="back-link" onclick="selectCampusModule('home')"><i class="ui-icon" data-icon="caret-left"></i>校园首页</button><span class="muted">学校与学院的消息，在这里</span></div>
+            <h1>校园公告</h1>
+            <label class="notice-search"><i class="ui-icon" data-icon="magnifying-glass"></i><input id="noticeSearch" type="search" placeholder="搜索公告、发布单位" oninput="renderNoticeList()" aria-label="搜索公告"></label>
+            <div class="notice-tabs library-tabs" aria-label="公告分类"><button data-source="all" onclick="setNoticeSource('all')" aria-pressed="true">全部</button><button data-source="school" onclick="setNoticeSource('school')" aria-pressed="false">学校</button><button data-source="college" onclick="setNoticeSource('college')" aria-pressed="false">学院</button><button data-source="saved" onclick="setNoticeSource('saved')" aria-pressed="false">已收藏</button></div>
+            <div class="notice-options"><label><input id="noticeUnread" type="checkbox" onchange="renderNoticeList()">只看未读</label><span id="noticeCount"></span></div>
+            <div id="noticeList" class="campus-panel"></div>
+          </section>
           
           <!-- 1. 课表日程视图 -->
-          <div id="campus-view-schedule" class="block p-3 space-y-3">
+          <div id="campus-view-schedule" class="hidden p-3 space-y-3">
+            <div class="section-heading"><button class="back-link" onclick="selectCampusModule('home')"><i class="ui-icon" data-icon="caret-left"></i>校园首页</button></div>
             
             <!-- 课表顶部控制区：学期与内嵌周次切换 + 日/周视图切换 (周次选择严格就地内嵌，绝不外溢至二级菜单) -->
             <div class="app-card p-3.5 space-y-2.5">
@@ -955,7 +980,7 @@
                 <div>
                   <span class="text-[10px] font-medium text-slate-400">2026-2027学年 秋季学期</span>
                   <!-- 课表内嵌周次选择器：上一周、当前周下拉、下一周 -->
-                  <div class="flex items-center gap-1.5 mt-0.5">
+                  <div class="schedule-week-control mt-0.5">
                     <button onclick="changeScheduleWeek(-1)" title="上一周" class="w-6 h-6 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold transition">‹</button>
                     <button onclick="toggleInPageWeekPicker()" class="flex items-center gap-1 px-2 py-0.5 rounded-lg bg-[#FAF0F1] hover:bg-[#F5E2E4] border border-[#F0D5D8] transition group">
                       <h3 id="scheduleWeekTitle" class="text-xs font-bold text-[#8B1E29]">第 3 周 (本周)</h3>
@@ -983,28 +1008,10 @@
                 </div>
               </div>
 
-              <!-- 快捷教务工具行 (直通空教室、成绩与日历导出) -->
-              <div class="grid grid-cols-4 gap-1.5 pt-2 border-t border-[var(--border-divider)] text-center text-xs">
-                <div onclick="openClassroomModal()" class="p-2 rounded-lg bg-slate-50 hover:bg-slate-100 cursor-pointer transition">
-                  <div class="text-[#8B1E29] font-bold text-xs">🏫 空教室</div>
-                  <div class="text-[9px] text-slate-400 mt-0.5">查自习空座</div>
-                </div>
-                <div onclick="openGradesModal()" class="p-2 rounded-lg bg-slate-50 hover:bg-slate-100 cursor-pointer transition">
-                  <div class="text-[#8B1E29] font-bold text-xs">📊 查成绩</div>
-                  <div class="text-[9px] text-slate-400 mt-0.5">GPA与绩点</div>
-                </div>
-                <div onclick="openCalendarModal()" class="p-2 rounded-lg bg-slate-50 hover:bg-slate-100 cursor-pointer transition">
-                  <div class="text-[#8B1E29] font-bold text-xs">🗓️ 导日历</div>
-                  <div class="text-[9px] text-slate-400 mt-0.5">18周ICS</div>
-                </div>
-                <div onclick="openFitnessModal()" class="p-2 rounded-lg bg-slate-50 hover:bg-slate-100 cursor-pointer transition">
-                  <div class="text-[#8B1E29] font-bold text-xs">🏃 体测算分</div>
-                  <div class="text-[9px] text-slate-400 mt-0.5">国标评分</div>
-                </div>
-              </div>
             </div>
 
             <!-- 日日程卡片流 -->
+            <div id="scheduleWeekStrip" class="week-strip" aria-label="课表日期"></div>
             <div id="schedule-day-container" class="space-y-2.5 block">
               
               <!-- 课程卡片 1 -->
@@ -1099,11 +1106,11 @@
 
           </div>
         <!-- ==================== Tab 3: 消息中心 (Messages) ==================== -->
-        <div id="page-messages" class="tab-page hidden">
+        <div id="page-messages" class="tab-page hidden message-page">
           <div class="grid grid-cols-3 gap-2 p-3 bg-white border-b border-[var(--border-divider)]">
             <div onclick="showToast('查看获赞记录：收到来自小林、陈同学等 148 次点赞')" class="flex flex-col items-center p-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 cursor-pointer transition">
               <div class="relative w-8 h-8 rounded-full bg-[#FAF0F1] text-[#8B1E29] flex items-center justify-center font-bold">
-                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                <i class="ui-icon" data-icon="heart"></i>
                 <span class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-[#8B1E29] text-white rounded-full text-[8px] flex items-center justify-center font-bold">3</span>
               </div>
               <span class="text-[11px] font-medium text-slate-700 mt-1">赞和收藏</span>
@@ -1160,6 +1167,35 @@
               </div>
             </div>
           </div>
+
+        <div class="message-modern-panel">
+          <div class="message-toolbar">
+            <label class="message-search"><i class="ui-icon" data-icon="magnifying-glass"></i><input type="search" placeholder="搜索聊天记录、联系人或关键词" oninput="filterMessageList(this.value)" aria-label="搜索消息"></label>
+            <button onclick="openModal('newChatModal')" class="message-new-btn"><i class="ui-icon" data-icon="chat-circle-dots"></i><span>新建聊天</span></button>
+          </div>
+          <div class="message-section-heading"><span>最近聊天</span><span class="message-count">6 个会话</span></div>
+          <div id="messageConversationList" class="message-list">
+            <button class="message-conversation" data-search="学校通知 秋季学期选课确认 教务处" onclick="showToast('暂无需要处理的学校通知')">
+              <span class="message-avatar message-avatar-notice"><i class="ui-icon" data-icon="megaphone-simple"></i></span><span class="message-conversation-main"><span class="message-conversation-title">学校通知</span><span class="message-conversation-preview">关于秋季学期选课确认的通知</span></span><span class="message-conversation-meta"><time>09:18</time><b>1</b></span>
+            </button>
+            <button class="message-conversation" data-search="林软软 计算机工程学院 考研 自习室" onclick="openChatPage('林软软', '计算机工程学院')">
+              <span class="message-avatar message-avatar-photo">林</span><span class="message-conversation-main"><span class="message-conversation-title">林软软 <em>同班同学</em></span><span id="recentChatMsg-lin" class="message-conversation-preview">晚上一起去打卡考研自习室吗？我已经占好座了～</span></span><span class="message-conversation-meta"><time>08:56</time><b>3</b></span>
+            </button>
+            <button class="message-conversation" data-search="考研自习搭子群 学习 小组" onclick="openChatPage('考研自习搭子群（6人）', '校园学习小组')">
+              <span class="message-avatar message-avatar-group">6</span><span class="message-conversation-main"><span class="message-conversation-title">考研自习搭子群 <em>群聊</em></span><span class="message-conversation-preview">小林：今晚 18:30–22:00 一起刷题呀～</span></span><span class="message-conversation-meta"><time>昨天</time><b>5</b></span>
+            </button>
+            <button class="message-conversation" data-search="周周 室友 食堂" onclick="openChatPage('周周', '室友')">
+              <span class="message-avatar message-avatar-warm">周</span><span class="message-conversation-main"><span class="message-conversation-title">周周 <em>室友</em></span><span class="message-conversation-preview">我已经到食堂了，你大概还有多久？</span></span><span class="message-conversation-meta"><time>昨天 21:04</time></span>
+            </button>
+            <button class="message-conversation" data-search="集大表白墙 社区 匿名投稿" onclick="openChatPage('集大表白墙', '校园社区')">
+              <span class="message-avatar message-avatar-sky">墙</span><span class="message-conversation-main"><span class="message-conversation-title">集大表白墙 <em>校园社区</em></span><span class="message-conversation-preview">【匿名投稿】黄昏真的好美呀，想把这份浪漫分享…</span></span><span class="message-conversation-meta"><time>昨天 19:27</time></span>
+            </button>
+            <button class="message-conversation" data-search="教务处 课程 调整 提醒" onclick="showToast('课程调整提醒：下周三《高等数学》上课地点变更')">
+              <span class="message-avatar message-avatar-soft"><i class="ui-icon" data-icon="calendar-plus"></i></span><span class="message-conversation-main"><span class="message-conversation-title">教务处</span><span class="message-conversation-preview">课程调整提醒：下周三《高等数学》上课地点变更…</span></span><span class="message-conversation-meta"><time>09-17</time></span>
+            </button>
+          </div>
+          <div id="messageEmptyState" class="message-empty hidden">没有找到匹配的会话<br><span>试试搜索姓名、群聊或关键词</span></div>
+        </div>
         </div>
 
         <!-- ==================== Tab 4: 个人中心 (Profile) ==================== -->
@@ -1182,7 +1218,7 @@
                   </div>
                 </div>
               </div>
-              <button onclick="openUserProfilePage('GnaixEuy', '计算机工程学院', '22级软件工程', '诚毅校区')" class="text-xs font-medium text-[#8B1E29] bg-[#FAF0F1] hover:bg-red-100 px-2.5 py-1 rounded-full border border-[#F0D5D8] transition">
+              <button onclick="openUserProfilePage('GnaixEuy', '计算机工程学院', '22级软件工程', '集美大学')" class="text-xs font-medium text-[#8B1E29] bg-[#FAF0F1] hover:bg-red-100 px-2.5 py-1 rounded-full border border-[#F0D5D8] transition">
                 公开主页 ›
               </button>
             </div>
@@ -1208,39 +1244,42 @@
             </div>
           </div>
 
-          <!-- 诚信守约分看板 -->
-          <div onclick="openCreditModal()" class="app-card p-3.5 flex items-center justify-between cursor-pointer app-card-hover transition">
-            <div class="flex items-center gap-2.5">
-              <div class="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-sm font-bold">
-                🛡️
+          <!-- 成长体系：诚信分与成就并列，避免个人页信息过长 -->
+          <div class="grid grid-cols-2 gap-2">
+            <button onclick="openCreditModal()" class="app-card p-3 text-left cursor-pointer app-card-hover transition">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-bold text-slate-900">诚信守约</span>
+                <span class="text-[9px] text-emerald-600">明细 ›</span>
               </div>
-              <div>
-                <div class="text-xs font-bold text-slate-900 flex items-center gap-1.5">
-                  <span>校园诚信守约分</span>
-                  <span class="text-[10px] text-emerald-600 bg-emerald-50 px-1.5 rounded font-semibold">680 · 极好</span>
-                </div>
-                <div class="text-[10px] text-slate-400 mt-0.5">享二手优先推荐与跑腿免押接单特权</div>
+              <div class="mt-2 text-lg font-bold text-emerald-600">680</div>
+              <div class="text-[10px] text-slate-400">极好 · 免押权益</div>
+            </button>
+            <button onclick="openModal('achievementModal')" class="app-card p-3 text-left cursor-pointer app-card-hover transition">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-bold text-slate-900">校园成就</span>
+                <span class="text-[9px] text-[#8B1E29]">查看 ›</span>
               </div>
-            </div>
-            <span class="text-slate-400 text-xs">明细 ›</span>
+              <div class="mt-2 text-lg font-bold text-[#8B1E29]">Lv.3</div>
+              <div class="text-[10px] text-slate-400">已解锁 6 / 12</div>
+            </button>
           </div>
 
           <!-- 功能列表项 -->
           <div class="app-card divide-y divide-slate-100 text-xs">
             <div onclick="openMyOrdersModal()" class="p-3 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition">
-              <span class="text-slate-800 font-medium">📋 我的闲置交易与跑腿流水</span>
-              <span class="text-slate-400 text-[11px]">查看履约记录 ›</span>
+              <span class="text-slate-800 font-medium">我的交易与互助</span>
+              <span class="text-slate-400 text-[11px]">查看 ›</span>
             </div>
             <div onclick="openAuthModal()" class="p-3 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition">
-              <span class="text-slate-800 font-medium">🎓 集美大学教务统一身份认证</span>
-              <span class="text-emerald-600 text-[11px] font-medium">已认证 (学号2022***) ›</span>
+              <span class="text-slate-800 font-medium">校园身份认证</span>
+              <span class="text-emerald-600 text-[11px] font-medium">已认证 ›</span>
             </div>
             <div onclick="openFeedbackModal()" class="p-3 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition">
-              <span class="text-slate-800 font-medium">💬 小程序开发与设计评审反馈</span>
-              <span class="text-[#8B1E29] text-[11px] font-medium">填写建议 ›</span>
+              <span class="text-slate-800 font-medium">原型体验反馈</span>
+              <span class="text-[#8B1E29] text-[11px] font-medium">反馈 ›</span>
             </div>
             <div onclick="showToast('已清理临时缓存，当前版本 v1.9.1 (标题去重与课表内嵌周次版)')" class="p-3 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition">
-              <span class="text-slate-800 font-medium">⚙️ 缓存清理与系统设置</span>
+              <span class="text-slate-800 font-medium">设置</span>
               <span class="text-slate-400 text-[11px]">0.3 MB ›</span>
             </div>
           </div>
@@ -1376,13 +1415,15 @@
           <div class="flex items-center justify-between pb-2.5 border-b border-slate-100">
             <div class="flex items-center gap-2">
               <span class="w-2.5 h-2.5 rounded-full bg-[#8B1E29]"></span>
-              <span class="font-bold text-sm text-slate-900">集大校园服务 · 教务功能矩阵</span>
+              <span class="font-bold text-sm text-slate-900">校园常用服务</span>
             </div>
             <button onclick="closeCampusActionSheet()" class="text-slate-400 hover:text-slate-600 text-xs p-1">✕ 关闭</button>
           </div>
 
           <div class="space-y-3 text-xs">
             <!-- 课表日程直达 -->
+            <button class="campus-menu-link" onclick="selectCampusModule('home')"><i class="ui-icon" data-icon="house"></i>校园首页<i class="ui-icon" data-icon="caret-right"></i></button>
+            <button class="campus-menu-link" onclick="openNoticeList('all')"><i class="ui-icon" data-icon="megaphone-simple"></i>学校与学院公告<i class="ui-icon" data-icon="caret-right"></i></button>
             <div onclick="selectCampusModule('schedule')" class="p-2.5 bg-[#FAF0F1] hover:bg-[#F5E2E4] rounded-xl border border-[#F0D5D8] flex items-center justify-between cursor-pointer transition">
               <div class="flex items-center gap-2.5">
                 <div class="w-8 h-8 rounded-lg bg-[#8B1E29] text-white flex items-center justify-center text-sm font-bold">📅</div>
@@ -1405,7 +1446,8 @@
                   <span class="text-[10px] font-bold text-slate-800 mt-1">空教室</span>
                   <span class="text-[8px] text-slate-400">门牌空座</span>
                 </div>
-                <div onclick="closeCampusActionSheet(); openGradesModal()" class="flex flex-col items-center p-2 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-base shadow-2xs group-hover:scale-105 transition">📊</div>
+                <div onclick="closeCampusActionSheet(); openGradesModal()" class="flex flex-col items-center p-2 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-100 cursor-pointer transition group">
+                <div class="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-base">📊</div>
                 <span class="text-[10px] font-bold text-slate-800 mt-1">查成绩</span>
                 <span class="text-[8px] text-slate-400">GPA走势</span>
                 </div>
@@ -1628,7 +1670,7 @@
           <div class="flex items-center justify-between pb-2 border-b border-slate-100">
             <div class="flex items-center gap-1.5">
               <span class="w-2 h-2 rounded-full bg-[#8B1E29]"></span>
-              <h3 class="font-bold text-sm text-slate-900">国家学生体质健康测算器</h3>
+              <h3 class="font-bold text-sm text-slate-900">体测成绩测算 · 演示</h3>
             </div>
             <button onclick="closeModal('fitnessModal')" class="text-slate-400 hover:text-slate-600 text-xs p-1">✕</button>
           </div>
@@ -1680,12 +1722,12 @@
 
           <!-- 测算综合评级卡片 -->
           <div class="p-3 bg-[#FAF0F1] border border-[#F0D5D8] rounded-2xl text-center space-y-1">
-            <div class="text-[11px] text-[#8B1E29] font-medium">国家体质综合得分预测</div>
+            <div class="text-[11px] text-[#8B1E29] font-medium">体测测算交互演示</div>
             <div id="fitScoreDisplay" class="text-xl font-extrabold text-[#8B1E29]">86.5 分 · 良好 (BMI 21.2)</div>
-            <div class="text-[10px] text-slate-500">权重算法已对齐教育部《国家学生体质健康标准》</div>
+            <div class="text-[10px] text-slate-500">简化演示算法，非正式体测成绩</div>
           </div>
 
-          <button onclick="closeModal('fitnessModal'); showToast('已同步体测数据至个人学业健康档案')" class="w-full py-2 bg-[#8B1E29] hover:bg-[#751722] text-white font-semibold text-xs rounded-xl transition shadow-xs">
+          <button onclick="closeModal('fitnessModal'); showToast('已保存本次演示测算结果')" class="w-full py-2 bg-[#8B1E29] hover:bg-[#751722] text-white font-semibold text-xs rounded-xl transition shadow-xs">
             保存测算结果
           </button>
         </div>
@@ -1768,25 +1810,25 @@
           </div>
 
           <div class="p-3 bg-purple-50 rounded-2xl border border-purple-200 text-xs text-purple-900 space-y-1">
-            <div class="font-bold">🗓️ 算法已对齐 JMU_JSON2ICS 规范</div>
+            <div class="font-bold">🗓️ 导出演示课表</div>
             <p class="text-[11px] text-purple-700 leading-relaxed">
-              将自动生成包含秋季学期 18 周、全门类节次时间、教室地点及上课提醒（课前15分钟震动提醒）的标准 .ics 日历订阅文件。
+              生成包含课程时间、教室及 16–18 周重复安排的 .ics 文件。暂未接入教务或节假日调课；导入后的提醒以设备日历设置为准。
             </p>
           </div>
 
           <div class="space-y-1 text-xs text-slate-600">
             <label class="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" checked class="accent-[#8B1E29]">
-              <span>包含随堂笔记与备忘提醒</span>
+              <input id="exportNotes" type="checkbox" checked class="accent-[#8B1E29]">
+              <span>包含已填写的课程备忘</span>
             </label>
             <label class="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" checked class="accent-[#8B1E29]">
-              <span>自动排除国庆节与中秋节调休</span>
+              <input id="exportReminder" type="checkbox" checked class="accent-[#8B1E29]">
+              <span>添加课前 15 分钟日历提醒</span>
             </label>
           </div>
 
           <button onclick="doExportICS()" class="w-full py-2.5 bg-[#8B1E29] hover:bg-[#751722] text-white font-semibold text-xs rounded-xl transition shadow-xs">
-            导出 18 周 .ics 日历文件
+            导出 .ics 日历文件
           </button>
         </div>
       </div>
@@ -1794,21 +1836,23 @@
       <!-- 8. 即时私聊全屏二级页面 (内置拟真智能自动回复) -->
       <div id="chatPage" class="sub-page">
         <!-- 聊天顶部导航 -->
-        <div class="h-12 bg-white border-b border-slate-200 flex items-center justify-between px-3 shrink-0">
+        <div class="chat-topbar flex items-center justify-between shrink-0">
           <div class="flex items-center gap-2">
-            <button onclick="closeChatPage()" class="text-slate-500 hover:text-black p-1 text-sm font-bold">‹ 返回</button>
+            <button onclick="closeChatPage()" class="chat-back" aria-label="返回消息列表">‹</button>
+            <div id="chatUserAvatar" class="chat-user-avatar">林</div>
             <div>
-              <div id="chatUserTitle" class="text-xs font-bold text-slate-900">软工小林_23</div>
-              <div id="chatUserCollege" class="text-[9px] text-emerald-600">计算机工程学院 · 学号已核验</div>
+              <div id="chatUserTitle" class="text-xs font-bold text-slate-900">林软软</div>
+              <div id="chatUserCollege" class="chat-status">计算机工程学院 · 在线</div>
             </div>
           </div>
-          <button id="chatUserProfileBtn" onclick="openUserProfilePage('软工小林_23', '计算机工程学院', '23级软件工程', '诚毅校区')" class="text-[10px] text-[#8B1E29] font-medium bg-[#FAF0F1] px-2 py-0.5 rounded border border-[#F0D5D8]">
-            看 TA 主页
-          </button>
+          <div class="flex items-center gap-1.5">
+            <button id="chatUserProfileBtn" onclick="openUserProfilePage('软工小林_23', '计算机工程学院', '23级软件工程', '集美大学')" class="text-[10px] text-[#8B1E29] font-medium bg-[#FAF0F1] px-2 py-1 rounded-lg border border-[#F0D5D8]">主页</button>
+            <button class="chat-more" onclick="showToast('聊天设置已打开')" aria-label="聊天设置">···</button>
+          </div>
         </div>
 
         <!-- 交易物品置顶挂载条 (Context Banner) -->
-        <div id="chatProductBanner" class="p-2 bg-slate-50 border-b border-slate-200 flex items-center justify-between text-xs shrink-0">
+        <div id="chatProductBanner" class="hidden p-2 bg-slate-50 border-b border-slate-200 flex items-center justify-between text-xs shrink-0">
           <div class="flex items-center gap-2">
             <span id="chatItemIcon" class="text-base">📱</span>
             <div>
@@ -1831,22 +1875,21 @@
           <div class="flex items-start gap-2">
             <div class="w-7 h-7 rounded-full bg-slate-800 text-white flex items-center justify-center text-[10px] font-bold shrink-0">林</div>
             <div class="bg-white border border-slate-200 p-2.5 rounded-2xl rounded-tl-none max-w-[240px] text-slate-800 leading-relaxed shadow-2xs">
-              同学你好！学号已经教务 CAS 认证核验过了，支持诚毅校区当面验机验货～
+              同学你好！最近在准备考研，晚上一起去自习室吗？
             </div>
           </div>
         </div>
 
         <!-- 快捷话术胶囊 -->
-        <div class="flex gap-1.5 px-3 py-1.5 bg-white border-t border-slate-100 overflow-x-auto no-scrollbar shrink-0 text-[11px]">
-          <button onclick="sendQuickReply('可以在诚毅二食堂面交吗？')" class="shrink-0 px-2 py-1 bg-slate-50 hover:bg-slate-100 rounded-full border border-slate-200 text-slate-600">在诚毅二食堂面交？</button>
-          <button onclick="sendQuickReply('下午有课，傍晚6点行吗？')" class="shrink-0 px-2 py-1 bg-slate-50 hover:bg-slate-100 rounded-full border border-slate-200 text-slate-600">傍晚 6 点方便吗？</button>
-          <button onclick="sendQuickReply('原装发票和保修期还在吗？')" class="shrink-0 px-2 py-1 bg-slate-50 hover:bg-slate-100 rounded-full border border-slate-200 text-slate-600">发票还在吗？</button>
+        <div class="chat-utility-row no-scrollbar shrink-0">
+          <button onclick="sendQuickReply('晚上一起去自习室吗？')">一起自习？</button>
+          <button onclick="sendQuickReply('你今天在哪栋楼？')">你在哪栋楼？</button>
+          <button onclick="sendQuickReply('收到啦，谢谢！')">收到啦，谢谢</button>
         </div>
 
         <!-- 输入栏 -->
-        <div class="p-2 bg-white border-t border-slate-200 flex items-center gap-2 shrink-0">
-          <input id="chatInput" onkeydown="if(event.key==='Enter') sendChatMessage()" type="text" placeholder="输入与校友交流的信息..." class="flex-1 bg-slate-100 rounded-full px-3 py-1.5 text-xs outline-none">
-          <button onclick="sendChatMessage()" class="px-3.5 py-1.5 bg-[#8B1E29] text-white rounded-full text-xs font-semibold shrink-0">发送</button>
+        <div class="chat-input-row flex items-center gap-2 shrink-0">
+          <div class="chat-input-shell flex-1"><button onclick="showToast('可添加图片、文件或位置')" class="!bg-transparent !text-[#8B1E29] !w-6 !h-6" aria-label="添加附件">＋</button><input id="chatInput" onkeydown="if(event.key==='Enter') sendChatMessage()" type="text" placeholder="发消息给对方..." aria-label="聊天输入框"><button onclick="sendChatMessage()" aria-label="发送消息">↑</button></div>
         </div>
       </div>
 
@@ -1920,7 +1963,7 @@
               <span id="detailItemLoc" class="text-[10px] text-slate-500">诚毅二食堂一楼门口面交</span>
             </div>
             <h4 id="detailItemTitle" class="text-sm font-bold text-slate-900 leading-snug">iPad Air 5 64G 紫色 (带 Pencil 2)</h4>
-            <p id="detailItemDesc" class="text-[11px] text-slate-600 leading-relaxed pt-1">考研上岸出闲置，电池健康98%，原盒发票配件齐全，附赠磁吸双面夹保护套。诚毅校区支持当面验机。</p>
+            <p id="detailItemDesc" class="text-[11px] text-slate-600 leading-relaxed pt-1">考研上岸出闲置，电池健康98%，原盒发票配件齐全，附赠磁吸双面夹保护套。支持校内当面验机。</p>
           </div>
 
           <!-- 卖家信息卡片 -->
@@ -2097,7 +2140,43 @@
         </div>
       </div>
 
-      <!-- 15. 周次选择弹窗 (1-18周真实切换) -->
+      <!-- 15. 校园成就系统 -->
+      <div id="achievementModal" onclick="if(event.target===this) closeModal('achievementModal')" class="modal-overlay">
+        <div class="bg-white rounded-3xl w-full max-w-[325px] p-4 shadow-2xl space-y-3 modal-dialog">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+            <div>
+              <h3 class="font-bold text-sm text-slate-900">校园成就 · Lv.3</h3>
+              <p class="text-[10px] text-slate-400 mt-0.5">参与校园生活，记录每一次成长</p>
+            </div>
+            <button onclick="closeModal('achievementModal')" class="text-slate-400 hover:text-slate-600 text-xs p-1">✕</button>
+          </div>
+          <div class="grid grid-cols-3 gap-2 text-center">
+            <div class="rounded-2xl bg-[#FAF0F1] p-2.5"><div class="text-sm font-bold text-[#8B1E29]">8</div><div class="text-[9px] text-slate-600 mt-1">互助新星</div></div>
+            <div class="rounded-2xl bg-amber-50 p-2.5"><div class="text-sm font-bold text-amber-700">12</div><div class="text-[9px] text-slate-600 mt-1">分享达人</div></div>
+            <div class="rounded-2xl bg-emerald-50 p-2.5"><div class="text-sm font-bold text-emerald-700">680</div><div class="text-[9px] text-slate-600 mt-1">守约同学</div></div>
+          </div>
+          <div class="rounded-2xl bg-slate-50 p-3">
+            <div class="flex items-center justify-between text-[11px]"><span class="font-bold text-slate-800">下一级：校园伙伴</span><span class="text-[#8B1E29]">60%</span></div>
+            <div class="h-1.5 rounded-full bg-slate-200 mt-2 overflow-hidden"><div class="h-full w-3/5 rounded-full bg-[#8B1E29]"></div></div>
+            <p class="text-[10px] text-slate-400 mt-2">再完成 4 次互助或发布 2 条优质动态即可升级</p>
+          </div>
+          <button onclick="closeModal('achievementModal')" class="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs rounded-xl transition">完成</button>
+        </div>
+      </div>
+
+      <!-- 16. 新建聊天 -->
+      <div id="newChatModal" onclick="if(event.target===this) closeModal('newChatModal')" class="modal-overlay">
+        <div class="bg-white rounded-3xl w-full max-w-[325px] p-4 shadow-2xl space-y-3 modal-dialog">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100"><div><h3 class="font-bold text-sm text-slate-900">新建聊天</h3><p class="text-[10px] text-slate-400 mt-0.5">和同学、老师或校园社群聊聊</p></div><button onclick="closeModal('newChatModal')" class="text-slate-400 text-xs p-1">✕</button></div>
+          <label class="message-search"><i class="ui-icon" data-icon="magnifying-glass"></i><input id="newChatName" type="text" placeholder="搜索姓名、学院或群聊" aria-label="搜索联系人"></label>
+          <div class="space-y-1.5">
+            <button onclick="startNewChat('陈同学','建筑学院')" class="w-full flex items-center gap-2.5 p-2.5 rounded-xl hover:bg-slate-50 text-left"><span class="message-avatar message-avatar-sky !w-9 !h-9 !text-[11px]">陈</span><span><b class="block text-xs text-slate-800">陈同学</b><small class="text-[10px] text-slate-400">建筑学院 · 22级</small></span></button>
+            <button onclick="startNewChat('校园树洞','校园社区')" class="w-full flex items-center gap-2.5 p-2.5 rounded-xl hover:bg-slate-50 text-left"><span class="message-avatar message-avatar-warm !w-9 !h-9 !text-[11px]">树</span><span><b class="block text-xs text-slate-800">校园树洞</b><small class="text-[10px] text-slate-400">匿名话题社区</small></span></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 17. 周次选择弹窗 (1-18周真实切换) -->
       <div id="weekPickerModal" onclick="if(event.target===this) closeModal('weekPickerModal')" class="modal-overlay">
         <div class="bg-white rounded-3xl w-full max-w-[325px] p-4 shadow-2xl space-y-3 modal-dialog">
           <div class="flex items-center justify-between pb-2 border-b border-slate-100">
@@ -2188,6 +2267,11 @@
       </div>
 
       <!-- 18. 通用 Toast 提示 -->
+      <section id="noticeDetail" class="sub-page" role="dialog" aria-modal="true" aria-labelledby="noticeDetailTitle">
+        <header class="detail-header"><button class="back-link" onclick="closeNoticeDetail()"><i class="ui-icon" data-icon="caret-left"></i>返回</button><span>公告详情</span><button id="noticeSave" class="icon-action" onclick="toggleNoticeSave()" aria-label="收藏公告"><i class="ui-icon" data-icon="bookmark-simple"></i></button></header>
+        <article class="notice-article"><div id="noticeDetailTags"></div><h1 id="noticeDetailTitle"></h1><p id="noticeDetailMeta" class="muted"></p><div id="noticeDetailDeadline" class="deadline-callout"></div><div id="noticeDetailBody"></div><p class="sample-caption">原型演示内容 · 公告以学校、学院正式发布为准</p></article>
+        <footer class="notice-detail-footer"><button id="noticeReminder" class="primary-action" onclick="toggleNoticeReminder()"></button><span id="noticeReminderHint"></span></footer>
+      </section>
       <div id="toastBox" class="hidden absolute top-16 left-1/2 -translate-x-1/2 z-50 px-4 py-2 bg-slate-900/90 text-white text-xs font-medium rounded-full shadow-lg backdrop-blur pointer-events-none transition-all">
         提示信息
       </div>
@@ -2202,7 +2286,7 @@
     // =========================================================
     let currentTab = 'feed';
     let currentFeedModule = 'stream'; // 'stream', 'used', 'lost', 'errand'
-    let currentModule = 'schedule';
+    let currentModule = 'home';
     let currentCourseCardId = 'course-card-1';
     let currentFitGender = 'male';
     let activeDetailItemId = 'used-1';
@@ -2217,7 +2301,7 @@
         icon: '📱',
         loc: '自提地点：诚毅二食堂一楼门口面交',
         seller: '软工小林_23 (计算机工程学院)',
-        desc: '考研上岸出闲置，电池健康98%，原盒发票配件齐全，附赠磁吸双面夹保护套。诚毅校区支持当面验机。'
+        desc: '考研上岸出闲置，电池健康98%，原盒发票配件齐全，附赠磁吸双面夹保护套。支持校内当面验机。'
       },
       'used-2': {
         title: '捷安特 ATX777 山地车 (送车锁)',
@@ -2226,7 +2310,7 @@
         icon: '🚲',
         loc: '自提地点：嘉庚大楼架空层车库面交',
         seller: '航海阿强 (航海学院)',
-        desc: '大四毕业出代步爱车，禧玛诺27速变速顺畅，刹车灵敏，诚毅校区代步神器，支持试骑满意再付款。'
+        desc: '大四毕业出代步爱车，禧玛诺27速变速顺畅，刹车灵敏，日常代步很方便，支持试骑满意再付款。'
       },
       'used-3': {
         title: '李林考研数学6套卷 + 往年真题解析',
@@ -2286,7 +2370,7 @@
         },
         campus: {
           title: '校园功能',
-          badge: '课表 ▾'
+          badge: ({ home: '日常 ▾', schedule: '课表 ▾', notices: '公告 ▾' })[currentModule] || '日常 ▾'
         },
         messages: {
           title: '消息中心',
@@ -2417,7 +2501,7 @@
         selectFeedModule(mod);
         return;
       }
-      currentModule = mod;
+      currentModule = ['home', 'schedule', 'notices'].includes(mod) ? mod : 'home';
       const vp = document.getElementById('viewport');
       if (vp) vp.scrollTop = 0;
       closeCampusActionSheet();
@@ -2425,13 +2509,14 @@
         switchTab('campus');
       }
 
-      const scheduleEl = document.getElementById('campus-view-schedule');
-      if (scheduleEl) scheduleEl.classList.remove('hidden');
+      ['home', 'schedule', 'notices'].forEach(view => {
+        document.getElementById('campus-view-' + view).classList.toggle('hidden', view !== currentModule);
+      });
 
       const navTitleEl = document.getElementById('navTitle');
       const navSubBadgeTextEl = document.getElementById('navSubBadgeText');
       if (navTitleEl) navTitleEl.innerText = '校园功能';
-      if (navSubBadgeTextEl) navSubBadgeTextEl.innerText = '课表 ▾';
+      if (navSubBadgeTextEl) navSubBadgeTextEl.innerText = ({ home: '日常 ▾', schedule: '课表 ▾', notices: '公告 ▾' })[currentModule];
     }
 
     // ==================== 课表内嵌周次选择器逻辑 (严格就地选择，不外溢) ====================
@@ -2455,6 +2540,7 @@
         titleEl.innerText = '第 ' + week + ' 周' + (isCurrent ? ' (本周)' : '');
       }
       renderInPageWeekGrid();
+      if (typeof renderSchedule === 'function') renderSchedule();
       showToast('已切换至第 ' + week + ' 周课表' + (isCurrent ? ' (当前教学周)' : ''));
     }
 
@@ -2488,7 +2574,7 @@
         } else {
           cls += 'bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-100';
         }
-        gridHtml += '<div onclick="selectScheduleWeek(' + i + ')" class="' + cls + '">' + i + '周' + (isThisWeek && !isSelected ? '*' : '') + '</div>';
+        gridHtml += '<button type="button" aria-pressed="' + isSelected + '" onclick="selectScheduleWeek(' + i + ')" class="' + cls + '">' + i + '周' + (isThisWeek && !isSelected ? '*' : '') + '</button>';
       }
       grid.innerHTML = gridHtml;
     }
@@ -2496,17 +2582,21 @@
     function setScheduleView(v) {
       const dayContainer = document.getElementById('schedule-day-container');
       const weekContainer = document.getElementById('schedule-week-container');
+      const weekStrip = document.getElementById('scheduleWeekStrip');
       const btnDay = document.getElementById('btn-view-day');
       const btnWeek = document.getElementById('btn-view-week');
+      scheduleView = v;
 
       if (v === 'day') {
         dayContainer.classList.remove('hidden');
         weekContainer.classList.add('hidden');
+        weekStrip.classList.remove('hidden');
         btnDay.className = 'px-2.5 py-1 rounded-md font-semibold text-white bg-[#8B1E29] shadow-xs transition text-[11px]';
         btnWeek.className = 'px-2.5 py-1 rounded-md font-medium text-slate-600 hover:text-slate-900 transition text-[11px]';
       } else {
         dayContainer.classList.add('hidden');
         weekContainer.classList.remove('hidden');
+        weekStrip.classList.add('hidden');
         btnWeek.className = 'px-2.5 py-1 rounded-md font-semibold text-white bg-[#8B1E29] shadow-xs transition text-[11px]';
         btnDay.className = 'px-2.5 py-1 rounded-md font-medium text-slate-600 hover:text-slate-900 transition text-[11px]';
       }
@@ -2616,7 +2706,7 @@
                 <div class="text-[10px] text-slate-400 mt-0.5">刚刚 · ${loc}</div>
               </div>
             </div>
-            <span class="text-[10px] text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded font-medium">机审通过</span>
+            <span class="text-[10px] text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded font-medium">演示发布</span>
           </div>
           <div class="flex items-center gap-2">
             <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">${selectedBoard}</span>
@@ -2636,8 +2726,9 @@
 
       document.getElementById('publishText').value = '';
       closePublishModal();
+      selectFeedModule('stream');
       setFeedChannel('rec');
-      showToast('发布成功并通过内容安全机审！');
+      showToast('演示动态已发布到本地列表');
     }
 
     // 课程便签编辑
@@ -2742,7 +2833,9 @@
     // 私聊会话二级页面
     function openChatPage(user, college, itemTitle, itemPrice, icon) {
       document.getElementById('chatUserTitle').innerText = user;
-      document.getElementById('chatUserCollege').innerText = college + ' · 学号已核验';
+      document.getElementById('chatUserCollege').innerText = college + ' · 在线';
+      const avatar = document.getElementById('chatUserAvatar');
+      if (avatar) avatar.innerText = (user || '同').slice(0, 1);
       if (itemTitle && itemPrice) {
         document.getElementById('chatItemTitle').innerText = itemTitle;
         document.getElementById('chatItemPrice').innerText = itemPrice;
@@ -2767,9 +2860,9 @@
 
       setTimeout(() => {
         const replies = [
-          '好的同学！原装都在，傍晚 18 点二食堂门口见可以吗？',
-          '在的！我今天都在诚毅，可以随时当面验货～',
-          '没问题，我带原装盒子给你看看，学号都是核验过的放心！'
+          '好呀！我今晚 18:30 到尚大楼，一起找个靠窗的位置～',
+          '在的！你方便的时候直接发消息给我就好。',
+          '没问题，晚点见～有需要也可以把位置发给我。'
         ];
         const reply = replies[Math.floor(Math.random() * replies.length)];
         appendChatBubble(reply, 'seller');
@@ -2781,8 +2874,25 @@
     function sendQuickReply(text) {
       appendChatBubble(text, 'me');
       setTimeout(() => {
-        appendChatBubble('好的同学！就按你说的办，我们在食堂门口见～', 'seller');
+        appendChatBubble('好呀，晚点见～到地方告诉我一声。', 'seller');
       }, 700);
+    }
+
+    function filterMessageList(query) {
+      const q = (query || '').trim().toLowerCase();
+      let visible = 0;
+      document.querySelectorAll('#messageConversationList .message-conversation').forEach(row => {
+        const match = !q || (row.dataset.search || '').toLowerCase().includes(q);
+        row.classList.toggle('hidden', !match);
+        if (match) visible++;
+      });
+      const empty = document.getElementById('messageEmptyState');
+      if (empty) empty.classList.toggle('hidden', visible !== 0);
+    }
+
+    function startNewChat(user, college) {
+      closeModal('newChatModal');
+      openChatPage(user, college);
     }
 
     function sendProductCardMsg() {
@@ -2863,18 +2973,19 @@
       const vital = parseFloat(document.getElementById('fitVital').value) || 4000;
       const sprint = parseFloat(document.getElementById('fit50m').value) || 7.1;
       const jump = parseFloat(document.getElementById('fitJump').value) || 240;
+      const run = parseFloat(document.getElementById('fitRun').value) || 230;
 
       const bmi = (w / ((h / 100) * (h / 100))).toFixed(1);
       
-      let score = 50;
-      if (bmi >= 18.5 && bmi <= 23.9) score += 15;
-      else if (bmi < 18.5) score += 12;
-      else score += 10;
-
-      score += Math.min(15, Math.max(5, (vital - 2000) / 200));
-      score += Math.min(20, Math.max(5, (9.0 - sprint) * 10));
-      score += Math.min(10, Math.max(2, (jump - 180) / 10));
-      score = Math.min(100, Math.max(40, score)).toFixed(1);
+      // Illustrative interaction only: every input affects this demo score.
+      const clamp = n => Math.min(20, Math.max(0, n));
+      const female = currentFitGender === 'female';
+      let score = clamp(20 - Math.abs(Number(bmi) - 21) * 1.5);
+      score += clamp(vital / (female ? 180 : 250));
+      score += clamp(((female ? 10.5 : 9.5) - sprint) * 4);
+      score += clamp(jump / (female ? 10 : 13));
+      score += clamp(20 - (run - (female ? 210 : 230)) / 12);
+      score = Math.min(100, Math.max(0, score)).toFixed(1);
 
       const grade = score >= 85 ? '优秀' : (score >= 75 ? '良好' : (score >= 60 ? '及格' : '不及格'));
       document.getElementById('fitScoreDisplay').innerText = `${score} 分 · ${grade} (BMI ${bmi})`;
@@ -2898,16 +3009,15 @@
 
     // 周次选择
     function selectWeek(w) {
-      document.getElementById('scheduleWeekTitle').innerText = `第 ${w} 周 (${w === 3 ? '本周' : '教学周'})`;
+      selectScheduleWeek(w);
       closeModal('weekPickerModal');
-      showToast(`已切换至第 ${w} 周课表`);
     }
 
     // 快捷打开各类弹窗
     function openClassroomModal() { openModal('classroomModal'); }
     function openGradesModal() { openModal('gradesModal'); }
     function openCalendarModal() { openModal('calendarModal'); }
-    function openFitnessModal() { openModal('fitnessModal'); }
+    function openFitnessModal() { openModal('fitnessModal'); calcFitnessScore(); }
     function openFeedbackModal() { openModal('feedbackModal'); }
     function openCreditModal() { openModal('creditModal'); }
     function openAuthModal() { openModal('authModal'); }
@@ -2970,16 +3080,17 @@
     }
 
     function toggleLike(btn) {
-      const span = btn.querySelector('span:last-child');
-      let count = parseInt(span.innerText) || 0;
+      const span = btn.querySelector('span:last-child') || btn;
+      const prefix = span === btn && span.innerText.includes('❤️') ? '❤️ ' : '';
+      let count = parseInt(span.innerText.replace(/[^0-9]/g, '')) || 0;
       if (btn.classList.contains('text-[#8B1E29]')) {
         btn.classList.remove('text-[#8B1E29]');
         btn.classList.add('text-slate-500');
-        span.innerText = Math.max(0, count - 1);
+        span.innerText = prefix + Math.max(0, count - 1);
       } else {
         btn.classList.add('text-[#8B1E29]');
         btn.classList.remove('text-slate-500');
-        span.innerText = count + 1;
+        span.innerText = prefix + (count + 1);
         showToast('已点赞');
       }
     }
@@ -3039,5 +3150,6 @@
     });
     renderInPageWeekGrid();
   </script>
+  <script src="campus.js"></script>
 </body>
 </html>

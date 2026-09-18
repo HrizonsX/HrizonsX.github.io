@@ -2,6 +2,14 @@
   "name": "demo-repo",
   "version": "0.2.0",
   "description": "A sample package.json",
+  "scripts": {
+    "dev": "node scripts/preview.mjs",
+    "build:css": "tailwindcss -i styles/utilities.css -o assets/utilities.css --content index.html,campus.js --minify"
+  },
+  "devDependencies": {
+    "@phosphor-icons/core": "2.1.1",
+    "tailwindcss": "3.4.17"
+  },
   "dependencies": {
     "@primer/css": "17.0.1"
   },
