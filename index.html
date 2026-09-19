@@ -539,6 +539,7 @@
                   <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.91a.75.75 0 01-.76-.814c.063-.564.248-1.127.536-1.636C3.86 16.98 3 14.61 3 12c0-4.556 4.03-8.25 9-8.25s9 3.582 9 8z"/></svg>
                   <span id="feed-comment-count">14</span>
                 </button>
+                <button type="button" data-post-save="study" aria-pressed="false" onclick="togglePostSave(event,'study')" class="post-save-action flex items-center gap-1.5 hover:text-[#8B1E29] transition"><span aria-hidden="true">☆</span><span>收藏</span></button>
                 <button onclick="toggleLike(this)" class="flex items-center gap-1.5 hover:text-[#8B1E29] transition group">
                   <svg class="w-4 h-4 text-slate-400 group-hover:text-[#8B1E29] transition" fill="currentColor" viewBox="0 0 24 24"><path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"/></svg>
                   <span>42</span>
@@ -578,6 +579,7 @@
                   <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.91a.75.75 0 01-.76-.814c.063-.564.248-1.127.536-1.636C3.86 16.98 3 14.61 3 12c0-4.556 4.03-8.25 9-8.25s9 3.582 9 8z"/></svg>
                   <span>26</span>
                 </button>
+                <button type="button" data-post-save="wall" aria-pressed="false" onclick="togglePostSave(event,'wall')" class="post-save-action flex items-center gap-1.5 hover:text-[#8B1E29] transition"><span aria-hidden="true">☆</span><span>收藏</span></button>
                 <button onclick="toggleLike(this)" class="flex items-center gap-1.5 hover:text-[#8B1E29] transition group">
                   <svg class="w-4 h-4 text-slate-400 group-hover:text-[#8B1E29] transition" fill="currentColor" viewBox="0 0 24 24"><path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"/></svg>
                   <span>68</span>
@@ -956,6 +958,8 @@
                 <button onclick="openGradesModal()"><span class="service-icon apricot"><i class="ui-icon" data-icon="chart-bar"></i></span><strong>成绩</strong><small>查看学业成绩</small></button>
                 <button onclick="openCalendarModal()"><span class="service-icon rose"><i class="ui-icon" data-icon="calendar-plus"></i></span><strong>导日历</strong><small>课程随身提醒</small></button>
                 <button onclick="openFitnessModal()"><span class="service-icon mint"><i class="ui-icon" data-icon="person-simple-run"></i></span><strong>体测</strong><small>算算我的成绩</small></button>
+                <button onclick="selectCampusModule('schedule')"><span class="service-icon apricot"><i class="ui-icon" data-icon="clock"></i></span><strong>课表</strong><small>本周课程安排</small></button>
+                <button onclick="openNoticeList('all')"><span class="service-icon rose"><i class="ui-icon" data-icon="megaphone-simple"></i></span><strong>公告</strong><small>学校学院通知</small></button>
               </section>
               <section class="campus-panel announcement-panel" aria-label="校园公告">
                 <div class="section-heading"><div class="notice-tabs" aria-label="公告来源"><button data-home-source="school" onclick="setHomeNoticeSource('school')" aria-pressed="true">学校公告</button><button data-home-source="college" onclick="setHomeNoticeSource('college')" aria-pressed="false">学院公告</button></div><button class="text-action" onclick="openNoticeList()">查看全部 <i class="ui-icon" data-icon="caret-right"></i></button></div>
@@ -1176,18 +1180,24 @@
             <label class="message-search"><i class="ui-icon" data-icon="magnifying-glass"></i><input type="search" placeholder="搜索聊天记录、联系人或关键词" oninput="filterMessageList(this.value)" aria-label="搜索消息"></label>
             <button onclick="openModal('newChatModal')" class="message-new-btn"><i class="ui-icon" data-icon="chat-circle-dots"></i><span>新建聊天</span></button>
           </div>
-          <div class="message-section-heading interaction-heading"><span>互动消息</span><button onclick="clearAllMessageUnread()" class="message-clear-btn">清除未读</button></div>
+          <div class="message-section-heading interaction-heading"><span>互动消息</span></div>
           <div class="interaction-grid" aria-label="动态互动提醒">
             <button onclick="openInteractionInbox('likes',this)" class="interaction-card"><span class="interaction-icon interaction-like"><i class="ui-icon" data-icon="heart"></i><b class="message-unread-badge">3</b></span><span><strong>赞和收藏</strong><small>小林等赞了你</small></span></button>
             <button onclick="openInteractionInbox('comments',this)" class="interaction-card"><span class="interaction-icon interaction-comment"><i class="ui-icon" data-icon="chat-circle-dots"></i><b class="message-unread-badge">5</b></span><span><strong>评论</strong><small>有新的回复</small></span></button>
             <button onclick="openInteractionInbox('mentions',this)" class="interaction-card"><span class="interaction-icon interaction-mention"><i class="ui-icon" data-icon="user"></i><b class="message-unread-badge">2</b></span><span><strong>@ 我的</strong><small>2 条新提醒</small></span></button>
           </div>
-          <div class="message-section-heading"><span>最近聊天</span></div>
+          <div class="message-section-heading"><span>最近聊天</span><button onclick="clearAllMessageUnread()" class="message-clear-btn">清除未读</button></div>
           <div id="messageConversationList" class="message-list">
-            <div class="message-swipe-row" data-search="学校通知 秋季学期选课确认 教务处" data-message-key="school-notice">
+            <div class="message-swipe-row" data-search="学校通知 秋季学期选课确认 教务处" data-message-key="school-notice" data-message-type="notice">
               <div class="message-swipe-actions" aria-label="学校通知操作"><button type="button" class="message-swipe-action mute" onclick="setMessageAction(event,this,'mute')">免打扰</button><button type="button" class="message-swipe-action hide" onclick="setMessageAction(event,this,'hide')">不显示</button><button type="button" class="message-swipe-action delete" onclick="setMessageAction(event,this,'delete')">删除</button></div>
               <button class="message-conversation" onclick="showToast('暂无需要处理的学校通知')">
               <span class="message-avatar message-avatar-notice"><i class="ui-icon" data-icon="megaphone-simple"></i></span><span class="message-conversation-main"><span class="message-conversation-title">学校通知 <em>通知</em></span><span class="message-conversation-preview">关于秋季学期选课确认的通知</span></span><span class="message-conversation-meta"><time>09:18</time><b class="message-unread-badge">1</b></span>
+              </button>
+            </div>
+            <div class="message-swipe-row" data-search="教务处 课程 调整 提醒" data-message-key="academic-notice" data-message-type="notice">
+              <div class="message-swipe-actions" aria-label="教务处会话操作"><button type="button" class="message-swipe-action mute" onclick="setMessageAction(event,this,'mute')">免打扰</button><button type="button" class="message-swipe-action hide" onclick="setMessageAction(event,this,'hide')">不显示</button><button type="button" class="message-swipe-action delete" onclick="setMessageAction(event,this,'delete')">删除</button></div>
+              <button class="message-conversation" onclick="showToast('课程调整提醒：下周三《高等数学》上课地点变更')">
+              <span class="message-avatar message-avatar-soft"><i class="ui-icon" data-icon="calendar-plus"></i></span><span class="message-conversation-main"><span class="message-conversation-title">教务处 <em>通知</em></span><span class="message-conversation-preview">课程调整提醒：下周三《高等数学》上课地点变更…</span></span><span class="message-conversation-meta"><time>09-17</time></span>
               </button>
             </div>
             <div class="message-swipe-row" data-search="林软软 计算机工程学院 考研 自习室" data-message-key="lin">
@@ -1212,12 +1222,6 @@
               <div class="message-swipe-actions" aria-label="集大表白墙会话操作"><button type="button" class="message-swipe-action mute" onclick="setMessageAction(event,this,'mute')">免打扰</button><button type="button" class="message-swipe-action hide" onclick="setMessageAction(event,this,'hide')">不显示</button><button type="button" class="message-swipe-action delete" onclick="setMessageAction(event,this,'delete')">删除</button></div>
               <button class="message-conversation" onclick="openChatPage('集大表白墙', '校园社区')">
               <span class="message-avatar message-avatar-sky">墙</span><span class="message-conversation-main"><span class="message-conversation-title">集大表白墙 <em>校园社区</em></span><span class="message-conversation-preview">【匿名投稿】黄昏真的好美呀，想把这份浪漫分享…</span></span><span class="message-conversation-meta"><time>昨天 19:27</time></span>
-              </button>
-            </div>
-            <div class="message-swipe-row" data-search="教务处 课程 调整 提醒" data-message-key="academic-notice">
-              <div class="message-swipe-actions" aria-label="教务处会话操作"><button type="button" class="message-swipe-action mute" onclick="setMessageAction(event,this,'mute')">免打扰</button><button type="button" class="message-swipe-action hide" onclick="setMessageAction(event,this,'hide')">不显示</button><button type="button" class="message-swipe-action delete" onclick="setMessageAction(event,this,'delete')">删除</button></div>
-              <button class="message-conversation" onclick="showToast('课程调整提醒：下周三《高等数学》上课地点变更')">
-              <span class="message-avatar message-avatar-soft"><i class="ui-icon" data-icon="calendar-plus"></i></span><span class="message-conversation-main"><span class="message-conversation-title">教务处 <em>通知</em></span><span class="message-conversation-preview">课程调整提醒：下周三《高等数学》上课地点变更…</span></span><span class="message-conversation-meta"><time>09-17</time></span>
               </button>
             </div>
           </div>
@@ -1247,24 +1251,32 @@
               </div>
             </div>
 
+            <button type="button" class="profile-bio-editor" onclick="openProfileBioEditor()" aria-label="编辑个人简要说明">
+              <span id="profileBioText">热爱产品与代码，也喜欢在校园里发现小惊喜。</span><span>编辑</span>
+            </button>
+
             <!-- 数据统计项 -->
-            <div class="grid grid-cols-4 gap-1 pt-3 border-t border-slate-100 text-center text-xs">
-              <div class="cursor-pointer" onclick="switchTab('feed')">
+            <div class="profile-stats pt-3 border-t border-slate-100 text-center text-xs">
+              <button type="button" class="profile-stat" onclick="switchTab('feed')">
                 <div class="font-bold text-slate-900 text-sm">12</div>
                 <div class="text-[10px] text-slate-400 mt-0.5">我的动态</div>
-              </div>
-              <div class="cursor-pointer" onclick="showToast('累计收到 148 次集大师生点赞鼓励')">
+              </button>
+              <button type="button" class="profile-stat is-accent" onclick="openSavedPosts()">
+                <div id="savedPostCount" class="font-bold text-sm">0</div>
+                <div class="text-[10px] mt-0.5">我的收藏</div>
+              </button>
+              <button type="button" class="profile-stat" onclick="showToast('累计收到 148 次集大师生点赞鼓励')">
                 <div class="font-bold text-slate-900 text-sm">148</div>
                 <div class="text-[10px] text-slate-400 mt-0.5">获赞总数</div>
-              </div>
-              <div class="cursor-pointer" onclick="switchTab('feed'); selectFeedModule('used')">
+              </button>
+              <button type="button" class="profile-stat" onclick="switchTab('feed'); selectFeedModule('used')">
                 <div class="font-bold text-[#8B1E29] text-sm">2</div>
                 <div class="text-[10px] text-slate-400 mt-0.5">在售闲置</div>
-              </div>
-              <div class="cursor-pointer" onclick="openMyOrdersModal()">
+              </button>
+              <button type="button" class="profile-stat" onclick="openMyOrdersModal()">
                 <div class="font-bold text-slate-900 text-sm">8</div>
                 <div class="text-[10px] text-slate-400 mt-0.5">互助履约</div>
-              </div>
+              </button>
             </div>
           </div>
 
@@ -1288,31 +1300,27 @@
             </button>
           </div>
 
-          <div class="profile-apps-heading"><span>校园小应用</span><small>左右滑动查看更多</small></div>
-          <div class="profile-apps-carousel no-scrollbar" aria-label="校园小应用">
+          <div class="profile-apps-heading"><span>小应用</span></div>
+          <div class="profile-apps-carousel no-scrollbar" aria-label="小应用">
             <button type="button" class="profile-app-card" onclick="handleDailyCheckIn(this)">
               <span class="app-icon bg-amber-50 text-amber-700"><i class="ui-icon" data-icon="calendar-plus"></i></span><strong>每日签到</strong><small class="app-status">领校园积分</small>
             </button>
             <button type="button" class="profile-app-card" onclick="openMiniGame()">
               <span class="app-icon bg-purple-50 text-purple-700"><i class="ui-icon" data-icon="squares-four"></i></span><strong>小游戏</strong><small>放松一下</small>
             </button>
-            <button type="button" class="profile-app-card" onclick="selectCampusModule('schedule')">
-              <span class="app-icon bg-blue-50 text-blue-700"><i class="ui-icon" data-icon="calendar-plus"></i></span><strong>我的课表</strong><small>今日安排</small>
+            <button type="button" class="profile-app-card" onclick="openCommunityInfo('rules')">
+              <span class="app-icon bg-blue-50 text-blue-700"><i class="ui-icon" data-icon="bookmark-simple"></i></span><strong>社区公约</strong><small>一起友善交流</small>
             </button>
-            <button type="button" class="profile-app-card" onclick="openClassroomModal()">
-              <span class="app-icon bg-emerald-50 text-emerald-700"><i class="ui-icon" data-icon="door-open"></i></span><strong>空教室</strong><small>找个好座位</small>
+            <button type="button" class="profile-app-card" onclick="openCommunityInfo('blacklist')">
+              <span class="app-icon bg-slate-100 text-slate-700"><i class="ui-icon" data-icon="user"></i></span><strong>小黑屋</strong><small>违规处理公示</small>
             </button>
-            <button type="button" class="profile-app-card" onclick="selectCampusModule('notices')">
-              <span class="app-icon bg-rose-50 text-[#8B1E29]"><i class="ui-icon" data-icon="megaphone-simple"></i></span><strong>校园公告</strong><small>重要提醒</small>
+            <button type="button" class="profile-app-card" onclick="openCommunityInfo('governance')">
+              <span class="app-icon bg-emerald-50 text-emerald-700"><i class="ui-icon" data-icon="megaphone-simple"></i></span><strong>治理记录</strong><small>共建社区环境</small>
             </button>
           </div>
 
           <!-- 功能列表项 -->
           <div class="app-card divide-y divide-slate-100 text-xs">
-            <div onclick="openMyOrdersModal()" class="p-3 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition">
-              <span class="text-slate-800 font-medium">我的交易与互助</span>
-              <span class="text-slate-400 text-[11px]">查看 ›</span>
-            </div>
             <div onclick="openAuthModal()" class="p-3 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition">
               <span class="text-slate-800 font-medium">校园身份认证</span>
               <span class="text-emerald-600 text-[11px] font-medium">已认证 ›</span>
@@ -1345,20 +1353,14 @@
       <!-- 底部 4 Tab 导航栏 -->
       <div class="absolute bottom-0 left-0 right-0 h-14 glass-tabbar border-t border-[var(--border-divider)] grid grid-cols-4 z-40 select-none">
         
-        <button onclick="handleFeedTabClick()" id="tab-feed" class="flex flex-col items-center justify-center text-[#8B1E29] transition group">
-          <div class="relative">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.25a.75.75 0 01.75.75v.759a8.966 8.966 0 015.657 2.343l.53-.53a.75.75 0 111.06 1.06l-.53.53a8.966 8.966 0 012.343 5.657h.76a.75.75 0 010 1.5h-.76a8.966 8.966 0 01-2.343 5.657l.53.53a.75.75 0 11-1.06 1.06l-.53-.53a8.966 8.966 0 01-5.657 2.343v.76a.75.75 0 01-1.5 0v-.76a8.966 8.966 0 01-5.657-2.343l-.53.53a.75.75 0 11-1.06-1.06l.53-.53A8.966 8.966 0 012.82 13.5h-.76a.75.75 0 010-1.5h.76a8.966 8.966 0 012.343-5.657l-.53-.53a.75.75 0 111.06-1.06l.53.53A8.966 8.966 0 0111.25 3.76V3a.75.75 0 01.75-.75zM12 6a6 6 0 100 12 6 6 0 000-12z"/></svg>
-            <span class="absolute -top-1 -right-2 text-[9px] text-[#8B1E29] group-hover:text-[#8B1E29] font-bold">▾</span>
-          </div>
+        <button onclick="switchTab('feed')" id="tab-feed" class="flex flex-col items-center justify-center text-[#8B1E29] transition group">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.25a.75.75 0 01.75.75v.759a8.966 8.966 0 015.657 2.343l.53-.53a.75.75 0 111.06 1.06l-.53.53a8.966 8.966 0 012.343 5.657h.76a.75.75 0 010 1.5h-.76a8.966 8.966 0 01-2.343 5.657l.53.53a.75.75 0 11-1.06 1.06l-.53-.53a8.966 8.966 0 01-5.657 2.343v.76a.75.75 0 01-1.5 0v-.76a8.966 8.966 0 01-5.657-2.343l-.53.53a.75.75 0 11-1.06-1.06l.53-.53A8.966 8.966 0 012.82 13.5h-.76a.75.75 0 010-1.5h.76a8.966 8.966 0 012.343-5.657l-.53-.53a.75.75 0 111.06-1.06l.53.53A8.966 8.966 0 0111.25 3.76V3a.75.75 0 01.75-.75zM12 6a6 6 0 100 12 6 6 0 000-12z"/></svg>
           <span class="text-[10px] font-bold mt-0.5">社区</span>
         </button>
 
-        <!-- 校园功能 Tab (点击直达大厅，不再弹窗死循环) -->
-        <button onclick="handleCampusTabClick()" id="tab-campus" class="flex flex-col items-center justify-center text-slate-400 hover:text-slate-700 transition group relative">
-          <div class="relative">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-5.25 6.557c.725-.262 1.464-.498 2.217-.706"/></svg>
-            <span class="absolute -top-1 -right-2 text-[9px] text-slate-400 group-hover:text-[#8B1E29] font-bold">▾</span>
-          </div>
+        <!-- 校园功能 Tab -->
+        <button onclick="switchTab('campus')" id="tab-campus" class="flex flex-col items-center justify-center text-slate-400 hover:text-slate-700 transition group relative">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-5.25 6.557c.725-.262 1.464-.498 2.217-.706"/></svg>
           <span class="text-[10px] font-medium mt-0.5">校园功能</span>
         </button>
 
@@ -2050,7 +2052,7 @@
             </div>
             <div id="postDetailBody" class="post-detail-body"></div>
             <div id="postDetailInfo" class="post-detail-info"></div>
-            <div class="flex items-center justify-between text-[10px] text-slate-500"><span id="postDetailStats">42 个赞 · 14 条评论</span><button onclick="showToast('已收藏这条动态')" class="text-[#8B1E29] font-semibold">☆ 收藏</button></div>
+            <div class="flex items-center justify-between text-[10px] text-slate-500"><span id="postDetailStats">42 个赞 · 14 条评论</span><button id="postDetailSaveBtn" type="button" onclick="togglePostSave(event,activePostDetailId)" class="post-save-action text-[#8B1E29] font-semibold" aria-pressed="false">☆ 收藏</button></div>
             <div class="border-t border-slate-100 pt-2">
               <div class="flex items-center justify-between mb-1"><strong class="text-xs text-slate-900">评论区</strong><span class="text-[10px] text-slate-400">友善交流，理性讨论</span></div>
               <div id="postDetailComments"></div>
@@ -2069,7 +2071,7 @@
           <div class="flex items-center justify-between pb-2 border-b border-slate-100"><div><h3 class="font-bold text-sm text-slate-900">帮助与客服</h3><p class="text-[10px] text-slate-400 mt-0.5">遇到问题，随时找我们</p></div><button onclick="closeModal('helpServiceModal')" class="text-slate-400 text-xs p-1">✕</button></div>
           <div class="space-y-2 text-xs">
             <button onclick="showToast('已展开：如何发布、编辑和删除校园动态')" class="w-full flex items-center justify-between rounded-xl bg-slate-50 p-3 text-left"><span>如何发布和管理动态</span><span class="text-slate-400">›</span></button>
-            <button onclick="showToast('消息页左滑会话即可设置免打扰、不显示或删除')" class="w-full flex items-center justify-between rounded-xl bg-slate-50 p-3 text-left"><span>消息和隐私设置</span><span class="text-slate-400">›</span></button>
+            <button onclick="showToast('消息页长按会话可置顶、不显示或删除；左滑仍可快速管理')" class="w-full flex items-center justify-between rounded-xl bg-slate-50 p-3 text-left"><span>消息和隐私设置</span><span class="text-slate-400">›</span></button>
             <button onclick="showToast('课表支持周网格、备忘和节假日标记')" class="w-full flex items-center justify-between rounded-xl bg-slate-50 p-3 text-left"><span>课表与校园服务</span><span class="text-slate-400">›</span></button>
           </div>
           <button onclick="showToast('客服已接入，工作日 9:00–18:00 在线'); closeModal('helpServiceModal')" class="w-full py-2.5 bg-[#8B1E29] text-white font-semibold text-xs rounded-xl">联系客服</button>
@@ -2284,7 +2286,57 @@
         </div>
       </div>
 
-      <!-- 18. 周次选择弹窗 (1-18周真实切换) -->
+      <!-- 18. 编辑个人简要说明 -->
+      <div id="profileBioModal" onclick="if(event.target===this) closeModal('profileBioModal')" class="modal-overlay">
+        <div class="bg-white rounded-3xl w-full max-w-[335px] p-4 shadow-2xl space-y-3 modal-dialog">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+            <div><h3 class="font-bold text-sm text-slate-900">个人简要说明</h3><p class="text-[10px] text-slate-400 mt-0.5">用一句话介绍你的兴趣或近况</p></div>
+            <button onclick="closeModal('profileBioModal')" class="text-slate-400 text-xs p-1" aria-label="关闭个人说明编辑">✕</button>
+          </div>
+          <label class="block"><span class="sr-only">个人简要说明</span><textarea id="profileBioInput" maxlength="48" rows="3" class="w-full resize-none rounded-2xl bg-slate-50 border border-slate-200 p-3 text-xs text-slate-800 outline-none focus:border-[#8B1E29]" placeholder="例如：热爱摄影，也在准备考研。"></textarea></label>
+          <div class="flex items-center justify-between text-[10px] text-slate-400"><span>最多 48 个字</span><span>保存后仅在当前原型会话生效</span></div>
+          <button onclick="saveProfileBio()" class="w-full py-2.5 bg-[#8B1E29] text-white font-semibold text-xs rounded-xl">保存说明</button>
+        </div>
+      </div>
+
+      <!-- 19. 我的收藏 -->
+      <div id="savedPostsModal" onclick="if(event.target===this) closeModal('savedPostsModal')" class="modal-overlay">
+        <div class="bg-white rounded-3xl w-full max-w-[345px] p-4 shadow-2xl space-y-3 modal-dialog">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+            <div><h3 class="font-bold text-sm text-slate-900">我的收藏</h3><p class="text-[10px] text-slate-400 mt-0.5">收藏的校园动态会集中出现在这里</p></div>
+            <button onclick="closeModal('savedPostsModal')" class="text-slate-400 text-xs p-1" aria-label="关闭我的收藏">✕</button>
+          </div>
+          <div id="savedPostsList" class="space-y-2"></div>
+        </div>
+      </div>
+
+      <!-- 20. 社区治理信息 -->
+      <div id="communityInfoModal" onclick="if(event.target===this) closeModal('communityInfoModal')" class="modal-overlay">
+        <div class="bg-white rounded-3xl w-full max-w-[335px] p-4 shadow-2xl space-y-3 modal-dialog">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+            <div><h3 id="communityInfoTitle" class="font-bold text-sm text-slate-900">社区公约</h3><p id="communityInfoSubtitle" class="text-[10px] text-slate-400 mt-0.5">一起维护真实、友善的校园社区</p></div>
+            <button onclick="closeModal('communityInfoModal')" class="text-slate-400 text-xs p-1" aria-label="关闭社区信息">✕</button>
+          </div>
+          <div id="communityInfoBody" class="space-y-2 text-xs text-slate-600 leading-relaxed"></div>
+          <button onclick="closeModal('communityInfoModal')" class="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs rounded-xl transition">知道了</button>
+        </div>
+      </div>
+
+      <!-- 21. 长按会话操作 -->
+      <div id="messageActionSheet" onclick="if(event.target===this) closeMessageActionSheet()" class="sheet-modal">
+        <div class="bg-white rounded-t-3xl p-4 shadow-2xl modal-dialog space-y-2">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+            <div><h3 id="messageActionTitle" class="font-bold text-sm text-slate-900">会话操作</h3><p class="text-[10px] text-slate-400 mt-0.5">选择要对当前聊天执行的操作</p></div>
+            <button onclick="closeMessageActionSheet()" class="text-slate-400 text-xs p-1" aria-label="关闭会话操作">✕</button>
+          </div>
+          <button id="messagePinAction" type="button" class="message-action-option" onclick="handleMessageLongPressAction('pin')"><span aria-hidden="true">↑</span><span>置顶聊天</span></button>
+          <button type="button" class="message-action-option" onclick="handleMessageLongPressAction('hide')"><span aria-hidden="true">—</span><span>不显示</span></button>
+          <button type="button" class="message-action-option is-danger" onclick="handleMessageLongPressAction('delete')"><span aria-hidden="true">×</span><span>删除聊天</span></button>
+          <button type="button" class="w-full py-2.5 mt-1 bg-slate-100 text-slate-600 font-semibold text-xs rounded-xl" onclick="closeMessageActionSheet()">取消</button>
+        </div>
+      </div>
+
+      <!-- 22. 周次选择弹窗 (1-18周真实切换) -->
       <div id="weekPickerModal" onclick="if(event.target===this) closeModal('weekPickerModal')" class="modal-overlay">
         <div class="bg-white rounded-3xl w-full max-w-[325px] p-4 shadow-2xl space-y-3 modal-dialog">
           <div class="flex items-center justify-between pb-2 border-b border-slate-100">
@@ -2403,17 +2455,24 @@
     let messageSwipeStartX = 0;
     let messageSwipeStartY = 0;
     let messageSwipeDragging = false;
+    let activeMessageActionRow = null;
+    let messageLongPressTimer = null;
+    let messageLongPressStart = null;
     let activePostDetailId = 'study';
     let localPostBody = '';
+    let profileBio = '热爱产品与代码，也喜欢在校园里发现小惊喜。';
+    const savedPostIds = new Set();
 
     const postDetailData = {
       study: {
+        title: '寻找考研自习搭子',
         author: '软工小林_23', avatar: '林', meta: '计算机学院 · 12分钟前 · 尚大楼 14F 考研自习室', subtitle: '找学伴搭子 · #考研自习搭子#',
         body: '尚大楼考研自习室靠窗的一排插座修好了！寻一个大三准备考本校计算机专硕的学伴，每天晚上 18:30-22:00 互相监督刷数学真题打卡，有兴趣的同学一起呀～',
         info: ['地点：尚大楼 14F 考研自习室', '时间：每天 18:30–22:00', '相关：考研自习、计算机专硕、学伴打卡'], likes: 42,
         commentCount: 14, comments: [{ name: '陈同学 · 计算机', avatar: '陈', time: '8分钟前', text: '我也在尚大楼 1402 复习，晚上有空一起对一下高数期末历年卷的选择题答案！' }, { name: '小周', avatar: '周', time: '20分钟前', text: '已收藏，周末一起组队刷题～' }]
       },
       wall: {
+        title: '表白墙失物归还',
         author: '集大表白墙', avatar: '墙', meta: '校园社区 · 1小时前 · 嘉庚图书馆三楼', subtitle: '#表白墙# · 同学匿名投递',
         body: '【表白投递】捞一下周三下午在诚毅教学楼 3-402 一起上《算法设计》的那个穿米白色毛衣、背浅灰双肩包的学姐，你借给我的签字笔还没来得及还给你！如果看到了麻烦私信我，请你喝诚毅二食堂的柠檬茶！',
         info: ['地点：诚毅教学楼 3-402', '时间：周三下午《算法设计》', '相关：失物归还、校园表白墙、诚毅二食堂'], likes: 68,
@@ -2557,15 +2616,6 @@
       }
     }
 
-    // 社区 Tab 点击 (首次点击切入Tab，在当前Tab轻点展开二级板块)
-    function handleFeedTabClick() {
-      if (currentTab !== 'feed') {
-        switchTab('feed');
-      } else {
-        toggleFeedActionSheet();
-      }
-    }
-
     function openFeedActionSheet() {
       const sheet = document.getElementById('feedActionSheet');
       if (sheet) sheet.classList.add('is-active');
@@ -2574,15 +2624,6 @@
     function closeFeedActionSheet() {
       const sheet = document.getElementById('feedActionSheet');
       if (sheet) sheet.classList.remove('is-active');
-    }
-
-    // 校园功能 Tab 点击 (首次点击切入Tab，在当前Tab轻点展开二级教务菜单)
-    function handleCampusTabClick() {
-      if (currentTab !== 'campus') {
-        switchTab('campus');
-      } else {
-        toggleCampusActionSheet();
-      }
     }
 
     function openCampusActionSheet() {
@@ -3040,12 +3081,14 @@
       messageSwipeStartY = event.touches[0].clientY;
       messageSwipeDragging = false;
       activeMessageSwipe = row;
+      startMessageLongPress(event.touches[0], row);
     }
 
     function messageTouchMove(event, row) {
       if (!event.touches || !event.touches[0]) return;
       const dx = event.touches[0].clientX - messageSwipeStartX;
       const dy = event.touches[0].clientY - messageSwipeStartY;
+      if (Math.abs(dx) > 8 || Math.abs(dy) > 8) cancelMessageLongPress();
       if (Math.abs(dx) < Math.abs(dy) || Math.abs(dx) < 8) return;
       event.preventDefault();
       messageSwipeDragging = true;
@@ -3054,6 +3097,7 @@
     }
 
     function messageTouchEnd(event, row) {
+      cancelMessageLongPress();
       if (!messageSwipeDragging) return;
       const button = row.querySelector('.message-conversation');
       const current = parseFloat((button.style.transform || '').replace(/[^-0-9.]/g, '')) || 0;
@@ -3084,6 +3128,75 @@
       closeMessageSwipes();
     }
 
+    function getMessageTitle(row) {
+      return row?.querySelector('.message-conversation-title')?.innerText.replace(/通知|群聊|校园社区/g, '').trim() || '会话';
+    }
+
+    function startMessageLongPress(point, row) {
+      cancelMessageLongPress();
+      messageLongPressStart = { x: point.clientX, y: point.clientY };
+      messageLongPressTimer = setTimeout(() => {
+        row.dataset.longPressBlock = '1';
+        setTimeout(() => { row.dataset.longPressBlock = ''; }, 900);
+        openMessageActionSheet(row);
+        messageLongPressTimer = null;
+      }, 520);
+    }
+
+    function cancelMessageLongPress(point) {
+      if (point && messageLongPressStart) {
+        const dx = point.clientX - messageLongPressStart.x;
+        const dy = point.clientY - messageLongPressStart.y;
+        if (Math.abs(dx) <= 8 && Math.abs(dy) <= 8) return;
+      }
+      if (messageLongPressTimer) clearTimeout(messageLongPressTimer);
+      messageLongPressTimer = null;
+      messageLongPressStart = null;
+    }
+
+    function openMessageActionSheet(row) {
+      activeMessageActionRow = row;
+      closeMessageSwipes();
+      const title = getMessageTitle(row);
+      document.getElementById('messageActionTitle').innerText = title;
+      const pinAction = document.getElementById('messagePinAction');
+      pinAction.querySelector('span:last-child').innerText = row.classList.contains('is-pinned') ? '取消置顶' : '置顶聊天';
+      document.getElementById('messageActionSheet').classList.add('is-active');
+    }
+
+    function closeMessageActionSheet() {
+      document.getElementById('messageActionSheet').classList.remove('is-active');
+      activeMessageActionRow = null;
+      cancelMessageLongPress();
+    }
+
+    function moveMessageRowAfterPriorityGroup(row) {
+      const list = document.getElementById('messageConversationList');
+      if (!list) return;
+      const protectedRows = [...list.querySelectorAll('.message-swipe-row')].filter(item => item !== row && (item.dataset.messageType === 'notice' || item.classList.contains('is-pinned')));
+      const anchor = protectedRows[protectedRows.length - 1];
+      list.insertBefore(row, anchor ? anchor.nextSibling : list.firstChild);
+    }
+
+    function handleMessageLongPressAction(action) {
+      const row = activeMessageActionRow;
+      if (!row) return;
+      const title = getMessageTitle(row);
+      if (action === 'pin') {
+        const pinned = !row.classList.contains('is-pinned');
+        row.classList.toggle('is-pinned', pinned);
+        moveMessageRowAfterPriorityGroup(row);
+        showToast(title + (pinned ? '已置顶' : '已取消置顶'));
+      } else if (action === 'hide') {
+        row.classList.add('is-hidden-by-user');
+        showToast(title + '将不再显示');
+      } else if (action === 'delete') {
+        row.remove();
+        showToast(title + '已删除');
+      }
+      closeMessageActionSheet();
+    }
+
     function initMessageSwipe() {
       const list = document.getElementById('messageConversationList');
       if (!list) return;
@@ -3091,13 +3204,20 @@
         row.addEventListener('touchstart', event => messageTouchStart(event, row), { passive: true });
         row.addEventListener('touchmove', event => messageTouchMove(event, row), { passive: false });
         row.addEventListener('touchend', event => messageTouchEnd(event, row), { passive: false });
+        row.addEventListener('touchcancel', () => cancelMessageLongPress());
+        row.addEventListener('mousedown', event => { if (event.button === 0) startMessageLongPress(event, row); });
+        row.addEventListener('mousemove', event => cancelMessageLongPress(event));
+        row.addEventListener('mouseup', () => cancelMessageLongPress());
+        row.addEventListener('mouseleave', () => cancelMessageLongPress());
+        row.addEventListener('contextmenu', event => { event.preventDefault(); openMessageActionSheet(row); });
       });
       list.addEventListener('click', event => {
         const row = event.target.closest('.message-swipe-row');
-        if (row && row.dataset.swipeBlock === '1') {
+        if (row && (row.dataset.swipeBlock === '1' || row.dataset.longPressBlock === '1')) {
           event.preventDefault();
           event.stopPropagation();
           row.dataset.swipeBlock = '';
+          row.dataset.longPressBlock = '';
         }
       }, true);
     }
@@ -3117,6 +3237,57 @@
       container.innerHTML = comments.map(item => '<div class="post-detail-comment"><span class="post-detail-comment-avatar">' + escapeHtml(item.avatar) + '</span><div class="post-detail-comment-copy"><strong>' + escapeHtml(item.name) + '</strong><time>' + escapeHtml(item.time) + '</time><p>' + escapeHtml(item.text) + '</p></div></div>').join('');
     }
 
+    function updatePostSaveUI() {
+      document.querySelectorAll('[data-post-save]').forEach(button => {
+        const saved = savedPostIds.has(button.dataset.postSave);
+        button.setAttribute('aria-pressed', String(saved));
+        button.innerHTML = '<span aria-hidden="true">' + (saved ? '★' : '☆') + '</span><span>' + (saved ? '已收藏' : '收藏') + '</span>';
+      });
+      const detailButton = document.getElementById('postDetailSaveBtn');
+      if (detailButton) {
+        const saved = savedPostIds.has(activePostDetailId);
+        detailButton.setAttribute('aria-pressed', String(saved));
+        detailButton.innerText = saved ? '★ 已收藏' : '☆ 收藏';
+      }
+      const count = document.getElementById('savedPostCount');
+      if (count) count.innerText = String(savedPostIds.size);
+    }
+
+    function togglePostSave(event, postId) {
+      event?.preventDefault();
+      event?.stopPropagation();
+      const saved = savedPostIds.has(postId);
+      if (saved) savedPostIds.delete(postId); else savedPostIds.add(postId);
+      updatePostSaveUI();
+      if (document.getElementById('savedPostsModal')?.classList.contains('is-active')) renderSavedPosts();
+      showToast(saved ? '已取消收藏' : '已收藏到“我的收藏”');
+    }
+
+    function renderSavedPosts() {
+      const list = document.getElementById('savedPostsList');
+      if (!list) return;
+      if (!savedPostIds.size) {
+        list.innerHTML = '<div class="rounded-2xl bg-slate-50 px-4 py-7 text-center"><strong class="block text-xs text-slate-700">还没有收藏动态</strong><span class="block text-[10px] text-slate-400 mt-1">在社区动态下点击“收藏”，之后就能从这里快速找到。</span></div>';
+        return;
+      }
+      list.innerHTML = [...savedPostIds].map(postId => {
+        const data = postDetailData[postId] || { title: '校园动态', author: 'GnaixEuy', body: localPostBody || '这是一条校园动态。' };
+        return '<button type="button" class="saved-post-row" onclick="openSavedPost(\'' + escapeHtml(postId) + '\')"><span><strong>' + escapeHtml(data.title || '校园动态') + '</strong><small>' + escapeHtml(data.author) + '</small><p>' + escapeHtml(data.body) + '</p></span><b aria-hidden="true">›</b></button>';
+      }).join('');
+    }
+
+    function openSavedPosts() {
+      renderSavedPosts();
+      openModal('savedPostsModal');
+    }
+
+    function openSavedPost(postId) {
+      closeModal('savedPostsModal');
+      switchTab('feed');
+      selectFeedModule('stream');
+      openPostDetail(postId);
+    }
+
     function openPostDetail(postId) {
       activePostDetailId = postId;
       const data = postDetailData[postId] || { author: 'GnaixEuy', avatar: '我', meta: '刚刚发布', subtitle: selectedBoard, body: localPostBody || '这是一条刚刚发布的校园动态。', info: ['相关：校园社区动态'], likes: 0, comments: [] };
@@ -3129,6 +3300,7 @@
       document.getElementById('postDetailStats').innerText = data.likes + ' 个赞 · ' + (data.commentCount ?? data.comments.length) + ' 条评论';
       renderPostDetailComments(data.comments);
       document.getElementById('postDetailCommentInput').value = '';
+      updatePostSaveUI();
       document.getElementById('postDetailSheet').classList.add('is-active');
     }
 
@@ -3158,6 +3330,48 @@
       const status = button.querySelector('.app-status');
       if (status) status.innerText = '已签到 +1分';
       showToast('签到成功，校园积分 +1');
+    }
+
+    function openProfileBioEditor() {
+      document.getElementById('profileBioInput').value = profileBio;
+      openModal('profileBioModal');
+      setTimeout(() => document.getElementById('profileBioInput')?.focus(), 120);
+    }
+
+    function saveProfileBio() {
+      const input = document.getElementById('profileBioInput');
+      const nextBio = input.value.trim();
+      if (!nextBio) {
+        showToast('请先写一句个人说明');
+        input.focus();
+        return;
+      }
+      profileBio = nextBio;
+      document.getElementById('profileBioText').innerText = profileBio;
+      closeModal('profileBioModal');
+      showToast('个人说明已更新');
+    }
+
+    function openCommunityInfo(kind) {
+      const info = {
+        rules: {
+          title: '社区公约', subtitle: '一起维护真实、友善的校园社区',
+          body: ['真诚分享校园生活，不发布虚假或误导信息。', '尊重每位同学，拒绝人身攻击、骚扰与隐私泄露。', '交易与互助留痕沟通，遇到风险及时举报。']
+        },
+        blacklist: {
+          title: '小黑屋', subtitle: '违规处理公示 · 原型演示',
+          body: ['当前没有正在公示的严重违规账号。', '公示会说明违规类型、处理期限与申诉入口，不公开无关个人信息。']
+        },
+        governance: {
+          title: '治理记录', subtitle: '看得见的社区共建进展',
+          body: ['本周处理 12 条有效举报，平均响应时间 3.2 小时。', '新增“交易风险提示”和“失物招领重复内容合并”两项优化。']
+        }
+      }[kind];
+      if (!info) return;
+      document.getElementById('communityInfoTitle').innerText = info.title;
+      document.getElementById('communityInfoSubtitle').innerText = info.subtitle;
+      document.getElementById('communityInfoBody').innerHTML = info.body.map((item, index) => '<div class="rounded-2xl bg-slate-50 p-3"><strong class="text-[#8B1E29] mr-1">' + (index + 1) + '.</strong>' + escapeHtml(item) + '</div>').join('');
+      openModal('communityInfoModal');
     }
 
     function openHelpServiceModal() { openModal('helpServiceModal'); }
@@ -3481,6 +3695,7 @@
       }
     });
     initMessageSwipe();
+    updatePostSaveUI();
     renderInPageWeekGrid();
   </script>
   <script src="campus.js"></script>
