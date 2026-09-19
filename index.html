@@ -390,8 +390,9 @@
       </div>
 
       <!-- 微信小程序 Navigation Bar (全端唯一顶栏，集成板块指示器，彻底消除重复标题栏) -->
-      <div class="h-11 bg-white border-b border-[var(--border-divider)] flex items-center justify-end px-4 shrink-0 z-30 select-none">
-        
+      <div class="h-11 bg-white border-b border-[var(--border-divider)] flex items-center justify-between px-4 shrink-0 z-30 select-none">
+        <img src="assets/unijmu-ink-wordmark.png" alt="UNIJMU" class="h-6 w-auto max-w-[104px] object-contain object-left">
+
         <!-- 微信原生胶囊控制器 (Mini-app Capsule) -->
         <div class="w-[84px] h-[30px] rounded-full border border-slate-200 bg-white flex items-center justify-evenly px-1 shadow-2xs">
           <button onclick="handleHeaderTitleClick()" title="展开当前业务二级菜单" class="p-1 text-slate-700 hover:text-black transition">
@@ -435,49 +436,31 @@
               </button>
             </div>
 
-            <!-- 社区高频服务与热门话题横滑快捷入口 (单行集约化，杜绝多层标题栏堆叠) -->
-            <div class="flex gap-2 px-3 py-2 overflow-x-auto no-scrollbar bg-white border-b border-[var(--border-divider)] text-xs">
-              <div onclick="selectFeedModule('used')" class="shrink-0 flex items-center gap-1 px-2.5 py-1 bg-amber-50 hover:bg-amber-100 rounded-lg font-medium text-amber-800 cursor-pointer border border-amber-200/80 transition">
-                <span>🛍️</span>
-                <span>二手集市</span>
-                <span class="text-[9px] bg-amber-500 text-white px-1 rounded-full font-bold">闲置</span>
-              </div>
-              <div onclick="selectFeedModule('lost')" class="shrink-0 flex items-center gap-1 px-2.5 py-1 bg-blue-50 hover:bg-blue-100 rounded-lg font-medium text-blue-700 cursor-pointer border border-blue-200/80 transition">
-                <span>🔍</span>
-                <span>失物寻物</span>
-              </div>
-              <div onclick="selectFeedModule('errand')" class="shrink-0 flex items-center gap-1 px-2.5 py-1 bg-emerald-50 hover:bg-emerald-100 rounded-lg font-medium text-emerald-700 cursor-pointer border border-emerald-200/80 transition">
-                <span>🏃</span>
-                <span>校园代取</span>
-              </div>
-              <div onclick="filterTopic('集大表白墙')" class="shrink-0 flex items-center gap-1 px-2.5 py-1 bg-red-50 hover:bg-red-100 rounded-lg font-medium text-[#8B1E29] cursor-pointer border border-red-100 transition">
-                <span>💌</span>
-                <span>表白墙</span>
-                <span class="text-[9px] text-red-500 bg-white px-1 rounded font-bold">HOT</span>
-              </div>
-              <div onclick="filterTopic('拼单拼车厦门北站')" class="shrink-0 flex items-center gap-1 px-2.5 py-1 bg-slate-50 hover:bg-slate-100 rounded-lg font-medium text-slate-700 cursor-pointer border border-slate-200 transition">
-                <span>🚗</span>
-                <span>拼车北站</span>
-              </div>
-              <div onclick="filterTopic('考研自习搭子')" class="shrink-0 flex items-center gap-1 px-2.5 py-1 bg-slate-50 hover:bg-slate-100 rounded-lg font-medium text-slate-700 cursor-pointer border border-slate-200 transition">
-                <span>📖</span>
-                <span>学伴搭子</span>
-              </div>
-              <div onclick="filterTopic('集大选课避雷')" class="shrink-0 flex items-center gap-1 px-2.5 py-1 bg-slate-50 hover:bg-slate-100 rounded-lg font-medium text-slate-700 cursor-pointer border border-slate-200 transition">
-                <span>💬</span>
-                <span>选课避雷</span>
-              </div>
+            <!-- 校园热度话题横滑榜 -->
+            <div class="flex gap-2 px-3 py-2 overflow-x-auto no-scrollbar bg-white border-b border-[var(--border-divider)] text-xs" aria-label="校园热度话题">
+              <button type="button" onclick="filterTopic('考研自习搭子')" class="shrink-0 flex items-center gap-1.5 px-2.5 py-1 bg-[#FAF0F1] hover:bg-[#F5E2E4] rounded-lg font-medium text-[#8B1E29] border border-[#F0D5D8] transition" aria-label="热度第一，考研自习搭子，12.8k 热度">
+                <span class="text-[9px] font-bold">01</span><span>#考研自习搭子#</span><span class="text-[9px] text-[#A9555D]">12.8k</span>
+              </button>
+              <button type="button" onclick="filterTopic('集大表白墙')" class="shrink-0 flex items-center gap-1.5 px-2.5 py-1 bg-rose-50 hover:bg-rose-100 rounded-lg font-medium text-rose-700 border border-rose-100 transition" aria-label="热度第二，集大表白墙，8.6k 热度">
+                <span class="text-[9px] font-bold">02</span><span>#集大表白墙#</span><span class="text-[9px] text-rose-500">8.6k</span>
+              </button>
+              <button type="button" onclick="filterTopic('集大选课避雷')" class="shrink-0 flex items-center gap-1.5 px-2.5 py-1 bg-amber-50 hover:bg-amber-100 rounded-lg font-medium text-amber-800 border border-amber-200/80 transition" aria-label="热度第三，秋季选课避雷，6.2k 热度">
+                <span class="text-[9px] font-bold">03</span><span>#秋季选课避雷#</span><span class="text-[9px] text-amber-600">6.2k</span>
+              </button>
+              <button type="button" onclick="filterTopic('拼单拼车厦门北站')" class="shrink-0 flex items-center gap-1.5 px-2.5 py-1 bg-slate-50 hover:bg-slate-100 rounded-lg font-medium text-slate-700 border border-slate-200 transition" aria-label="热度第四，厦门北站拼车，4.9k 热度">
+                <span class="text-[9px] font-bold">04</span><span>#厦门北站拼车#</span><span class="text-[9px] text-slate-500">4.9k</span>
+              </button>
             </div>
 
             <!-- 动态卡片流容器 (推荐流) -->
           <div id="feedChannelRec" class="p-3 space-y-3 block">
 
-            <!-- 生活互助置顶公告 -->
-            <button onclick="openFeedActionSheet()" class="community-notice w-full text-left" aria-label="打开校内生活互助专区">
-              <span class="community-notice-icon" aria-hidden="true">互助</span>
+            <!-- 面向全站用户的系统公告 -->
+            <button onclick="showToast('系统通知：社区公约已更新，请文明交流并注意交易安全')" class="community-notice w-full text-left" aria-label="查看系统通知：社区公约已更新">
+              <span class="community-notice-icon" aria-hidden="true">公告</span>
               <span class="min-w-0 flex-1">
-                <span class="community-notice-title">校内生活互助专区</span>
-                <span class="community-notice-copy">二手、寻物、校园代取，都在这里</span>
+                <span class="community-notice-title">系统通知</span>
+                <span class="community-notice-copy">社区公约已更新 · 全站用户可见</span>
               </span>
               <span class="community-notice-link">查看 <i class="ui-icon" data-icon="caret-right"></i></span>
             </button>
@@ -1395,9 +1378,8 @@
           <div class="space-y-3 text-xs">
             <!-- 组 1: 生活互助大厅 -->
             <div>
-              <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center justify-between">
-                <span>校内生活互助专区</span>
-                <span class="text-[9px] text-[#8B1E29] font-semibold bg-[#FAF0F1] px-1.5 py-0.5 rounded border border-[#F0D5D8]">核心互助</span>
+              <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">
+                <span>校内生活专区</span>
               </div>
               <div class="grid grid-cols-3 gap-2 text-center">
                 <div onclick="selectFeedModule('used')" class="flex flex-col items-center p-2.5 rounded-xl bg-amber-50/70 hover:bg-amber-100/70 border border-amber-200/80 cursor-pointer transition group">
@@ -1430,30 +1412,6 @@
               <span class="text-xs text-[#8B1E29] font-bold">进入广场 ›</span>
             </div>
 
-            <!-- 组 3: 热门话题讨论圈 -->
-            <div>
-              <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">
-                <span>热门话题讨论</span>
-              </div>
-              <div class="grid grid-cols-2 gap-2 text-xs">
-                <div onclick="selectFeedModule('stream'); filterTopic('集大表白墙')" class="p-2 bg-slate-50 hover:bg-slate-100 rounded-lg border border-slate-200/80 flex items-center gap-2 cursor-pointer transition">
-                  <span>💌</span>
-                  <span class="font-medium text-slate-700">集大表白墙</span>
-                </div>
-                <div onclick="selectFeedModule('stream'); filterTopic('拼单拼车厦门北站')" class="p-2 bg-slate-50 hover:bg-slate-100 rounded-lg border border-slate-200/80 flex items-center gap-2 cursor-pointer transition">
-                  <span>🚗</span>
-                  <span class="font-medium text-slate-700">拼车厦门北站</span>
-                </div>
-                <div onclick="selectFeedModule('stream'); filterTopic('考研自习搭子')" class="p-2 bg-slate-50 hover:bg-slate-100 rounded-lg border border-slate-200/80 flex items-center gap-2 cursor-pointer transition">
-                  <span>📖</span>
-                  <span class="font-medium text-slate-700">找学伴搭子</span>
-                </div>
-                <div onclick="selectFeedModule('stream'); filterTopic('集大选课避雷')" class="p-2 bg-slate-50 hover:bg-slate-100 rounded-lg border border-slate-200/80 flex items-center gap-2 cursor-pointer transition">
-                  <span>💬</span>
-                  <span class="font-medium text-slate-700">选课避雷吐槽</span>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
