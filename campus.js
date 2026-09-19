@@ -55,6 +55,7 @@ function renderCampusHome() {
   document.getElementById('nextClassHeading').textContent = homeDay === 4 ? '下一节课' : '当日课程';
   document.getElementById('nextClassCard').innerHTML = course ? '<div class="course-title-row"><span class="class-label">' + (homeDay === 4 ? '即将开始' : '第 ' + (course.slot*2+1) + '–' + (course.slot*2+2) + ' 节') + '</span><h3>' + course.title + '</h3></div><div class="class-meta"><span>' + icon('clock') + course.start + '–' + course.end + '</span><span>' + icon('map-pin') + course.room + '</span></div>' : '<span class="class-label">自由安排</span><h3>这一天没有课程</h3><div class="class-meta">去自习，或给自己放个小假。</div>';
   document.getElementById('nextClassCard').disabled = !course;
+  document.getElementById('nextClassCard').setAttribute('aria-label', course ? course.title + '，' + course.start + '至' + course.end + '，' + course.room : '这一天没有课程，去自习，或给自己放个小假');
   document.getElementById('nextClassCard').classList.toggle('is-free-day', !course);
   document.getElementById('nextClassCard').insertAdjacentHTML('beforeend', '<img class="course-illustration" src="assets/campus-study-v2.png" width="66" height="66" alt="" aria-hidden="true">');
   document.querySelectorAll('[data-home-source]').forEach(b => b.setAttribute('aria-pressed',String(b.dataset.homeSource === homeSource)));
@@ -132,11 +133,21 @@ const originalSaveCourseNote = saveCourseNote;
 saveCourseNote = function() { courseNotes[currentCourseCardId]=document.getElementById('courseNoteInput').value.trim(); originalSaveCourseNote(); renderSchedule(); };
 const baseSwitchTab = switchTab;
 switchTab = function(tab) { closeCampusActionSheet(); closeFeedActionSheet(); baseSwitchTab(tab); updateBottomNav(tab); document.getElementById('fabPublishBtn').classList.toggle('hidden',tab!=='feed'); };
-function updateBottomNav(tab) { document.querySelectorAll('.bottom-nav > button').forEach(b=>b.setAttribute('aria-current',b.id==='tab-'+tab?'page':'false')); }
+function updateBottomNav(tab) {
+  document.querySelectorAll('.bottom-nav > button').forEach(b => {
+    const active = b.id === 'tab-' + tab;
+    b.setAttribute('aria-current', active ? 'page' : 'false');
+    b.classList.toggle('is-active', active);
+  });
+}
 // Preserve the original four destinations while matching the selected visual language.
 const nav = document.getElementById('tab-feed').parentElement;
 nav.classList.add('bottom-nav');
 [['feed','house','社区'],['campus','squares-four','校园功能'],['messages','chat-circle-dots','消息'],['profile','user','我的']].forEach(([id,name,label])=>{document.getElementById('tab-'+id).innerHTML=icon(name)+'<span class="mt-1">'+label+'</span>';});
+// Keep the selected destination visually truthful even when inline handlers run first.
+nav.addEventListener('click', event => {
+  if (event.target.closest('button')) updateBottomNav(currentTab);
+});
 document.getElementById('fabPublishBtn').setAttribute('role','button');
 document.getElementById('fabPublishBtn').setAttribute('tabindex','0');
 document.getElementById('fabPublishBtn').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openPublishModal();}});

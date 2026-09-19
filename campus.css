@@ -246,6 +246,29 @@ input[type="checkbox"] { accent-color: #8b1e29; }
 #fabPublishBtn { bottom: calc(82px + env(safe-area-inset-bottom)); left: auto; right: 15px; transform: none; }
 #fabPublishBtn > div { background: #8b1e29; width: 42px; height: 42px; border: 3px solid white; box-shadow: 0 4px 14px #8b1e2933; }
 .desktop-side-nav { overflow-y: auto; }
+
+/* Visual polish pass: reinforce hierarchy without changing the existing flows. */
+.campus-hero { overflow: hidden; isolation: isolate; background-image: linear-gradient(90deg, rgba(251,247,243,.98) 0%, rgba(251,247,243,.86) 54%, rgba(251,247,243,.18) 100%), url('assets/campus-life-v2.png'); }
+.campus-hero::after { content: ''; position: absolute; z-index: -1; right: 14px; bottom: 10px; width: 118px; height: 40px; border: 1px solid rgba(139,30,41,.13); border-radius: 999px; transform: rotate(-6deg); pointer-events: none; }
+.campus-hero-meta { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; padding: 4px 8px; border: 1px solid rgba(139,30,41,.12); border-radius: 999px; background: rgba(255,255,255,.64); color: #8b6661; font-size: 9px; letter-spacing: .2px; }
+.campus-hero-meta span + span { padding-left: 6px; border-left: 1px solid rgba(139,30,41,.16); }
+.campus-panel { border: 1px solid rgba(238,233,229,.78); box-shadow: 0 8px 24px rgba(82,50,34,.055); }
+.next-class-card { border: 1px solid rgba(202,104,96,.09); transition: border-color .16s ease, transform .16s ease, box-shadow .16s ease; }
+.next-class-card:not(:disabled):hover, .next-class-card:not(:disabled):focus-visible { border-color: rgba(139,30,41,.23); box-shadow: 0 7px 16px rgba(139,30,41,.08); transform: translateY(-1px); }
+.service-grid button { min-height: 74px; transition: background .16s ease, transform .16s ease; }
+.service-grid button:hover, .service-grid button:focus-visible { background: #fffaf8; transform: translateY(-1px); }
+.service-grid button:focus-visible { outline-offset: 1px; }
+.notice-row { transition: background .16s ease; }
+.notice-row:hover, .notice-row:focus-within { background: #fffaf8; }
+.bottom-nav > button { position: relative; color: #9aa1aa !important; }
+.bottom-nav > button[aria-current="page"], .bottom-nav > button.is-active { color: #8b1e29 !important; font-weight: 700; }
+.bottom-nav > button[aria-current="page"]::before, .bottom-nav > button.is-active::before { content: ''; position: absolute; top: 5px; width: 22px; height: 3px; border-radius: 999px; background: currentColor; opacity: .18; }
+.profile-app-card .app-icon .ui-icon { width: 16px; height: 16px; }
+#page-profile > .app-card:first-child { position: relative; overflow: hidden; }
+#page-profile > .app-card:first-child::after { content: ''; position: absolute; right: -18px; bottom: -25px; width: 154px; height: 88px; background: url('assets/campus-architecture.png') right bottom / contain no-repeat; opacity: .12; pointer-events: none; }
+#page-profile > .app-card:first-child > * { position: relative; z-index: 1; }
+.message-search, .message-list, .interaction-card { border-color: rgba(238,233,229,.9); }
+.message-search:focus-within { border-color: rgba(139,30,41,.34); box-shadow: 0 0 0 3px rgba(139,30,41,.08); }
 @media (max-width: 359px) {
   .next-class-card { padding-right: 58px; }
   .course-illustration { width: 48px; height: 48px; right: 4px; }

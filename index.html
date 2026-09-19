@@ -942,6 +942,7 @@
               <span class="campus-eyebrow">UNIJMU · 集大日常</span>
               <h1>校园</h1>
               <p>诚以待人 <span>毅以处事</span></p>
+              <div class="campus-hero-meta" aria-label="当前教学周与日期"><span>第 3 教学周</span><span>周五 · 09/18</span></div>
             </header>
             <div class="campus-content">
               <section class="campus-panel next-class-panel" aria-labelledby="nextClassHeading">
@@ -1290,19 +1291,19 @@
           <div class="profile-apps-heading"><span>校园小应用</span><small>左右滑动查看更多</small></div>
           <div class="profile-apps-carousel no-scrollbar" aria-label="校园小应用">
             <button type="button" class="profile-app-card" onclick="handleDailyCheckIn(this)">
-              <span class="app-icon bg-amber-50 text-amber-700">📅</span><strong>每日签到</strong><small class="app-status">领校园积分</small>
+              <span class="app-icon bg-amber-50 text-amber-700"><i class="ui-icon" data-icon="calendar-plus"></i></span><strong>每日签到</strong><small class="app-status">领校园积分</small>
             </button>
             <button type="button" class="profile-app-card" onclick="openMiniGame()">
-              <span class="app-icon bg-purple-50 text-purple-700">🎮</span><strong>小游戏</strong><small>放松一下</small>
+              <span class="app-icon bg-purple-50 text-purple-700"><i class="ui-icon" data-icon="squares-four"></i></span><strong>小游戏</strong><small>放松一下</small>
             </button>
             <button type="button" class="profile-app-card" onclick="selectCampusModule('schedule')">
-              <span class="app-icon bg-blue-50 text-blue-700">🗓️</span><strong>我的课表</strong><small>今日安排</small>
+              <span class="app-icon bg-blue-50 text-blue-700"><i class="ui-icon" data-icon="calendar-plus"></i></span><strong>我的课表</strong><small>今日安排</small>
             </button>
             <button type="button" class="profile-app-card" onclick="openClassroomModal()">
-              <span class="app-icon bg-emerald-50 text-emerald-700">🏫</span><strong>空教室</strong><small>找个好座位</small>
+              <span class="app-icon bg-emerald-50 text-emerald-700"><i class="ui-icon" data-icon="door-open"></i></span><strong>空教室</strong><small>找个好座位</small>
             </button>
             <button type="button" class="profile-app-card" onclick="selectCampusModule('notices')">
-              <span class="app-icon bg-rose-50 text-[#8B1E29]">📣</span><strong>校园公告</strong><small>重要提醒</small>
+              <span class="app-icon bg-rose-50 text-[#8B1E29]"><i class="ui-icon" data-icon="megaphone-simple"></i></span><strong>校园公告</strong><small>重要提醒</small>
             </button>
           </div>
 
@@ -2379,7 +2380,7 @@
         <article class="notice-article"><div id="noticeDetailTags"></div><h1 id="noticeDetailTitle"></h1><p id="noticeDetailMeta" class="muted"></p><div id="noticeDetailDeadline" class="deadline-callout"></div><div id="noticeDetailBody"></div><p class="sample-caption">原型演示内容 · 公告以学校、学院正式发布为准</p></article>
         <footer class="notice-detail-footer"><button id="noticeReminder" class="primary-action" onclick="toggleNoticeReminder()"></button><span id="noticeReminderHint"></span></footer>
       </section>
-      <div id="toastBox" class="hidden absolute top-16 left-1/2 -translate-x-1/2 z-50 px-4 py-2 bg-slate-900/90 text-white text-xs font-medium rounded-full shadow-lg backdrop-blur pointer-events-none transition-all">
+      <div id="toastBox" role="status" aria-live="polite" class="hidden absolute top-16 left-1/2 -translate-x-1/2 z-50 px-4 py-2 bg-slate-900/90 text-white text-xs font-medium rounded-full shadow-lg backdrop-blur pointer-events-none transition-all">
         提示信息
       </div>
 
@@ -2467,6 +2468,7 @@
       currentTab = tabId;
       const vp = document.getElementById('viewport');
       if (vp) vp.scrollTop = 0;
+      if (typeof closeNoticeDetail === 'function') closeNoticeDetail();
 
       document.querySelectorAll('.device-shell .tab-page').forEach(el => {
         el.classList.add('hidden');
@@ -2520,6 +2522,8 @@
       if (fab) {
         fab.classList.remove('hidden');
       }
+      // Keep direct in-page module jumps (for example, Profile -> Schedule) in sync with the bottom nav.
+      if (typeof updateBottomNav === 'function') updateBottomNav(tabId);
     }
 
     // ==================== 顶栏与二级菜单综合联动 ====================
