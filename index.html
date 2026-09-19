@@ -512,9 +512,10 @@
                 <span class="text-[10px] text-[#8B1E29] font-medium">#考研自习搭子#</span>
               </div>
 
-              <p class="text-[13px] text-slate-800 leading-relaxed">
-                尚大楼考研自习室靠窗的一排插座修好了！寻一个大三准备考本校计算机专硕的学伴，每天晚上 18:30-22:00 互相监督刷数学真题打卡，有兴趣的同学一起呀～
-              </p>
+              <div class="feed-post-copy-wrap">
+                <p class="feed-post-copy is-collapsed text-[13px] text-slate-800 leading-relaxed" role="button" tabindex="0" onclick="openPostDetail('study')" onkeydown="if(event.key==='Enter'||event.key===' ') openPostDetail('study')">尚大楼考研自习室靠窗的一排插座修好了！寻一个大三准备考本校计算机专硕的学伴，每天晚上 18:30-22:00 互相监督刷数学真题打卡，有兴趣的同学一起呀～</p>
+                <button type="button" class="feed-post-expand" onclick="openPostDetail('study')">查看全文 ›</button>
+              </div>
 
               <!-- 图片栅格 -->
               <div class="grid grid-cols-2 gap-2 pt-0.5">
@@ -534,7 +535,7 @@
                   <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z"/></svg>
                   <span>分享</span>
                 </button>
-                <button onclick="openCommentsSheet()" class="flex items-center gap-1.5 hover:text-slate-900 transition">
+                <button onclick="openPostDetail('study')" class="flex items-center gap-1.5 hover:text-slate-900 transition">
                   <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.91a.75.75 0 01-.76-.814c.063-.564.248-1.127.536-1.636C3.86 16.98 3 14.61 3 12c0-4.556 4.03-8.25 9-8.25s9 3.582 9 8z"/></svg>
                   <span id="feed-comment-count">14</span>
                 </button>
@@ -563,16 +564,17 @@
                 <span class="text-[10px] bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full">同学匿名投递</span>
               </div>
 
-              <p class="text-[13px] text-slate-800 leading-relaxed">
-                【表白投递】捞一下周三下午在诚毅教学楼 3-402 一起上《算法设计》的那个穿米白色毛衣、背浅灰双肩包的学姐，你借给我的签字笔还没来得及还给你！如果看到了麻烦私信我，请你喝诚毅二食堂的柠檬茶！
-              </p>
+              <div class="feed-post-copy-wrap">
+                <p class="feed-post-copy is-collapsed text-[13px] text-slate-800 leading-relaxed" role="button" tabindex="0" onclick="openPostDetail('wall')" onkeydown="if(event.key==='Enter'||event.key===' ') openPostDetail('wall')">【表白投递】捞一下周三下午在诚毅教学楼 3-402 一起上《算法设计》的那个穿米白色毛衣、背浅灰双肩包的学姐，你借给我的签字笔还没来得及还给你！如果看到了麻烦私信我，请你喝诚毅二食堂的柠檬茶！</p>
+                <button type="button" class="feed-post-expand" onclick="openPostDetail('wall')">查看全文 ›</button>
+              </div>
 
               <div class="flex items-center justify-between pt-2.5 border-t border-[var(--border-divider)] text-xs text-slate-500">
                 <button onclick="openWechatActionSheet()" class="flex items-center gap-1.5 hover:text-slate-900 transition">
                   <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z"/></svg>
                   <span>分享</span>
                 </button>
-                <button onclick="openCommentsSheet()" class="flex items-center gap-1.5 hover:text-slate-900 transition">
+                <button onclick="openPostDetail('wall')" class="flex items-center gap-1.5 hover:text-slate-900 transition">
                   <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.91a.75.75 0 01-.76-.814c.063-.564.248-1.127.536-1.636C3.86 16.98 3 14.61 3 12c0-4.556 4.03-8.25 9-8.25s9 3.582 9 8z"/></svg>
                   <span>26</span>
                 </button>
@@ -1181,24 +1183,42 @@
           </div>
           <div class="message-section-heading"><span>最近聊天</span></div>
           <div id="messageConversationList" class="message-list">
-            <button class="message-conversation" data-search="学校通知 秋季学期选课确认 教务处" onclick="showToast('暂无需要处理的学校通知')">
+            <div class="message-swipe-row" data-search="学校通知 秋季学期选课确认 教务处" data-message-key="school-notice">
+              <div class="message-swipe-actions" aria-label="学校通知操作"><button type="button" class="message-swipe-action mute" onclick="setMessageAction(event,this,'mute')">免打扰</button><button type="button" class="message-swipe-action hide" onclick="setMessageAction(event,this,'hide')">不显示</button><button type="button" class="message-swipe-action delete" onclick="setMessageAction(event,this,'delete')">删除</button></div>
+              <button class="message-conversation" onclick="showToast('暂无需要处理的学校通知')">
               <span class="message-avatar message-avatar-notice"><i class="ui-icon" data-icon="megaphone-simple"></i></span><span class="message-conversation-main"><span class="message-conversation-title">学校通知 <em>通知</em></span><span class="message-conversation-preview">关于秋季学期选课确认的通知</span></span><span class="message-conversation-meta"><time>09:18</time><b class="message-unread-badge">1</b></span>
-            </button>
-            <button class="message-conversation" data-search="林软软 计算机工程学院 考研 自习室" onclick="openChatPage('林软软', '计算机工程学院')">
+              </button>
+            </div>
+            <div class="message-swipe-row" data-search="林软软 计算机工程学院 考研 自习室" data-message-key="lin">
+              <div class="message-swipe-actions" aria-label="林软软会话操作"><button type="button" class="message-swipe-action mute" onclick="setMessageAction(event,this,'mute')">免打扰</button><button type="button" class="message-swipe-action hide" onclick="setMessageAction(event,this,'hide')">不显示</button><button type="button" class="message-swipe-action delete" onclick="setMessageAction(event,this,'delete')">删除</button></div>
+              <button class="message-conversation" onclick="openChatPage('林软软', '计算机工程学院')">
               <span class="message-avatar message-avatar-photo">林</span><span class="message-conversation-main"><span class="message-conversation-title">林软软</span><span id="recentChatMsg-lin" class="message-conversation-preview">晚上一起去打卡考研自习室吗？我已经占好座了～</span></span><span class="message-conversation-meta"><time>08:56</time><b class="message-unread-badge">3</b></span>
-            </button>
-            <button class="message-conversation" data-search="考研自习搭子群 学习 小组" onclick="openChatPage('考研自习搭子群（6人）', '校园学习小组')">
+              </button>
+            </div>
+            <div class="message-swipe-row" data-search="考研自习搭子群 学习 小组" data-message-key="study-group">
+              <div class="message-swipe-actions" aria-label="考研自习搭子群操作"><button type="button" class="message-swipe-action mute" onclick="setMessageAction(event,this,'mute')">免打扰</button><button type="button" class="message-swipe-action hide" onclick="setMessageAction(event,this,'hide')">不显示</button><button type="button" class="message-swipe-action delete" onclick="setMessageAction(event,this,'delete')">删除</button></div>
+              <button class="message-conversation" onclick="openChatPage('考研自习搭子群（6人）', '校园学习小组')">
               <span class="message-avatar message-avatar-group">6</span><span class="message-conversation-main"><span class="message-conversation-title">考研自习搭子群 <em>群聊</em></span><span class="message-conversation-preview">小林：今晚 18:30–22:00 一起刷题呀～</span></span><span class="message-conversation-meta"><time>昨天</time><b class="message-unread-badge">5</b></span>
-            </button>
-            <button class="message-conversation" data-search="周周 室友 食堂" onclick="openChatPage('周周', '室友')">
+              </button>
+            </div>
+            <div class="message-swipe-row" data-search="周周 室友 食堂" data-message-key="zhou">
+              <div class="message-swipe-actions" aria-label="周周会话操作"><button type="button" class="message-swipe-action mute" onclick="setMessageAction(event,this,'mute')">免打扰</button><button type="button" class="message-swipe-action hide" onclick="setMessageAction(event,this,'hide')">不显示</button><button type="button" class="message-swipe-action delete" onclick="setMessageAction(event,this,'delete')">删除</button></div>
+              <button class="message-conversation" onclick="openChatPage('周周', '室友')">
               <span class="message-avatar message-avatar-warm">周</span><span class="message-conversation-main"><span class="message-conversation-title">周周</span><span class="message-conversation-preview">我已经到食堂了，你大概还有多久？</span></span><span class="message-conversation-meta"><time>昨天 21:04</time></span>
-            </button>
-            <button class="message-conversation" data-search="集大表白墙 社区 匿名投稿" onclick="openChatPage('集大表白墙', '校园社区')">
+              </button>
+            </div>
+            <div class="message-swipe-row" data-search="集大表白墙 社区 匿名投稿" data-message-key="wall">
+              <div class="message-swipe-actions" aria-label="集大表白墙会话操作"><button type="button" class="message-swipe-action mute" onclick="setMessageAction(event,this,'mute')">免打扰</button><button type="button" class="message-swipe-action hide" onclick="setMessageAction(event,this,'hide')">不显示</button><button type="button" class="message-swipe-action delete" onclick="setMessageAction(event,this,'delete')">删除</button></div>
+              <button class="message-conversation" onclick="openChatPage('集大表白墙', '校园社区')">
               <span class="message-avatar message-avatar-sky">墙</span><span class="message-conversation-main"><span class="message-conversation-title">集大表白墙 <em>校园社区</em></span><span class="message-conversation-preview">【匿名投稿】黄昏真的好美呀，想把这份浪漫分享…</span></span><span class="message-conversation-meta"><time>昨天 19:27</time></span>
-            </button>
-            <button class="message-conversation" data-search="教务处 课程 调整 提醒" onclick="showToast('课程调整提醒：下周三《高等数学》上课地点变更')">
+              </button>
+            </div>
+            <div class="message-swipe-row" data-search="教务处 课程 调整 提醒" data-message-key="academic-notice">
+              <div class="message-swipe-actions" aria-label="教务处会话操作"><button type="button" class="message-swipe-action mute" onclick="setMessageAction(event,this,'mute')">免打扰</button><button type="button" class="message-swipe-action hide" onclick="setMessageAction(event,this,'hide')">不显示</button><button type="button" class="message-swipe-action delete" onclick="setMessageAction(event,this,'delete')">删除</button></div>
+              <button class="message-conversation" onclick="showToast('课程调整提醒：下周三《高等数学》上课地点变更')">
               <span class="message-avatar message-avatar-soft"><i class="ui-icon" data-icon="calendar-plus"></i></span><span class="message-conversation-main"><span class="message-conversation-title">教务处 <em>通知</em></span><span class="message-conversation-preview">课程调整提醒：下周三《高等数学》上课地点变更…</span></span><span class="message-conversation-meta"><time>09-17</time></span>
-            </button>
+              </button>
+            </div>
           </div>
           <div id="messageEmptyState" class="message-empty hidden">没有找到匹配的会话<br><span>试试搜索姓名、群聊或关键词</span></div>
         </div>
@@ -1217,7 +1237,7 @@
                 <div>
                   <div class="flex items-center gap-1.5">
                     <h3 class="font-bold text-sm text-slate-900">GnaixEuy</h3>
-                    <span class="text-[9px] text-[#8B1E29] bg-[#FAF0F1] px-1.5 py-[0.5px] rounded border border-[#F0D5D8] font-semibold">学校</span>
+                    <span class="text-[9px] text-[#8B1E29] bg-[#FAF0F1] px-1.5 py-[0.5px] rounded border border-[#F0D5D8] font-semibold">集美大学</span>
                   </div>
                   <div class="text-[11px] text-slate-500 mt-0.5 flex items-center gap-1">
                     <span>计算机工程学院 · 22级</span>
@@ -1267,6 +1287,25 @@
             </button>
           </div>
 
+          <div class="profile-apps-heading"><span>校园小应用</span><small>左右滑动查看更多</small></div>
+          <div class="profile-apps-carousel no-scrollbar" aria-label="校园小应用">
+            <button type="button" class="profile-app-card" onclick="handleDailyCheckIn(this)">
+              <span class="app-icon bg-amber-50 text-amber-700">📅</span><strong>每日签到</strong><small class="app-status">领校园积分</small>
+            </button>
+            <button type="button" class="profile-app-card" onclick="openMiniGame()">
+              <span class="app-icon bg-purple-50 text-purple-700">🎮</span><strong>小游戏</strong><small>放松一下</small>
+            </button>
+            <button type="button" class="profile-app-card" onclick="selectCampusModule('schedule')">
+              <span class="app-icon bg-blue-50 text-blue-700">🗓️</span><strong>我的课表</strong><small>今日安排</small>
+            </button>
+            <button type="button" class="profile-app-card" onclick="openClassroomModal()">
+              <span class="app-icon bg-emerald-50 text-emerald-700">🏫</span><strong>空教室</strong><small>找个好座位</small>
+            </button>
+            <button type="button" class="profile-app-card" onclick="selectCampusModule('notices')">
+              <span class="app-icon bg-rose-50 text-[#8B1E29]">📣</span><strong>校园公告</strong><small>重要提醒</small>
+            </button>
+          </div>
+
           <!-- 功能列表项 -->
           <div class="app-card divide-y divide-slate-100 text-xs">
             <div onclick="openMyOrdersModal()" class="p-3 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition">
@@ -1280,6 +1319,10 @@
             <div onclick="openFeedbackModal()" class="p-3 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition">
               <span class="text-slate-800 font-medium">原型体验反馈</span>
               <span class="text-[#8B1E29] text-[11px] font-medium">反馈 ›</span>
+            </div>
+            <div onclick="openHelpServiceModal()" class="p-3 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition">
+              <span class="text-slate-800 font-medium">帮助与客服</span>
+              <span class="text-slate-400 text-[11px]">常见问题 ›</span>
             </div>
             <div onclick="showToast('已清理临时缓存，当前版本 v1.9.1 (标题去重与课表内嵌周次版)')" class="p-3 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition">
               <span class="text-slate-800 font-medium">设置</span>
@@ -1992,6 +2035,55 @@
         </div>
       </div>
 
+      <!-- 帖子详情抽屉：正文、评论与关联信息 -->
+      <div id="postDetailSheet" onclick="if(event.target===this) closePostDetail()" class="sheet-modal">
+        <div class="bg-white rounded-t-3xl p-4 shadow-2xl modal-dialog flex flex-col max-h-[680px]">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100 shrink-0">
+            <div><span class="font-bold text-sm text-slate-900">动态详情</span><p id="postDetailSubtitle" class="text-[10px] text-slate-400 mt-0.5">社区广场 · 刚刚</p></div>
+            <button onclick="closePostDetail()" class="text-slate-400 hover:text-slate-600 text-xs p-1" aria-label="关闭动态详情">✕</button>
+          </div>
+          <div class="overflow-y-auto no-scrollbar space-y-3 py-3">
+            <div class="flex items-center gap-2.5">
+              <span id="postDetailAvatar" class="message-avatar message-avatar-photo !w-9 !h-9 !text-[11px]">林</span>
+              <div class="min-w-0"><strong id="postDetailAuthor" class="block text-xs text-slate-900">软工小林_23</strong><span id="postDetailMeta" class="text-[10px] text-slate-400">计算机学院 · 尚大楼 14F</span></div>
+            </div>
+            <div id="postDetailBody" class="post-detail-body"></div>
+            <div id="postDetailInfo" class="post-detail-info"></div>
+            <div class="flex items-center justify-between text-[10px] text-slate-500"><span id="postDetailStats">42 个赞 · 14 条评论</span><button onclick="showToast('已收藏这条动态')" class="text-[#8B1E29] font-semibold">☆ 收藏</button></div>
+            <div class="border-t border-slate-100 pt-2">
+              <div class="flex items-center justify-between mb-1"><strong class="text-xs text-slate-900">评论区</strong><span class="text-[10px] text-slate-400">友善交流，理性讨论</span></div>
+              <div id="postDetailComments"></div>
+            </div>
+          </div>
+          <div class="pt-2 border-t border-slate-100 flex items-center gap-2 shrink-0">
+            <input id="postDetailCommentInput" onkeydown="if(event.key==='Enter') submitPostDetailComment()" type="text" placeholder="写下你的评论..." class="flex-1 bg-slate-50 border border-slate-200 rounded-full px-3 py-1.5 text-xs outline-none">
+            <button onclick="submitPostDetailComment()" class="px-3.5 py-1.5 bg-[#8B1E29] text-white rounded-full text-xs font-semibold">发送</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 帮助与客服 -->
+      <div id="helpServiceModal" onclick="if(event.target===this) closeModal('helpServiceModal')" class="modal-overlay">
+        <div class="bg-white rounded-3xl w-full max-w-[335px] p-4 shadow-2xl space-y-3 modal-dialog">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100"><div><h3 class="font-bold text-sm text-slate-900">帮助与客服</h3><p class="text-[10px] text-slate-400 mt-0.5">遇到问题，随时找我们</p></div><button onclick="closeModal('helpServiceModal')" class="text-slate-400 text-xs p-1">✕</button></div>
+          <div class="space-y-2 text-xs">
+            <button onclick="showToast('已展开：如何发布、编辑和删除校园动态')" class="w-full flex items-center justify-between rounded-xl bg-slate-50 p-3 text-left"><span>如何发布和管理动态</span><span class="text-slate-400">›</span></button>
+            <button onclick="showToast('消息页左滑会话即可设置免打扰、不显示或删除')" class="w-full flex items-center justify-between rounded-xl bg-slate-50 p-3 text-left"><span>消息和隐私设置</span><span class="text-slate-400">›</span></button>
+            <button onclick="showToast('课表支持周网格、备忘和节假日标记')" class="w-full flex items-center justify-between rounded-xl bg-slate-50 p-3 text-left"><span>课表与校园服务</span><span class="text-slate-400">›</span></button>
+          </div>
+          <button onclick="showToast('客服已接入，工作日 9:00–18:00 在线'); closeModal('helpServiceModal')" class="w-full py-2.5 bg-[#8B1E29] text-white font-semibold text-xs rounded-xl">联系客服</button>
+        </div>
+      </div>
+
+      <!-- 校园小游戏 -->
+      <div id="miniGameModal" onclick="if(event.target===this) closeModal('miniGameModal')" class="modal-overlay">
+        <div class="bg-white rounded-3xl w-full max-w-[335px] p-4 shadow-2xl space-y-3 modal-dialog">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100"><div><h3 class="font-bold text-sm text-slate-900">校园小游戏 · 今日手气</h3><p class="text-[10px] text-slate-400 mt-0.5">选一张校园卡牌，赢取积分</p></div><button onclick="closeModal('miniGameModal')" class="text-slate-400 text-xs p-1">✕</button></div>
+          <div class="grid grid-cols-3 gap-2 text-center"><button onclick="playMiniGame(this)" class="mini-game-card rounded-2xl bg-[#FAF0F1] p-4 text-2xl">🌟<span class="block text-[10px] text-[#8B1E29] mt-1">星愿卡</span></button><button onclick="playMiniGame(this)" class="mini-game-card rounded-2xl bg-amber-50 p-4 text-2xl">🍀<span class="block text-[10px] text-amber-700 mt-1">好运卡</span></button><button onclick="playMiniGame(this)" class="mini-game-card rounded-2xl bg-emerald-50 p-4 text-2xl">🎒<span class="block text-[10px] text-emerald-700 mt-1">学伴卡</span></button></div>
+          <p id="miniGameResult" class="hidden rounded-xl bg-slate-50 p-3 text-center text-xs text-slate-700"></p>
+        </div>
+      </div>
+
       <!-- 11. 评论区半屏抽屉 (支持真实插入发表) -->
       <div id="commentsSheet" onclick="if(event.target===this) closeCommentsSheet()" class="sheet-modal">
         <div class="bg-white rounded-t-3xl p-4 shadow-2xl modal-dialog flex flex-col max-h-[480px]">
@@ -2306,6 +2398,27 @@
     let currentFitGender = 'male';
     let activeDetailItemId = 'used-1';
     let selectedBoard = '校园日常';
+    let activeMessageSwipe = null;
+    let messageSwipeStartX = 0;
+    let messageSwipeStartY = 0;
+    let messageSwipeDragging = false;
+    let activePostDetailId = 'study';
+    let localPostBody = '';
+
+    const postDetailData = {
+      study: {
+        author: '软工小林_23', avatar: '林', meta: '计算机学院 · 12分钟前 · 尚大楼 14F 考研自习室', subtitle: '找学伴搭子 · #考研自习搭子#',
+        body: '尚大楼考研自习室靠窗的一排插座修好了！寻一个大三准备考本校计算机专硕的学伴，每天晚上 18:30-22:00 互相监督刷数学真题打卡，有兴趣的同学一起呀～',
+        info: ['地点：尚大楼 14F 考研自习室', '时间：每天 18:30–22:00', '相关：考研自习、计算机专硕、学伴打卡'], likes: 42,
+        commentCount: 14, comments: [{ name: '陈同学 · 计算机', avatar: '陈', time: '8分钟前', text: '我也在尚大楼 1402 复习，晚上有空一起对一下高数期末历年卷的选择题答案！' }, { name: '小周', avatar: '周', time: '20分钟前', text: '已收藏，周末一起组队刷题～' }]
+      },
+      wall: {
+        author: '集大表白墙', avatar: '墙', meta: '校园社区 · 1小时前 · 嘉庚图书馆三楼', subtitle: '#表白墙# · 同学匿名投递',
+        body: '【表白投递】捞一下周三下午在诚毅教学楼 3-402 一起上《算法设计》的那个穿米白色毛衣、背浅灰双肩包的学姐，你借给我的签字笔还没来得及还给你！如果看到了麻烦私信我，请你喝诚毅二食堂的柠檬茶！',
+        info: ['地点：诚毅教学楼 3-402', '时间：周三下午《算法设计》', '相关：失物归还、校园表白墙、诚毅二食堂'], likes: 68,
+        commentCount: 26, comments: [{ name: '路过的同学', avatar: '路', time: '36分钟前', text: '帮顶一下，希望能顺利找到！' }, { name: '诚毅同学', avatar: '诚', time: '52分钟前', text: '可以去教学楼一楼失物招领处留一下信息。' }]
+      }
+    };
 
     // 闲鱼二手物品真实数据模型
     const usedItemsData = {
@@ -2705,6 +2818,7 @@
 
       const loc = document.getElementById('publishLocationSelect').value;
       const isAnon = document.getElementById('publishAnonymous').checked;
+      localPostBody = text;
 
       const newPostHtml = `
         <div class="app-card p-4 space-y-2.5 animate-fadeIn">
@@ -2727,7 +2841,10 @@
             <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">${selectedBoard}</span>
             <span class="text-[10px] text-[#8B1E29] font-medium">#集大新鲜事#</span>
           </div>
-          <p class="text-[13px] text-slate-800 leading-relaxed">${escapeHtml(text)}</p>
+          <div class="feed-post-copy-wrap">
+            <p class="feed-post-copy is-collapsed text-[13px] text-slate-800 leading-relaxed" role="button" tabindex="0" onclick="openPostDetail('local')" onkeydown="if(event.key==='Enter'||event.key===' ') openPostDetail('local')">${escapeHtml(text)}</p>
+            <button type="button" class="feed-post-expand" onclick="openPostDetail('local')">查看全文 ›</button>
+          </div>
           <div class="flex items-center justify-between pt-2.5 border-t border-[var(--border-divider)] text-xs text-slate-500">
             <span onclick="openWechatActionSheet()" class="cursor-pointer hover:text-slate-900">分享</span>
             <span onclick="openCommentsSheet()" class="cursor-pointer hover:text-slate-900">0 评论</span>
@@ -2896,13 +3013,89 @@
     function filterMessageList(query) {
       const q = (query || '').trim().toLowerCase();
       let visible = 0;
-      document.querySelectorAll('#messageConversationList .message-conversation').forEach(row => {
+      document.querySelectorAll('#messageConversationList .message-swipe-row').forEach(row => {
         const match = !q || (row.dataset.search || '').toLowerCase().includes(q);
         row.classList.toggle('hidden', !match);
         if (match) visible++;
       });
       const empty = document.getElementById('messageEmptyState');
       if (empty) empty.classList.toggle('hidden', visible !== 0);
+    }
+
+    function closeMessageSwipes(except) {
+      document.querySelectorAll('#messageConversationList .message-swipe-row.is-open').forEach(row => {
+        if (row !== except) row.classList.remove('is-open');
+      });
+      if (!except) activeMessageSwipe = null;
+    }
+
+    function messageTouchStart(event, row) {
+      if (!event.touches || !event.touches[0]) return;
+      closeMessageSwipes(row);
+      messageSwipeStartX = event.touches[0].clientX;
+      messageSwipeStartY = event.touches[0].clientY;
+      messageSwipeDragging = false;
+      activeMessageSwipe = row;
+    }
+
+    function messageTouchMove(event, row) {
+      if (!event.touches || !event.touches[0]) return;
+      const dx = event.touches[0].clientX - messageSwipeStartX;
+      const dy = event.touches[0].clientY - messageSwipeStartY;
+      if (Math.abs(dx) < Math.abs(dy) || Math.abs(dx) < 8) return;
+      event.preventDefault();
+      messageSwipeDragging = true;
+      const offset = Math.max(-198, Math.min(0, dx + (row.classList.contains('is-open') ? -198 : 0)));
+      row.querySelector('.message-conversation').style.transform = 'translateX(' + offset + 'px)';
+    }
+
+    function messageTouchEnd(event, row) {
+      if (!messageSwipeDragging) return;
+      const button = row.querySelector('.message-conversation');
+      const current = parseFloat((button.style.transform || '').replace(/[^-0-9.]/g, '')) || 0;
+      button.style.transform = '';
+      row.classList.toggle('is-open', current <= -70);
+      row.dataset.swipeBlock = '1';
+      setTimeout(() => { row.dataset.swipeBlock = ''; }, 320);
+      messageSwipeDragging = false;
+      event.preventDefault();
+    }
+
+    function setMessageAction(event, trigger, action) {
+      event.preventDefault();
+      event.stopPropagation();
+      const row = trigger.closest('.message-swipe-row');
+      if (!row) return;
+      const title = row.querySelector('.message-conversation-title')?.innerText.replace(/通知|群聊|校园社区/g, '').trim() || '会话';
+      if (action === 'mute') {
+        row.classList.toggle('is-muted');
+        showToast(row.classList.contains('is-muted') ? title + '已设为免打扰' : title + '已恢复提醒');
+      } else if (action === 'hide') {
+        row.classList.add('is-hidden-by-user');
+        showToast(title + '将不再显示');
+      } else if (action === 'delete') {
+        row.remove();
+        showToast(title + '已删除');
+      }
+      closeMessageSwipes();
+    }
+
+    function initMessageSwipe() {
+      const list = document.getElementById('messageConversationList');
+      if (!list) return;
+      list.querySelectorAll('.message-swipe-row').forEach(row => {
+        row.addEventListener('touchstart', event => messageTouchStart(event, row), { passive: true });
+        row.addEventListener('touchmove', event => messageTouchMove(event, row), { passive: false });
+        row.addEventListener('touchend', event => messageTouchEnd(event, row), { passive: false });
+      });
+      list.addEventListener('click', event => {
+        const row = event.target.closest('.message-swipe-row');
+        if (row && row.dataset.swipeBlock === '1') {
+          event.preventDefault();
+          event.stopPropagation();
+          row.dataset.swipeBlock = '';
+        }
+      }, true);
     }
 
     function clearAllMessageUnread() {
@@ -2912,6 +3105,73 @@
       });
       document.querySelectorAll('#page-messages .interaction-card').forEach(card => card.classList.add('is-read'));
       showToast('已清除全部未读消息');
+    }
+
+    function renderPostDetailComments(comments) {
+      const container = document.getElementById('postDetailComments');
+      if (!container) return;
+      container.innerHTML = comments.map(item => '<div class="post-detail-comment"><span class="post-detail-comment-avatar">' + escapeHtml(item.avatar) + '</span><div class="post-detail-comment-copy"><strong>' + escapeHtml(item.name) + '</strong><time>' + escapeHtml(item.time) + '</time><p>' + escapeHtml(item.text) + '</p></div></div>').join('');
+    }
+
+    function openPostDetail(postId) {
+      activePostDetailId = postId;
+      const data = postDetailData[postId] || { author: 'GnaixEuy', avatar: '我', meta: '刚刚发布', subtitle: selectedBoard, body: localPostBody || '这是一条刚刚发布的校园动态。', info: ['相关：校园社区动态'], likes: 0, comments: [] };
+      document.getElementById('postDetailAuthor').innerText = data.author;
+      document.getElementById('postDetailAvatar').innerText = data.avatar;
+      document.getElementById('postDetailMeta').innerText = data.meta;
+      document.getElementById('postDetailSubtitle').innerText = data.subtitle;
+      document.getElementById('postDetailBody').innerText = data.body;
+      document.getElementById('postDetailInfo').innerHTML = data.info.map(item => '<div>· <strong>' + escapeHtml(item.split('：')[0]) + '：</strong>' + escapeHtml(item.split('：').slice(1).join('：')) + '</div>').join('');
+      document.getElementById('postDetailStats').innerText = data.likes + ' 个赞 · ' + (data.commentCount ?? data.comments.length) + ' 条评论';
+      renderPostDetailComments(data.comments);
+      document.getElementById('postDetailCommentInput').value = '';
+      document.getElementById('postDetailSheet').classList.add('is-active');
+    }
+
+    function closePostDetail() {
+      document.getElementById('postDetailSheet').classList.remove('is-active');
+    }
+
+    function submitPostDetailComment() {
+      const input = document.getElementById('postDetailCommentInput');
+      const val = input.value.trim();
+      if (!val) return;
+      const data = postDetailData[activePostDetailId] || (postDetailData.local = postDetailData.local || { author: 'GnaixEuy', avatar: '我', meta: '刚刚发布', subtitle: selectedBoard, body: localPostBody, info: ['相关：校园社区动态'], likes: 0, commentCount: 0, comments: [] });
+      data.comments.unshift({ name: 'GnaixEuy (我)', avatar: '我', time: '刚刚', text: val });
+      data.commentCount = (data.commentCount ?? data.comments.length - 1) + 1;
+      input.value = '';
+      renderPostDetailComments(data.comments);
+      document.getElementById('postDetailStats').innerText = data.likes + ' 个赞 · ' + data.commentCount + ' 条评论';
+      showToast('评论已发布');
+    }
+
+    function handleDailyCheckIn(button) {
+      if (button.classList.contains('is-checked')) {
+        showToast('今日已签到，明天再来吧');
+        return;
+      }
+      button.classList.add('is-checked');
+      const status = button.querySelector('.app-status');
+      if (status) status.innerText = '已签到 +1分';
+      showToast('签到成功，校园积分 +1');
+    }
+
+    function openHelpServiceModal() { openModal('helpServiceModal'); }
+
+    function openMiniGame() {
+      const result = document.getElementById('miniGameResult');
+      if (result) result.classList.add('hidden');
+      document.querySelectorAll('.mini-game-card').forEach(card => { card.disabled = false; card.classList.remove('opacity-50'); });
+      openModal('miniGameModal');
+    }
+
+    function playMiniGame(card) {
+      const prizes = ['校园积分 +3', '好运加成：今日学习效率 ↑', '学伴匹配券 ×1'];
+      const result = document.getElementById('miniGameResult');
+      document.querySelectorAll('.mini-game-card').forEach(item => { item.disabled = true; item.classList.add('opacity-50'); });
+      card.classList.remove('opacity-50');
+      result.innerText = '恭喜你抽到：' + prizes[Math.floor(Math.random() * prizes.length)];
+      result.classList.remove('hidden');
     }
 
     const interactionInboxData = {
@@ -3210,11 +3470,13 @@
         document.querySelectorAll('.sheet-modal.is-active').forEach(el => el.classList.remove('is-active'));
         closeCampusActionSheet();
         closeCommentsSheet();
+        closePostDetail();
         closeWechatActionSheet();
         closeChatPage();
         closeUserProfilePage();
       }
     });
+    initMessageSwipe();
     renderInPageWeekGrid();
   </script>
   <script src="campus.js"></script>
