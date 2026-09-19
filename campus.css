@@ -148,6 +148,28 @@ input[type="checkbox"] { accent-color: #8b1e29; }
 .message-new-btn { display: inline-flex; align-items: center; justify-content: center; gap: 5px; flex: 0 0 auto; min-height: 42px; padding: 0 12px; border-radius: 14px; color: #fff; background: #8b1e29; font-size: 11px; font-weight: 700; box-shadow: 0 5px 12px #8b1e2922; }
 .message-new-btn .ui-icon { width: 17px; height: 17px; }
 .message-section-heading { display: flex; align-items: center; justify-content: space-between; padding: 18px 3px 8px; color: #253146; font-size: 13px; font-weight: 700; }
+.interaction-heading { padding-top: 14px; }
+.interaction-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 7px; }
+.interaction-card { display: flex; min-height: 74px; align-items: center; gap: 7px; padding: 10px 8px; text-align: left; border: 1px solid #eee9e5; border-radius: 15px; background: #fff; transition: background .16s ease, transform .16s ease; }
+.interaction-card:hover, .interaction-card:focus-visible { background: #fff9f7; transform: translateY(-1px); }
+.interaction-card > span:last-child { display: flex; min-width: 0; flex-direction: column; gap: 3px; }
+.interaction-card strong { overflow: hidden; color: #263244; font-size: 10px; white-space: nowrap; text-overflow: ellipsis; }
+.interaction-card small { overflow: hidden; color: #9299a3; font-size: 8px; white-space: nowrap; text-overflow: ellipsis; }
+.interaction-icon { position: relative; display: grid; place-items: center; width: 28px; height: 28px; flex: 0 0 auto; border-radius: 10px; }
+.interaction-icon .ui-icon { width: 16px; height: 16px; }
+.interaction-icon b { position: absolute; top: -5px; right: -6px; display: grid; min-width: 14px; height: 14px; place-items: center; padding: 0 3px; border: 2px solid #fff; border-radius: 9px; color: #fff; background: #8b1e29; font-size: 8px; line-height: 1; }
+.interaction-card.is-read .interaction-icon b { background: #aeb5bd; }
+.interaction-like { color: #b24c5b; background: #fbecee; }
+.interaction-comment { color: #557f9b; background: #edf5fa; }
+.interaction-mention { color: #9b6b2c; background: #fff4e5; }
+.interaction-modal-list { display: flex; flex-direction: column; gap: 8px; }
+.interaction-modal-item { display: flex; align-items: flex-start; gap: 9px; padding: 10px; border-radius: 14px; background: #faf8f6; }
+.interaction-modal-avatar { display: grid; width: 30px; height: 30px; flex: 0 0 auto; place-items: center; border-radius: 50%; color: #fff; background: #5a6575; font-size: 10px; font-weight: 700; }
+.interaction-modal-copy { min-width: 0; flex: 1; }
+.interaction-modal-copy p { margin: 0; color: #4f5b6b; font-size: 11px; line-height: 1.55; }
+.interaction-modal-copy p strong { color: #263244; }
+.interaction-modal-copy small { display: block; margin-top: 3px; color: #a0a7b1; font-size: 9px; }
+.interaction-modal-item button { flex: 0 0 auto; align-self: center; color: #8b1e29; font-size: 10px; font-weight: 700; }
 .message-count { color: #9aa1aa; font-size: 10px; font-weight: 500; }
 .message-list { overflow: hidden; border: 1px solid #eee9e5; border-radius: 18px; background: #fff; }
 .message-conversation { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 72px; padding: 10px 12px; text-align: left; border-bottom: 1px solid #f1eeeb; background: #fff; transition: background .16s ease; }

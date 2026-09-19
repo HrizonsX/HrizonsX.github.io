@@ -1173,6 +1173,12 @@
             <label class="message-search"><i class="ui-icon" data-icon="magnifying-glass"></i><input type="search" placeholder="搜索聊天记录、联系人或关键词" oninput="filterMessageList(this.value)" aria-label="搜索消息"></label>
             <button onclick="openModal('newChatModal')" class="message-new-btn"><i class="ui-icon" data-icon="chat-circle-dots"></i><span>新建聊天</span></button>
           </div>
+          <div class="message-section-heading interaction-heading"><span>互动消息</span><span class="message-count">与你发布的动态有关</span></div>
+          <div class="interaction-grid" aria-label="动态互动提醒">
+            <button onclick="openInteractionInbox('likes',this)" class="interaction-card"><span class="interaction-icon interaction-like"><i class="ui-icon" data-icon="heart"></i><b>3</b></span><span><strong>赞和收藏</strong><small>小林等赞了你</small></span></button>
+            <button onclick="openInteractionInbox('comments',this)" class="interaction-card"><span class="interaction-icon interaction-comment"><i class="ui-icon" data-icon="chat-circle-dots"></i><b>5</b></span><span><strong>评论</strong><small>有新的回复</small></span></button>
+            <button onclick="openInteractionInbox('mentions',this)" class="interaction-card"><span class="interaction-icon interaction-mention"><i class="ui-icon" data-icon="user"></i><b>2</b></span><span><strong>@ 我的</strong><small>2 条新提醒</small></span></button>
+          </div>
           <div class="message-section-heading"><span>最近聊天</span><span class="message-count">6 个会话</span></div>
           <div id="messageConversationList" class="message-list">
             <button class="message-conversation" data-search="学校通知 秋季学期选课确认 教务处" onclick="showToast('暂无需要处理的学校通知')">
@@ -2176,7 +2182,19 @@
         </div>
       </div>
 
-      <!-- 17. 周次选择弹窗 (1-18周真实切换) -->
+      <!-- 17. 我的动态互动提醒 -->
+      <div id="interactionModal" onclick="if(event.target===this) closeModal('interactionModal')" class="modal-overlay">
+        <div class="bg-white rounded-3xl w-full max-w-[335px] p-4 shadow-2xl space-y-3 modal-dialog">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+            <div><h3 id="interactionModalTitle" class="font-bold text-sm text-slate-900">赞和收藏</h3><p class="text-[10px] text-slate-400 mt-0.5">与你发布的动态有关</p></div>
+            <button onclick="closeModal('interactionModal')" class="text-slate-400 text-xs p-1" aria-label="关闭互动提醒">✕</button>
+          </div>
+          <div id="interactionModalList" class="interaction-modal-list"></div>
+          <button onclick="closeModal('interactionModal')" class="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs rounded-xl transition">完成</button>
+        </div>
+      </div>
+
+      <!-- 18. 周次选择弹窗 (1-18周真实切换) -->
       <div id="weekPickerModal" onclick="if(event.target===this) closeModal('weekPickerModal')" class="modal-overlay">
         <div class="bg-white rounded-3xl w-full max-w-[325px] p-4 shadow-2xl space-y-3 modal-dialog">
           <div class="flex items-center justify-between pb-2 border-b border-slate-100">
@@ -2888,6 +2906,49 @@
       });
       const empty = document.getElementById('messageEmptyState');
       if (empty) empty.classList.toggle('hidden', visible !== 0);
+    }
+
+    const interactionInboxData = {
+      likes: {
+        title: '赞和收藏',
+        rows: [
+          ['林软软', '赞了你的动态《尚大楼考研自习室靠窗插座修好了》', '8 分钟前', '林'],
+          ['集大跑腿小哥', '收藏了你的动态《尚大楼考研自习室靠窗插座修好了》', '26 分钟前', '跑'],
+          ['陈同学等 6 人', '赞了你的动态《周末去海边看日落吗？》', '昨天', '陈']
+        ]
+      },
+      comments: {
+        title: '评论和回复',
+        rows: [
+          ['林软软', '评论了你的动态：晚上一起去自习室吗？', '12 分钟前', '林'],
+          ['陈同学', '回复了你的动态：我也想报名，一起组队吗？', '1 小时前', '陈'],
+          ['集大表白墙', '评论了你的动态：这份校园攻略很实用，已收藏！', '昨天', '墙']
+        ]
+      },
+      mentions: {
+        title: '@ 我的',
+        rows: [
+          ['考研自习搭子群', '在群聊中 @ 了你：今晚 18:30 尚大楼集合', '5 分钟前', '群'],
+          ['校学生会', '在动态中提到你：@GnaixEuy 欢迎来参加分享会', '昨天', '学']
+        ]
+      }
+    };
+
+    function openInteractionInbox(kind, trigger) {
+      const data = interactionInboxData[kind] || interactionInboxData.likes;
+      const title = document.getElementById('interactionModalTitle');
+      const list = document.getElementById('interactionModalList');
+      if (title) title.innerText = data.title;
+      if (list) list.innerHTML = data.rows.map(row => '<div class="interaction-modal-item"><span class="interaction-modal-avatar">'+escapeHtml(row[3])+'</span><span class="interaction-modal-copy"><p><strong>'+escapeHtml(row[0])+'</strong> '+escapeHtml(row[1])+'</p><small>'+escapeHtml(row[2])+'</small></span><button onclick="openOwnPostFromInteraction()">查看动态 ›</button></div>').join('');
+      if (trigger) trigger.classList.add('is-read');
+      openModal('interactionModal');
+    }
+
+    function openOwnPostFromInteraction() {
+      closeModal('interactionModal');
+      switchTab('feed');
+      selectFeedModule('stream');
+      showToast('已定位到你发布的动态');
     }
 
     function startNewChat(user, college) {
