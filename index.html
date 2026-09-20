@@ -254,7 +254,7 @@
       display: none !important;
     }
   </style>
-    <link rel="stylesheet" href="campus.css?v=20260920-7">
+    <link rel="stylesheet" href="campus.css?v=20260920-8">
 </head>
 <body class="min-h-screen flex items-center justify-center p-0 sm:p-6 select-none">
 
@@ -1107,24 +1107,11 @@
             </button>
           </div>
 
-          <!-- 功能列表项 -->
-          <div class="app-card divide-y divide-slate-100 text-xs">
-            <div onclick="openAuthModal()" class="p-3 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition">
-              <span class="text-slate-800 font-medium">校园身份认证</span>
-              <span class="text-emerald-600 text-[11px] font-medium">已认证 ›</span>
-            </div>
-            <div onclick="openFeedbackModal()" class="p-3 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition">
-              <span class="text-slate-800 font-medium">体验反馈</span>
-              <span class="text-[#8B1E29] text-[11px] font-medium">反馈 ›</span>
-            </div>
-            <div onclick="openHelpServiceModal()" class="p-3 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition">
-              <span class="text-slate-800 font-medium">帮助与客服</span>
-              <span class="text-slate-400 text-[11px]">常见问题 ›</span>
-            </div>
-            <div onclick="showToast('已清理临时缓存，当前版本 v1.9.1 (标题去重与课表内嵌周次版)')" class="p-3 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition">
-              <span class="text-slate-800 font-medium">设置</span>
-              <span class="text-slate-400 text-[11px]">0.3 MB ›</span>
-            </div>
+          <div class="profile-recommend-heading"><span>商品推荐</span><button type="button" onclick="switchTab('feed'); selectFeedModule('used')">去集市 ›</button></div>
+          <div class="profile-recommend-grid">
+            <button type="button" class="profile-recommend-card" onclick="openRecommendedItem('used-1')"><span class="profile-recommend-icon">📱</span><strong>iPad Air 5</strong><b>¥2,580</b><small>12 人想要</small></button>
+            <button type="button" class="profile-recommend-card" onclick="openRecommendedItem('used-2')"><span class="profile-recommend-icon">🚲</span><strong>捷安特山地车</strong><b>¥620</b><small>7 人想要</small></button>
+            <button type="button" class="profile-recommend-card" onclick="openRecommendedItem('used-3')"><span class="profile-recommend-icon">📚</span><strong>考研数学真题</strong><b>¥35</b><small>23 人想要</small></button>
           </div>
 
         </div>
@@ -2713,6 +2700,12 @@
       openModal('itemDetailModal');
     }
 
+    function openRecommendedItem(itemId) {
+      switchTab('feed');
+      selectFeedModule('used');
+      setTimeout(() => openItemDetailModal(itemId), 0);
+    }
+
     function chatCurrentItem() {
       closeModal('itemDetailModal');
       const data = usedItemsData[activeDetailItemId] || usedItemsData['used-1'];
@@ -3413,6 +3406,6 @@
     renderInPageWeekGrid();
   </script>
   <script src="campus.js"></script>
-    <script src="feed.js?v=20260920-7"></script>
+    <script src="feed.js?v=20260920-8"></script>
 </body>
 </html>
