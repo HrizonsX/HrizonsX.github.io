@@ -299,12 +299,13 @@ input[type="checkbox"] { accent-color: #8b1e29; }
 .profile-apps-heading { display: flex; align-items: baseline; justify-content: space-between; padding: 2px 2px 0; color: #253146; font-size: 13px; font-weight: 700; }
 .profile-apps-heading small { color: #a0a7b1; font-size: 9px; font-weight: 500; }
 .profile-apps-carousel { display: flex; gap: 8px; overflow-x: auto; padding: 10px; border: 1px solid #eee9e5; border-radius: 15px; background: #fff; scroll-snap-type: x mandatory; scroll-padding-inline: 10px; }
-.profile-app-card { display: flex; min-width: 82px; min-height: 78px; flex: 0 0 82px; flex-direction: column; align-items: center; justify-content: center; gap: 5px; scroll-snap-align: start; border: 1px solid #eee9e5; border-radius: 15px; background: #fff; transition: transform .16s ease, background .16s ease; }
+.profile-app-card { display: flex; min-width: 0; min-height: 78px; flex: 0 0 calc((100% - 32px) / 5); flex-direction: column; align-items: center; justify-content: center; gap: 5px; scroll-snap-align: start; border: 1px solid #eee9e5; border-radius: 15px; background: #fff; transition: transform .16s ease, background .16s ease; }
 .profile-app-card:hover, .profile-app-card:focus-visible { background: #fff9f7; transform: translateY(-1px); }
 .profile-app-card .app-icon { display: grid; width: 30px; height: 30px; place-items: center; border-radius: 10px; font-size: 16px; }
 .profile-app-card strong { color: #263244; font-size: 10px; }
 .profile-app-card small { color: #a0a7b1; font-size: 8px; }
 .profile-app-card.is-checked { border-color: #c8e2d4; background: #f1faf5; }
+.feed-achievement { display: inline-flex; margin-left: 5px; padding: 2px 5px; border-radius: 5px; color: #8b1e29; background: #fbecee; font-size: 9px; font-weight: 700; vertical-align: 1px; }
 .profile-bio-editor { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 10px; border-radius: 11px; color: #697383; background: rgba(248,246,244,.86); font-size: 10px; text-align: left; }
 .profile-bio-editor span:first-child { overflow: hidden; flex: 1; white-space: nowrap; text-overflow: ellipsis; }
 .profile-bio-editor span:last-child { flex: 0 0 auto; color: #8b1e29; font-weight: 650; }

@@ -61,7 +61,7 @@ function renderFeedPost(postId) {
   return `<article class="app-card p-4 space-y-2.5 feed-post-card" data-post-id="${id}">
     <div class="feed-card-header">
       <span class="feed-card-avatar">${escapeHtml(post.avatar)}</span>
-      <div class="feed-card-author"><strong>${author}</strong>${postId === 'wall' ? '<span class="feed-official">官方</span>' : ''}<small>${headerMeta}</small></div>
+      <div class="feed-card-author"><strong>${author}</strong><span class="feed-achievement">Lv.3</span>${postId === 'wall' ? '<span class="feed-official">官方</span>' : ''}<small>${headerMeta}</small></div>
       ${post.author === 'GnaixEuy' ? '' : `<div class="feed-card-author-actions">
         <button type="button" class="feed-private" data-author="${author}" onclick="openChatPage(this.dataset.author, '集美大学')">私信</button>
         <button type="button" data-follow-author="${author}" aria-pressed="${followed}" onclick="toggleFeedFollow(this.dataset.followAuthor)">${followed ? '已关注' : '+ 关注'}</button>
