@@ -7,7 +7,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
   
   <!-- 本地构建样式，无外部 CDN 运行依赖 -->
-  <link rel="stylesheet" href="assets/utilities.css">
+  <link rel="stylesheet" href="assets/utilities.css?v=20260920-4">
   <script>
     if (window.tailwind) {
       tailwind.config = {
@@ -254,7 +254,7 @@
       display: none !important;
     }
   </style>
-  <link rel="stylesheet" href="campus.css">
+  <link rel="stylesheet" href="campus.css?v=20260920-6">
 </head>
 <body class="min-h-screen flex items-center justify-center p-0 sm:p-6 select-none">
 
@@ -422,7 +422,7 @@
                   <span id="feed-line-rec" class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-[2px] bg-[#8B1E29] rounded-full"></span>
                 </button>
                 <button onclick="setFeedChannel('focus')" id="feed-btn-focus" class="text-sm font-medium text-slate-400 relative transition hover:text-slate-700">
-                  关注
+                  关注圈
                   <span id="feed-line-focus" class="hidden absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-[2px] bg-[#8B1E29] rounded-full"></span>
                 </button>
                 <button onclick="setFeedChannel('topic')" id="feed-btn-topic" class="text-sm font-medium text-slate-400 relative transition hover:text-slate-700">
@@ -430,14 +430,14 @@
                   <span id="feed-line-topic" class="hidden absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-[2px] bg-[#8B1E29] rounded-full"></span>
                 </button>
               </div>
-              <button onclick="openFeedActionSheet()" class="text-xs text-[#8B1E29] bg-[#FAF0F1] hover:bg-[#F5E2E4] px-2 py-0.5 rounded font-medium border border-[#F0D5D8] flex items-center gap-1 transition">
+              <button onclick="openFeedActionSheet()" class="feed-hall-pill">
                 <span>板块大厅</span>
                 <span class="text-[9px]">▾</span>
               </button>
             </div>
 
             <!-- 校园热度话题横滑榜 -->
-            <div class="flex gap-2 px-3 py-2 overflow-x-auto no-scrollbar bg-white border-b border-[var(--border-divider)] text-xs" aria-label="校园热度话题">
+            <div id="feedTopicScroll" class="flex gap-2 px-3 py-2 overflow-x-auto no-scrollbar bg-white border-b border-[var(--border-divider)] text-xs" aria-label="校园热度话题">
               <button type="button" onclick="filterTopic('考研自习搭子')" class="shrink-0 flex items-center gap-1.5 px-2.5 py-1 bg-[#FAF0F1] hover:bg-[#F5E2E4] rounded-lg font-medium text-[#8B1E29] border border-[#F0D5D8] transition" aria-label="热度第一，考研自习搭子，12.8k 热度">
                 <span class="text-[9px] font-bold">01</span><span>#考研自习搭子#</span><span class="text-[9px] text-[#A9555D]">12.8k</span>
               </button>
@@ -465,175 +465,20 @@
               <span class="community-notice-link">查看 <i class="ui-icon" data-icon="caret-right"></i></span>
             </button>
             
-            <!-- 动态卡片 1 -->
-            <div class="app-card p-4 space-y-2.5">
-              <div class="flex items-center justify-between">
-                <div class="flex items-center gap-2.5 cursor-pointer" onclick="openUserProfilePage('软工小林_23', '计算机工程学院', '23级软件工程', '集美大学')">
-                  <div class="w-9 h-9 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold text-xs">
-                    林
-                  </div>
-                  <div>
-                    <div class="flex items-center gap-1.5">
-                      <span class="text-[13px] font-bold text-slate-900 hover:text-[#8B1E29] transition">软工小林_23</span>
-                      <span class="text-[10px] text-[#8B1E29] bg-[#FAF0F1] px-1.5 py-[0.5px] rounded font-medium border border-[#F0D5D8]">计算机学院</span>
-                    </div>
-                    <div class="text-[10px] text-slate-400 mt-0.5">12分钟前 · 尚大楼 14F 考研自习室</div>
-                  </div>
-                </div>
-                <div class="flex items-center gap-1.5">
-                  <button onclick="openChatPage('软工小林_23', '计算机工程学院')" class="text-[11px] font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 px-2.5 py-1 rounded-full transition">
-                    私信
-                  </button>
-                  <button onclick="toggleFollow(this)" class="text-[11px] font-medium text-[#8B1E29] hover:bg-[#FAF0F1] px-2.5 py-1 rounded-full border border-[#F0D5D8] transition">
-                    + 关注
-                  </button>
-                </div>
-              </div>
-
-              <div class="flex items-center gap-2">
-                <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">找学伴搭子</span>
-                <span class="text-[10px] text-[#8B1E29] font-medium">#考研自习搭子#</span>
-              </div>
-
-              <div class="feed-post-copy-wrap">
-                <p class="feed-post-copy is-collapsed text-[13px] text-slate-800 leading-relaxed" role="button" tabindex="0" onclick="openPostDetail('study')" onkeydown="if(event.key==='Enter'||event.key===' ') openPostDetail('study')">尚大楼考研自习室靠窗的一排插座修好了！寻一个大三准备考本校计算机专硕的学伴，每天晚上 18:30-22:00 互相监督刷数学真题打卡，有兴趣的同学一起呀～</p>
-                <button type="button" class="feed-post-expand" onclick="openPostDetail('study')">查看全文 ›</button>
-              </div>
-
-              <!-- 图片栅格 -->
-              <div class="grid grid-cols-2 gap-2 pt-0.5">
-                <div class="feed-media-card h-28 bg-slate-100 rounded-xl flex flex-col items-center justify-center text-slate-500 text-xs border border-slate-200/60 cursor-pointer hover:opacity-90 transition" onclick="showToast('查看高清自习室照片')"><img src="assets/campus-life-v2.png" alt="集美大学校园与自习生活实拍">
-                  <svg class="w-6 h-6 text-slate-400 mb-1" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
-                  <span>尚大楼自习室实拍</span>
-                </div>
-                <div class="feed-media-card h-28 bg-slate-100 rounded-xl flex flex-col items-center justify-center text-slate-500 text-xs border border-slate-200/60 cursor-pointer hover:opacity-90 transition" onclick="showToast('查看打卡计划表')"><img src="assets/campus-study-v2.png" alt="考研复习计划插图">
-                  <svg class="w-6 h-6 text-slate-400 mb-1" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>
-                  <span>考研复习进度打卡</span>
-                </div>
-              </div>
-
-              <!-- 互动操作栏 -->
-              <div class="flex items-center justify-between pt-2.5 border-t border-[var(--border-divider)] text-xs text-slate-500">
-                <button onclick="openWechatActionSheet()" class="flex items-center gap-1.5 hover:text-slate-900 transition">
-                  <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z"/></svg>
-                  <span>分享</span>
-                </button>
-                <button onclick="openPostDetail('study')" class="flex items-center gap-1.5 hover:text-slate-900 transition">
-                  <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.91a.75.75 0 01-.76-.814c.063-.564.248-1.127.536-1.636C3.86 16.98 3 14.61 3 12c0-4.556 4.03-8.25 9-8.25s9 3.582 9 8z"/></svg>
-                  <span id="feed-comment-count">14</span>
-                </button>
-                <button type="button" data-post-save="study" aria-pressed="false" onclick="togglePostSave(event,'study')" class="post-save-action flex items-center gap-1.5 hover:text-[#8B1E29] transition"><span aria-hidden="true">☆</span><span>收藏</span></button>
-                <button onclick="toggleLike(this)" class="flex items-center gap-1.5 hover:text-[#8B1E29] transition group">
-                  <svg class="w-4 h-4 text-slate-400 group-hover:text-[#8B1E29] transition" fill="currentColor" viewBox="0 0 24 24"><path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"/></svg>
-                  <span>42</span>
-                </button>
-              </div>
-            </div>
-
-            <!-- 动态卡片 2: 表白墙 -->
-            <div class="app-card p-4 space-y-2.5">
-              <div class="flex items-center justify-between">
-                <div class="flex items-center gap-2.5">
-                  <div class="w-9 h-9 rounded-full bg-red-100 text-[#8B1E29] flex items-center justify-center font-bold text-xs">
-                    墙
-                  </div>
-                  <div>
-                    <div class="flex items-center gap-1.5">
-                      <span class="text-[13px] font-bold text-slate-900">集大表白墙</span>
-                      <span class="text-[10px] text-pink-600 bg-pink-50 px-1.5 py-[0.5px] rounded font-medium border border-pink-100">#表白墙#</span>
-                    </div>
-                    <div class="text-[10px] text-slate-400 mt-0.5">1小时前 · 嘉庚图书馆三楼</div>
-                  </div>
-                </div>
-                <span class="text-[10px] bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full">同学匿名投递</span>
-              </div>
-
-              <div class="feed-post-copy-wrap">
-                <p class="feed-post-copy is-collapsed text-[13px] text-slate-800 leading-relaxed" role="button" tabindex="0" onclick="openPostDetail('wall')" onkeydown="if(event.key==='Enter'||event.key===' ') openPostDetail('wall')">【表白投递】捞一下周三下午在诚毅教学楼 3-402 一起上《算法设计》的那个穿米白色毛衣、背浅灰双肩包的学姐，你借给我的签字笔还没来得及还给你！如果看到了麻烦私信我，请你喝诚毅二食堂的柠檬茶！</p>
-                <button type="button" class="feed-post-expand" onclick="openPostDetail('wall')">查看全文 ›</button>
-              </div>
-
-              <div class="flex items-center justify-between pt-2.5 border-t border-[var(--border-divider)] text-xs text-slate-500">
-                <button onclick="openWechatActionSheet()" class="flex items-center gap-1.5 hover:text-slate-900 transition">
-                  <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z"/></svg>
-                  <span>分享</span>
-                </button>
-                <button onclick="openPostDetail('wall')" class="flex items-center gap-1.5 hover:text-slate-900 transition">
-                  <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.91a.75.75 0 01-.76-.814c.063-.564.248-1.127.536-1.636C3.86 16.98 3 14.61 3 12c0-4.556 4.03-8.25 9-8.25s9 3.582 9 8z"/></svg>
-                  <span>26</span>
-                </button>
-                <button type="button" data-post-save="wall" aria-pressed="false" onclick="togglePostSave(event,'wall')" class="post-save-action flex items-center gap-1.5 hover:text-[#8B1E29] transition"><span aria-hidden="true">☆</span><span>收藏</span></button>
-                <button onclick="toggleLike(this)" class="flex items-center gap-1.5 hover:text-[#8B1E29] transition group">
-                  <svg class="w-4 h-4 text-slate-400 group-hover:text-[#8B1E29] transition" fill="currentColor" viewBox="0 0 24 24"><path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"/></svg>
-                  <span>68</span>
-                </button>
-              </div>
-            </div>
-
-          </div>
-
-          <!-- 关注流容器 (关注的校友与社团动态) -->
-          <div id="feedChannelFocus" class="p-3 space-y-3 hidden">
-            <div class="p-2.5 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-800 flex items-center justify-between">
-              <span>已为您同步 3 位集大校友与官方号最新动态</span>
-              <span class="font-bold text-[10px]">即时更新</span>
-            </div>
-
-            <div class="app-card p-4 space-y-2.5">
-              <div class="flex items-center justify-between">
-                <div class="flex items-center gap-2.5">
-                  <div class="w-9 h-9 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold text-xs">林</div>
-                  <div>
-                    <div class="flex items-center gap-1.5">
-                      <span class="text-[13px] font-bold text-slate-900">软工小林_23</span>
-                      <span class="text-[10px] text-emerald-700 bg-emerald-50 px-1.5 py-[0.5px] rounded font-medium border border-emerald-200">已关注</span>
-                    </div>
-                    <div class="text-[10px] text-slate-400 mt-0.5">35分钟前 · 诚毅二食堂门口</div>
-                  </div>
-                </div>
-                <button onclick="openChatPage('软工小林_23', '计算机工程学院')" class="text-[11px] font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 px-2.5 py-1 rounded-full transition">私信</button>
-              </div>
-              <p class="text-[13px] text-slate-800 leading-relaxed">刚刚把大二下学期整理的《数据库系统概论》期末重点思维导图整理好了！需要的同学在评论区留邮箱或者私信我，学长免费分享 PDF 原图～</p>
-              <div class="flex items-center justify-between pt-2 border-t border-[var(--border-divider)] text-xs text-slate-500">
-                <span>分享</span>
-                <span onclick="openCommentsSheet()" class="cursor-pointer hover:text-slate-900">8 评论</span>
-                <span onclick="toggleLike(this)" class="cursor-pointer hover:text-[#8B1E29]">❤️ 31</span>
-              </div>
-            </div>
-
-            <div class="app-card p-4 space-y-2.5">
-              <div class="flex items-center justify-between">
-                <div class="flex items-center gap-2.5">
-                  <div class="w-9 h-9 rounded-full bg-amber-600 text-white flex items-center justify-center font-bold text-xs">跑</div>
-                  <div>
-                    <div class="flex items-center gap-1.5">
-                      <span class="text-[13px] font-bold text-slate-900">集大跑腿小哥</span>
-                      <span class="text-[10px] text-emerald-700 bg-emerald-50 px-1.5 py-[0.5px] rounded font-medium border border-emerald-200">已关注</span>
-                    </div>
-                    <div class="text-[10px] text-slate-400 mt-0.5">2小时前 · 诚毅快递街</div>
-                  </div>
-                </div>
-                <button onclick="openChatPage('集大跑腿小哥', '航海学院')" class="text-[11px] font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 px-2.5 py-1 rounded-full transition">私信</button>
-              </div>
-              <p class="text-[13px] text-slate-800 leading-relaxed">美贤路顺丰代取点今天下午爆仓啦，有需要代取大件包裹的同学尽早下单，晚上统一安排推车运送到各宿舍大堂！遵循校内互助安全守则～</p>
-              <div class="flex items-center justify-between pt-2 border-t border-[var(--border-divider)] text-xs text-slate-500">
-                <span>分享</span>
-                <span onclick="openCommentsSheet()" class="cursor-pointer hover:text-slate-900">19 评论</span>
-                <span onclick="toggleLike(this)" class="cursor-pointer hover:text-[#8B1E29]">❤️ 57</span>
-              </div>
-            </div>
+            <div id="feedPostList" class="feed-post-list"></div>
           </div>
 
           <!-- 话题广场容器 (话题榜与分类讨论) -->
-          <div id="feedChannelTopic" class="p-3 space-y-2.5 hidden">
-            <div class="text-xs font-bold text-slate-900 px-1 flex items-center justify-between">
-              <span>🔥 集美大学 24 小时高热校园话题榜</span>
-              <span class="text-[10px] text-slate-400 font-mono">实时更新</span>
+          <div id="feedChannelTopic" class="topic-hub p-3 hidden">
+            <div class="topic-hub-hero">
+              <span class="topic-hub-eyebrow">CAMPUS HOT SEARCH</span>
+              <strong>校园热搜</strong>
+              <p>大家都在看 · 实时话题榜</p>
             </div>
 
             <div onclick="filterTopic('集大表白墙')" class="app-card p-3.5 flex items-center justify-between cursor-pointer hover:border-slate-300 transition">
               <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-red-50 text-[#8B1E29] flex items-center justify-center font-bold text-base">💌</div>
+                <div class="topic-rank rank-1">01</div>
                 <div>
                   <div class="font-bold text-xs text-slate-900 flex items-center gap-1.5">
                     <span>#集大表白墙#</span>
@@ -647,7 +492,7 @@
 
             <div onclick="filterTopic('拼单拼车厦门北站')" class="app-card p-3.5 flex items-center justify-between cursor-pointer hover:border-slate-300 transition">
               <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center font-bold text-base">🚗</div>
+                <div class="topic-rank rank-2">02</div>
                 <div>
                   <div class="font-bold text-xs text-slate-900 flex items-center gap-1.5">
                     <span>#拼车厦门北站#</span>
@@ -661,7 +506,7 @@
 
             <div onclick="filterTopic('考研自习搭子')" class="app-card p-3.5 flex items-center justify-between cursor-pointer hover:border-slate-300 transition">
               <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold text-base">📖</div>
+                <div class="topic-rank rank-3">03</div>
                 <div>
                   <div class="font-bold text-xs text-slate-900 flex items-center gap-1.5">
                     <span>#考研自习搭子#</span>
@@ -683,20 +528,16 @@
               <button onclick="selectFeedModule('stream')" class="text-xs text-slate-600 hover:text-[#8B1E29] flex items-center gap-1 font-semibold transition">
                 <span>‹ 返回社区广场</span>
               </button>
-              <button onclick="openFeedActionSheet()" class="text-[11px] text-[#8B1E29] bg-[#FAF0F1] px-2 py-0.5 rounded font-medium border border-[#F0D5D8] flex items-center gap-0.5">
-                切换板块 ▾
-              </button>
             </div>
 
             
             <!-- 顶部搜索栏 -->
-            <div class="flex items-center gap-2">
+            <div class="used-search-row">
               <div class="flex-1 h-9 px-3 bg-white rounded-full border border-slate-200 flex items-center gap-2 shadow-2xs">
-                <svg class="w-4 h-4 text-slate-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
                 <input id="usedSearchInput" oninput="filterUsedItems(this.value)" type="text" placeholder="搜索集大闲置：考研真题、iPad、电驴..." class="w-full text-xs bg-transparent outline-none">
               </div>
-              <button onclick="openPublishWithBoard('二手闲置')" class="h-9 px-3.5 bg-[#8B1E29] hover:bg-[#751722] text-white rounded-full text-xs font-semibold shrink-0 shadow-xs transition flex items-center gap-1">
-                <span>+ 卖闲置</span>
+              <button type="button" onclick="filterUsedItems(document.getElementById('usedSearchInput').value)" class="used-search-btn" aria-label="搜索闲置">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
               </button>
             </div>
 
@@ -746,10 +587,6 @@
 
             <!-- 闲鱼式双列推荐流 -->
             <div>
-              <div class="flex items-center justify-between px-1 mb-2">
-                <span class="text-xs font-bold text-slate-900">集大校友推荐 · 严选面交</span>
-                <span class="text-[10px] text-slate-400">演示商品 · 请当面核验</span>
-              </div>
 
               <!-- 搜索空状态 -->
               <div id="usedEmptyState" class="hidden py-8 text-center text-xs text-slate-400 space-y-1">
@@ -771,10 +608,8 @@
                       <h4 class="text-xs font-bold text-slate-900 line-clamp-1">iPad Air 5 64G 紫色 (带 Pencil 2)</h4>
                       <p class="text-[10px] text-slate-400 mt-0.5">诚毅二食堂面交 · 原盒发票齐全</p>
                     </div>
-                    <div class="pt-1 flex items-center justify-between border-t border-slate-100">
-                      <span class="text-sm font-bold text-[#8B1E29]">¥2,580</span>
-                      <span class="text-[9px] bg-[#FAF0F1] text-[#8B1E29] px-1 rounded font-medium">学号已核验</span>
-                    </div>
+                    <div class="used-price-row"><span>¥2,580</span><small>12 人想要</small></div>
+                    <div class="used-seller-row"><span class="used-seller-avatar">林</span><strong>软工小林</strong><em>信用 680</em></div>
                   </div>
                 </div>
 
@@ -789,10 +624,8 @@
                       <h4 class="text-xs font-bold text-slate-900 line-clamp-1">捷安特 ATX777 山地车 (送车锁)</h4>
                       <p class="text-[10px] text-slate-400 mt-0.5">嘉庚大楼面交 · 顺滑免维护</p>
                     </div>
-                    <div class="pt-1 flex items-center justify-between border-t border-slate-100">
-                      <span class="text-sm font-bold text-[#8B1E29]">¥620</span>
-                      <span class="text-[9px] bg-slate-100 text-slate-600 px-1 rounded font-medium">大四出清</span>
-                    </div>
+                    <div class="used-price-row"><span>¥620</span><small>7 人想要</small></div>
+                    <div class="used-seller-row"><span class="used-seller-avatar amber">强</span><strong>航海阿强</strong><em>信用 705</em></div>
                   </div>
                 </div>
 
@@ -807,10 +640,8 @@
                       <h4 class="text-xs font-bold text-slate-900 line-clamp-1">李林考研数学6套卷 + 往年真题解析</h4>
                       <p class="text-[10px] text-slate-400 mt-0.5">尚大楼自习室面交 · 全新未写</p>
                     </div>
-                    <div class="pt-1 flex items-center justify-between border-t border-slate-100">
-                      <span class="text-sm font-bold text-[#8B1E29]">¥35</span>
-                      <span class="text-[9px] bg-[#FAF0F1] text-[#8B1E29] px-1 rounded font-medium">学号已核验</span>
-                    </div>
+                    <div class="used-price-row"><span>¥35</span><small>23 人想要</small></div>
+                    <div class="used-seller-row"><span class="used-seller-avatar green">理</span><strong>理院学长</strong><em>信用 692</em></div>
                   </div>
                 </div>
 
@@ -825,10 +656,8 @@
                       <h4 class="text-xs font-bold text-slate-900 line-clamp-1">九阳多功能学生电煮锅 (带蒸屉)</h4>
                       <p class="text-[10px] text-slate-400 mt-0.5">诚毅12号楼面交 · 功率合规</p>
                     </div>
-                    <div class="pt-1 flex items-center justify-between border-t border-slate-100">
-                      <span class="text-sm font-bold text-[#8B1E29]">¥28</span>
-                      <span class="text-[9px] bg-slate-100 text-slate-600 px-1 rounded font-medium">诚毅宿舍</span>
-                    </div>
+                    <div class="used-price-row"><span>¥28</span><small>16 人想要</small></div>
+                    <div class="used-seller-row"><span class="used-seller-avatar rose">萌</span><strong>文院小萌</strong><em>信用 671</em></div>
                   </div>
                 </div>
 
@@ -839,80 +668,57 @@
 
           <!-- 3. 失物招领视图 -->
           <div id="feed-view-lost" class="hidden p-3 space-y-2.5">
-            <!-- 返回动态广场导航条 -->
-            <div class="flex items-center justify-between pb-1">
-              <button onclick="selectFeedModule('stream')" class="text-xs text-slate-600 hover:text-[#8B1E29] flex items-center gap-1 font-semibold transition">
-                <span>‹ 返回社区广场</span>
-              </button>
-              <button onclick="openFeedActionSheet()" class="text-[11px] text-[#8B1E29] bg-[#FAF0F1] px-2 py-0.5 rounded font-medium border border-[#F0D5D8] flex items-center gap-0.5">
-                切换板块 ▾
-              </button>
+            <div class="utility-module-hero lost-hero">
+              <div class="utility-module-nav"><button onclick="selectFeedModule('stream')">‹ 社区</button></div>
+              <div class="utility-module-title"><span class="utility-module-icon">🔎</span><div><strong>失物寻物</strong><p>校内线索互助</p></div></div>
             </div>
 
-            <div class="flex items-center justify-between px-1">
-              <span class="text-xs font-bold text-slate-900">失物寻物告示板（联动集大保卫处）</span>
-              <button onclick="openPublishWithBoard('失物招领')" class="text-xs text-[#8B1E29] font-medium">+ 发布启事</button>
-            </div>
-
-            <div class="app-card p-4 space-y-2">
+            <div class="lost-found-card">
               <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded">【寻物】黑色韶音骨传导耳机</span>
+                <span class="lost-found-type lost">寻物</span>
                 <span class="text-[10px] text-slate-400">2小时前</span>
               </div>
+              <strong>黑色韶音骨传导耳机</strong>
               <p class="text-xs text-slate-700 leading-relaxed">
                 在嘉庚图书馆三楼南侧自习长桌遗落，如有捡到的同学麻烦私信我，必有柠檬茶重谢！
               </p>
-              <div class="flex items-center justify-between pt-2 border-t border-[var(--border-divider)] text-[11px] text-slate-400">
-                <span>失主：文学院 · 23级</span>
-                <button onclick="openLostContactDialog('黑色韶音骨传导耳机', '文学院 · 23级')" class="text-[#8B1E29] font-semibold hover:underline">提供线索 ›</button>
-              </div>
+              <div class="lost-found-meta"><span>📍 嘉庚图书馆三楼</span><span>文学院 · 23级</span></div>
+              <div class="lost-found-actions single"><button onclick="openChatPage('失主同学','文学院 · 23级')" class="primary">私聊</button></div>
             </div>
 
-            <div class="app-card p-4 space-y-2">
+            <div class="lost-found-card">
               <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">【招领】校园一卡通 (学号 2024****08)</span>
+                <span class="lost-found-type found">招领</span>
                 <span class="text-[10px] text-slate-400">今天上午</span>
               </div>
+              <strong>校园一卡通（2024****08）</strong>
               <p class="text-xs text-slate-700 leading-relaxed">
                 在尚大楼 4 楼饮水机旁拾获，已移交至尚大楼一楼保卫室，失主可凭身份证件核对领取。
               </p>
-              <div class="flex items-center justify-between pt-2 border-t border-[var(--border-divider)] text-[11px] text-slate-400">
-                <span>存放：尚大楼保卫室</span>
-                <button onclick="showToast('已复制尚大楼值班室电话: 0592-618****')" class="text-[#8B1E29] font-semibold hover:underline">联系保卫室 ›</button>
-              </div>
+              <div class="lost-found-meta"><span>📍 尚大楼保卫室</span><span>凭证件领取</span></div>
+              <div class="lost-found-actions single"><button onclick="openChatPage('尚大楼保卫室','校园保卫处')" class="primary">私聊</button></div>
             </div>
           </div>
 
           <!-- 4. 校园跑腿互助视图 -->
           <div id="feed-view-errand" class="hidden p-3 space-y-2.5">
-            <!-- 返回动态广场导航条 -->
-            <div class="flex items-center justify-between pb-1">
-              <button onclick="selectFeedModule('stream')" class="text-xs text-slate-600 hover:text-[#8B1E29] flex items-center gap-1 font-semibold transition">
-                <span>‹ 返回社区广场</span>
-              </button>
-              <button onclick="openFeedActionSheet()" class="text-[11px] text-[#8B1E29] bg-[#FAF0F1] px-2 py-0.5 rounded font-medium border border-[#F0D5D8] flex items-center gap-0.5">
-                切换板块 ▾
-              </button>
+            <div class="utility-module-hero errand-hero">
+              <div class="utility-module-nav"><button onclick="selectFeedModule('stream')">‹ 社区</button></div>
+              <div class="utility-module-title"><span class="utility-module-icon">🏃</span><div><strong>校园跑腿</strong><p>同学顺路帮 · 全程进度可联系</p></div></div>
             </div>
 
-            <div class="flex items-center justify-between px-1">
-              <span class="text-xs font-bold text-slate-900">校园互助跑腿 · 严格遵循学生守则</span>
-              <button onclick="openPublishWithBoard('校园跑腿')" class="text-xs text-[#8B1E29] font-medium">+ 发布需求</button>
-            </div>
-
-            <div class="app-card p-4 space-y-2.5">
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded">待接单 · 顺丰大件代取</span>
-                <span class="text-xs font-bold text-[#8B1E29]">报酬 ¥8.00</span>
+            <div class="errand-task-card">
+              <div class="errand-task-head"><span>待接单</span><strong>¥8.00</strong></div>
+              <h3>顺丰大件代取</h3>
+              <div class="errand-route">
+                <div><i class="start"></i><span><small>取</small><strong>美贤路顺丰服务点</strong></span></div>
+                <div><i class="end"></i><span><small>送</small><strong>诚毅 12 号宿舍楼大堂</strong></span></div>
               </div>
-              <p class="text-xs text-slate-800 leading-relaxed font-medium">
-                帮忙去美贤路顺丰服务点代取一个大箱子（约3kg），送达诚毅 12 号宿舍楼大堂。
-              </p>
-              <div class="flex items-center justify-between pt-2 border-t border-[var(--border-divider)] text-[11px] text-slate-400">
-                <span>时效：今日 18:30 前送达</span>
-                <button id="errandAcceptBtn" onclick="openAcceptErrandModal('顺丰大件代取', '¥8.00', '今日 18:30 前')" class="px-3 py-1 bg-[#8B1E29] text-white font-semibold rounded-lg hover:bg-[#751722] transition shadow-2xs">
-                  立即接单
-                </button>
+              <div class="errand-tags"><span>约 3kg</span><span>预计 1.2km</span><span>18:30 前送达</span></div>
+              <div class="errand-publisher"><span class="used-seller-avatar">郭</span><span><strong>GnaixEuy</strong><small>信用 680 · 已实名</small></span><em class="errand-fulfillment">履约 12 单 · 100% 完成</em></div>
+              <div class="errand-actions">
+                <button onclick="openChatPage('GnaixEuy','校园跑腿发布者')">私聊发布者</button>
+                <button id="errandAcceptBtn" onclick="openAcceptErrandModal('顺丰大件代取', '¥8.00', '今日 18:30 前')" class="primary">立即接单</button>
               </div>
             </div>
 
@@ -924,7 +730,6 @@
         <div id="page-campus" class="tab-page hidden">
           <div id="campus-view-home">
             <header class="campus-hero">
-              <span class="campus-eyebrow">UNIJMU · 集大日常</span>
               <h1>校园</h1>
               <p>诚以待人 <span>毅以处事</span></p>
               <div class="campus-hero-meta" aria-label="当前教学周与日期"><span>第 3 教学周</span><span>周五 · 09/18</span></div>
@@ -1220,11 +1025,11 @@
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-3">
                 <div class="w-12 h-12 rounded-full bg-gradient-to-br from-slate-800 to-slate-900 text-white flex items-center justify-center font-bold text-base shadow-sm">
-                  郭
+                  U
                 </div>
                 <div>
                   <div class="flex items-center gap-1.5">
-                    <h3 class="font-bold text-sm text-slate-900">GnaixEuy</h3>
+                    <h3 class="font-bold text-sm text-slate-900">UNIJMU</h3>
                     <span class="text-[9px] text-[#8B1E29] bg-[#FAF0F1] px-1.5 py-[0.5px] rounded border border-[#F0D5D8] font-semibold">集美大学</span>
                   </div>
                   <div class="text-[11px] text-slate-500 mt-0.5 flex items-center gap-1">
@@ -1244,9 +1049,9 @@
                 <div class="font-bold text-slate-900 text-sm">12</div>
                 <div class="text-[10px] text-slate-400 mt-0.5">我的动态</div>
               </button>
-              <button type="button" class="profile-stat is-accent" onclick="openSavedPosts()">
-                <div id="savedPostCount" class="font-bold text-sm">0</div>
-                <div class="text-[10px] mt-0.5">我的收藏</div>
+              <button type="button" class="profile-stat" onclick="openSavedPosts()">
+                <div id="savedPostCount" class="font-bold text-slate-900 text-sm">0</div>
+                <div class="text-[10px] text-slate-400 mt-0.5">我的收藏</div>
               </button>
               <button type="button" class="profile-stat" onclick="showToast('累计收到 148 次集大师生点赞鼓励')">
                 <div class="font-bold text-slate-900 text-sm">148</div>
@@ -1370,7 +1175,7 @@
           <div class="flex items-center justify-between pb-2.5 border-b border-slate-100">
             <div class="flex items-center gap-2">
               <span class="w-2.5 h-2.5 rounded-full bg-[#8B1E29]"></span>
-              <span class="font-bold text-sm text-slate-900">集大社区空间 · 综合板块导航</span>
+              <span class="font-bold text-sm text-slate-900">综合板块导航</span>
             </div>
             <button onclick="closeFeedActionSheet()" class="text-slate-400 hover:text-slate-600 text-xs p-1">✕ 关闭</button>
           </div>
@@ -1385,31 +1190,16 @@
                 <div onclick="selectFeedModule('used')" class="flex flex-col items-center p-2.5 rounded-xl bg-amber-50/70 hover:bg-amber-100/70 border border-amber-200/80 cursor-pointer transition group">
                   <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center text-lg shadow-2xs group-hover:scale-105 transition">🛍️</div>
                   <span class="text-[11px] font-bold text-slate-800 mt-1.5">二手闲置集市</span>
-                  <span class="text-[9px] text-slate-400 mt-0.5">校内安全面交</span>
                 </div>
                 <div onclick="selectFeedModule('lost')" class="flex flex-col items-center p-2.5 rounded-xl bg-blue-50/70 hover:bg-blue-100/70 border border-blue-200/80 cursor-pointer transition group">
                   <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center text-lg shadow-2xs group-hover:scale-105 transition">🔍</div>
                   <span class="text-[11px] font-bold text-slate-800 mt-1.5">失物寻物告示</span>
-                  <span class="text-[9px] text-slate-400 mt-0.5">联动保卫处</span>
                 </div>
                 <div onclick="selectFeedModule('errand')" class="flex flex-col items-center p-2.5 rounded-xl bg-emerald-50/70 hover:bg-emerald-100/70 border border-emerald-200/80 cursor-pointer transition group">
                   <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-lg shadow-2xs group-hover:scale-105 transition">🏃</div>
                   <span class="text-[11px] font-bold text-slate-800 mt-1.5">校园跑腿代取</span>
-                  <span class="text-[9px] text-slate-400 mt-0.5">同学顺路代领</span>
                 </div>
               </div>
-            </div>
-
-            <!-- 组 2: 动态广场主入口 -->
-            <div onclick="selectFeedModule('stream'); setFeedChannel('rec')" class="p-2.5 bg-[#FAF0F1] hover:bg-[#F5E2E4] rounded-xl border border-[#F0D5D8] flex items-center justify-between cursor-pointer transition">
-              <div class="flex items-center gap-2.5">
-                <div class="w-8 h-8 rounded-lg bg-[#8B1E29] text-white flex items-center justify-center text-sm font-bold">📰</div>
-                <div>
-                  <div class="text-xs font-bold text-[#8B1E29]">社区动态广场</div>
-                  <div class="text-[10px] text-slate-500">师生动态、推荐流与关注流</div>
-                </div>
-              </div>
-              <span class="text-xs text-[#8B1E29] font-bold">进入广场 ›</span>
             </div>
 
           </div>
@@ -1496,9 +1286,8 @@
 
           <!-- 步骤 1: 选板块 -->
           <div class="space-y-1.5 text-xs">
-            <div class="font-bold text-slate-900 text-[11px] flex items-center justify-between">
-              <span>第一步：选择发布板块</span>
-              <span class="text-[10px] text-slate-400 font-normal">必选</span>
+            <div class="font-bold text-slate-900 text-[11px] flex items-center gap-1">
+              <span>第一步：选择发布板块</span><span class="text-[#8B1E29]" aria-label="必选">＊</span>
             </div>
             <div class="grid grid-cols-4 gap-1.5 text-center text-xs">
               <button onclick="selectPublishBoard(this, '校园日常')" class="pub-board-btn py-1.5 bg-[#FAF0F1] text-[#8B1E29] border border-[#F0D5D8] rounded-xl font-medium transition">校园日常</button>
@@ -1512,47 +1301,33 @@
             </div>
           </div>
 
-          <!-- 步骤 2: 图文编辑与校区地点 -->
+          <!-- 步骤 2: 图文编辑 -->
           <div class="space-y-1.5 text-xs">
             <div class="font-bold text-slate-900 text-[11px] flex items-center justify-between">
-              <span>第二步：填写内容与校内地点标签</span>
-              <span class="text-[10px] text-slate-400 font-normal">机审合规</span>
+              <span>第二步：填写内容</span>
+              <span class="text-[10px] text-[#8B1E29] font-normal">支持 #添加话题</span>
             </div>
 
-            <textarea id="publishText" placeholder="分享今天的校园见闻、求助搭子、出闲置或表白投递（支持机审自动过滤违规词）..." class="w-full h-24 p-2.5 text-xs bg-slate-50 rounded-xl border border-slate-200 outline-none resize-none leading-relaxed text-slate-800"></textarea>
-
-            <!-- 地点选择与上传配图 -->
-            <div class="flex items-center gap-2">
-              <div class="flex-1 flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5">
-                <span class="text-xs">📍</span>
-                <select id="publishLocationSelect" class="w-full bg-transparent text-xs text-slate-700 outline-none">
-                  <option value="诚毅二食堂">诚毅二食堂</option>
-                  <option value="尚大楼 考研自习室">尚大楼 考研自习室</option>
-                  <option value="美贤楼 阶梯教室">美贤楼 阶梯教室</option>
-                  <option value="嘉庚图书馆">嘉庚图书馆</option>
-                  <option value="水产大楼 实验室">水产大楼 实验室</option>
-                  <option value="集大万人食堂">集大万人食堂</option>
-                  <option value="敬贤堂前广场">敬贤堂前广场</option>
-                </select>
+            <div class="publish-editor-shell">
+              <textarea id="publishText" maxlength="500" oninput="document.getElementById('publishTextCount').textContent=this.value.length+' / 500'" placeholder="分享校园见闻、求助或闲置，也可以输入 #话题名称 参与讨论..." class="w-full h-28 p-2.5 pb-10 text-xs bg-transparent outline-none resize-none leading-relaxed text-slate-800"></textarea>
+              <div class="publish-editor-tools">
+                <button type="button" onclick="showToast('已模拟选择 2 张实拍照片')" aria-label="添加图片"><span>＋</span><span>图片</span></button>
+                <span id="publishTextCount">0 / 500</span>
               </div>
-
-              <div onclick="showToast('已模拟选择 2 张实拍照片')" class="flex items-center gap-1 bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5 cursor-pointer hover:bg-slate-100 transition shrink-0">
-                <span>📷</span>
-                <span class="text-[11px] text-slate-600">添加图片</span>
-              </div>
-            </div>
-
-            <!-- 匿名投递开关 -->
-            <div class="flex items-center justify-between pt-1 text-[11px] text-slate-600">
-              <span class="flex items-center gap-1">
-                <span>🎭</span>
-                <span>匿名投递 (仅隐藏学号与姓名，后台留痕合规)</span>
-              </span>
-              <input id="publishAnonymous" type="checkbox" class="w-3.5 h-3.5 accent-[#8B1E29] rounded">
             </div>
           </div>
 
-          <!-- 步骤 3: 安全机审并发布 -->
+          <div class="publish-tags-editor">
+            <label for="publishTagInput">自定义标签 <small id="publishTagCount">0 / 5</small></label>
+            <div class="publish-tag-input-row">
+              <input id="publishTagInput" type="text" placeholder="输入标签，回车添加" aria-describedby="publishTagHint" onkeydown="if(event.key==='Enter'&&!event.isComposing){event.preventDefault();addPublishTag()}">
+              <button type="button" onclick="addPublishTag()">添加</button>
+            </div>
+            <div id="publishTagList" class="publish-tag-list" aria-live="polite"></div>
+            <small id="publishTagHint">最多 5 个标签，每个不超过 20 字</small>
+          </div>
+
+          <!-- 发布 -->
           <div class="pt-1">
             <button onclick="submitFullPost()" class="w-full py-2.5 bg-[#8B1E29] hover:bg-[#751722] text-white font-bold text-xs rounded-xl shadow-xs transition flex items-center justify-center gap-1.5">
               <span>立即发布到集大动态</span>
@@ -2431,7 +2206,7 @@
       },
       wall: {
         title: '表白墙失物归还',
-        author: '集大表白墙', avatar: '墙', meta: '校园社区 · 1小时前 · 嘉庚图书馆三楼', subtitle: '#表白墙# · 同学匿名投递',
+        author: '集大表白墙', avatar: '墙', meta: '校园社区 · 1小时前 · 嘉庚图书馆三楼', subtitle: '#表白墙# · 官方',
         body: '【表白投递】捞一下周三下午在诚毅教学楼 3-402 一起上《算法设计》的那个穿米白色毛衣、背浅灰双肩包的学姐，你借给我的签字笔还没来得及还给你！如果看到了麻烦私信我，请你喝诚毅二食堂的柠檬茶！',
         info: ['地点：诚毅教学楼 3-402', '时间：周三下午《算法设计》', '相关：失物归还、校园表白墙、诚毅二食堂'], likes: 68,
         commentCount: 26, comments: [{ name: '路过的同学', avatar: '路', time: '36分钟前', text: '帮顶一下，希望能顺利找到！' }, { name: '诚毅同学', avatar: '诚', time: '52分钟前', text: '可以去教学楼一楼失物招领处留一下信息。' }]
@@ -2735,6 +2510,7 @@
 
     // 社区频道切换
     function setFeedChannel(c) {
+      currentFeedChannel = c;
       ['rec', 'focus', 'topic'].forEach(id => {
         const btn = document.getElementById('feed-btn-' + id);
         const line = document.getElementById('feed-line-' + id);
@@ -2750,6 +2526,9 @@
         }
       });
 
+      document.getElementById('feedChannelRec').classList.toggle('hidden', c === 'topic');
+      document.querySelector('#feedChannelRec .community-notice').classList.toggle('hidden', c !== 'rec');
+      if (typeof renderFeedPosts === 'function') renderFeedPosts();
       const topicScroll = document.getElementById('feedTopicScroll');
       if (topicScroll) {
         if (c === 'topic') topicScroll.classList.add('hidden');
@@ -2819,47 +2598,22 @@
         return;
       }
 
-      const loc = document.getElementById('publishLocationSelect').value;
-      const isAnon = document.getElementById('publishAnonymous').checked;
       localPostBody = text;
-
-      const newPostHtml = `
-        <div class="app-card p-4 space-y-2.5 animate-fadeIn">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2.5">
-              <div class="w-9 h-9 rounded-full bg-[#8B1E29] text-white flex items-center justify-center font-bold text-xs">
-                ${isAnon ? '匿' : '我'}
-              </div>
-              <div>
-                <div class="flex items-center gap-1.5">
-                  <span class="text-[13px] font-bold text-slate-900">${isAnon ? '集大同学 (匿名)' : 'GnaixEuy'}</span>
-                  <span class="text-[10px] text-[#8B1E29] bg-[#FAF0F1] px-1.5 py-[0.5px] rounded font-medium border border-[#F0D5D8]">刚刚发布</span>
-                </div>
-                <div class="text-[10px] text-slate-400 mt-0.5">刚刚 · ${loc}</div>
-              </div>
-            </div>
-            <span class="text-[10px] text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded font-medium">演示发布</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">${selectedBoard}</span>
-            <span class="text-[10px] text-[#8B1E29] font-medium">#集大新鲜事#</span>
-          </div>
-          <div class="feed-post-copy-wrap">
-            <p class="feed-post-copy is-collapsed text-[13px] text-slate-800 leading-relaxed" role="button" tabindex="0" onclick="openPostDetail('local')" onkeydown="if(event.key==='Enter'||event.key===' ') openPostDetail('local')">${escapeHtml(text)}</p>
-            <button type="button" class="feed-post-expand" onclick="openPostDetail('local')">查看全文 ›</button>
-          </div>
-          <div class="flex items-center justify-between pt-2.5 border-t border-[var(--border-divider)] text-xs text-slate-500">
-            <span onclick="openWechatActionSheet()" class="cursor-pointer hover:text-slate-900">分享</span>
-            <span onclick="openCommentsSheet()" class="cursor-pointer hover:text-slate-900">0 评论</span>
-            <span onclick="toggleLike(this)" class="cursor-pointer hover:text-[#8B1E29]">❤️ 0</span>
-          </div>
-        </div>
-      `;
-
-      const container = document.getElementById('feedChannelRec');
-      container.insertAdjacentHTML('afterbegin', newPostHtml);
+      if (document.getElementById('publishTagInput').value.trim() && !addPublishTag()) return;
+      const tags = [...publishTags];
+      const postId = 'local-' + Date.now();
+      postDetailData[postId] = {
+        title: selectedBoard + '动态', author: 'GnaixEuy', avatar: '我',
+        meta: '刚刚 · 集美大学校园', subtitle: [selectedBoard, ...tags].join(' · '), body: text,
+        info: ['地点：集美大学校园', '板块：' + selectedBoard, ...(tags.length ? ['标签：' + tags.join('、')] : [])],
+        likes: 0, commentCount: 0, comments: []
+      };
+      feedPostOrder.unshift(postId);
 
       document.getElementById('publishText').value = '';
+      document.getElementById('publishTextCount').textContent = '0 / 500';
+      publishTags.length = 0;
+      renderPublishTags();
       closePublishModal();
       selectFeedModule('stream');
       setFeedChannel('rec');
@@ -3276,6 +3030,7 @@
       input.value = '';
       renderPostDetailComments(data.comments);
       document.getElementById('postDetailStats').innerText = data.likes + ' 个赞 · ' + data.commentCount + ' 条评论';
+      if (typeof renderFeedPosts === 'function') renderFeedPosts();
       showToast('评论已发布');
     }
 
@@ -3618,8 +3373,9 @@
     function openAcceptErrandModal(task, price, ddl) {
       const btn = document.getElementById('errandAcceptBtn');
       if (btn) {
-        btn.innerText = '已接单 (履约中)';
-        btn.className = 'px-3 py-1 bg-emerald-600 text-white font-semibold rounded-lg text-xs cursor-default';
+        btn.innerText = '已接单 · 查看进度';
+        btn.className = 'primary is-accepted';
+        btn.onclick = () => showToast('订单进度：等待前往取件点');
       }
       showToast('接单成功！报酬 ' + price + '，请按时完成履约');
     }
@@ -3657,5 +3413,6 @@
     renderInPageWeekGrid();
   </script>
   <script src="campus.js"></script>
+  <script src="feed.js?v=20260920-6"></script>
 </body>
 </html>
