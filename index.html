@@ -254,7 +254,7 @@
       display: none !important;
     }
   </style>
-    <link rel="stylesheet" href="campus.css?v=20260920-8">
+    <link rel="stylesheet" href="campus.css?v=20260920-9">
 </head>
 <body class="min-h-screen flex items-center justify-center p-0 sm:p-6 select-none">
 
@@ -862,6 +862,10 @@
                   <span>王教授 · 马院</span>
                 </div>
               </div>
+              <div class="profile-header-actions">
+                <button type="button" class="profile-header-action" onclick="openHelpServiceModal()" aria-label="帮助与客服"><i class="ui-icon" data-icon="question"></i></button>
+                <button type="button" class="profile-header-action" onclick="showToast('设置已打开，当前版本 v1.9.1')" aria-label="设置"><i class="ui-icon" data-icon="gear"></i></button>
+              </div>
             </div>
 
             <!-- 周网格视图 -->
@@ -1107,7 +1111,7 @@
             </button>
           </div>
 
-          <div class="profile-recommend-heading"><span>商品推荐</span><button type="button" onclick="switchTab('feed'); selectFeedModule('used')">去集市 ›</button></div>
+          <div class="profile-recommend-heading"><span>商品推荐</span></div>
           <div class="profile-recommend-grid">
             <button type="button" class="profile-recommend-card" onclick="openRecommendedItem('used-1')"><span class="profile-recommend-icon">📱</span><strong>iPad Air 5</strong><b>¥2,580</b><small>12 人想要</small></button>
             <button type="button" class="profile-recommend-card" onclick="openRecommendedItem('used-2')"><span class="profile-recommend-icon">🚲</span><strong>捷安特山地车</strong><b>¥620</b><small>7 人想要</small></button>
@@ -3406,6 +3410,6 @@
     renderInPageWeekGrid();
   </script>
   <script src="campus.js"></script>
-    <script src="feed.js?v=20260920-8"></script>
+    <script src="feed.js?v=20260920-9"></script>
 </body>
 </html>
